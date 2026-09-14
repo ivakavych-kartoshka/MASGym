@@ -1,0 +1,59 @@
+% ============================================================================
+% figures/tikz_experimental_setup.tex  --  Experimental design (Fig. 5)
+% Inputs -> variables -> systems under test -> metrics -> outputs.
+% ============================================================================
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+\begin{scope}[on background layer]
+  \node[grp=honest,    fit={(-0.1,-0.1) (3.0,6.4)}, label={[font=\scriptsize\bfseries,honest]above:Inputs}] {};
+  \node[grp=amber,     fit={(3.3,-0.1) (6.5,6.4)}, label={[font=\scriptsize\bfseries,amber!70!black]above:Swept variables}] {};
+  \node[grp=infra,     fit={(6.8,-0.1) (10.0,6.4)}, label={[font=\scriptsize\bfseries,infra]above:Systems under test}] {};
+  \node[grp=defense,   fit={(10.3,-0.1) (13.0,6.4)}, label={[font=\scriptsize\bfseries,defense]above:Metrics}] {};
+  \node[grp=theorycol, fit={(13.3,-0.1) (15.3,6.4)}, label={[font=\scriptsize\bfseries,theorycol]above:Outputs}] {};
+\end{scope}
+
+% ---------- inputs ----------
+\node[honestblock, text width=24mm] (m)  at (1.45,5.4) {Models\\ \scriptsize 5 open+proprietary};
+\node[honestblock, text width=24mm] (t)  at (1.45,3.9) {Tasks\\ \scriptsize forced-coordination};
+\node[honestblock, text width=24mm] (tp) at (1.45,2.5) {Topologies\\ \scriptsize star/chain/tree/mesh};
+\node[honestblock, text width=24mm] (nn) at (1.45,1.2) {Scale $N{=}3\text{--}50$};
+
+% ---------- swept variables ----------
+\node[amberblock, text width=24mm] (v1) at (4.9,5.4) {$\betafrac$; indep/colluding};
+\node[amberblock, text width=24mm] (v2) at (4.9,4.1) {static/adaptive};
+\node[amberblock, text width=24mm] (v3) at (4.9,2.8) {orch.\ trusted\\ vs.\ compromised};
+\node[amberblock, text width=24mm] (v4) at (4.9,1.2) {malicious tools; Sybils; poisoned mem.};
+
+% ---------- systems under test ----------
+\node[infrablock, text width=24mm] (b1) at (8.4,5.4) {ASB (single-agent)};
+\node[infrablock, text width=24mm] (b2) at (8.4,4.3) {AgentDojo};
+\node[infrablock, text width=24mm] (b3) at (8.4,3.2) {no-defense};
+\node[infrablock, text width=24mm] (b4) at (8.4,2.1) {lifted per-agent defenses};
+\node[defblock,   text width=24mm] (b5) at (8.4,0.7) {\scriptsize MA ref.: AutoDefense, G-Safeguard};
+
+% ---------- metrics ----------
+\node[defblock, text width=23mm] (me) at (11.65,3.1)
+  {\scriptsize $\ASRs,\ \PNAs$\\[1pt] $\NRPs,\ \CPR,\ \CSR$\\[1pt] time-to-detect\\[1pt] recovery, cost\\[1pt] scalability};
+
+% ---------- outputs ----------
+\node[theoryblock, text width=16mm] (o) at (14.3,3.1)
+  {\scriptsize Tables~\ref{tab:degradation}--\ref{tab:topology}; Fig.~\ref{fig:results}; Pareto frontier};
+
+% ---------- flow arrows (blue), between bands ----------
+\draw[dataflow] (3.0,3.1) -- (3.3,3.1);
+\draw[dataflow] (6.5,3.1) -- (6.8,3.1);
+\draw[dataflow] (10.0,3.1) -- (me.west);
+\draw[dataflow] (me.east) -- (o.west);
+
+\end{tikzpicture}}
+\caption{Evaluation design (\Cref{sec:experiments}). Inputs (models, forced-coordination tasks,
+topologies, and agent count) and swept adversary variables drive the systems under test
+(single-agent ASB and AgentDojo baselines, no-defense, per-agent defenses lifted into the
+multi-agent setting, and multi-agent defenses as reference points), which are scored on the
+system-level metric suite and summarized as the paper's tables, plots, and Pareto frontier.
+All reported numbers in this version are placeholders.}
+\label{fig:expsetup}
+\end{figure*}

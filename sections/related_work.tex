@@ -1,0 +1,119 @@
+\section{Related Work}
+\label{sec:related}
+
+We organize prior work into six clusters and then state precisely how \defname{}
+differs. Throughout, we distinguish \emph{single-agent} instruments, which measure one
+agent against untrusted data, from the \emph{multi-agent} regime that \defname{} targets.
+
+\subsection{Single-agent agent-security benchmarks and sandboxes}
+The closest instruments to \defname{} evaluate a lone tool-using agent. ASB~\cite{zhang2025asb}
+formalizes attacks (direct and indirect prompt injection, memory poisoning, a
+plan-of-thought backdoor, and mixed attacks) and eleven defenses across ten scenarios
+and many tools, and introduces the utility--security metric $\mathrm{NRP}=\mathrm{PNA}\cdot(1-\mathrm{ASR})$
+that we generalize. Its threat model is single-agent with retrieval-augmented memory,
+and its sole cross-agent vector is a shared memory database. AgentDojo~\cite{debenedetti2024agentdojo}
+contributes a dynamic, stateful environment whose \emph{deterministic}, state-based
+\texttt{security()} and \texttt{utility()} functions are computed from pre- and
+post-execution environment state, so that a prompt injection which hijacks the agent
+cannot also hijack the evaluator; it explicitly names a multi-agent planner/worker
+defense as future work. InjecAgent~\cite{zhan2024injecagent} benchmarks indirect prompt
+injection in tool-integrated agents, and the ToolEmu sandbox~\cite{ruan2024toolemu}
+uses a language model to emulate tool execution from specifications, reporting that a
+majority of emulator-identified failures are valid real-world failures while cautioning
+that automatic evaluation agrees with humans only moderately. AgentHarm~\cite{andriushchenko2025agentharm}
+measures the harmfulness of agent behaviour, HarmBench~\cite{mazeika2024harmbench}
+standardizes automated red teaming and robust refusal, DecodingTrust~\cite{wang2023decodingtrust}
+assesses trustworthiness dimensions of GPT models, and Liu et al.~\cite{liu2024formalizing}
+formalize and benchmark prompt-injection attacks and defenses. All of these are
+single-agent; none parameterizes collusion, orchestrator trust, Sybils, or
+compromise propagation.
+
+\subsection{Multi-agent LLM frameworks and agent foundations}
+A large body of work builds orchestrated collectives of LLM agents:
+AutoGen~\cite{wu2023autogen}, MetaGPT~\cite{hong2023metagpt}, CAMEL~\cite{li2023camel},
+ChatDev~\cite{qian2024chatdev}, AgentVerse~\cite{chen2024agentverse}, the dynamic agent
+network DyLAN~\cite{liu2024dylan}, Mixture-of-Agents~\cite{wang2024mixture}, multi-agent
+debate~\cite{du2023debate}, ChatEval~\cite{chan2023chateval}, and generalist systems
+such as OpenHands~\cite{wang2025openhands} and Magentic-One~\cite{fourney2024magenticone}.
+These rest on single-agent capabilities---ReAct-style reasoning and
+acting~\cite{yao2023react}, Reflexion~\cite{shinn2023reflexion}, tool use~\cite{schick2023toolformer},
+and long-horizon agent behaviour~\cite{park2023generative}---surveyed by Guo et al.~\cite{guo2024survey}.
+This literature is concerned with capability and coordination, not security; \defname{}
+adopts its role structures (planner/worker/tool/memory) as the substrate on which
+security is measured.
+
+\subsection{Attacks on multi-agent LLM systems}
+A fast-growing line studies attacks that are intrinsically multi-agent. Prompt
+Infection~\cite{lee2024promptinfection} shows LLM-to-LLM prompt injection propagating
+within a system; CORBA~\cite{zhou2025corba} induces contagious, recursive blocking;
+Agent Smith~\cite{gu2024agentsmith} jailbreaks a population of multimodal agents from a
+single seed at exponential speed; communication attacks place an adversary
+in the middle of inter-agent messages~\cite{he2025redteaming}; NetSafe~\cite{yu2024netsafe}
+studies the topological safety of agent networks; PsySafe~\cite{zhang2024psysafe}
+attacks multi-agent safety through psychological manipulation; Evil Geniuses~\cite{tian2023evilgeniuses}
+probes the safety of agent roles; and zero-click GenAI worms~\cite{cohen2024aiworm}
+spread through agentic applications. Memory- and weight-level vectors include
+AgentPoison~\cite{chen2024agentpoison}, which poisons an agent's memory or knowledge
+base, and agent backdoors~\cite{yang2024watchout}. These works demonstrate that
+group-level vectors exist and are dangerous; they are attacks, evaluated in bespoke
+setups. \defname{} is complementary: it is the controlled environment in which such
+attacks---and the defenses meant to stop them---can be instantiated, swept, and
+compared under a common, deterministically scored metric.
+
+\subsection{Defenses, surveys, and systematizations}
+On the defensive side, AutoDefense~\cite{zeng2024autodefense} uses a multi-agent
+pipeline to filter jailbreaks, and G-Safeguard~\cite{yu2025gsafeguard} adds a
+topology-guided detection-and-treatment lens to multi-agent systems.
+Single-agent guardrails such as TrustAgent~\cite{hua2024trustagent}, Llama
+Guard~\cite{inan2023llamaguard}, and NeMo Guardrails~\cite{rebedea2023nemo} are the
+per-agent defenses we lift into the multi-agent setting as baselines. Classical Byzantine fault tolerance~\cite{lamport1982byzantine,pease1980reaching} and
+Byzantine-robust aggregation such as Krum~\cite{blanchard2017krum} tolerate a faulty fraction
+of nodes under a trusted coordinator and over numeric messages; they do not target
+natural-language agent collectives with a possibly compromised orchestrator, but they motivate
+\defname{}'s collusion and orchestrator-trust knobs. Surveys of agent
+security and privacy~\cite{he2025emerged,li2024personalllmagents} catalogue the
+single-agent attack surface, while MASEC~\cite{schroederdewitt2025masec} and the
+multi-agent risk taxonomy of Hammond et al.~\cite{hammond2025multiagent} argue that
+multi-agent security is non-compositional and enumerate the missing measurement
+apparatus. \defname{} is a direct response to that enumeration.
+
+\subsection{Prompt injection and jailbreak primitives}
+The attack primitives instantiated inside \defname{} originate in the single-agent
+literature: indirect prompt injection against LLM-integrated
+applications~\cite{greshake2023indirect,liu2023houyi}, instruction-override
+techniques~\cite{perez2022ignore}, gradient-based universal
+triggers~\cite{zou2023universal}, stealthy jailbreak
+generation~\cite{liu2024autodan}, and analyses of why safety training
+fails~\cite{wei2023jailbroken}. \defname{} treats these as pluggable red-team
+primitives rather than as objects of study, and its contribution is the multi-agent
+\emph{composition} of such primitives across roles, tools, memory, and identities.
+
+\subsection{Reinforcement-learning environments and co-evolving red teaming}
+Methodologically, \defname{} follows the tradition of standardized environments---the
+original Gym~\cite{brockman2016openaigym}, the multi-agent PettingZoo~\cite{terry2021pettingzoo},
+and Melting Pot~\cite{leibo2021meltingpot}, which evaluates social outcomes and
+generalization at the level of the collective---and of automated red teaming, in which
+one model generates test cases against another~\cite{perez2022redteaming}. The MAST
+taxonomy of multi-agent failure modes~\cite{cemri2025mast} supplies a vocabulary for
+the group-level failures \defname{} is built to elicit. Our \corb{} protocol adapts the
+red/blue co-evolution idea to the security of agent collectives and logs system-level
+scores rather than per-utterance verdicts.
+
+\subsection{Positioning: why \defname{} is not a rescaled single-agent benchmark}
+\label{sec:positioning}
+Three distinctions matter. First, \defname{} is \emph{not ASB applied to many agents}.
+ASB's only cross-agent vector is shared memory, and it has no collusion and no
+compromised-orchestrator setting; re-running it $N$ times yields $N$ independent agents,
+never a coordinated adversary, an orchestrator with a trust switch, or a compromise that
+propagates over a topology. Second, \defname{} is \emph{not AgentDojo at scale}.
+AgentDojo's deterministic checker is a decisive design choice that \defname{} preserves
+and generalizes, but it was defined over a single agent's environment state; scoring a
+\emph{collective} requires system-level security predicates over a \emph{global} trace,
+which is a new object (\Cref{sec:problem}). Third, \defname{} is \emph{not} a model-swap,
+a prompt-filter study, or mere engineering: its scientific object is the controlled
+variation of coordination, collusion, and orchestrator variables---undefined in a
+single-agent setting---and the system-level metrics that quantify their effect. The
+evaluator-integrity distinction is also load-bearing: LLM-as-judge evaluation is known
+to be manipulable and biased~\cite{zheng2023judging,wang2023fair}, which is exactly why
+\defname{} keeps a deterministic checker on the critical path and treats the
+deterministic-versus-judge comparison as a measurable ablation rather than an assumption.

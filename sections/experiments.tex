@@ -1,0 +1,151 @@
+\section{Evaluation Protocol and Placeholder Results}
+\label{sec:experiments}
+
+\defname{} is a benchmark, so ``evaluation'' means \emph{validating the instrument} and
+\emph{demonstrating the headline finding}. This section specifies the protocol; the
+numerical tables and plots are clearly labelled placeholders, and all quantitative
+outcomes are marked \emph{(hypothesis)} until produced. \Cref{fig:expsetup} summarizes the
+design as a pipeline from datasets and variables to metrics.
+
+\subsection{Research questions}
+\begin{itemize}[leftmargin=1.4em]
+\item[\textbf{RQ1}] \emph{Construct validity.} Does $\NRPs$ behave as
+\Cref{thm:metric} predicts (monotone in $\PNAs$ and $1-\ASRs$, reducing to ASB at $N=1$),
+and do alternative aggregators (\Cref{rem:metric}) change configuration rankings?
+\item[\textbf{RQ2}] \emph{Evaluator integrity (hypothesis).} How large is the
+deterministic-versus-LLM-judge gap---i.e., how often can an injection hijack a judge but
+not the deterministic checker (\Cref{thm:integrity,prop:judgehijack})?
+\item[\textbf{RQ3}] \emph{Defense degradation (headline hypothesis).} Do per-agent defenses
+that are effective in single-agent ASB/AgentDojo lose effectiveness under collusion and
+compromised-orchestrator configurations?
+\item[\textbf{RQ4}] \emph{Topology and propagation (hypothesis).} Does the measured $\CPR$
+follow the topological ordering predicted by \Cref{prop:chain,prop:star,prop:tree,prop:mesh}
+(chain $<$ tree$_{\text{sub}}$ $<$ star $<$ mesh), and is the orchestrator the critical node?
+\item[\textbf{RQ5}] \emph{Collusion and Sybils (hypothesis).} Is there a measurable
+collusion advantage $\Delta_{\mathrm{coll}}$ (\Cref{def:csr,thm:collusion}), and how does
+Sybil pressure affect selection/voting/memory outcomes?
+\item[\textbf{RQ6}] \emph{Scalability and cost.} How do the metrics and the token/API and
+latency costs scale with the agent count $N\in\{3,\dots,50\}$ and \corb{} rounds?
+\end{itemize}
+
+\subsection{Models, scale, and tasks}
+\textbf{Agent backbones.} Open models---Llama-3~\cite{dubey2024llama3},
+Qwen2.5~\cite{qwen2025qwen25}, and Mistral~\cite{jiang2023mistral7b}---and proprietary
+models---GPT-4o~\cite{openai2024gpt4o} and Claude-3.5---so that findings are not tied to a
+single family. \textbf{Scale/topology.} $3$--$50$ agents across star, chain, tree, and mesh.
+\textbf{Tasks.} Forced-coordination tasks (\Cref{def:forced}) instrumented with registered
+$(\Predutil,\Predsec)$ pairs; benign difficulty tuned so $\PNAs$ is neither saturated nor
+zero, with benign task pools drawn in the spirit of agent benchmarks such as
+AgentBench~\cite{liu2024agentbench}, GAIA~\cite{mialon2024gaia},
+WebArena~\cite{zhou2024webarena}, and SWE-bench~\cite{jimenez2024swebench}, and reasoning
+pools such as MMLU~\cite{hendrycks2021measuring} and GSM8K~\cite{cobbe2021gsm8k} for worker
+subtasks.
+
+\subsection{Adversary sweeps}
+We sweep each knob of $\config_{\mathrm{adv}}$ (\Cref{eq:adv-config}) while holding the
+others fixed: adversary fraction $\betafrac\in\{0,0.1,\dots,0.5\}$; independent versus
+colluding; static versus adaptive; orchestrator trusted versus compromised; malicious tools
+on/off; Sybil count $\in\{0,1,2,4\}$; and poisoned-memory on/off. Red-team primitives are
+instantiated from the single-agent literature---indirect prompt
+injection~\cite{greshake2023indirect,zhan2024injecagent}, instruction
+override~\cite{perez2022ignore}, universal triggers~\cite{zou2023universal}, and
+memory poisoning~\cite{chen2024agentpoison}---and composed across roles by the harness.
+
+\subsection{Baselines and defenses}
+As stated in the source design, baselines are: (i) \textbf{ASB re-run in single-agent
+mode}~\cite{zhang2025asb}; (ii) \textbf{AgentDojo}~\cite{debenedetti2024agentdojo};
+(iii) \textbf{no-defense}; and (iv) \textbf{per-agent defenses lifted into the multi-agent
+setting}---delimiting/sandwiching, paraphrase, a prompt-injection detector, instructional
+prevention, and guardrails such as Llama Guard~\cite{inan2023llamaguard} and NeMo
+Guardrails~\cite{rebedea2023nemo}, plus TrustAgent-style safety
+prompting~\cite{hua2024trustagent}. Where relevant we also include multi-agent defenses as
+reference points (AutoDefense~\cite{zeng2024autodefense}, G-Safeguard~\cite{yu2025gsafeguard})
+and an oracle upper bound that scores with ground-truth compromise labels.
+
+\subsection{Metrics and ablations}
+Metrics are the full suite of \Cref{sec:metric-suite}: $\ASRs$, $\PNAs$, $\NRPs$, $\CSR$,
+$\Delta_{\mathrm{coll}}$, $\CPR$, coordination quality, time-to-detection, recovery rate,
+token/API and latency cost, scalability, and human-intervention rate. The registered
+\textbf{ablations} are: collusion on/off; orchestrator trusted vs.\ compromised; emulated
+vs.\ real tools (bounding the $\kappaem\approx0.48$ realism cost); and deterministic vs.\
+LLM-judge evaluation (quantifying evaluator-hijack risk, RQ2). Each metric is estimated with
+$M$ episodes chosen by \Cref{thm:sample} for a target $(\epsilon,\alpha)$, with Benjamini--Hochberg
+control across the sweep grid.
+
+\subsection{Implementation and hyperparameters}
+The harness is model-agnostic (any chat/completions backbone behind a common interface),
+runs episodes with horizon $H$ per task, and logs every message, tool call, memory
+operation, and state transition into $\Trace$. Default study parameters (to be finalized
+with compute budget): $M{=}200$ episodes per configuration at target $\epsilon{=}0.05$,
+$\alpha{=}0.05$; $R\!\le\!20$ \corb{} rounds; temperature and decoding fixed per backbone
+and reported; random seeds logged. All defenses and attacks are versioned, and every reported
+number is a row of the \corb{} trajectory $\mathcal{L}$ (\Cref{alg:corb}).
+
+\subsection{Placeholder result tables}
+\Cref{tab:degradation,tab:topology} give the \emph{structure} of the two headline results.
+Their cells are placeholders.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
+before submission.} Headline degradation study (RQ3): system-level $\ASRs\downarrow$ /
+$\NRPs\uparrow$ are better. Each defense is measured single-agent (ASB/AgentDojo regime) and
+then under multi-agent collusion and compromised-orchestrator configurations. Expected
+\emph{(hypothesis)} trend: a defense's advantage over no-defense shrinks from left to right.}
+\label{tab:degradation}
+\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{2}{c}{Single-agent} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + compromised orch.} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Defense & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ \\
+\midrule
+No-defense              & --- & --- & --- & --- & --- & --- \\
+Delimiting/sandwich     & --- & --- & --- & --- & --- & --- \\
+Paraphrase              & --- & --- & --- & --- & --- & --- \\
+PI detector             & --- & --- & --- & --- & --- & --- \\
+Instructional prevention& --- & --- & --- & --- & --- & --- \\
+Guardrails              & --- & --- & --- & --- & --- & --- \\
+\midrule
+\emph{Oracle (upper bound)} & --- & --- & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
+before submission.} Topology study (RQ4): measured compromise-propagation rate $\CPR$ and
+$\ASRs$ by topology at fixed $\betafrac$. Expected \emph{(hypothesis)} ordering, from
+\Cref{prop:chain,prop:star,prop:tree,prop:mesh}: chain $<$ subcritical tree $<$ star $<$
+mesh, with the orchestrator (star hub) as the critical node.}
+\label{tab:topology}
+\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect & Recovery \\
+\midrule
+Chain & --- & --- & --- & --- & --- \\
+Tree (subcritical, $b\pinf<1$) & --- & --- & --- & --- & --- \\
+Tree (supercritical, $b\pinf>1$) & --- & --- & --- & --- & --- \\
+Star & --- & --- & --- & --- & --- \\
+Mesh & --- & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\Cref{fig:results} plots the \emph{conceptual expected trends} for RQ3--RQ6 (defense
+degradation with collusion, $\CPR$ versus topology, collusion advantage versus $\betafrac$,
+and cost versus $N$). They are drawn from the theory of \Cref{sec:theory} and are labelled
+as conceptual, not measured.
+
+\subsection{Reproducibility checklist}
+We will release: the environment harness and orchestration layer; the task suite with
+registered $(\Predutil,\Predsec)$ predicates; the adversary knobs and red-team primitives;
+the deterministic checker and the optional off-critical-path judge; the \corb{} driver; all
+prompts, decoding settings, seeds, and model/version identifiers; and the full \corb{}
+trajectory logs $\mathcal{L}$ underlying every reported number. Because scoring is
+deterministic given a trace, results are reproducible from the logs even when backbone APIs
+change. The emulated-versus-real-tools and deterministic-versus-judge ablations are shipped
+as first-class configurations so that reviewers can reproduce the validity checks, not only
+the headline numbers.

@@ -1,0 +1,74 @@
+% ============================================================================
+% SHARED SKELETON for every Idea_XX/idea.tex  (standalone, compiles with pdflatex)
+% Copy this preamble verbatim; replace TITLE and the section bodies.
+% Rules: escape & % _ # $ ; use \% for percent; use \href{URL}{Name} for venues;
+% use $...$ for math; NEVER invent citations, datasets, numbers, or results;
+% refer to corpus papers by name + arXiv id (e.g. "AgentPoison (arXiv:2407.12784)").
+% Mark unvalidated claims as (hypothesis). Keep it concise, precise, critical.
+% ============================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\setlist{nosep,leftmargin=1.4em}
+\newcommand{\hyp}{\textit{(hypothesis)}\xspace}
+\usepackage{xspace}
+\title{\bfseries MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems}
+\author{Secure Multi-Agent Systems --- Research Idea Repository}
+\date{Research concept note for collaborator discussion (not a paper)}
+\begin{document}\maketitle
+
+\section*{Target Venues}
+\begin{itemize}
+\item \href{https://neurips.cc/}{NeurIPS (Datasets \& Benchmarks)} (primary) --- purpose-built environment plus task suite and metrics for a new problem regime (multi-agent security).
+\item \href{https://iclr.cc/}{ICLR} --- benchmark with a co-evolving red/blue methodology and an empirical finding.
+\item \href{https://www.usenix.org/conferences/byname/108}{USENIX Security} --- the security finding (defense degradation under collusion/orchestrator compromise).
+\item \href{https://www.ieee-security.org/}{IEEE S\&P (Oakland)} --- systematized threat model and measurement across topologies.
+\item \href{https://www.ifaamas.org/}{AAMAS} --- coordination, group-level emergence, and forced-coordination tasks.
+\end{itemize}
+
+\section*{Motivation}
+Security research on LLM agents is bottlenecked by its instruments: the strongest existing benchmarks are single-agent. ASB (arXiv:2410.02644, ICLR 2025) formalizes agent attacks/defenses but is single-agent with tools and RAG whose \emph{only} cross-agent vector is shared memory, and it has no collusion and no compromised-orchestrator settings. AgentDojo (arXiv:2406.13352) evaluates one agent under prompt injection with deterministic, state-based \texttt{security()} checks. Yet deployed systems are increasingly orchestrated collectives: planners direct workers, agents share memory, tools are third-party, and coordination is forced. The phenomena that matter there --- collusion among agents, a compromised orchestrator, malicious tools, Sybil identities, and \emph{group-level} emergent risk --- cannot be produced, let alone measured, by a single-agent harness. MASEC (arXiv:2505.02077, \S4.7) states plainly that no multi-agent security benchmark exists and enumerates what one must provide. Without such an instrument, the field cannot tell whether single-agent defenses survive multi-agent deployment.
+
+\section*{Research Gap}
+Established facts (corpus): (i) ToolEmu (arXiv:2309.15817, ICLR 2024) is an LM-emulated sandbox in which an LLM emulates arbitrary tool execution from specifications, paired with an adversarial emulator and LM safety/helpfulness evaluators at human agreement $\kappa \approx 0.48$. (ii) ASB (arXiv:2410.02644, ICLR 2025) introduces $\mathrm{NRP} = \mathrm{PNA}\cdot(1-\mathrm{ASR})$ but is single-agent (tools + RAG), with shared memory as its lone cross-agent vector, and \emph{no} collusion and \emph{no} compromised-orchestrator settings. (iii) AgentDojo (arXiv:2406.13352) uses deterministic state-based \texttt{security()} checks rather than an LLM judge, so a successful injection cannot hijack the evaluator. (iv) MASEC (arXiv:2505.02077, \S4.7) states no multi-agent security benchmark exists and asks for heterogeneous roles, partial observability, forced coordination, co-evolving red/blue, and group-level emergence metrics. Unresolved: an environment that \emph{natively} parameterizes collusion, orchestrator/tool compromise, and Sybils, and evaluates risk at the \emph{system} level. Whether single-agent defenses degrade there is the open question we target and mark \hyp.
+
+\section*{System and Threat Model}
+Because MASGym is an environment, its threat model is \emph{parameterized} and configurable, not fixed.
+\begin{itemize}
+\item \textbf{Roles / agents:} heterogeneous roles (orchestrator, workers, tool-executors, shared-memory store); $3$--$50$ agents. Partial observability: agents see only their local context and permitted messages.
+\item \textbf{Topology / coordination:} star, chain, tree, and mesh; forced-coordination tasks that no single agent can complete alone.
+\item \textbf{Trust / oversight:} per-agent trust boundaries; optional human-approval hooks; orchestrator may be trusted or compromised (a switch).
+\item \textbf{Attacker (parameterized):} adversary fraction over agents; independent vs.\ colluding; static vs.\ adaptive; compromised orchestrator on/off; malicious tools; Sybil identities; poisoned shared memory. Objective: system-level compromise (unsafe action, exfiltration, coordination sabotage).
+\item \textbf{Trusted computing base:} the deterministic state checker and the environment harness are trusted; emulated tools have no real side effects. \textbf{Out of scope:} real-world tool side effects, physical actuation, model-weight attacks.
+\end{itemize}
+
+\section*{Core Idea}
+MASGym is, to our knowledge, the first benchmark/environment purpose-built for \emph{multi-agent} security. It provides forced-coordination tasks, heterogeneous roles, and partial observability, plus \emph{native} parameterized settings for colluding agents, compromised orchestrators, malicious tools, and Sybils. It evaluates risk at the \emph{system} level rather than per step, runs a \emph{co-evolving red/blue} protocol, and reports a \emph{system-level NRP} that generalizes ASB's $\mathrm{NRP} = \mathrm{PNA}\cdot(1-\mathrm{ASR})$. It is built on ToolEmu-style LM emulation for breadth of tools and AgentDojo-style deterministic state-based checks for evaluation integrity (so a successful injection cannot hijack the judge). To avoid the ``benchmark without a finding'' critique, MASGym ships with a concrete scientific finding as its headline result: that defenses effective in single-agent ASB/AgentDojo degrade under collusion and compromised-orchestrator conditions \hyp. This is an environment/methodology contribution, not an attack or defense per se.
+
+\section*{Novelty}
+MASGym is \emph{fundamentally multi-agent} because it exists to \emph{isolate} phenomena that single-agent harnesses cannot reproduce. It is not ASB-applied-to-many: ASB's only cross-agent vector is shared memory, and it has no collusion and no compromised-orchestrator settings, so re-running ASB $N$ times does not create coordinated adversaries, orchestrator trust, or group-level emergence. It is not AgentDojo-at-scale: AgentDojo is single-agent, and its (excellent) deterministic checker was designed for one agent's state. It is not a \emph{model-swap} or \emph{prompt-filter} study, and not mere \emph{engineering}: the scientific object is the controlled variation of \emph{coordination, collusion, and orchestrator} variables and the system-level metrics that quantify their effect --- variables that are undefined in a single-agent setting. Forced coordination, collusion, compromise propagation, and Sybil pressure are group-level by construction.
+
+\section*{Expected Contributions}
+\begin{itemize}
+\item An open environment and task suite for multi-agent LLM security with heterogeneous roles, partial observability, and forced coordination.
+\item A parameterized adversary model: adversary fraction, collusion on/off, adaptivity, orchestrator compromise, malicious tools, Sybils, poisoned memory.
+\item System-level metrics, including a system-level NRP generalizing ASB's, that measure risk over the collective rather than per step.
+\item A co-evolving red/blue protocol as a reusable evaluation methodology.
+\item A headline empirical \emph{finding} on single-agent-defense degradation under collusion/orchestrator compromise \hyp, so the benchmark ships with a result.
+\end{itemize}
+
+\section*{Preliminary Technical Direction}
+Architecture: (1) an emulation layer where an LLM emulates tool execution from specs (ToolEmu-style), with an adversarial-emulator mode; (2) a deterministic state checker that evaluates system-level security predicates over the global state trace (AgentDojo-style), never an LLM judge on the critical path, so injections cannot hijack scoring; (3) an orchestration layer that instantiates topology, roles, observability, and the adversary parameters. Define a system-level generalization $\mathrm{NRP}_{\text{sys}} = \mathrm{PNA}_{\text{sys}}\cdot(1-\mathrm{ASR}_{\text{sys}})$, where $\mathrm{ASR}_{\text{sys}}$ is measured against system-level security predicates and $\mathrm{PNA}_{\text{sys}}$ is benign coordinated-task performance; the exact aggregation is a design contribution to be validated, not assumed. The co-evolving loop alternates a red policy (proposes attack configurations from the parameter space) and a blue policy (proposes defenses), logging a trajectory of $(\text{attack},\text{defense})$ pairs and their system-NRP. Emulation fidelity is bounded by ToolEmu's reported $\kappa \approx 0.48$; we surface this as a first-class caveat rather than treating emulator verdicts as ground truth.
+
+\section*{Evaluation Strategy}
+This is a benchmark, so ``evaluation'' means validating the instrument and demonstrating the headline finding. \textbf{Models:} open (Llama-3, Qwen2.5, Mistral) and proprietary (GPT-4o, Claude-3.5) agents. \textbf{Scale/topology:} $3$--$50$ agents across star, chain, tree, and mesh. \textbf{Adversary sweeps:} adversary fraction; independent vs.\ colluding; static vs.\ adaptive; compromised orchestrator on/off; malicious tools; Sybils; poisoned memory. \textbf{Metrics:} system-level ASR, collusion success rate, compromise propagation rate, coordination quality, system-NRP, time-to-detection, recovery rate, token/API and latency cost, and scalability with agent count. \textbf{Baselines:} ASB re-run in single-agent mode; AgentDojo; no-defense; per-agent defenses lifted into the multi-agent setting. \textbf{Ablations:} collusion on/off; orchestrator trusted vs.\ compromised; emulated vs.\ real tools; deterministic vs.\ LLM-judge evaluation (to quantify evaluator-hijack risk). The environment is instrument, not verdict: we never equate a lower system-ASR or higher system-NRP with ``secure''; results characterize measured risk under stated configurations and are \hyp until produced.
+
+\section*{Potential Risks}
+Emulation fidelity is the central threat to validity: ToolEmu's human agreement is $\kappa \approx 0.48$, so emulator-derived outcomes carry noise; we mitigate by routing scoring through the deterministic checker and reporting the emulated-vs-real-tools ablation. The ``benchmark-without-a-finding'' critique is mitigated by shipping the degradation finding, but that finding must actually replicate across models and topologies \hyp; if defenses do \emph{not} degrade, the contribution reframes as a (still valuable) negative result. API/compute cost grows with agent count and the co-evolving loop, constraining the reachable region of the parameter space. Construct-validity risk: the system-NRP aggregation must be justified, not asserted, or reviewers will discount it.
+
+\section*{Publication Readiness}
+Confidence: \textbf{8/10}. The gap is explicit --- MASEC (\S4.7) states no multi-agent security benchmark exists --- and the design reuses established, credible components (ToolEmu emulation, AgentDojo deterministic checks, ASB's NRP) in a genuinely new regime, which fits NeurIPS D\&B and ICLR strongly, with USENIX/S\&P for the finding and AAMAS for coordination. The score is held below 9 by emulation-fidelity limits ($\kappa \approx 0.48$), compute cost, and dependence of the headline finding on replication; all quantitative outcomes remain \hyp until measured.
+\end{document}

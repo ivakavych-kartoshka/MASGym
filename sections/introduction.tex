@@ -1,0 +1,125 @@
+\section{Introduction}
+\label{sec:intro}
+
+Progress in the security of large language model (LLM) agents has tracked the quality
+of the instruments used to measure it. Agent Security Bench (ASB)~\cite{zhang2025asb}
+formalized attacks and defenses across an agent's operational stages and introduced a
+utility--security metric $\mathrm{NRP}=\mathrm{PNA}\cdot(1-\mathrm{ASR})$;
+AgentDojo~\cite{debenedetti2024agentdojo} evaluates an agent under prompt injection
+with \emph{deterministic}, state-based \texttt{security()} checks, so that a
+successful injection cannot also corrupt the evaluator; InjecAgent~\cite{zhan2024injecagent}
+benchmarks indirect prompt injection in tool-integrated agents; and the ToolEmu
+sandbox~\cite{ruan2024toolemu} lets a language model emulate arbitrary tool execution
+from specifications, trading fidelity for breadth. These instruments are strong, and
+they are all single-agent. Their only cross-agent channel is a shared memory store,
+and none of them exposes a knob for the phenomena that arise when several agents act
+together.
+
+Deployment has moved in the opposite direction. Production systems such as
+AutoGen~\cite{wu2023autogen}, MetaGPT~\cite{hong2023metagpt},
+CAMEL~\cite{li2023camel}, ChatDev~\cite{qian2024chatdev},
+AgentVerse~\cite{chen2024agentverse}, and Magentic-One~\cite{fourney2024magenticone}
+are orchestrated \emph{collectives}: a planner directs workers, agents read and write a
+shared memory, third-party tools are invoked on the critical path, and many tasks are
+structured so that no single agent can finish them alone. In such systems the security
+questions that matter are group-level. Do a fraction of agents \emph{collude}? Is the
+\emph{orchestrator} itself trusted, or has it been compromised? Can a
+\emph{malicious tool}, a \emph{Sybil} identity, or a \emph{poisoned} entry in shared
+memory spread through the collective? These are not attributes of any one agent, and
+re-running a single-agent benchmark $N$ times does not create them: it produces $N$
+independent agents, not a coordinated adversary, an orchestrator with a trust setting,
+or a compromise that propagates over a communication topology. The recent
+systematization of multi-agent security (MASEC)~\cite{schroederdewitt2025masec} makes
+the point sharply---security in multi-agent systems is \emph{non-compositional}, in
+that individually safe agents can compose into unsafe systems---and states plainly, in
+its Section~4.7, that no multi-agent security benchmark exists, enumerating what one
+must provide: heterogeneous roles, partial observability, forced coordination, a
+co-evolving red/blue methodology, and group-level emergence metrics. A parallel survey
+of multi-agent risks from advanced AI~\cite{hammond2025multiagent} organizes the same
+territory into miscoordination, conflict, and collusion, again distinct from
+single-agent mitigations. The field therefore cannot currently answer a basic
+question: \emph{do single-agent defenses survive multi-agent deployment?}
+
+\paragraph{Contribution.}
+We answer the instrument gap directly. \defname{} is, to the best of our knowledge and
+within the verified literature, the first environment purpose-built for the security
+of multi-agent LLM systems. It is not a new attack and not a new defense; it is an
+environment and an evaluation methodology whose scientific object is the controlled
+variation of coordination, collusion, and orchestrator variables and the system-level
+metrics that quantify their effect. \Cref{fig:architecture} previews the design: a
+ToolEmu-style emulation layer supplies breadth of tools; an AgentDojo-style
+deterministic checker scores system-level security predicates over the global state
+trace, never placing an LLM judge on the critical path; and an orchestration layer
+instantiates topology, roles, partial observability, and a parameterized adversary. We
+make four concrete contributions and one empirical claim.
+
+\begin{enumerate}[leftmargin=1.5em]
+\item \textbf{An environment and task suite for multi-agent LLM security}
+(\Cref{sec:system,sec:method}). Heterogeneous roles (orchestrator, workers,
+tool-executors, shared-memory store), partial observability, and forced-coordination
+tasks, instantiated over star, chain, tree, and mesh topologies at $3$--$50$ agents.
+Forced coordination, collusion, compromise propagation, and Sybil pressure are
+group-level \emph{by construction} and have no single-agent analogue.
+
+\item \textbf{A natively parameterized adversary model} (\Cref{sec:threat}). A single
+configuration vector controls the adversary fraction over agents, independent versus
+colluding behaviour, static versus adaptive strategy, orchestrator compromise on/off,
+malicious tools, Sybil identities, and poisoned shared memory, with a system-level
+compromise objective (unsafe action, exfiltration, or coordination sabotage).
+
+\item \textbf{A system-level metric suite} (\Cref{sec:problem,sec:method}). A
+generalization $\NRPs=\PNAs\cdot(1-\ASRs)$ of ASB's metric, together with collusion
+success rate, compromise-propagation rate, coordination quality, time-to-detection,
+recovery rate, and cost, all measured over the collective rather than per step. Because
+$\ASRs$ is scored by a deterministic checker, a successful injection cannot hijack the
+evaluator---a property we prove and then quantify empirically against an LLM-judge
+ablation.
+
+\item \textbf{The \corb{} co-evolving red/blue protocol} (\Cref{sec:algorithm}). A
+reusable methodology that alternates a red policy proposing attack configurations from
+the parameter space and a blue policy proposing defenses, logging a trajectory of
+$(\text{attack},\text{defense})$ pairs and their system-level scores.
+
+\item \textbf{A headline empirical hypothesis} (\Cref{sec:experiments}). We formulate,
+and lay out the protocol to test, the claim that defenses effective in single-agent
+ASB/AgentDojo \emph{degrade} under collusion and compromised-orchestrator conditions.
+This claim is marked throughout as a \emph{hypothesis}; if it does not replicate across
+models and topologies, the contribution reframes as a still-informative negative result.
+\end{enumerate}
+
+Because reviewers rightly discount benchmarks whose central metric is asserted rather
+than justified, and because the idea's own risk analysis flags construct validity as
+the primary threat, we treat the theory as part of the instrument rather than as
+decoration. \Cref{sec:theory} states, under explicit assumptions and with honest
+proof-status labels, five results: an axiomatic characterization that singles out the
+product aggregator among all utility--security combiners and reduces it to ASB's metric
+when $N=1$; an evaluator-integrity theorem showing that the deterministic checker's
+verdict is invariant to adversarial message content and is therefore not hijackable,
+in contrast to an LLM judge; topology-dependent bounds on compromise propagation across
+the four topologies together with a strict collusion-versus-independent separation in
+the environment's cascade model; a forced-coordination lower bound; and finite-sample
+concentration guarantees for the estimators that fix the number of episodes the sweeps
+require. None of these results asserts that any real defense is secure or that any
+defense provably degrades; they characterize the \emph{measurement}, which is what a
+benchmark can honestly own.
+
+\paragraph{Scope and stance.}
+\defname{} is an instrument, not a verdict. A lower system-level attack success rate or
+a higher system-level NRP is a \emph{measurement under a stated configuration}, not a
+certificate of security; we never equate the two. Emulation fidelity is the central
+threat to validity---ToolEmu's reported human agreement is $\kappaem\approx 0.48$---and
+we surface it as a first-class caveat, route scoring through the deterministic checker,
+and report an emulated-versus-real-tools ablation rather than treating emulator verdicts
+as ground truth. Following the trusted computing base of the source design, we take the
+deterministic state checker and the environment harness to be trusted and give the
+emulated tools no real side effects; real-world tool side effects, physical actuation,
+and model-weight attacks are out of scope. The remainder of the paper is organized as
+follows. \Cref{sec:related} situates \defname{} against single-agent benchmarks,
+multi-agent frameworks and attacks, and reinforcement-learning environments;
+\Cref{sec:prelim} fixes notation and recalls the ASB, AgentDojo, and ToolEmu
+primitives; \Cref{sec:system,sec:threat,sec:problem} give the system model, threat
+model, and problem formulation; \Cref{sec:method,sec:algorithm} present the
+architecture, metric suite, and \corb{} protocol; \Cref{sec:theory} develops the
+theory; \Cref{sec:experiments} specifies the evaluation protocol and placeholder
+results; and \Cref{sec:discussion,sec:limitations,sec:ethics,sec:conclusion} discuss
+implications, limitations, ethics, and conclusions.

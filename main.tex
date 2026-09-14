@@ -1,0 +1,185 @@
+% ============================================================================
+% MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems.
+% Elsevier (elsarticle) manuscript. See idea_fidelity_report.md and
+% topic_signature.json for the LOCKED specification this manuscript must remain
+% consistent with (source of truth: idea.pdf).
+%
+% BUILD: latexmk -pdf main.tex   (or: pdflatex; bibtex; pdflatex; pdflatex)
+% NOTE:  elsarticle.cls in this directory is a LOCAL COMPATIBILITY SHIM used
+%        because the official class was unavailable offline. For submission,
+%        install the official elsarticle.cls and delete the local shim; main.tex
+%        compiles unchanged. See TODO_before_submission.md.
+% ============================================================================
+\documentclass[preprint,12pt]{elsarticle}
+
+% ---- encoding / fonts ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---- math ----
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{xspace}
+
+% ---- lists / tables / floats ----
+\usepackage{enumitem}
+\usepackage{booktabs,multirow,array}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+
+% ---- graphics: TikZ / PGFPlots ----
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,shapes.geometric,%
+  shapes.symbols,decorations.pathreplacing,patterns,matrix,shadows.blur}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots,fillbetween}
+
+% ---- hyperlinks + clever references (order matters: hyperref then cleveref) ----
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,%
+  urlcolor=blue!55!black]{hyperref}
+\usepackage{cleveref}
+
+% ---- shared TikZ styles (visual grammar) ----
+\input{figures/tikz_styles.tex}
+
+% ============================================================================
+% Theorem environments
+% ============================================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{assumption}{Assumption}{Assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+
+% ============================================================================
+% Lightweight algorithm float + pseudocode macros
+% (the algorithm/algpseudocode packages were unavailable offline; these macros
+%  reproduce a numbered, ruled pseudocode listing and compile everywhere.)
+% ============================================================================
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\crefname{algorithm}{Algorithm}{Algorithms}
+\Crefname{algorithm}{Algorithm}{Algorithms}
+\newcounter{algline}
+\newlength{\algind}
+\newcommand{\algreset}{\setcounter{algline}{0}\setlength{\algind}{0pt}}
+\newcommand{\PL}[1]{\par\refstepcounter{algline}\noindent
+  \makebox[2.6em][r]{\scriptsize\thealgline:\,}\hspace{0.5em}\hspace{\algind}%
+  \ignorespaces#1\strut}
+\newcommand{\Ind}{\addtolength{\algind}{1.5em}}
+\newcommand{\Ded}{\addtolength{\algind}{-1.5em}}
+\newcommand{\kw}[1]{\textbf{#1}}
+\newcommand{\comm}[1]{\hfill{\footnotesize\itshape\color{black!55}\(\triangleright\)~#1}}
+
+% ============================================================================
+% Notation macros (kept consistent with notation_consistency_check.md)
+% ============================================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\indic}{\mathbb{1}}
+\newcommand{\Agents}{\mathcal{A}}          % set of agents
+\newcommand{\Roles}{\mathcal{R}}           % role set
+\newcommand{\Gtop}{\mathcal{G}}            % topology graph
+\newcommand{\Vtop}{\mathcal{V}}
+\newcommand{\Etop}{\mathcal{E}}
+\newcommand{\Nin}{\mathcal{N}^{-}}          % inbound neighbourhood
+\newcommand{\Trace}{\tau}                  % global state trace
+\newcommand{\TraceSp}{\mathcal{T}}         % trace space
+\newcommand{\Statesp}{\mathcal{S}}         % state space
+\newcommand{\Predsec}{\Phi}                % system-level security predicate
+\newcommand{\Predutil}{\Psi}               % benign-success predicate
+\newcommand{\Checker}{\mathsf{C}}          % deterministic checker
+\newcommand{\Emu}{\mathcal{E}_{\mathrm{LM}}} % LM tool emulator
+\newcommand{\Judge}{\mathsf{J}}            % LLM judge (contrast)
+\newcommand{\Advset}{\mathcal{B}}          % adversarial agent set
+\newcommand{\betafrac}{\beta}              % adversary fraction
+\newcommand{\config}{c}                    % environment configuration
+\newcommand{\Configs}{\mathcal{C}}         % configuration space
+\newcommand{\ASRs}{\mathrm{ASR}_{\mathrm{sys}}}
+\newcommand{\PNAs}{\mathrm{PNA}_{\mathrm{sys}}}
+\newcommand{\NRPs}{\mathrm{NRP}_{\mathrm{sys}}}
+\newcommand{\CPR}{\mathrm{CPR}}            % compromise-propagation rate
+\newcommand{\CSR}{\mathrm{CSR}}            % collusion success rate
+\newcommand{\red}{\rho}                    % red policy
+\newcommand{\blue}{\delta}                 % blue policy (defense)
+\newcommand{\pinf}{p}                      % per-edge propagation probability
+\newcommand{\thresh}{\theta}               % threshold (bootstrap percolation)
+\newcommand{\kappaem}{\kappa}              % emulation agreement
+\newcommand{\defname}{\textsc{MASGym}\xspace}
+\newcommand{\corb}{\textsc{CoRB}\xspace}
+
+\journal{Computers \& Security (Elsevier)}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% Front matter
+% ---------------------------------------------------------------------------
+\begin{frontmatter}
+
+\title{\defname: A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM
+Systems with Parameterized Collusion, Orchestrator Compromise, and
+System-Level Metrics}
+
+\author[rmit]{Thanh Pham\corref{cor1}}
+\ead{thanhphamchivn@gmail.com}
+\cortext[cor1]{Corresponding author.}
+\address[rmit]{School of Computing Technologies, RMIT University, Melbourne, Australia}
+
+\input{sections/abstract.tex}
+
+\end{frontmatter}
+
+% ---------------------------------------------------------------------------
+% Body
+% ---------------------------------------------------------------------------
+\input{sections/introduction.tex}
+\input{figures/tikz_architecture.tex}
+\input{sections/related_work.tex}
+\input{sections/preliminaries.tex}
+\input{sections/system_model.tex}
+\input{sections/threat_model.tex}
+\input{figures/tikz_threat_privacy_robustness.tex}
+\input{sections/problem_formulation.tex}
+\input{sections/methodology.tex}
+\input{figures/tikz_method_pipeline.tex}
+\input{sections/algorithm.tex}
+\input{sections/theory.tex}
+\input{figures/tikz_theory_diagram.tex}
+\input{sections/experiments.tex}
+\input{figures/tikz_experimental_setup.tex}
+\input{figures/pgfplots_placeholder_results.tex}
+\input{sections/discussion.tex}
+\input{sections/limitations.tex}
+\input{sections/ethics.tex}
+\input{sections/conclusion.tex}
+
+% ---------------------------------------------------------------------------
+% Appendices
+% ---------------------------------------------------------------------------
+\appendix
+\input{appendix/proofs.tex}
+\input{appendix/additional_experiments.tex}
+
+% ---------------------------------------------------------------------------
+% Bibliography
+% ---------------------------------------------------------------------------
+\bibliographystyle{plainnat} % submission: swap to elsarticle-num (ships w/ elsarticle)
+\bibliography{references_verified}
+
+\end{document}

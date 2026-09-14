@@ -1,0 +1,90 @@
+\section{The \defname{} Environment}
+\label{sec:method}
+
+\defname{} is organized as three layers (\Cref{fig:architecture,fig:pipeline}): an
+\emph{emulation layer} that supplies tools, a \emph{deterministic checking layer} that
+scores system-level predicates, and an \emph{orchestration layer} that instantiates the
+system and threat models and drives the \corb{} loop. We describe each layer, the task
+suite, the realized adversary knobs, and the full metric suite.
+
+\subsection{Emulation layer}
+Following ToolEmu~\cite{ruan2024toolemu}, tool execution is emulated by a language model
+$\Emu$ from a tool specification, giving breadth without hand-built sandboxes. \defname{}
+adds an \emph{adversarial-emulator} mode $\Emu^{\!\dagger}$ that realizes malicious tools:
+under the $\mathsf{tool}$ knob, a designated tool's emulated responses are generated to
+carry attacker-controlled content, exfiltration bait, or injected instructions. Crucially,
+the emulator is \emph{not} on the scoring critical path: it produces tool outputs that
+agents consume, but the security verdict is computed by the deterministic checker from the
+recorded trace, so emulator noise (the $\kappaem\approx0.48$ caveat) degrades realism, not
+scoring integrity. An emulated-versus-real-tools ablation (\Cref{sec:experiments}) bounds
+the realism cost.
+
+\subsection{Deterministic checking layer}
+The checker $\Checker$ evaluates the registered predicates $\Predsec,\Predutil$ over the
+global trace $\Trace$ (\Cref{def:predicates}). It never invokes an LLM judge on the
+critical path. System-level predicates are expressed as programs over the recorded state:
+for example, an \emph{exfiltration} predicate fires iff protected data recorded as leaving
+the trust boundary appears in an outbound tool call; a \emph{sabotage} predicate fires iff
+a $k$-forced task's witness set was prevented from completing; an \emph{unsafe-action}
+predicate fires iff a state transition on a denylisted action is recorded. Because these
+are functions of $\Trace$ alone, they inherit the hijack-resistance property proved in
+\Cref{thm:integrity}. For studies that wish to \emph{measure} the risk of judge-based
+evaluation, \defname{} also ships an optional LLM judge $\Judge$ used only off the critical
+path, enabling the deterministic-versus-judge ablation.
+
+\subsection{Orchestration layer}
+The orchestration layer builds the topology $\Gtop$, assigns roles, enforces observability
+masks, applies the adversary configuration $\config_{\mathrm{adv}}$ of \Cref{eq:adv-config},
+and runs episodes. It is part of the TCB (\Cref{sec:tcb}): it attributes every message to
+its sender, records the trace, and gates human-approval hooks. The same layer exposes the
+\corb{} interface, alternately querying a red policy for an attack configuration and a blue
+policy for a defense, and logging their system-level scores (\Cref{sec:algorithm}).
+
+\subsection{Task suite}
+\defname{} tasks are \emph{forced-coordination} by design (\Cref{def:forced}), so that no
+single agent can complete them and the collective is the unit of analysis. Each task
+provides: a benign goal decomposable across roles; a registered pair $(\Predutil,\Predsec)$;
+a tool set (some emulated as malicious under the $\mathsf{tool}$ knob); and a
+shared-memory schema (poisonable under $\mathsf{mem}$). Tasks span the coordination
+structures that the topologies induce---hub-and-spoke delegation (star), pipelines (chain),
+hierarchical decomposition (tree), and peer collaboration (mesh)---and are parameterized by
+$k$ (the forced-coordination degree) and by benign difficulty so that $\PNAs$ is neither
+saturated nor zero.
+
+\subsection{Realized adversary knobs}
+Each component of $\config_{\mathrm{adv}}$ maps to a concrete harness mechanism:
+$\betafrac$ selects the seed set $\Advset$; $\mathsf{coll}$ toggles a shared adversary
+channel and a joint objective; $\mathsf{adapt}$ enables red co-evolution across \corb{}
+rounds; $\mathsf{orch}$ flips the orchestrator's policy to adversarial; $\mathsf{tool}$
+routes designated tools through $\Emu^{\!\dagger}$; $\mathsf{syb}$ instantiates extra
+identities that share an underlying controller; and $\mathsf{mem}$ writes poisoned entries
+into shared memory. Because the knobs are independent, a study can isolate the effect of a
+single variable while holding the rest fixed---the controlled variation that is the paper's
+scientific object, read as estimating the causal effect of a treatment such as
+collusion~\cite{rubin1974estimating}.
+
+\subsection{Metric suite}
+\label{sec:metric-suite}
+\defname{} reports the following system-level quantities, all computed from traces by the
+deterministic checker or the harness logs; none is an LLM-judge verdict on the critical
+path.
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{System attack success rate} $\ASRs$ (\Cref{eq:asrsys}) and \textbf{system
+NRP} $\NRPs$ (\Cref{eq:nrpsys}); benign performance $\PNAs$ (\Cref{eq:pnasys}).
+\item \textbf{Collusion success rate} $\CSR$ and collusion advantage $\Delta_{\mathrm{coll}}$
+(\Cref{def:csr}).
+\item \textbf{Compromise-propagation rate} $\CPR$ (\Cref{eq:cpr}): fraction of initially
+honest agents that become compromised.
+\item \textbf{Coordination quality}: benign success on forced-coordination tasks, and its
+degradation under sabotage objectives.
+\item \textbf{Time-to-detection}: environment steps until a defense (if any) flags the
+compromise, and \textbf{recovery rate}: fraction of episodes that return to a safe,
+task-completing state after detection.
+\item \textbf{Cost and scalability}: token/API cost, wall-clock latency, and how each
+metric and cost scale with the agent count $N$.
+\item \textbf{Human-intervention rate}: fraction of episodes in which a human-approval hook
+was required to hold risk at target, when such hooks are enabled.
+\end{itemize}
+Estimating these to a target precision requires a number of episodes fixed by the
+concentration results of \Cref{thm:sample}, which in turn drives the cost analysis of
+\Cref{sec:experiments}.

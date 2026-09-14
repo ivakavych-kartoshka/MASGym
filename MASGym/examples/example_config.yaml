@@ -1,0 +1,18 @@
+# Minimal example config for a single MASGym run (synthetic).
+# Run: python scripts/run_experiment.py --config examples/example_config.yaml --stage sweep --out outputs/example
+env:
+  n_agents: 6
+  topology: star
+  horizon: 4
+  p_infect: 0.3
+  forced_degree: 2
+
+eval:
+  n_episodes: 50
+  seed: 0
+
+defense: null
+
+sweep:
+  beta: [0.0, 0.3]
+  colluding: [false, true]

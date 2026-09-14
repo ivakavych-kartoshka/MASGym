@@ -1,0 +1,123 @@
+\section{Proofs}
+\label{app:proofs}
+
+This appendix gives the proofs deferred from \Cref{sec:theory}. Throughout we work in the
+independent-cascade instance of \Cref{as:prop}: when an agent becomes compromised, it
+independently compromises each susceptible out-neighbour with probability $\pinf$ when its
+message is processed, and compromise is absorbing.
+
+\subsection{Propagation propositions}
+
+\begin{proof}[Proof of \Cref{prop:chain} (chain)]
+On the directed path $a_1\to a_2\to\cdots\to a_n$ with the single seed at $a_1$, the agent
+$a_{1+j}$ becomes compromised iff every one of the $j$ edges $a_1\to a_2,\dots,a_j\to a_{1+j}$
+fires. By independence these events have probability $\pinf^{\,j}$. Summing the expected
+indicators,
+\[
+\E\bigl[|\Advset_\infty|-1\bigr]=\sum_{j=1}^{n-1}\pinf^{\,j}
+=\pinf\,\frac{1-\pinf^{\,n-1}}{1-\pinf}\le \frac{\pinf}{1-\pinf},
+\qquad \pinf<1,
+\]
+which is bounded independently of $n$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:star} (star)]
+Let the centre be $c$ and the leaves $a_1,\dots,a_{n-1}$.
+\emph{Centre seed.} Each leaf is a direct out-neighbour of $c$, so it is compromised
+independently with probability $\pinf$; hence $\E[|\Advset_\infty|-1]=\pinf(n-1)$ and
+$\CPR=\pinf(n-1)/(n-1)=\pinf$.
+\emph{Leaf seed.} A seed leaf compromises the centre with probability $\pinf$; conditioned on
+that, each of the remaining $n-2$ leaves is compromised with probability $\pinf$. Thus the
+expected number of additional compromises is $\pinf+\pinf^{2}(n-2)$, and the total reach is
+$1+\pinf+\pinf^{2}(n-2)$. The centre-seed total reach minus the leaf-seed total reach is
+\[
+\bigl[1+\pinf(n-1)\bigr]-\bigl[1+\pinf+\pinf^{2}(n-2)\bigr]
+=\pinf(n-2)-\pinf^{2}(n-2)=\pinf(1-\pinf)(n-2)=\Theta\!\bigl(\pinf(1-\pinf)n\bigr).
+\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:tree} (tree)]
+Seed the root (level $0$). Each compromised node at level $\ell-1$ independently compromises
+each of its $b$ children with probability $\pinf$, so the expected number of compromised
+nodes at level $\ell$ equals $b\pinf$ times that at level $\ell-1$. With one seed,
+$\E[\text{level }\ell]=(b\pinf)^{\ell}$, and the total expected reach is
+$\sum_{\ell=1}^{d}(b\pinf)^{\ell}$. For $b\pinf<1$ this is at most $b\pinf/(1-b\pinf)$,
+bounded in $d$; for $b\pinf>1$ it is $\Theta\bigl((b\pinf)^{d}\bigr)$, exponential in depth;
+the critical case is $b\pinf=1$. (This is the mean of a Galton--Watson branching process with
+offspring mean $b\pinf$.)
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:mesh} (mesh, one round)]
+On $K_n$ with seed set $\Advset_0$, $|\Advset_0|=s$, each honest node has all $s$ seeds as
+in-neighbours. It survives the round uncompromised iff every one of the $s$ independent
+edges fails, with probability $(1-\pinf)^{s}$; hence it is compromised with probability
+$1-(1-\pinf)^{s}$. Summing over the $n-s$ honest nodes,
+$\E[|\Advset_1|]=s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. For fixed $\pinf>0$,
+$1-(1-\pinf)^{s}\to1$ as $s\to\infty$, so the honest-compromise fraction after one round
+tends to $1$; iterating the absorbing process only increases the compromised set, and above
+the percolation threshold a giant compromised component forms, driving $\CPR\to1$
+(cf.~\cite{kempe2003maximizing,watts2002simple}).
+\end{proof}
+
+\subsection{Collusion advantage on the star}
+
+\begin{proof}[Full proof of \Cref{thm:collusion}]
+Write $C=1+\pinf(N-1)$ for the centre-seed reach and $L=1+\pinf+\pinf^{2}(N-2)$ for the
+leaf-seed reach (\Cref{prop:star}). A colluding adversary with one seed places it at the
+centre, achieving expected compromise $C$. An independent adversary places its single seed
+uniformly at random: with probability $1/N$ it lands on the centre (reach $C$) and with
+probability $(N-1)/N$ on a leaf (reach $L$), giving
+\[
+\E^{\mathrm{ind}}=\tfrac1N\,C+\tfrac{N-1}{N}\,L.
+\]
+Therefore
+\[
+\Delta_{\mathrm{coll}}=C-\E^{\mathrm{ind}}
+=C-\tfrac1N C-\tfrac{N-1}{N}L
+=\tfrac{N-1}{N}\,(C-L).
+\]
+From \Cref{prop:star}, $C-L=\pinf(1-\pinf)(N-2)$, so
+\[
+\boxed{\;\Delta_{\mathrm{coll}}=\pinf(1-\pinf)\,\frac{(N-1)(N-2)}{N}\;}
+\;=\;\Theta\!\bigl(\pinf(1-\pinf)N\bigr).
+\]
+For every $\pinf\in(0,1)$ and $N\ge3$ we have $(N-1)(N-2)/N>0$, so $\Delta_{\mathrm{coll}}>0$
+strictly: the coordinated adversary compromises strictly more of the collective than the
+uncoordinated adversary of equal budget. For $s>1$ seeds, coordinated placement solves the
+monotone submodular influence-maximization objective, for which greedy seeding attains a
+$(1-1/e)$ approximation to the optimum~\cite{kempe2003maximizing}; the single-seed star
+computation above already exhibits a strictly positive gap, which is all the theorem claims.
+\end{proof}
+
+\begin{remark}
+The proof isolates the mechanism: random placement pays an $O(1/N)$ chance of hitting the
+hub, whereas coordination pays nothing, and the hub controls an $\Theta(\pinf N)$ reach. This
+is exactly why \defname{} treats collusion and topology jointly and flags hub topologies as
+where degradation, if it occurs, should be largest (\Cref{rem:collusion}).
+\end{remark}
+
+\subsection{Auxiliary details for the metric and estimators}
+
+\begin{proof}[Detail for \Cref{thm:metric}]
+Continuity (\Cref{as:cont}) is used only to extend the homogeneity identities from rationals
+to all of $[0,1]$; the algebraic identities $g(u,\sigma)=u\,g(1,\sigma)$ and
+$g(1,\sigma)=\sigma\,g(1,1)$ hold pointwise from D4a and D4b, and $g(1,1)=1$ from D2, giving
+$g(u,\sigma)=u\sigma$ everywhere.
+\end{proof}
+
+\begin{proof}[Detail for \Cref{thm:sample}(b)]
+For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
+\[
+|\hat u\hat\sigma-u\sigma|
+=|\hat u\hat\sigma-u\hat\sigma+u\hat\sigma-u\sigma|
+\le \hat\sigma\,|\hat u-u|+u\,|\hat\sigma-\sigma|
+\le |\hat u-u|+|\hat\sigma-\sigma|,
+\]
+since $\hat\sigma,u\le1$. Taking $\hat u=\widehat{\PNAs}$, $u=\PNAs$,
+$\hat\sigma=1-\widehat{\ASRs}$, $\sigma=1-\ASRs$ gives
+$|\widehat{\NRPs}-\NRPs|\le|\widehat{\PNAs}-\PNAs|+|\widehat{\ASRs}-\ASRs|$. If each term is
+below $\epsilon$ (each failing with probability at most $2e^{-2M\epsilon^2}$ by part (a)),
+then the sum is below $2\epsilon$; the union bound gives failure probability at most
+$4e^{-2M\epsilon^{2}}$.
+\end{proof}

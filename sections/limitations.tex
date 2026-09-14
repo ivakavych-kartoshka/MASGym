@@ -1,0 +1,45 @@
+\section{Limitations}
+\label{sec:limitations}
+
+We state the limitations that bear on validity, in the spirit of the source design's own
+risk analysis.
+
+\paragraph{Emulation fidelity.} The central threat to validity is that LM-emulated tools
+are imperfect proxies for real ones; ToolEmu reports human agreement of only
+$\kappaem\approx0.48$~\cite{ruan2024toolemu}. \defname{} routes scoring through the
+deterministic checker and ships an emulated-versus-real-tools ablation, but a residual
+realism gap remains, and absolute numbers should be read as comparative, not as field
+measurements.
+
+\paragraph{The headline finding is a hypothesis.} The degradation claim (RQ3) must
+replicate across models and topologies before it can be stated as a result. If per-agent
+defenses do \emph{not} degrade under collusion and orchestrator compromise, the
+contribution reframes as a still-informative negative result; either way, the environment
+retains its value as an instrument.
+
+\paragraph{Construct validity of the metric.} \Cref{thm:metric} justifies $\NRPs=u\sigma$
+only relative to its axioms; a reviewer who rejects utility/security-homogeneity would
+prefer a different aggregator (\Cref{rem:metric}). We mitigate by reporting alternative
+aggregators and checking whether they change configuration rankings (RQ1), but the choice of
+default remains a modelling decision.
+
+\paragraph{The propagation model is a model.} \Cref{prop:chain,prop:star,prop:tree,prop:mesh}
+and \Cref{thm:collusion} hold in the independent-cascade instance of \Cref{as:prop}. Real
+compromise dynamics among LLM agents may not be independent-cascade; the theorems characterize
+the environment's dynamics and predict where to look, and the measured $\CPR$ is what
+adjudicates realism.
+
+\paragraph{TCB and predicate specification.} \Cref{thm:integrity} assumes a trusted harness
+and checker (\Cref{as:tcb}) and shows non-gameability, not correctness: a mis-specified
+predicate can be systematically wrong, and harness compromise is out of scope. Predicate
+review is therefore part of task construction.
+
+\paragraph{Cost and reachable region.} API/compute cost grows as $\Theta(RMNH)$
+(\Cref{sec:algorithm}), and the parameter space is exponential in the number of knobs, so
+any study explores a \emph{reachable region}. We report that region explicitly rather than
+implying full coverage.
+
+\paragraph{Scope.} Real-world tool side effects, physical actuation, and model-weight
+attacks are out of scope by construction (\Cref{sec:tcb}). \defname{} measures the
+interaction-level security of orchestrated LLM collectives, not the security of the
+underlying models' weights or of the physical systems tools might touch.

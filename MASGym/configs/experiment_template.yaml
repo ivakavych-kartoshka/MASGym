@@ -1,0 +1,44 @@
+# Template for a larger MASGym experiment (paper-scale sweeps).
+#
+# Running this locally still uses the SYNTHETIC generator. To run REAL experiments on EC2,
+# wire the real adapters (LLM backbones, ToolEmu, ASB/AgentDojo) into the environment and set
+# `data.root` to your provisioned benchmark data. See docs/ec2_experiment_guide.md.
+#
+# WARNING: this repository never downloads data or runs paper-level experiments automatically.
+
+env:
+  n_agents: 20               # sweep 3..50 across runs
+  topology: mesh             # run once per topology: star | chain | tree | mesh
+  horizon: 10
+  forced_degree: 3
+  branching_factor: 2
+  propagation: independent_cascade
+  p_infect: 0.3
+
+eval:
+  n_episodes: 200            # set via masgym.theory.sample_complexity.hoeffding_min_samples
+  seed: 0
+
+# Optional real data location (used by masgym.data.adapters.BenchmarkTaskAdapter on EC2).
+data:
+  root: null                 # e.g. /data/agentbench  (must be provisioned manually)
+  benchmark: agentbench      # agentbench | gaia | webarena | swebench | mmlu | gsm8k
+
+defense: "lifted:guardrail"  # null | fixed_threshold | lifted:{delimiting,paraphrase,pi_detector,instructional_prevention,guardrail}
+
+sweep:
+  beta: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+  colluding: [false, true]
+  adaptive: [false, true]
+  orchestrator_compromised: [false, true]
+  malicious_tools: [false, true]
+  sybils: [0, 1, 2, 4]
+  poisoned_memory: [false, true]
+
+ablation:
+  beta: 0.3
+
+corb:
+  rounds: 20
+  red: adaptive
+  blue: escalating

@@ -1,0 +1,63 @@
+\begin{abstract}
+Security research on large language model (LLM) agents is bottlenecked by its
+instruments: the strongest existing benchmarks---Agent Security Bench (ASB),
+AgentDojo, InjecAgent, and the ToolEmu sandbox---are single-agent, and their only
+cross-agent vector is a shared memory store. Yet deployed systems are increasingly
+orchestrated collectives in which a planner directs workers, agents share memory,
+tools are third-party, and coordination is forced. The phenomena that dominate risk
+in that regime---collusion among agents, a compromised orchestrator, malicious
+tools, Sybil identities, and group-level emergent failure---cannot be produced, let
+alone measured, by a single-agent harness. We present \defname, an environment and
+evaluation methodology purpose-built for the security of multi-agent LLM systems.
+\defname{} contributes: (i) a task suite with heterogeneous roles (orchestrator,
+workers, tool-executors, shared-memory store), partial observability, and
+\emph{forced-coordination} tasks that no single agent can complete alone, over star,
+chain, tree, and mesh topologies at $3$--$50$ agents; (ii) a natively parameterized
+adversary model spanning adversary fraction, independent-versus-colluding behaviour,
+static-versus-adaptive strategy, orchestrator compromise, malicious tools, Sybils,
+and poisoned shared memory; (iii) a system-level metric suite, including a
+generalization $\NRPs=\PNAs\cdot(1-\ASRs)$ of ASB's utility--security metric that is
+scored against deterministic security predicates over the global state trace, never
+an LLM judge on the critical path, so a successful injection cannot hijack the
+evaluator; and (iv) \corb, a co-evolving red/blue protocol that alternates attack and
+defense proposals and logs their system-level scores. We develop the theory the
+instrument requires rather than assuming it: an axiomatic characterization that
+singles out the product aggregator and reduces it to ASB's metric at one agent;
+an evaluator-integrity theorem separating deterministic checking from LLM-judge
+hijack; topology-dependent compromise-propagation bounds and a
+collusion-versus-independent separation in the environment's cascade model; a
+forced-coordination lower bound; and finite-sample concentration for the estimators.
+Built on ToolEmu-style LM emulation (human agreement $\kappaem\approx 0.48$, which we
+surface as a first-class caveat) and AgentDojo-style deterministic checks, \defname{}
+is an instrument, not a verdict: we never equate a lower system-level attack success
+rate with ``secure.'' The manuscript states as a testable \emph{hypothesis} that
+defenses effective in single-agent ASB/AgentDojo degrade under collusion and
+compromised-orchestrator conditions; all empirical tables and plots in this version
+are clearly labelled placeholders to be replaced with measured results.
+\end{abstract}
+
+\begin{highlights}
+\item A benchmark environment for \emph{multi-agent} LLM security with heterogeneous
+roles, partial observability, and forced-coordination tasks across star, chain, tree,
+and mesh topologies at $3$--$50$ agents---phenomena undefined in single-agent harnesses.
+\item A natively parameterized adversary: adversary fraction, collusion on/off,
+static/adaptive, orchestrator compromised on/off, malicious tools, Sybil identities,
+and poisoned shared memory, with system-level compromise objectives.
+\item A system-level metric suite generalizing ASB's $\mathrm{NRP}=\mathrm{PNA}\cdot(1-\mathrm{ASR})$
+to $\NRPs=\PNAs\cdot(1-\ASRs)$, scored by a deterministic state checker so a
+successful injection cannot hijack the evaluator.
+\item \corb: a co-evolving red/blue evaluation protocol as a reusable methodology,
+logging $(\text{attack},\text{defense})$ trajectories and their system-level scores.
+\item Instrument-supporting theory: an axiomatic characterization of the aggregator,
+an evaluator-integrity separation, topology-dependent compromise-propagation and
+collusion bounds, a forced-coordination lower bound, and estimator concentration---all
+under explicitly stated assumptions, with a headline degradation \emph{hypothesis}
+and placeholder empirical results.
+\end{highlights}
+
+\begin{keyword}
+multi-agent LLM security \sep security benchmark and environment \sep co-evolving
+red/blue evaluation \sep collusion \sep compromised orchestrator \sep Sybil attack
+\sep prompt injection \sep tool emulation \sep deterministic security checking \sep
+system-level metrics \sep compromise propagation
+\end{keyword}

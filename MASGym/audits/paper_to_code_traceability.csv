@@ -1,0 +1,39 @@
+paper_section,page_or_algorithm_or_equation,paper_object,implementation_file,class_or_function_name,test_file,implementation_status,notes
+Preliminaries,Eq (1),NRP = PNA*(1-ASR),src/masgym/methods/aggregators.py,product_nrp,tests/test_aggregators.py,implemented,ASB baseline metric that NRP_sys generalizes
+Threat model,Eq (2),Adversary config c_adv,src/masgym/data/schemas.py,AdversaryConfig,tests/test_schemas.py,implemented,seven independent knobs
+Problem,Eq (3),ASR_sys,src/masgym/metrics/metrics.py,asr_sys,tests/test_metrics.py,implemented,mean of Phi indicators
+Problem,Eq (4),PNA_sys,src/masgym/metrics/metrics.py,pna_sys,tests/test_metrics.py,implemented,benign counterpart c-circle
+Problem,Eq (5),NRP_sys,src/masgym/metrics/metrics.py,nrp_sys,tests/test_metrics.py,implemented,product aggregator default
+Problem,Eq (6),CPR,src/masgym/metrics/metrics.py,compromise_propagation_rate,tests/test_metrics.py,implemented,guards N=|B0| edge case
+System model,Section 4.2,Topologies,src/masgym/data/topology.py,build_topology,tests/test_topology.py,implemented,star chain tree mesh
+System model,Sections 4-6,Agents/roles/env,src/masgym/data/schemas.py,Agent/Role/EnvConfig,tests/test_schemas.py,implemented,heterogeneous roles
+Method,Section 7.1,Emulation layer,src/masgym/env/emulation.py,SyntheticToolEmulator/ToolEmuAdapter,tests/test_imports.py,implemented_with_synthetic_demo,real ToolEmu is an adapter stub
+Method,Section 7.2 / Thm 9.4,Deterministic checker,src/masgym/env/checker.py,DeterministicChecker,tests/test_checker_integrity.py,implemented,reads trace only not messages
+Theory,Prop 9.5,LLM judge hijackable,src/masgym/env/judge.py,HijackableDummyJudge/LLMJudgeAdapter,tests/test_checker_integrity.py,implemented_with_synthetic_demo,real judge is an adapter stub
+Method,Section 7.3 / Prop 9.15,Orchestration + forced coordination,src/masgym/env/orchestration.py,Orchestrator.run_episode,tests/test_synthetic_data.py,implemented_with_synthetic_demo,synthetic agent model; witness/transversal
+Theory,Assumption A4,Compromise propagation,src/masgym/env/propagation.py,IndependentCascade/ThresholdCascade,tests/test_propagation.py,implemented,MC verified vs closed forms
+Method,Algorithm 1,ScoreConfig,src/masgym/methods/scoring.py,score_config,tests/test_reproducibility.py,implemented_with_synthetic_demo,deterministic scoring
+Method,Algorithm 2,CoRB co-evolving loop,src/masgym/methods/corb.py,run_corb,tests/test_corb.py,implemented_with_synthetic_demo,pluggable red/blue
+Method,Section 8,Red policies,src/masgym/methods/red_policies.py,Grid/Random/AdaptiveRedPolicy,tests/test_corb.py,implemented,static and adaptive
+Method,Section 8,Blue policies,src/masgym/methods/blue_policies.py,Static/EscalatingBluePolicy,tests/test_corb.py,implemented,synthetic defenses
+Theory,Thm 9.2 / Remark 9.3,Metric aggregator axioms,src/masgym/theory/metric_axioms.py,check_axioms,tests/test_aggregators.py,implemented,product/min/weighted-geom
+Theory,Prop 9.1,Reduction to ASB,src/masgym/theory/metric_axioms.py,reduces_to_asb,tests/test_aggregators.py,implemented,N=1 identity
+Theory,Prop 9.7,Chain reach,src/masgym/theory/propagation_bounds.py,chain_expected_reach,tests/test_propagation.py,implemented,sum p^j
+Theory,Prop 9.8,Star reach,src/masgym/theory/propagation_bounds.py,star_centre/leaf_expected_reach,tests/test_propagation.py,implemented,orchestrator critical node
+Theory,Prop 9.9,Tree reach,src/masgym/theory/propagation_bounds.py,tree_expected_reach,tests/test_propagation.py,implemented,transition at bp=1
+Theory,Prop 9.10,Mesh one-round reach,src/masgym/theory/propagation_bounds.py,mesh_one_round_expected,tests/test_propagation.py,implemented,fixation kept remark-level only
+Theory,Cor 9.11,Threshold confinement,src/masgym/env/propagation.py,ThresholdCascade,tests/test_propagation.py,implemented,in-degree < theta never infected
+Theory,Thm 9.13,Collusion advantage,src/masgym/theory/propagation_bounds.py,collusion_gap_star,tests/test_propagation.py,implemented,exact single-seed star gap
+Theory,Thm 9.17,Concentration + CIs,src/masgym/theory/sample_complexity.py,hoeffding_min_samples,tests/test_sample_complexity.py,implemented,Hoeffding + Wilson CI verified
+Theory,Cor 9.18,Sweep budget,src/masgym/theory/sample_complexity.py,sweep_budget,tests/test_sample_complexity.py,implemented,M = O(delta^-2 ln(G/alpha))
+Method,Section 8.1,Complexity accounting,src/masgym/theory/sample_complexity.py,episode_cost/sweep_cost,tests/test_imports.py,implemented,operation counts not timings
+Experiments,Section 10,Lifted per-agent defenses,src/masgym/baselines/lifted_defenses.py,lifted_defense,tests/test_cli.py,implemented_with_synthetic_demo,synthetic effect-models
+Experiments,Section 10,No-defense / fixed-threshold,src/masgym/baselines/no_defense.py+fixed_threshold.py,NoDefense/FixedThresholdDefense,tests/test_cli.py,implemented,simple baselines
+Experiments,Section 10,External baselines,src/masgym/baselines/external_wrappers.py,ASB/AgentDojo/Guardrail/MADefense adapters,tests/test_imports.py,adapter_stub_waiting_for_external_dependency,require external repos/models
+Experiments,Section 10,LLM backbones,src/masgym/data/adapters.py,LLMBackboneAdapter,tests/test_imports.py,adapter_stub_waiting_for_external_dependency,Llama3 Qwen2.5 Mistral GPT-4o Claude-3.5
+Experiments,Section 10,Benchmark task pools,src/masgym/data/adapters.py,BenchmarkTaskAdapter,tests/test_imports.py,not_implemented_requires_manual_data,AgentBench GAIA WebArena SWE-bench MMLU GSM8K
+Experiments,RQ2,Evaluator-integrity ablation,experiments/run_ablation.py,_evaluator_integrity,tests/test_cli.py,implemented_with_synthetic_demo,deterministic vs judge
+Experiments,RQ3-RQ6,Adversary sweep,experiments/run_evaluation.py,run_sweep,tests/test_cli.py,implemented_with_synthetic_demo,metrics per config
+Experiments,Tables 2-6 / Fig 6,Placeholder results,experiments/,run_sweep/run_corb/plot_results,tests/test_cli.py,intentionally_out_of_scope,paper numbers are placeholders; only synthetic demo produced
+Limitations,Section 12,ToolEmu kappa~0.48 caveat,src/masgym/env/emulation.py,ToolEmuAdapter (docstring),n/a,intentionally_out_of_scope,documented caveat not a computed quantity
+Template,n/a,Conformal prediction branch,n/a,n/a,n/a,intentionally_out_of_scope,not this paper's topic (MASGym is a benchmark environment)

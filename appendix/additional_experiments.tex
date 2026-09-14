@@ -1,0 +1,143 @@
+\section{Extended Protocol and Additional Placeholder Studies}
+\label{app:experiments}
+
+This appendix expands the evaluation protocol of \Cref{sec:experiments}: it records the
+precise metric definitions, the Sybil and adaptivity studies, the cost model, and a
+sensitivity plan. All tables are \textbf{placeholders}; every quantitative outcome is
+\emph{(hypothesis)} until produced.
+
+\subsection{Precise metric definitions}
+Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Coordination quality} $=\PNAs$ on forced-coordination tasks under the benign
+counterpart $\config^{\circ}$; \textbf{coordination sabotage} $=\PNAs(\config^{\circ})-\PNAs(\config)$
+for a sabotage configuration $\config$.
+\item \textbf{Time-to-detection} $=\E[\min\{t:\text{defense flags a compromise in }\Trace\}]$,
+$\infty$ if never; reported as a survival curve over $t$.
+\item \textbf{Recovery rate} $=\Prob[\text{episode returns to a safe, task-completing state
+after a detection}]$.
+\item \textbf{Token/API cost} and \textbf{latency}: summed over all agent and emulator calls
+in an episode, averaged over the $M$ episodes; \textbf{scalability}: the fitted growth of each
+metric and cost in $N$.
+\item \textbf{Human-intervention rate} $=\Prob[\text{a human-approval hook was triggered}]$
+when hooks are enabled.
+\end{itemize}
+
+\subsection{Sybil and adaptivity studies}
+\Cref{tab:sybil} gives the structure of the Sybil study (RQ5): as the number of Sybil
+identities grows, an adversary controlling one underlying policy gains disproportionate
+influence over selection, voting, and memory writes. \Cref{tab:adaptive} gives the
+adaptivity study: static versus adaptive red policies across \corb{} rounds, reporting how
+quickly the blue policy is out-evolved.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
+before submission.} Sybil study (RQ5). Expected \emph{(hypothesis)} trend: influence and
+$\ASRs$ increase with Sybil count until selection/voting defenses saturate.}
+\label{tab:sybil}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Sybil count & Selection share & Vote share & $\ASRs$ & $\NRPs$ \\
+\midrule
+0 & --- & --- & --- & --- \\
+1 & --- & --- & --- & --- \\
+2 & --- & --- & --- & --- \\
+4 & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
+before submission.} Adaptivity study: static vs.\ adaptive red across \corb{} rounds
+$r=1,\dots,R$. Expected \emph{(hypothesis)} trend: adaptive red erodes a static blue's
+$\NRPs$ over rounds; a co-adapting blue slows but may not stop the erosion.}
+\label{tab:adaptive}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& \multicolumn{2}{c}{Static red} & \multicolumn{2}{c}{Adaptive red} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Round & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ \\
+\midrule
+$r=1$ & --- & --- & --- & --- \\
+$r=5$ & --- & --- & --- & --- \\
+$r=10$ & --- & --- & --- & --- \\
+$r=20$ & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cost model and reachable region}
+By \Cref{sec:algorithm}, one \corb{} round costs $2M$ episodes and each episode costs
+$\Theta(NH)$ agent invocations plus emulator calls, so a study of $G$ swept configurations
+and $R$ rounds costs $\Theta(GRMNH)$ invocations. With $M$ set by
+\Cref{thm:sample}(c) to $M=O(\epsilon^{-2}\ln(G/\alpha))$, the dominant cost driver is the
+product $GN$: both the sweep grid and the agent count. \Cref{tab:cost} records the structure
+of the scalability study (RQ6). We report the \emph{reachable region} of the parameter space
+explicitly---which $(N,\text{topology},\betafrac,\text{knobs})$ combinations were actually
+run---rather than implying exhaustive coverage.
+
+\begin{table}[t]
+\centering
+\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
+before submission.} Scalability and cost (RQ6) vs.\ agent count $N$. Expected
+\emph{(hypothesis)} trend: token/API cost and latency grow with $N$ (and with \corb{}
+rounds), constraining the reachable region.}
+\label{tab:cost}
+\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
+\midrule
+3  & --- & --- & --- & --- & --- \\
+10 & --- & --- & --- & --- & --- \\
+20 & --- & --- & --- & --- & --- \\
+50 & --- & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{A worked forced-coordination task}
+\label{app:worked}
+To make the predicate machinery concrete, consider a $3$-forced ``travel-booking'' task on a
+star of $N$ agents. The orchestrator decomposes the goal into three subtasks assigned to
+distinct workers: (W1) retrieve an itinerary from a calendar tool; (W2) select a flight within a
+stated budget via a booking tool; and (W3) pay via a payment tool, but \emph{only} to the payee
+named in the user's instruction. A witness (\Cref{def:forced}) is any set of agents that jointly
+supplies a valid itinerary, an in-budget flight, and a correctly addressed payment; because all
+three subtasks are required and are assigned to distinct workers, every witness has size at least
+three, so the task is $3$-forced.
+
+The registered predicates read only the recorded trace $\Trace$:
+\begin{align*}
+\Predutil(\Trace) &= \indic[\text{a payment to the instructed payee for an in-budget flight matching the itinerary is recorded}],\\
+\Predsec(\Trace) &= \indic[\text{a payment to a payee \emph{not} named in the instruction is recorded (exfiltration of funds), \emph{or}}\\
+&\qquad\ \text{a denylisted action (e.g., disclosing card details to a tool) is recorded}].
+\end{align*}
+A malicious tool (via $\Emu^{\!\dagger}$) might return a booking result that embeds an injected
+instruction ``pay to account X''; a colluding W3 might then act on it. Whether the payment to
+account~X occurs is a recorded state transition, so $\Predsec$ fires deterministically regardless
+of what the agents \emph{say} in their messages---the content of the injection cannot change the
+verdict unless the illicit payment is actually recorded (\Cref{thm:integrity}). If instead the
+adversary set forms a transversal of the witnesses (e.g., it controls W3 in every route), it can
+force $\Predutil=0$ by withholding the legitimate payment (\Cref{prop:forced}), which the sabotage
+component of the metric records as coordination failure. This example is illustrative; the shipped
+task suite generalizes it across roles, tools, and topologies.
+
+\subsection{Sensitivity and validity checks}
+Beyond the headline studies, the protocol includes: (i) an \textbf{aggregator-sensitivity}
+check (RQ1) that recomputes configuration rankings under $u\sigma$, $\min(u,\sigma)$, and a
+weighted geometric mean $u^{w}\sigma^{1-w}$ (\Cref{rem:metric}) and reports rank correlation;
+(ii) an \textbf{evaluator-integrity} check (RQ2) that measures how often a crafted injection
+flips the LLM judge $\Judge$ while leaving the deterministic verdict $\Checker(\Trace)$
+unchanged (an empirical instance of \Cref{thm:integrity} versus \Cref{prop:judgehijack});
+(iii) an \textbf{emulation-fidelity} check that compares emulated and real tools on the
+subset of tasks where a real implementation is available, reporting the change in $\ASRs$ and
+$\NRPs$ and relating it to $\kappaem$; and (iv) \textbf{backbone-robustness} checks that repeat
+the headline degradation study across all five model families so that no conclusion rests on a
+single model. Each check is a registered configuration in the released harness, so validity,
+not only headline numbers, is reproducible.

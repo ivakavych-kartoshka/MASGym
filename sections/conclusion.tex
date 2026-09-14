@@ -1,0 +1,30 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Security research on LLM agents has been bottlenecked by single-agent instruments that
+cannot produce the phenomena---collusion, orchestrator compromise, malicious tools, Sybils,
+and group-level compromise propagation---that dominate risk in deployed, orchestrated
+collectives. We presented \defname{}, an environment and evaluation methodology
+purpose-built for multi-agent LLM security. \defname{} contributes a forced-coordination
+task suite with heterogeneous roles and partial observability across star, chain, tree, and
+mesh topologies at $3$--$50$ agents; a natively parameterized adversary model; a
+system-level metric suite generalizing ASB's $\mathrm{NRP}$ to $\NRPs=\PNAs(1-\ASRs)$ and
+scored by a deterministic checker that cannot be hijacked by an injection; and \corb, a
+co-evolving red/blue protocol that logs $(\text{attack},\text{defense})$ trajectories.
+Rather than assert its design, \defname{} proves the properties an instrument needs: an
+axiomatic characterization of the metric that reduces it to ASB at one agent, an
+evaluator-integrity separation from LLM-judge hijack, topology-dependent
+compromise-propagation bounds with a strict collusion advantage, a forced-coordination lower
+bound, and finite-sample concentration for the estimators.
+
+\defname{} is an instrument, not a verdict. It ships with a concrete, testable
+\emph{hypothesis}---that single-agent defenses degrade under collusion and
+compromised-orchestrator conditions---and with the protocol to adjudicate it, while marking
+every quantitative outcome as a hypothesis until measured and surfacing emulation fidelity
+($\kappaem\approx0.48$) as a first-class caveat. Future work is threefold: run the sweeps to
+convert the hypotheses of \Cref{sec:experiments} into measured results (or a negative
+result); extend the task suite and predicate library toward richer forced-coordination
+structures; and develop stronger red and blue policies within the fixed \corb{} interface so
+that the instrument's frontier tightens over time. Our aim is that \defname{} does for
+multi-agent security what its single-agent predecessors did for single agents: turn a
+qualitative worry into a measurable quantity.

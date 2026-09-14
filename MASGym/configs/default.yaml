@@ -1,0 +1,32 @@
+# MASGym default configuration (synthetic environment).
+# All fields map to masgym.data.schemas.EnvConfig / AdversaryConfig.
+env:
+  n_agents: 10
+  topology: star            # star | chain | tree | mesh
+  horizon: 8                # H environment steps per episode
+  forced_degree: 2          # k in the k-forced-coordination task
+  branching_factor: 2       # tree branching factor b
+  propagation: independent_cascade   # independent_cascade | threshold
+  p_infect: 0.3             # per-edge propagation probability p
+  threshold: 1              # theta (threshold model only)
+  orchestrator_id: 0
+  # Synthetic agent effect parameters (NOT paper-measured):
+  base_unsafe_action_prob: 0.5
+  benign_success_base: 0.9
+
+eval:
+  n_episodes: 200           # episodes per configuration (choose via Theorem 9.17)
+  seed: 0
+
+# Optional single defense (synthetic effect-model): null | fixed_threshold | "lifted:<name>"
+defense: null
+
+# Adversary configuration (used when no `sweep` is given).
+adversary:
+  beta: 0.3
+  colluding: true
+  adaptive: false
+  orchestrator_compromised: false
+  malicious_tools: false
+  sybils: 0
+  poisoned_memory: false

@@ -1,0 +1,78 @@
+\section{Threat Model}
+\label{sec:threat}
+
+Because \defname{} is an environment, its threat model is \emph{parameterized and
+configurable}, not fixed. A study selects a point in the adversary parameter space, and
+the harness realizes it. \Cref{fig:threat} depicts the resulting honest, adversarial,
+and orchestrator/tool/memory vectors and how each enters the system.
+
+\subsection{Adversary configuration}
+An adversary is specified by a configuration
+\begin{equation}
+\label{eq:adv-config}
+\config_{\mathrm{adv}} \;=\; \bigl(\,\betafrac,\ \mathsf{coll},\ \mathsf{adapt},\
+\mathsf{orch},\ \mathsf{tool},\ \mathsf{syb},\ \mathsf{mem}\,\bigr),
+\end{equation}
+whose components the harness exposes as independent knobs:
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Adversary fraction} $\betafrac=|\Advset|/N\in[0,1]$: the fraction of agents
+placed under adversarial control, $\Advset\subseteq\Agents$.
+\item \textbf{Collusion} $\mathsf{coll}\in\{\text{independent},\text{colluding}\}$:
+whether adversarial agents optimize a shared objective and may coordinate messages,
+timing, and target selection, or act independently.
+\item \textbf{Adaptivity} $\mathsf{adapt}\in\{\text{static},\text{adaptive}\}$: whether
+the red strategy is fixed in advance or may react to the blue defense across \corb{}
+rounds (\Cref{sec:algorithm}).
+\item \textbf{Orchestrator compromise} $\mathsf{orch}\in\{\text{trusted},\text{compromised}\}$:
+a single bit flipping the planner from honest to adversarial. A compromised orchestrator
+can mis-route, mislabel, or fabricate subtasks and messages.
+\item \textbf{Malicious tools} $\mathsf{tool}$: a subset of tools whose (emulated)
+behaviour is adversarial, realized by the adversarial emulator $\Emu^{\!\dagger}$
+(e.g., returning attacker-controlled content or exfiltration bait).
+\item \textbf{Sybil identities} $\mathsf{syb}$: the number of additional identities an
+adversary may instantiate to gain disproportionate influence over selection, voting, or
+memory writes (cf.\ the classical Sybil attack~\cite{douceur2002sybil}).
+\item \textbf{Poisoned memory} $\mathsf{mem}$: adversarial entries written into the
+shared-memory store, in the spirit of memory-poisoning attacks on single
+agents~\cite{chen2024agentpoison} but now readable by many agents.
+\end{itemize}
+
+\subsection{Attacker objective, knowledge, and capabilities}
+\paragraph{Objective.} The adversary seeks \emph{system-level compromise}: causing an
+unsafe action, exfiltrating protected information, or sabotaging coordination so the
+collective fails a forced-coordination task. Formally, the adversary maximizes
+$\Prob[\Predsec(\Trace)=1]$ (attack success) and, for sabotage objectives, minimizes
+$\Prob[\Predutil(\Trace)=1]$ (benign success), where $\Predsec,\Predutil$ are the fixed
+predicates of \Cref{sec:problem}.
+\paragraph{Knowledge.} \defname{} supports a spectrum. At minimum the adversary knows its
+own role, tools, and local context; at maximum (a strong-adversary study) it knows the
+topology $\Gtop$, the honest agents' prompts, and the active blue defense. Knowledge is a
+configurable dimension so that a defense is not credited for security that evaporates
+under a better-informed attacker.
+\paragraph{Capabilities.} An adversarial agent may emit arbitrary messages and tool calls
+within its granted permissions, write to memory it can write to, and---if colluding---share
+state with other adversarial agents out of band. A compromised orchestrator additionally
+controls routing and task assignment. Adversaries \emph{cannot} read observations they are
+not permitted to see, forge messages on edges they do not control (the harness attributes
+messages to their senders), or alter the recorded trace $\Trace$; these are TCB
+guarantees.
+
+\subsection{Static versus adaptive, independent versus colluding}
+The two axes that distinguish the multi-agent regime are collusion and adaptivity. An
+\emph{independent} adversary of fraction $\betafrac$ behaves like $\betafrac N$ separately
+acting bad agents; a \emph{colluding} adversary of the same fraction coordinates seed
+placement, message content, and timing toward the shared objective. A \emph{static}
+adversary commits to a strategy; an \emph{adaptive} adversary co-evolves against the blue
+policy. \Cref{sec:theory} shows that in the environment's propagation model, collusion
+yields a strict advantage on star and tree topologies; \Cref{sec:experiments} tests
+whether that advantage manifests as measured defense degradation for real defenses
+(a \emph{hypothesis}).
+
+\subsection{Trust assumptions and scope}
+Trusted: the deterministic checker $\Checker$ and the harness (\Cref{sec:tcb}). Untrusted
+under the appropriate knob: any agent (including the orchestrator), any tool, any memory
+entry, and any message content. Out of scope: real-world tool side effects, physical
+actuation, and model-weight or training-time attacks on the backbones. We emphasize the
+stance of the whole paper: a configuration that yields low $\ASRs$ or high $\NRPs$
+demonstrates \emph{measured} risk under the stated knobs; it is never read as a proof of
+security.

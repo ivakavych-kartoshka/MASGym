@@ -1,0 +1,28 @@
+# Small, fast synthetic configuration for the smoke-test demo.
+# Produces "synthetic smoke-test output, not a paper result".
+env:
+  n_agents: 8
+  topology: star
+  horizon: 5
+  forced_degree: 2
+  p_infect: 0.3
+
+eval:
+  n_episodes: 80
+  seed: 0
+
+defense: null
+
+# Adversary sweep: Cartesian product of these lists (see masgym.config.expand_sweep).
+sweep:
+  beta: [0.0, 0.25, 0.5]
+  colluding: [false, true]
+  orchestrator_compromised: [false, true]
+
+ablation:
+  beta: 0.3
+
+corb:
+  rounds: 6
+  red: adaptive       # random | adaptive
+  blue: escalating    # static | escalating
