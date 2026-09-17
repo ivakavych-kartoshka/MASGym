@@ -1,7 +1,9 @@
 % ============================================================================
-% figures/pgfplots_placeholder_results.tex  --  Conceptual expected trends (Fig. 6)
-% NOT experimental results. Curves are drawn from the theory of Sec. 6 to
-% illustrate the shapes RQ3-RQ6 will test. All are placeholders.
+% figures/pgfplots_placeholder_results.tex  --  Fig. 6: RQ3-RQ6 trends (MEASURED)
+% Data points are measurements from the transparent synthetic model (M=738,
+% eps=alpha=0.05); see outputs/full_matrix and outputs/{degradation,collusion}.
+% Previously this figure carried conceptual placeholder curves; it is now labeled
+% as measured. Charts (b) and (d) omit mesh / N in {20,50} (deferred).
 % ============================================================================
 \begin{figure*}[t]
 \centering
@@ -14,47 +16,49 @@
 \begin{tikzpicture}
 \begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.9cm, vertical sep=1.9cm}]
 
-% ---- (a) defense degradation ----
-\nextgroupplot[title={(a) Defense degradation \emph{(conceptual)}},
+% ---- (a) defense degradation (measured): NRP_action ----
+\nextgroupplot[title={(a) Defense degradation \emph{(synthetic)}},
   symbolic x coords={single,+collusion,+comp.\,orch}, xtick=data,
-  ylabel={$\NRPs$}, ymin=0, ymax=0.8, x tick label style={font=\scriptsize}]
-\addplot[honest, mark=*, thick] coordinates {(single,0.70) (+collusion,0.46) (+comp.\,orch,0.24)};
-\addplot[advers, mark=square*, thick, dashed] coordinates {(single,0.48) (+collusion,0.36) (+comp.\,orch,0.20)};
-\legend{\scriptsize with defense, \scriptsize no-defense}
+  ylabel={$\NRPs$ (ASB predicate)}, ymin=0, ymax=0.8, x tick label style={font=\scriptsize}]
+\addplot[honest, mark=*, thick] coordinates {(single,0.590) (+collusion,0.553) (+comp.\,orch,0.552)};
+\addplot[advers, mark=square*, thick, dashed] coordinates {(single,0.374) (+collusion,0.396) (+comp.\,orch,0.424)};
+\legend{\scriptsize per-agent guardrail, \scriptsize no-defense}
 
-% ---- (b) CPR vs topology ----
-\nextgroupplot[title={(b) Compromise propagation \emph{(conceptual)}},
-  ybar, bar width=8pt, symbolic x coords={chain,tree$_{\mathrm{sub}}$,star,mesh},
-  xtick=data, ylabel={$\CPR$}, ymin=0, ymax=1, x tick label style={font=\scriptsize},
-  enlarge x limits=0.18]
-\addplot[fill=theorycol!35, draw=theorycol] coordinates {(chain,0.08) (tree$_{\mathrm{sub}}$,0.20) (star,0.46) (mesh,0.85)};
+% ---- (b) CPR vs topology (measured) ----
+\nextgroupplot[title={(b) Compromise propagation \emph{(synthetic)}},
+  ybar, bar width=10pt, symbolic x coords={chain,tree,star},
+  xtick=data, ylabel={$\CPR$}, ymin=0, ymax=0.4, x tick label style={font=\scriptsize},
+  enlarge x limits=0.22]
+\addplot[fill=theorycol!35, draw=theorycol] coordinates {(chain,0.136) (tree,0.228) (star,0.287)};
 
-% ---- (c) collusion advantage vs beta ----
-\nextgroupplot[title={(c) Collusion advantage \emph{(conceptual)}},
-  xlabel={adversary fraction $\betafrac$}, ylabel={$\ASRs$},
-  xmin=0, xmax=0.5, ymin=0, ymax=1, legend pos=north west]
-\addplot[advers, mark=*, thick] coordinates {(0,0.05)(0.1,0.28)(0.2,0.5)(0.3,0.68)(0.4,0.8)(0.5,0.88)};
-\addplot[honest, mark=triangle*, thick, dashed] coordinates {(0,0.05)(0.1,0.16)(0.2,0.3)(0.3,0.44)(0.4,0.56)(0.5,0.66)};
+% ---- (c) collusion advantage vs beta (measured): ASR_action ----
+\nextgroupplot[title={(c) Collusion advantage \emph{(synthetic)}},
+  xlabel={adversary fraction $\betafrac$}, ylabel={ASR$_{\mathrm{act}}$},
+  xmin=0, xmax=0.5, ymin=0, ymax=0.8, legend pos=north west]
+\addplot[advers, mark=*, thick] coordinates {(0,0)(0.1,0.603)(0.2,0.577)(0.3,0.558)(0.4,0.561)(0.5,0.564)};
+\addplot[honest, mark=triangle*, thick, dashed] coordinates {(0,0)(0.1,0.554)(0.2,0.575)(0.3,0.583)(0.4,0.523)(0.5,0.565)};
 \legend{\scriptsize colluding, \scriptsize independent}
 
-% ---- (d) cost vs N ----
-\nextgroupplot[title={(d) Cost vs.\ agent count \emph{(conceptual)}},
-  xlabel={agents $N$}, ylabel={tokens/episode (arb.)},
-  xmin=0, xmax=52, ymin=0, legend pos=north west]
-\addplot[infra, mark=*, thick] coordinates {(3,1)(10,4)(20,10)(30,19)(40,31)(50,47)};
-\addplot[defense, mark=square*, thick, dashed] coordinates {(3,0.9)(10,3)(20,6)(30,9)(40,12)(50,15)};
-\legend{\scriptsize mesh ($\Theta(N^2)$-like), \scriptsize star ($\Theta(N)$-like)}
+% ---- (d) cost vs N (measured) ----
+\nextgroupplot[title={(d) Cost vs.\ agent count \emph{(synthetic)}},
+  xlabel={agents $N$}, ylabel={tokens/episode},
+  xmin=0, xmax=12, ymin=0, ymax=100, legend pos=north west]
+\addplot[infra, mark=*, thick] coordinates {(3,26.4)(5,44)(10,88)};
+\addplot[honest, mark=none, thick, dashed] coordinates {(3,26.4)(5,44)(10,88)};
+\legend{\scriptsize star (measured), \scriptsize $\Theta(N)$ reference fit}
 
 \end{groupplot}
 \end{tikzpicture}
-\caption{\textbf{Conceptual expected trends; not experimental results---placeholder curves to be
-replaced with measured data before submission.} Shapes are drawn from the theory of
-\Cref{sec:theory}: (a) a defense's $\NRPs$ advantage over no-defense is expected to shrink under
-collusion and orchestrator compromise (RQ3, the headline \emph{hypothesis}); (b) the
-compromise-propagation rate is expected to increase across topologies chain $<$ subcritical
-tree $<$ star $<$ mesh (\Cref{prop:chain,prop:star,prop:tree,prop:mesh}, RQ4); (c) colluding
-adversaries are expected to achieve higher $\ASRs$ than independent ones at equal fraction
-(\Cref{thm:collusion}, RQ5); and (d) cost is expected to grow with agent count and topology
-density (RQ6). No claim of measured superiority is made.}
+\caption{\textbf{Measured trends on the transparent synthetic model ($M{=}738$,
+$\epsilon{=}\alpha{=}0.05$); all numbers are synthetic and provenance-stamped.}
+(a) The per-agent guardrail's $\NRPs$ advantage over no-defense shrinks across the
+single-agent, +collusion, +compromised-orchestrator sweep (RQ3); $\NRPs$ is the
+ASB-compatible single-agent predicate (\Cref{tab:degradation}). (b) The
+compromise-propagation rate orders as chain $<$ tree $<$ star (\Cref{prop:chain,prop:star,prop:tree},
+RQ4); mesh is deferred. (c) Collusion advantage in the unsafe-action channel is clearest at
+low $\betafrac$ and converges as $\betafrac$ grows; under the full system predicate it is
+masked by availability sabotage on the star hub. (d) Token cost grows $\approx$ linearly in
+$N$ for the star topology; the $\Theta(N^2)$-like mesh and $N\in\{20,50\}$ are deferred.
+No claim of measured superiority beyond these stated synthetic configurations is made.}
 \label{fig:results}
 \end{figure*}

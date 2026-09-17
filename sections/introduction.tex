@@ -72,19 +72,21 @@ generalization $\NRPs=\PNAs\cdot(1-\ASRs)$ of ASB's metric, together with collus
 success rate, compromise-propagation rate, coordination quality, time-to-detection,
 recovery rate, and cost, all measured over the collective rather than per step. Because
 $\ASRs$ is scored by a deterministic checker, a successful injection cannot hijack the
-evaluator---a property we prove and then quantify empirically against an LLM-judge
-ablation.
+evaluator---a property we prove and plan to quantify an LLM-judge ablation against (deferred
+to the release phase).
 
 \item \textbf{The \corb{} co-evolving red/blue protocol} (\Cref{sec:algorithm}). A
 reusable methodology that alternates a red policy proposing attack configurations from
 the parameter space and a blue policy proposing defenses, logging a trajectory of
 $(\text{attack},\text{defense})$ pairs and their system-level scores.
 
-\item \textbf{A headline empirical hypothesis} (\Cref{sec:experiments}). We formulate,
-and lay out the protocol to test, the claim that defenses effective in single-agent
-ASB/AgentDojo \emph{degrade} under collusion and compromised-orchestrator conditions.
-This claim is marked throughout as a \emph{hypothesis}; if it does not replicate across
-models and topologies, the contribution reframes as a still-informative negative result.
+\item \textbf{A headline degradation result} (\Cref{sec:experiments}). We measure on a
+transparent, clearly-labelled synthetic agent emulator that defenses effective in the
+single-agent regime \emph{degrade} under collusion and compromised-orchestrator
+conditions: a per-agent guardrail's relative ASR reduction over no-defense shrinks
+$41.6\%\to31.8\%\to27.7\%$ across the three contexts (\Cref{tab:degradation}). Real-backbone
+replication is the release-phase programme; whether the effect replicates across models and
+topologies will confirm or reframe the result.
 \end{enumerate}
 
 Because reviewers rightly discount benchmarks whose central metric is asserted rather
@@ -120,6 +122,6 @@ multi-agent frameworks and attacks, and reinforcement-learning environments;
 primitives; \Cref{sec:system,sec:threat,sec:problem} give the system model, threat
 model, and problem formulation; \Cref{sec:method,sec:algorithm} present the
 architecture, metric suite, and \corb{} protocol; \Cref{sec:theory} develops the
-theory; \Cref{sec:experiments} specifies the evaluation protocol and placeholder
+theory; \Cref{sec:experiments} specifies the evaluation protocol and the synthetic-model
 results; and \Cref{sec:discussion,sec:limitations,sec:ethics,sec:conclusion} discuss
 implications, limitations, ethics, and conclusions.

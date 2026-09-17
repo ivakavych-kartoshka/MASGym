@@ -11,11 +11,14 @@ deterministic checker and ships an emulated-versus-real-tools ablation, but a re
 realism gap remains, and absolute numbers should be read as comparative, not as field
 measurements.
 
-\paragraph{The headline finding is a hypothesis.} The degradation claim (RQ3) must
-replicate across models and topologies before it can be stated as a result. If per-agent
-defenses do \emph{not} degrade under collusion and orchestrator compromise, the
-contribution reframes as a still-informative negative result; either way, the environment
-retains its value as an instrument.
+\paragraph{The headline finding is a synthetic-model measurement.} The degradation
+result (RQ3)---that a per-agent guardrail's relative ASR reduction over no-defense shrinks
+from the single-agent to the collusion to the compromised-orchestrator context
+(\Cref{tab:degradation})---is measured on the transparent synthetic emulator at the stated
+operating point ($M{=}738$). Whether it replicates across real backbone families, larger
+$N$, and the deferred mesh topology is untested; the release phase runs that replication, and
+a failed replication reframes the contribution as a still-informative negative result.
+Either way, the environment retains its value as an instrument.
 
 \paragraph{Construct validity of the metric.} \Cref{thm:metric} justifies $\NRPs=u\sigma$
 only relative to its axioms; a reviewer who rejects utility/security-homogeneity would
@@ -27,7 +30,9 @@ default remains a modelling decision.
 and \Cref{thm:collusion} hold in the independent-cascade instance of \Cref{as:prop}. Real
 compromise dynamics among LLM agents may not be independent-cascade; the theorems characterize
 the environment's dynamics and predict where to look, and the measured $\CPR$ is what
-adjudicates realism.
+adjudicates realism: in the synthetic phase the measured ordering
+$\CPR_{\mathrm{chain}}<\CPR_{\mathrm{tree}}<\CPR_{\mathrm{star}}$ matches the predicted
+one (\Cref{tab:topology}), while the mesh prediction remains pending that sweep.
 
 \paragraph{TCB and predicate specification.} \Cref{thm:integrity} assumes a trusted harness
 and checker (\Cref{as:tcb}) and shows non-gameability, not correctness: a mis-specified

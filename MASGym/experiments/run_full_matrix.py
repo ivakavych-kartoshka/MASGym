@@ -40,7 +40,7 @@ import pandas as pd
 from masgym.config import adv_from_dict, build_defense, env_from_dict
 from masgym.data.synthetic import generate_benign_episodes, generate_episodes
 from masgym.metrics.metrics import compute_system_metrics
-from masgym.methods.scoring import ScoreConfigResult
+from masgym.methods.scoring import ScoreConfigResult, _ACTION_PREFIXES, _rate_with_prefix
 from masgym.theory.sample_complexity import hoeffding_min_samples
 from masgym.utils.io import ensure_dir, run_metadata, write_csv, write_json
 from masgym.utils.logging import configure_logging, get_logger
@@ -180,6 +180,8 @@ def run_full_matrix(
             n_episodes=n_episodes,
             seed=seed_cfg,
             metrics=metrics,
+            asr_action=_rate_with_prefix(list(adv_eps), _ACTION_PREFIXES),
+            asr_sabotage=_rate_with_prefix(list(adv_eps), ("sabotage",)),
         ).row()
         rows.append({"scenario": scen, "defense_kind": dname, **row})
         if dump_episodes:

@@ -41,6 +41,11 @@ class SyntheticDefense(Defense):
     The reduction is applied uniformly and does NOT encode any orchestrator- or
     topology-specific effect, so the pipeline never manufactures the paper's degradation
     hypothesis; any pattern that appears is a property of the transparent synthetic model.
+
+    The same ``p_reduction`` fraction is also applied by the orchestrator to the
+    per-step unsafe-action probability (a compromised agent is less likely to turn an
+    injection into a recorded action), which is what lets the single-agent N=1 baseline
+    move ``ASR_sys`` at all.
     """
 
     name: str

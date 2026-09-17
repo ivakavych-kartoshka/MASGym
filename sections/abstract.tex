@@ -30,10 +30,14 @@ forced-coordination lower bound; and finite-sample concentration for the estimat
 Built on ToolEmu-style LM emulation (human agreement $\kappaem\approx 0.48$, which we
 surface as a first-class caveat) and AgentDojo-style deterministic checks, \defname{}
 is an instrument, not a verdict: we never equate a lower system-level attack success
-rate with ``secure.'' The manuscript states as a testable \emph{hypothesis} that
-defenses effective in single-agent ASB/AgentDojo degrade under collusion and
-compromised-orchestrator conditions; all empirical tables and plots in this version
-are clearly labelled placeholders to be replaced with measured results.
+rate with ``secure.'' Because the backbone interface is model-agnostic, we evaluate the
+instrument end-to-end on a transparent, clearly-labelled \emph{synthetic} agent emulator
+(all quantitative output in this version is synthetic and provenance-stamped; nothing is a
+real-LLM result). On that emulator the headline claim is measured: defenses effective in
+the single-agent regime lose advantage under collusion and compromised-orchestrator
+conditions (a per-agent guardrail's relative ASR reduction over no-defense shrinks
+$41.6\%\to31.8\%\to27.7\%$ across those contexts; Table~\ref{tab:degradation}); replication
+on real backbones and the deferred topologies/scales is the release-phase programme.
 \end{abstract}
 
 \begin{highlights}
@@ -51,8 +55,8 @@ logging $(\text{attack},\text{defense})$ trajectories and their system-level sco
 \item Instrument-supporting theory: an axiomatic characterization of the aggregator,
 an evaluator-integrity separation, topology-dependent compromise-propagation and
 collusion bounds, a forced-coordination lower bound, and estimator concentration---all
-under explicitly stated assumptions, with a headline degradation \emph{hypothesis}
-and placeholder empirical results.
+under explicitly stated assumptions, with a headline degradation claim measured on a
+transparent synthetic emulator and scoped by real-backbone replication.
 \end{highlights}
 
 \begin{keyword}

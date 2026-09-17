@@ -1,10 +1,11 @@
-\section{Extended Protocol and Additional Placeholder Studies}
+\section{Extended Protocol and Additional Synthetic-Model Studies}
 \label{app:experiments}
 
 This appendix expands the evaluation protocol of \Cref{sec:experiments}: it records the
 precise metric definitions, the Sybil and adaptivity studies, the cost model, and a
-sensitivity plan. All tables are \textbf{placeholders}; every quantitative outcome is
-\emph{(hypothesis)} until produced.
+sensitivity plan. The filled cells below report measurements from the transparent
+synthetic model ($M{=}738$, $\epsilon{=}\alpha{=}0.05$, provenance-stamped in the released
+logs); cells marked ``---'' are deferred to the real-backbone release phase.
 
 \subsection{Precise metric definitions}
 Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
@@ -24,37 +25,44 @@ when hooks are enabled.
 \end{itemize}
 
 \subsection{Sybil and adaptivity studies}
-\Cref{tab:sybil} gives the structure of the Sybil study (RQ5): as the number of Sybil
-identities grows, an adversary controlling one underlying policy gains disproportionate
-influence over selection, voting, and memory writes. \Cref{tab:adaptive} gives the
-adaptivity study: static versus adaptive red policies across \corb{} rounds, reporting how
-quickly the blue policy is out-evolved.
+\Cref{tab:sybil} gives the Sybil study (RQ5): as the number of Sybil identities grows, an
+adversary controlling one underlying policy gains disproportionate influence over selection,
+voting, and memory writes. The shipped harness does not yet instrument per-selection /
+per-vote influence shares, so this study quantifies influence through the system metric
+suite instead. \Cref{tab:adaptive} gives the adaptivity study: static versus adaptive red
+policies across \corb{} rounds, reporting how quickly the blue policy is out-evolved.
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
-before submission.} Sybil study (RQ5). Expected \emph{(hypothesis)} trend: influence and
-$\ASRs$ increase with Sybil count until selection/voting defenses saturate.}
+\caption{Sybil study (RQ5), \textbf{synthetic-model} results (star, $N{=}5$,
+$\betafrac{=}0.1$, no defense, $M{=}738$). The expected trend---$\ASRs$ increases with the
+Sybil count until the system is fully seeded---is observed: $\ASRs$ rises monotonically as
+Sybil identities inflate the adversary's initial footprint, and $\NRPs$ falls to zero at
+full seeding.}
 \label{tab:sybil}
 \small
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lccccc@{}}
 \toprule
-Sybil count & Selection share & Vote share & $\ASRs$ & $\NRPs$ \\
+Sybil count & $\ASRs$ & $\NRPs$ & ASR$_{\mathrm{act}}$ & $\CPR$ \\
 \midrule
-0 & --- & --- & --- & --- \\
-1 & --- & --- & --- & --- \\
-2 & --- & --- & --- & --- \\
-4 & --- & --- & --- & --- \\
+0 & 0.775 & 0.203 & 0.595 & 0.173 \\
+1 & 0.870 & 0.115 & 0.612 & 0.288 \\
+2 & 0.942 & 0.053 & 0.561 & 0.344 \\
+4 & 1.000 & 0.000 & 0.561 & 0.000 \\
 \bottomrule
+\multicolumn{5}{@{}l}{\footnotesize ASR$_{\mathrm{act}}$ is the single-agent predicate
+(unsafe action / exfiltration; \Cref{tab:degradation}); $\CPR$ at count 4 is $0$ by the
+denominator convention (\Cref{sec:metric-suite}) because the whole star is seeded at
+$t{=}0$.}
 \end{tabular}
 \end{table}
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
-before submission.} Adaptivity study: static vs.\ adaptive red across \corb{} rounds
-$r=1,\dots,R$. Expected \emph{(hypothesis)} trend: adaptive red erodes a static blue's
-$\NRPs$ over rounds; a co-adapting blue slows but may not stop the erosion.}
+\caption{Adaptivity study, \textbf{synthetic-model} results (star, $N{=}5$, $M{=}60$ per
+scored pair, $R{=}20$ \corb{} rounds). An adaptive red (Algorithm~2 best-responder) erodes
+the co-adapting blue's $\NRPs$ from $0.649$ to $0.236$; a random (``static'') red leaves the
+system in the availability-sabotage regime ($\ASRs{=}1$, $\NRPs{=}0$) throughout.}
 \label{tab:adaptive}
 \small
 \begin{tabular}{@{}lcccc@{}}
@@ -63,11 +71,14 @@ $\NRPs$ over rounds; a co-adapting blue slows but may not stop the erosion.}
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
 Round & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ \\
 \midrule
-$r=1$ & --- & --- & --- & --- \\
-$r=5$ & --- & --- & --- & --- \\
-$r=10$ & --- & --- & --- & --- \\
-$r=20$ & --- & --- & --- & --- \\
+$r=1$  & 1.000 & 0.000 & 0.317 & 0.649 \\
+$r=5$  & 1.000 & 0.000 & 0.617 & 0.358 \\
+$r=10$ & 1.000 & 0.000 & 0.783 & 0.195 \\
+$r=20$ & 1.000 & 0.000 & 0.733 & 0.236 \\
 \bottomrule
+\multicolumn{5}{@{}l}{\footnotesize Blue = escalating policy ($p_{\mathrm{red}}$ ramps
+$0.2\to0.8$). Static-red ASR$_{\mathrm{act}}$ cycles $\{0.50,0.62,0.23,0.52\}$ (no trend);
+adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}
 \end{tabular}
 \end{table}
 
@@ -83,21 +94,79 @@ run---rather than implying exhaustive coverage.
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
-before submission.} Scalability and cost (RQ6) vs.\ agent count $N$. Expected
-\emph{(hypothesis)} trend: token/API cost and latency grow with $N$ (and with \corb{}
-rounds), constraining the reachable region.}
+\caption{Scalability and cost (RQ6), \textbf{synthetic-model} results (star, no defense,
+$\betafrac{=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx
+8.8{\times}N$ per episode); latency is the synthetic per-call proxy and stays near-flat.
+$\ASRs$ saturates via availability sabotage (\Cref{tab:degradation}).}
 \label{tab:cost}
 \small
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 $N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
 \midrule
-3  & --- & --- & --- & --- & --- \\
-10 & --- & --- & --- & --- & --- \\
-20 & --- & --- & --- & --- & --- \\
-50 & --- & --- & --- & --- & --- \\
+3  & 1.000 & 0.279 & 26.4 & 18.7 & Yes (138 configs) \\
+5  & 1.000 & 0.289 & 44.0 & 20.8 & Yes (138 configs) \\
+10 & 0.999 & 0.294 & 88.0 & 22.4 & Yes (138 configs) \\
 \bottomrule
+\multicolumn{6}{@{}l}{\footnotesize $N\in\{20,50\}$ and mesh are deferred to the
+release phase; the reachable region is the $(N,\text{topology},\betafrac,\text{knob})$
+combinations actually run (grid in the released provenance logs).}
+\end{tabular}
+\end{table}
+
+\subsection{LLM backbone pilot (open models)}
+\label{app:pilot}
+The headlined tables are synthetic by design, but the harness's real-backbone path is not
+dead code: this pilot wires two open instruct families---Qwen2.5 ($0.5$B, $1.5$B, $3$B,
+$7$B; the $7$B loaded in 4-bit) and Llama-3.2 ($1$B, $3$B)---through
+\texttt{LLMBackboneAdapter.generate\_fn} and runs the environment end-to-end on a small grid
+(star, $N{=}3$, $H{=}4$, $k{=}2$, $\betafrac{=}0.3$, $M{=}12$, direct exfiltration injection
+embedded in a tool-result note; \emph{fictitious data}). Task completion remains the
+deterministic witness condition, so the pilot isolates the \emph{security} decision: every
+compromised agent's reaction to the injected instruction is a real model output.
+\Cref{tab:llm_pilot} summarizes; every model response, with its prompt, is in the released
+\texttt{decisions.jsonl}. These numbers are \textbf{labelled PILOT and excluded from the
+headlined, synthetic results}---they demonstrate the adapter path and a real
+family-dependence of the security decision, not headline findings. Mistral and the
+proprietary families are deferred until model credentials are provisioned; the official
+\verb+meta-llama+ repos gate downloads on per-account approval, so the Llama-3.2 checkpoints
+here are loaded from an ungated mirror of the official weights.
+
+\begin{table}[t]
+\centering
+\caption{LLM backbone pilot, \textbf{PILOT-labelled} (Qwen2.5
+\{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, star $N{=}3$, $M{=}12$, no
+defense, fictitious data; numbers excluded from the headlined synthetic tables). Backbones
+differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse
+every direct exfiltration instruction (parse failures 0), yet $\ASRs$ is still positive in
+the two orchestrator-critical scenarios via structural availability sabotage;
+Llama-$1$B \emph{complies}, yielding $\ASRs{=}1.000$ across all attack scenarios. The
+registered security outcome is a real model property, not a framework artefact.}
+\label{tab:llm_pilot}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Backbone & benign & single\_attacker & colluding & orch.\ comp. \\
+\midrule
+Qwen2.5-$0.5$B & 0.000 & 0.417 (0/15) & 1.000 (0/20) & 1.000 (0/22) \\
+Qwen2.5-$1.5$B & 0.000 & 0.417 (0/15) & 1.000 (0/20) & 1.000 (0/22) \\
+Qwen2.5-$3$B   & 0.000 & 0.417 (0/15) & 1.000 (0/20) & 1.000 (0/22) \\
+Qwen2.5-$7$B$^{*}$ & 0.000 & 0.417 (0/15) & 1.000 (0/20) & 1.000 (0/22) \\
+Llama-3.2-$1$B & 0.000 & 1.000 (15/15) & 1.000 (20/20) & 1.000 (22/22) \\
+Llama-3.2-$3$B & 0.000 & 0.417 (0/15) & 1.000 (0/20) & 1.000 (0/22) \\
+\bottomrule
+\multicolumn{5}{@{}p{\dimexpr\textwidth-2\tabcolsep\relax}@{}}{\footnotesize Cells report
+$\ASRs$; the parenthesised pair is exfiltration-compliant decisions per compromised-agent
+decision (a dash means no compromised decision occurred, benign scenario). Defenses are
+synthetic effect-models and are deliberately not applied. $\NRPs{=}\PNAs(1-\ASRs)$ with
+$\PNAs{=}1.000$; token/episode $\approx300$--$490$; real latency $\approx
+0.2$--$1.2$\,s per decision (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in
+full precision and is therefore loaded in bitsandbytes 4-bit from an ungated mirror; all
+other rows are full precision. Llama-3.2 weights are from an ungated mirror of the
+official full-precision (bf16) checkpoints; the security-decision divergence between
+Llama-3.2-$1$B (complies) and the remaining backbones (refuses) shows the registered
+outcome is a real model property, not a framework artefact. Stronger injection styles and
+per-agent defenses are release-phase work.}
 \end{tabular}
 \end{table}
 

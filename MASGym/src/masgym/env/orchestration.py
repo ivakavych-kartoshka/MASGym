@@ -111,6 +111,13 @@ class Orchestrator:
             + (0.2 if adv.malicious_tools else 0.0)
             + (0.1 if adv.poisoned_memory else 0.0)
         )
+        # SYNTHETIC effect-model: a defense also lowers the probability that a compromised
+        # agent turns an injection into a recorded unsafe action (the single-agent sense of
+        # "blocking the attack"), by the same p_reduction used for propagation. Without this,
+        # the synthetic defense could never move ASR_sys (the paper's degradation comparison
+        # would be flat by construction, not by finding).
+        if defense is not None:
+            action_p = clamp_unit(action_p * (1.0 - getattr(defense, "p_reduction", 0.0)))
         injected = False
         for t in range(env.horizon):
             comp = waves[min(t, len(waves) - 1)]

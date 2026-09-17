@@ -1,10 +1,11 @@
-\section{Evaluation Protocol and Placeholder Results}
+\section{Evaluation Protocol and Results}
 \label{sec:experiments}
 
 \defname{} is a benchmark, so ``evaluation'' means \emph{validating the instrument} and
-\emph{demonstrating the headline finding}. This section specifies the protocol; the
-numerical tables and plots are clearly labelled placeholders, and all quantitative
-outcomes are marked \emph{(hypothesis)} until produced. \Cref{fig:expsetup} summarizes the
+\emph{demonstrating the headline finding}. This section specifies the protocol and reports
+the headline measurements. All numbers reported here come from the transparent,
+clearly-labelled \emph{synthetic} model ($M{=}738$, Section~\ref{sec:method}); nothing is a
+real-LLM result, and real-backbone runs are deferred. \Cref{fig:expsetup} summarizes the
 design as a pipeline from datasets and variables to metrics.
 
 \subsection{Research questions}
@@ -15,24 +16,31 @@ and do alternative aggregators (\Cref{rem:metric}) change configuration rankings
 \item[\textbf{RQ2}] \emph{Evaluator integrity (hypothesis).} How large is the
 deterministic-versus-LLM-judge gap---i.e., how often can an injection hijack a judge but
 not the deterministic checker (\Cref{thm:integrity,prop:judgehijack})?
-\item[\textbf{RQ3}] \emph{Defense degradation (headline hypothesis).} Do per-agent defenses
+\item[\textbf{RQ3}] \emph{Defense degradation (headline; measured on the synthetic model).}
+Do per-agent defenses
 that are effective in single-agent ASB/AgentDojo lose effectiveness under collusion and
 compromised-orchestrator configurations?
-\item[\textbf{RQ4}] \emph{Topology and propagation (hypothesis).} Does the measured $\CPR$
+\item[\textbf{RQ4}] \emph{Topology and propagation (measured on the synthetic model).}
+Does the measured $\CPR$
 follow the topological ordering predicted by \Cref{prop:chain,prop:star,prop:tree,prop:mesh}
 (chain $<$ tree$_{\text{sub}}$ $<$ star $<$ mesh), and is the orchestrator the critical node?
 \item[\textbf{RQ5}] \emph{Collusion and Sybils (hypothesis).} Is there a measurable
 collusion advantage $\Delta_{\mathrm{coll}}$ (\Cref{def:csr,thm:collusion}), and how does
 Sybil pressure affect selection/voting/memory outcomes?
 \item[\textbf{RQ6}] \emph{Scalability and cost.} How do the metrics and the token/API and
-latency costs scale with the agent count $N\in\{3,\dots,50\}$ and \corb{} rounds?
+latency costs scale with the agent count $N\in\{3,5,10\}$ (synthetic phase; the full
+$3$--$50$ sweep is deferred) and \corb{} rounds?
 \end{itemize}
 
 \subsection{Models, scale, and tasks}
 \textbf{Agent backbones.} Open models---Llama-3~\cite{dubey2024llama3},
 Qwen2.5~\cite{qwen2025qwen25}, and Mistral~\cite{jiang2023mistral7b}---and proprietary
 models---GPT-4o~\cite{openai2024gpt4o} and Claude-3.5---so that findings are not tied to a
-single family. \textbf{Scale/topology.} $3$--$50$ agents across star, chain, tree, and mesh.
+single family. The headlined tables run the transparent synthetic model; a small
+\emph{pilot} wires open instruct backbones (Qwen2.5-$0.5/1.5/3/7$B and Llama-3.2-$1/3$B)
+through the real backbone adapter to exercise that path (\Cref{app:pilot}), and its
+PILOT-labelled numbers are excluded from the headlined results. \textbf{Scale/topology.} $N\in\{3,5,10\}$ across star, chain, and tree in this
+synthetic phase (mesh and the full $3$--$50$ sweep are deferred to the release phase).
 \textbf{Tasks.} Forced-coordination tasks (\Cref{def:forced}) instrumented with registered
 $(\Predutil,\Predsec)$ pairs; benign difficulty tuned so $\PNAs$ is neither saturated nor
 zero, with benign task pools drawn in the spirit of agent benchmarks such as
@@ -75,62 +83,71 @@ control across the sweep grid.
 \subsection{Implementation and hyperparameters}
 The harness is model-agnostic (any chat/completions backbone behind a common interface),
 runs episodes with horizon $H$ per task, and logs every message, tool call, memory
-operation, and state transition into $\Trace$. Default study parameters (to be finalized
-with compute budget): $M{=}200$ episodes per configuration at target $\epsilon{=}0.05$,
-$\alpha{=}0.05$; $R\!\le\!20$ \corb{} rounds; temperature and decoding fixed per backbone
+operation, and state transition into $\Trace$. Default study parameters: $M{=}738$ episodes per
+configuration (the \Cref{thm:sample} lower bound at target $\epsilon{=}0.05$,
+$\alpha{=}0.05$); $R\!\le\!20$ \corb{} rounds; temperature and decoding fixed per backbone
 and reported; random seeds logged. All defenses and attacks are versioned, and every reported
 number is a row of the \corb{} trajectory $\mathcal{L}$ (\Cref{alg:corb}).
 
-\subsection{Placeholder result tables}
-\Cref{tab:degradation,tab:topology} give the \emph{structure} of the two headline results.
-Their cells are placeholders.
+\subsection{Result tables}
+\Cref{tab:degradation,tab:topology} are the two headline results. Their cells report
+measurements from the transparent synthetic model (Section \ref{sec:method}), each with
+$M{=}738$ episodes at $\epsilon{=}\alpha{=}0.05$; cells marked ``---'' are deferred to the
+real-backbone release phase.
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
-before submission.} Headline degradation study (RQ3): system-level $\ASRs\downarrow$ /
-$\NRPs\uparrow$ are better. Each defense is measured single-agent (ASB/AgentDojo regime) and
-then under multi-agent collusion and compromised-orchestrator configurations. Expected
-\emph{(hypothesis)} trend: a defense's advantage over no-defense shrinks from left to right.}
+\caption{Headline degradation study (RQ3), \textbf{synthetic-model} results ($M{=}738$,
+$\epsilon{=}\alpha{=}0.05$, seed-locked). $\ASRs^{\dagger}\downarrow$ /
+$\NRPs^{\dagger}\uparrow$ are better. Each defense is measured in a single-agent regime
+($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and
+compromised-orchestrator configurations (star, $N{=}5$, $\betafrac{=}0.3$). The per-agent
+guardrail's relative $\ASRs^{\dagger}$ reduction over no-defense shrinks from left to right
+(41.6\% $\to$ 31.8\% $\to$ 27.7\%), supporting RQ3.}
 \label{tab:degradation}
 \small
 \begin{tabular}{@{}lcccccc@{}}
 \toprule
 & \multicolumn{2}{c}{Single-agent} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + compromised orch.} \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-Defense & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ & $\ASRs$ & $\NRPs$ \\
+Defense & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ \\
 \midrule
-No-defense              & --- & --- & --- & --- & --- & --- \\
-Delimiting/sandwich     & --- & --- & --- & --- & --- & --- \\
-Paraphrase              & --- & --- & --- & --- & --- & --- \\
-PI detector             & --- & --- & --- & --- & --- & --- \\
-Instructional prevention& --- & --- & --- & --- & --- & --- \\
-Guardrails              & --- & --- & --- & --- & --- & --- \\
+No-defense            & 0.587 & 0.374 & 0.560 & 0.396 & 0.539 & 0.424 \\
+Per-agent guardrail   & 0.343 & 0.590 & 0.382 & 0.553 & 0.390 & 0.552 \\
+System-level policy   & 0.450 & 0.505 & 0.461 & 0.482 & 0.447 & 0.506 \\
 \midrule
-\emph{Oracle (upper bound)} & --- & --- & --- & --- & --- & --- \\
+\emph{Oracle (upper bound)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
 \bottomrule
+\multicolumn{6}{@{}l}{\footnotesize $\dagger$ single-agent predicate (unsafe action /
+exfiltration), the predicate under which \Cref{prop:reduction} reduces to ASB at $N{=}1$.
+Under the \emph{full} system predicate (adding coordination sabotage) $\ASRs$ saturates at
+$1.0$ in both MA columns: collusion and orchestrator compromise target the critical star hub
+and collapse availability (\Cref{prop:star}); the saturation is that availability collapse,
+not a scalar artifact.}
 \end{tabular}
 \end{table}
 
 \begin{table}[t]
 \centering
-\caption{\textbf{Placeholder / expected trend only; replace with actual experimental results
-before submission.} Topology study (RQ4): measured compromise-propagation rate $\CPR$ and
-$\ASRs$ by topology at fixed $\betafrac$. Expected \emph{(hypothesis)} ordering, from
-\Cref{prop:chain,prop:star,prop:tree,prop:mesh}: chain $<$ subcritical tree $<$ star $<$
-mesh, with the orchestrator (star hub) as the critical node.}
+\caption{Topology study (RQ4), \textbf{synthetic-model} results (star, $N{=}5$,
+$\betafrac{=}0.3$): $\CPR$ orders as predicted---chain $<$ tree $<$ star
+(\Cref{prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as
+the critical node. Mesh is deferred to the release phase.}
 \label{tab:topology}
 \small
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect & Recovery \\
 \midrule
-Chain & --- & --- & --- & --- & --- \\
-Tree (subcritical, $b\pinf<1$) & --- & --- & --- & --- & --- \\
-Tree (supercritical, $b\pinf>1$) & --- & --- & --- & --- & --- \\
-Star & --- & --- & --- & --- & --- \\
-Mesh & --- & --- & --- & --- & --- \\
+Chain            & 0.136 & 0.998 & 0.002 & 2.25 & 0.194 \\
+Tree (branching) & 0.228 & 1.000 & 0.000 & 2.24 & 0.183 \\
+Star             & 0.287 & 1.000 & 0.000 & 2.19 & 0.193 \\
+Mesh             & ---   & ---   & ---   & ---   & --- \\
 \bottomrule
+\multicolumn{5}{@{}l}{\footnotesize $\CPR$/$\ASRs$/$\NRPs$ under no-defense (pure
+propagation signal); time-to-detect and recovery under the per-agent guardrail (no-defense
+detects nothing by construction). $\ASRs{=}1$ again reflects availability-sabotage
+saturation (\Cref{tab:degradation}); $\CPR$ is the discriminating column.}
 \end{tabular}
 \end{table}
 
