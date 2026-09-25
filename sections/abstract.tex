@@ -32,11 +32,12 @@ surface as a first-class caveat) and AgentDojo-style deterministic checks, \defn
 is an instrument, not a verdict: we never equate a lower system-level attack success
 rate with ``secure.'' Because the backbone interface is model-agnostic, we evaluate the
 instrument end-to-end on a transparent, clearly-labelled \emph{synthetic} agent emulator
-(all quantitative output in this version is synthetic and provenance-stamped; nothing is a
-real-LLM result). On that emulator the headline claim is measured: defenses effective in
+(all headlined output in this version is synthetic and provenance-stamped; a real-backbone
+pilot of six open instruct models over twelve configurations is reported separately and
+explicitly labelled PILOT). On that emulator the headline claim is measured: defenses effective in
 the single-agent regime lose advantage under collusion and compromised-orchestrator
 conditions (a per-agent guardrail's relative ASR reduction over no-defense shrinks
-$41.6\%\to31.8\%\to27.7\%$ across those contexts; Table~\ref{tab:degradation}); replication
+$41.6\%\to31.8\%\to27.6\%$ across those contexts; Table~\ref{tab:degradation}); replication
 on real backbones and the deferred topologies/scales is the release-phase programme.
 \end{abstract}
 

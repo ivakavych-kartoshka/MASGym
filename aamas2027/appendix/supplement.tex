@@ -1,0 +1,82 @@
+\section{Supplementary Material: Notation, Desiderata, and Cost}
+\label{app:supp}
+
+\subsection{Notation}
+\Cref{tab:notation} (in \Cref{sec:prelim}) summarizes the notation used throughout the
+paper; we reference it from here and do not duplicate the table.
+
+\subsection{Desiderata for the aggregator (D1--D5)}
+A system-level utility--security aggregator $g:[0,1]^2\to[0,1]$, written
+$\NRPs=g(\PNAs,\,1-\ASRs)$, should satisfy: (D1) \emph{boundedness}, $g$ maps into
+$[0,1]$; (D2) \emph{security consistency}, $g(u,1)=u$ and $g(0,\sigma)=0$; (D3)
+\emph{monotonicity}, $g$ non-decreasing in each argument; (D4) \emph{utility- and
+security-proportionality}, $g(\lambda u,\sigma)=\lambda g(u,\sigma)$ and
+$g(u,\lambda\sigma)=\lambda g(u,\sigma)$ for $\lambda\in[0,1]$; and (D5) \emph{reduction},
+$g$ recovers \Cref{eq:asb-nrp} at $N=1$.
+
+\subsection{Topology study}
+\label{app:topology-table}
+\begin{table}[t]
+\centering
+\caption{Topology study (RQ3), \textbf{synthetic-model} results: $\CPR$ orders as
+predicted---chain $<$ tree $<$ star (\Cref{prop:chain,prop:star,prop:tree})---and the
+orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured
+in the real-backbone pilot (\Cref{fig:results}(b)).}
+\label{tab:topology}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect & Recovery \\
+\midrule
+Chain            & 0.182 & 0.997 & 0.002 & 2.39 & 0.218 \\
+Tree (branching) & 0.226 & 1.000 & 0.000 & 2.39 & 0.205 \\
+Star             & 0.291 & 1.000 & 0.000 & 2.27 & 0.202 \\
+Mesh             & ---   & ---   & ---   & ---   & --- \\
+\bottomrule
+\multicolumn{6}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $\CPR$/$\ASRs$/$\NRPs$ under
+no-defense (pure propagation signal); time-to-detect and recovery under the per-agent
+guardrail. $\ASRs{=}1$ reflects availability-sabotage saturation (\Cref{tab:degradation});
+$\CPR$ is the discriminating column.}
+\end{tabular}
+\end{table}
+
+\subsection{Cost and complexity of the instrument}
+\label{app:complexity}
+An episode runs $N$ agents for $H$ steps: $\Theta(NH)$ agent invocations and up to
+$\Theta(|\Etop|H)$ messages; the trace has size $\Theta((N+|\Etop|)H)$. The checker
+evaluates $\Predsec,\Predutil$ once per trace with a linear or near-linear scan
+($\tilde{O}((N+|\Etop|)H)$, no LLM call). Edge counts are $\Theta(N)$ for star, chain,
+and tree, and $\Theta(N^2)$ for a dense mesh---why mesh is the costliest topology
+(\Cref{app:pilot}). Estimating the metrics to accuracy $\epsilon$ costs
+$M=O(\epsilon^{-2}\ln(1/\alpha))$ episodes (\Cref{thm:sample}); a \corb{} run of $R$
+rounds costs $\Theta(RMNH)$ invocations; a sweep of $G$ configurations resolving $\NRPs$
+gaps of size $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ (\Cref{cor:budget}).
+Because the parameter space is exponential in the number of adversary knobs, \corb{}
+explores a \emph{reachable region} rather than the whole space---an honesty constraint we
+report per study.
+
+\begin{table}[t]
+\centering
+\caption{Cost of the \defname{} instrument. $N$ agents, horizon $H$, edges $|\Etop|$
+($\Theta(N)$ for star/chain/tree, $\Theta(N^2)$ for dense mesh), $M$ episodes per
+configuration, $R$ \corb{} rounds, $G$ swept configurations. Checking is deterministic.}
+\label{tab:complexity}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Scope & Cost (agent invocations) \\
+\midrule
+Per episode        & $\Theta(NH)$ \\
+Per configuration  & $\Theta(MNH)$ \\
+Per \corb{} run    & $\Theta(RMNH)$ \\
+Full parameter sweep & $\Theta(GNH\Delta^{-2}\ln\tfrac{G}{\alpha})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{System architecture}
+\label{app:architecture}
+\Cref{fig:architecture} reproduces the system overview of \Cref{sec:method} in full
+width; the figure is defined in the main body and not repeated here.

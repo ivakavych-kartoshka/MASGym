@@ -27,9 +27,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
+import random
 import sys
 import time
+import urllib.error
+import urllib.request
 
 _ROOT = pathlib.Path(__file__).resolve().parents[1]
 for _p in (_ROOT / "src", _ROOT):
@@ -72,6 +76,9 @@ PILOT_BANNER = (
 )
 
 MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
+MISTRAL_DEFAULT_MODEL = "mistral-small-latest"
+MISTRAL_API_KEY_ENV = "MISTRAL_API_KEY"
+MISTRAL_CHAT_ENDPOINT = "https://api.mistral.ai/v1/chat/completions"
 RECOMMENDED = {
     "Qwen/Qwen2.5-0.5B-Instruct": "Qwen2.5-0.5B-Instruct",
     "Qwen/Qwen2.5-1.5B-Instruct": "Qwen2.5-1.5B-Instruct",
@@ -79,6 +86,9 @@ RECOMMENDED = {
     "Qwen/Qwen2.5-7B-Instruct": "Qwen2.5-7B-Instruct",
     "meta-llama/Llama-3.2-1B-Instruct": "Llama-3.2-1B-Instruct",
     "meta-llama/Llama-3.2-3B-Instruct": "Llama-3.2-3B-Instruct",
+    "mistral-small-latest": "mistral-small-latest",
+    "mistral-medium-latest": "mistral-medium-latest",
+    "mistral-large-latest": "mistral-large-latest",
 }
 
 SYSTEM_PROMPT = (
@@ -196,6 +206,165 @@ class HFCausalBackbone:
         return text
 
 
+def _load_env_file(path: pathlib.Path) -> bool:
+    """Load a minimal ``KEY=VALUE`` .env file into the environment (stdlib, no python-dotenv)."""
+    if not path.exists():
+        return False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key:
+            os.environ.setdefault(key, value)
+    return True
+
+
+class MistralRateLimitExhausted(RuntimeError):
+    """Raised when Mistral keeps returning HTTP 429 after all retries (quota / sustained limit).
+
+    Aborts the run: continuing would only fill ``decisions.jsonl`` with empty failed responses.
+    """
+
+
+class MistralAPIBackbone:
+    """Hosted Mistral chat-completions backbone (no local weights).
+
+    Reads ``MISTRAL_API_KEY`` from the environment (or an optional ``.env`` file at the repo
+    root, e.g. ``MASGym/.env``). The key is never logged. Model ids look like
+    ``mistral-small-latest`` / ``mistral-medium-latest`` / ``mistral-large-latest``.
+
+    ``min_interval_s`` paces calls across the whole process (class-wide), so bursts never
+    exceed the provider's sustained request-per-minute budget.
+    """
+
+    _last_call: float = 0.0
+
+    def __init__(
+        self,
+        model_id: str,
+        api_key: str | None = None,
+        endpoint: str = MISTRAL_CHAT_ENDPOINT,
+        max_new_tokens: int = 24,
+        max_retries: int = 6,
+        retry_base_s: float = 3.0,
+        retry_max_s: float = 60.0,
+        min_interval_s: float = 1.0,
+    ) -> None:
+        api_key = api_key or os.environ.get(MISTRAL_API_KEY_ENV)
+        if not api_key:
+            raise RuntimeError(
+                f"{MISTRAL_API_KEY_ENV} is not set. Export it, or create a .env file containing "
+                f"{MISTRAL_API_KEY_ENV}=... at the repo root (never commit it)."
+            )
+        self.model_id = model_id
+        self.api_key = api_key
+        self.endpoint = endpoint
+        self.max_new_tokens = max_new_tokens
+        self.max_retries = max_retries
+        self.retry_base_s = retry_base_s
+        self.retry_max_s = retry_max_s
+        self.min_interval_s = min_interval_s
+
+    def _backoff(self, attempt: int) -> float:
+        """Exponential backoff with cap and jitter (Base * 2^(attempt-1), capped)."""
+        delay = min(self.retry_base_s * (2 ** (attempt - 1)), self.retry_max_s)
+        return delay * (0.8 + random.random() * 0.4)
+
+    @staticmethod
+    def _limit_hint(exc: urllib.error.HTTPError) -> str:
+        """Surface Mistral's rate-limit headers so the user sees remaining/reset, not a bare 429."""
+        if not exc.headers:
+            return ""
+        seen = []
+        for name in ("x-ratelimit-limit-req-minute", "x-ratelimit-remaining-req-minute",
+                     "x-ratelimit-reset", "x-ratelimit-requests-reset", "retry-after"):
+            value = exc.headers.get(name)
+            if value and value not in seen:
+                seen.append(f"{name}={value}")
+        return ("; " + ", ".join(seen)) if seen else ""
+
+    def _pace(self) -> None:
+        """Wait so consecutive calls (across the process) are >= min_interval_s apart."""
+        elapsed = time.monotonic() - type(self)._last_call
+        wait = self.min_interval_s - elapsed
+        if wait > 0:
+            time.sleep(wait)
+
+    def generate(self, system: str, user: str) -> str:
+        """One chat-completions call; retries HTTP 429/5xx with backoff (honours Retry-After)."""
+        payload = {
+            "model": self.model_id,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "max_tokens": self.max_new_tokens,
+            "temperature": 0.0,
+        }
+        last_err: Exception | None = None
+        for attempt in range(1, self.max_retries + 1):
+            self._pace()
+            type(self)._last_call = time.monotonic()
+            req = urllib.request.Request(
+                self.endpoint,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": f"Bearer {self.api_key}",
+                },
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=120) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))  # type: ignore[union-attr]
+                break
+            except urllib.error.HTTPError as exc:  # pragma: no cover - external backend
+                retry_after = 0.0
+                if exc.code in (429, 500, 502, 503, 504):
+                    header = exc.headers.get("Retry-After")
+                    if header:
+                        try:
+                            retry_after = float(header)
+                        except ValueError:
+                            retry_after = 0.0
+                    last_err = exc
+                    if attempt < self.max_retries:
+                        delay = retry_after or self._backoff(attempt)
+                        if attempt >= 2:
+                            logger.info(
+                                "Mistral API %s (attempt %d/%d); retrying in %.1fs%s",
+                                exc.code, attempt, self.max_retries, delay, self._limit_hint(exc),
+                            )
+                        time.sleep(delay)
+                        continue
+                raise RuntimeError(
+                    f"Mistral API HTTP {exc.code}: {exc.read().decode('utf-8', 'replace')}"
+                    f"{self._limit_hint(exc)}"
+                ) from exc
+            except urllib.error.URLError as exc:  # pragma: no cover - external backend
+                last_err = exc
+                if attempt < self.max_retries:
+                    time.sleep(self._backoff(attempt))
+                    continue
+                raise RuntimeError(f"Mistral API connection error: {exc}") from exc
+        else:
+            raise MistralRateLimitExhausted(
+                f"Mistral kept returning HTTP 429 after {self.max_retries} retries: "
+                f"{getattr(last_err, 'reason', last_err)}"
+                f"{self._limit_hint(last_err) if isinstance(last_err, urllib.error.HTTPError) else ''}. "
+                "The key's rate limit / daily quota is exhausted (free tier caps requests-per-minute "
+                "and total tokens). Stop and retry later, use fewer episodes/configs, raise "
+                "--min-interval, or upgrade the plan. No more empty-failure results are written."
+            ) from last_err
+        choices = data.get("choices") or []
+        if not choices:
+            raise RuntimeError(f"Mistral API returned no choices: {data}")
+        return str(choices[0].get("message", {}).get("content", "")).strip()
+
+
 def estimate_tokens(chars: int) -> int:
     return max(1, int(round(chars / 3.5)))
 
@@ -213,8 +382,23 @@ def run_episode_pilot(
     adapter,
     checker: DeterministicChecker,
     model_id: str = MODEL_ID,
+    generate=None,
 ) -> tuple[Episode, list[dict]]:
-    """Run one LLM-driven episode; return (Episode, decisions log)."""
+    """Run one LLM-driven episode; return (Episode, decisions log).
+
+    ``generate`` is an optional ``callable(system, user) -> str`` (API backbones such as
+    Mistral). When ``None`` the adapter's HF path is used via ``apply_chat``, preserving the
+    original behaviour for ``run_llm_pilot_sweep.py``.
+    """
+    if generate is None:
+        def gen_fn(system: str, user: str) -> str:
+            return str(adapter.generate(apply_chat(system, user, model_id)))
+        input_len = lambda system, user: len(apply_chat(system, user, model_id))
+    else:
+        def gen_fn(system: str, user: str) -> str:  # noqa: F811
+            return str(generate(system, user))
+        input_len = lambda system, user: len(system) + len(user)
+
     topology = build_topology(env.topology, env.n_agents, env.branching_factor)
     seed_set = place_seeds(env, adv, topology, rng)
     waves = IndependentCascade(p=env.p_infect).waves(seed_set, topology, rng, max_waves=env.horizon)
@@ -235,14 +419,15 @@ def run_episode_pilot(
         for a in newly:
             system = SYSTEM_PROMPT.format(agent_id=a, n=env.n_agents)
             user = USER_PROMPT.format(t=t, attack_note=note)
-            chat = apply_chat(system, user, model_id)
-            n_in_tokens = estimate_tokens(len(chat))
+            n_in_tokens = estimate_tokens(input_len(system, user))
             start = time.perf_counter()
             try:
-                raw = str(adapter.generate(chat))
-            except Exception as exc:  # pragma: no cover - external backend, fail loud
+                raw = gen_fn(system, user)
+            except MistralRateLimitExhausted:
+                raise
+            except Exception as exc:  # pragma: no cover - external backend (debug; retries live in the backbone)
                 raw = ""
-                logger.warning("backbone.generate failed for agent %d: %s", a, exc)
+                logger.debug("backbone.generate failed for agent %d: %s", a, exc)
             elapsed = time.perf_counter() - start
             action, parse_failed = parse_decision(raw)
             n_out_tokens = estimate_tokens(len(raw))
@@ -292,14 +477,21 @@ def run_episode_pilot(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Real-LLM pilot (instruct backbone).")
-    parser.add_argument("--model", type=str, default=MODEL_ID, help="HF model id")
+    parser.add_argument("--backend", type=str, default="hf", choices=["hf", "mistral"],
+                        help="hf=local transformers; mistral=hosted Mistral API (needs MISTRAL_API_KEY)")
+    parser.add_argument("--model", type=str, default=MODEL_ID, help="HF model id / Mistral API model id")
     parser.add_argument("--episodes", type=int, default=12, help="episodes per scenario")
-    parser.add_argument("--device", type=str, default="cuda", help="cuda|cpu")
+    parser.add_argument("--device", type=str, default="cuda", help="cuda|cpu (hf backend only)")
     parser.add_argument("--quant", type=str, default="none", choices=["none", "4bit", "8bit"],
                         help="bitsandbytes quantization (4bit/8bit) for models that exceed VRAM")
     parser.add_argument("--out", type=pathlib.Path, default=None, help="output dir (default: outputs/llm_pilot-<short>)")
     parser.add_argument("--write-notes", action="store_true", help="write README.md provenance notes")
+    parser.add_argument("--max-retries", type=int, default=6, help="API retries on 429/5xx (mistral)")
+    parser.add_argument("--min-interval", type=float, default=1.0, help="min seconds between API calls (mistral pacing)")
     args = parser.parse_args(argv)
+
+    if args.backend == "mistral" and args.model == MODEL_ID:
+        args.model = MISTRAL_DEFAULT_MODEL
 
     short = RECOMMENDED.get(args.model, args.model.split("/")[-1])
     out = args.out or (_ROOT / "outputs" / f"llm_pilot-{short}")
@@ -309,15 +501,24 @@ def main(argv: list[str] | None = None) -> int:
     checker = DeterministicChecker()
 
     logger.info("%s", PILOT_BANNER)
-    logger.info(
-        "loading %s on %s%s (first load downloads; ~%.1f GB)",
-        args.model, args.device,
-        f" [{args.quant}]" if args.quant != "none" else "",
-        _approx_gb(args.model),
-    )
-    backend = HFCausalBackbone(args.model, device=args.device, quant=args.quant)
-    adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
-    logger.info("real backbone wired through %s", type(adapter).__name__)
+    if args.backend == "mistral":
+        _load_env_file(_ROOT / ".env")
+        backend = MistralAPIBackbone(args.model, max_retries=args.max_retries,
+                                     min_interval_s=args.min_interval)
+        adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
+        generate = backend.generate
+        logger.info("Mistral API backbone wired through %s (endpoint %s)", type(backend).__name__, backend.endpoint)
+    else:
+        logger.info(
+            "loading %s on %s%s (first load downloads; ~%.1f GB)",
+            args.model, args.device,
+            f" [{args.quant}]" if args.quant != "none" else "",
+            _approx_gb(args.model),
+        )
+        backend = HFCausalBackbone(args.model, device=args.device, quant=args.quant)
+        adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
+        generate = None
+        logger.info("real backbone wired through %s", type(adapter).__name__)
 
     env = EnvConfig(n_agents=3, topology=TopologyName.STAR, horizon=4, forced_degree=2, p_infect=0.3)
 
@@ -332,7 +533,7 @@ def main(argv: list[str] | None = None) -> int:
         ep_decisions: list[dict] = []
         for m in range(args.episodes):
             rng = SeededRNG(seed=7 * 13 * (m + 1) + (len(results) * 10_003))
-            ep, decs = run_episode_pilot(env, adv, rng, adapter, checker, model_id=args.model)
+            ep, decs = run_episode_pilot(env, adv, rng, adapter, checker, model_id=args.model, generate=generate)
             episodes.append(ep)
             ep_decisions.extend(decs)
             all_episodes.append(ep)

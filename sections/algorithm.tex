@@ -86,7 +86,8 @@ $\Predsec,\Predutil$ once over the trace; for the predicate families we use (den
 exfiltration, and sabotage checks), each is a linear or near-linear scan of the trace, costing
 $\tilde{O}((N+|\Etop|)H)$ and never an LLM call. Edge counts differ by topology:
 $|\Etop|=\Theta(N)$ for star, chain, and tree, and $|\Etop|=\Theta(N^{2})$ for a dense mesh,
-which is why the mesh is the costliest topology (\Cref{fig:results}(d)).
+which is why the mesh is the costliest topology (measured in the real-backbone pilot,
+\Cref{app:pilot}; star's linear cost is \Cref{fig:results}(d)).
 
 \emph{Per configuration and per sweep.} Estimating the metrics for one configuration to accuracy
 $\epsilon$ costs $M=O(\epsilon^{-2}\ln(1/\alpha))$ episodes (\Cref{thm:sample}), hence

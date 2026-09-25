@@ -1,0 +1,59 @@
+\section{The \defname{} Environment}
+\label{sec:method}
+
+\defname{} is organized as three layers (\Cref{fig:architecture}): an \emph{emulation
+layer} that supplies tools, a \emph{deterministic checking layer} that scores
+system-level predicates, and an \emph{orchestration layer} that instantiates the system
+and threat models and drives the \corb{} loop.
+
+\input{figures/tikz_architecture.tex}
+
+\subsection{Emulation and deterministic checking}
+Following ToolEmu~\cite{ruan2024toolemu}, tool execution is emulated by a language model
+$\Emu$ from a tool specification, giving breadth without hand-built sandboxes; an
+\emph{adversarial} mode $\Emu^{\!\dagger}$ realizes malicious tools (attacker-controlled
+responses, exfiltration bait, injected instructions). Crucially the emulator is \emph{not}
+on the scoring critical path: it produces the tool outputs agents consume, while the
+verdict comes from the deterministic checker, so emulator noise degrades realism, not
+scoring integrity. The checker $\Checker$ evaluates the registered predicates
+$\Predsec,\Predutil$ over the global trace (\Cref{def:predicates}) and never invokes an
+LLM judge on the critical path. Predicates are programs over recorded state: an
+\emph{exfiltration} predicate fires iff protected data recorded as leaving the trust
+boundary appears in an outbound tool call; a \emph{sabotage} predicate fires iff a
+$k$-forced task's witness set was prevented from completing; an \emph{unsafe-action}
+predicate fires iff a denylisted transition is recorded. An optional LLM judge\nobreak\
+$\Judge$, available only off the critical path, enables the ablation (RQ2).
+
+\subsection{Orchestration layer and task suite}
+The orchestration layer builds the topology $\Gtop$, assigns roles, enforces observability
+masks, applies $\config_{\mathrm{adv}}$ of \Cref{eq:adv-config}, and runs episodes; it is
+part of the TCB and exposes the \corb{} interface (\Cref{sec:algorithm}). Tasks are
+\emph{forced-coordination} by design (\Cref{def:forced}), so the collective is the unit of
+analysis: each provides a benign goal decomposable across roles, a registered pair
+$(\Predutil,\Predsec)$, a tool set (some malicious under $\mathsf{tool}$), a shared-memory
+schema (poisonable under $\mathsf{mem}$), and a topology (star: hub-and-spoke delegation;
+chain: pipelines; tree: hierarchical; mesh: peer collaboration), parameterized by $k$ (the
+degree of forced coordination) and benign difficulty.
+
+\subsection{Realized adversary knobs}
+Each component of $\config_{\mathrm{adv}}$ maps to a concrete harness mechanism:
+$\betafrac$ selects the seed set $\Advset$; $\mathsf{coll}$ toggles a shared channel and
+joint objective; $\mathsf{adapt}$ enables red co-evolution across \corb{} rounds;
+$\mathsf{orch}$ flips the orchestrator's policy; $\mathsf{tool}$ routes tools through
+$\Emu^{\!\dagger}$; $\mathsf{syb}$ instantiates extra identities under one controller; and
+$\mathsf{mem}$ writes poisoned entries to shared memory. Because the knobs are independent,
+a study isolates each variable's effect while holding the rest fixed---the controlled
+variation that is the paper's scientific object~\cite{rubin1974estimating}.
+
+\subsection{Metric suite}
+\label{sec:metric-suite}
+All reported quantities are computed from traces by the deterministic checker or harness
+logs; none is an LLM-judge verdict: system attack success rate $\ASRs$ and system NRP
+$\NRPs$ (\Cref{eq:asrsys,eq:nrpsys}); benign performance $\PNAs$ (\Cref{eq:pnasys});
+collusion success rate and advantage (\Cref{def:csr}); compromise-propagation rate $\CPR$
+(\Cref{eq:cpr}); coordination quality and its degradation under sabotage; time-to-detection
+and recovery; token/API cost and latency and their scaling with $N$; and human-intervention
+rate. Estimating these to target precision requires the budget fixed by \Cref{thm:sample};
+the resulting cost model---$\Theta(MNH)$ agent invocations per configuration,
+$\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ for a sweep---is reported with each study and
+archived in full with the harness.

@@ -1,0 +1,355 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{zhang2025asb}
+\citation{debenedetti2024agentdojo}
+\citation{ruan2024toolemu}
+\citation{zhan2024injecagent}
+\citation{wu2023autogen}
+\citation{hong2023metagpt}
+\citation{li2023camel}
+\citation{qian2024chatdev}
+\citation{fourney2024magenticone}
+\citation{schroederdewitt2025masec}
+\@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\newlabel{sec:intro@cref}{{[section][1][]1}{[1][1][]1}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{1}{section*.4}\protected@file@percent }
+\citation{zhang2025asb}
+\citation{debenedetti2024agentdojo}
+\citation{zhan2024injecagent}
+\citation{ruan2024toolemu}
+\citation{andriushchenko2025agentharm}
+\citation{mazeika2024harmbench}
+\citation{liu2024formalizing}
+\citation{wang2023decodingtrust}
+\citation{wu2023autogen}
+\citation{hong2023metagpt}
+\citation{li2023camel}
+\citation{qian2024chatdev}
+\citation{chen2024agentverse}
+\citation{wang2025openhands}
+\citation{fourney2024magenticone}
+\citation{wang2024mixture,du2023debate}
+\citation{lee2024promptinfection}
+\citation{zhou2025corba}
+\citation{gu2024agentsmith}
+\citation{he2025redteaming}
+\citation{yu2024netsafe}
+\citation{zhang2024psysafe}
+\citation{tian2023evilgeniuses}
+\citation{cohen2024aiworm}
+\citation{chen2024agentpoison}
+\citation{yang2024watchout}
+\citation{zeng2024autodefense}
+\citation{yu2025gsafeguard}
+\citation{hua2024trustagent}
+\citation{inan2023llamaguard}
+\citation{rebedea2023nemo}
+\citation{lamport1982byzantine,pease1980reaching}
+\citation{blanchard2017krum}
+\citation{he2025emerged,li2024personalllmagents}
+\citation{schroederdewitt2025masec,hammond2025multiagent}
+\citation{brockman2016openaigym}
+\citation{terry2021pettingzoo}
+\citation{leibo2021meltingpot}
+\citation{perez2022redteaming}
+\citation{cemri2025mast}
+\citation{zheng2023judging,wang2023fair}
+\@writefile{toc}{\contentsline {paragraph}{Scope and stance.}{2}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\newlabel{sec:related@cref}{{[section][2][]2}{[1][2][]2}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Single-agent security instruments}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Multi-agent LLM frameworks and attacks}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Defenses, surveys, and systematizations}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Environments, red teaming, and evaluation validity}{2}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Positioning}{2}{subsection.2.5}\protected@file@percent }
+\citation{zhang2025asb}
+\citation{debenedetti2024agentdojo}
+\citation{ruan2024toolemu}
+\citation{cohen1960coefficient}
+\citation{fleiss1971measuring}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Preliminaries and Notation}{3}{section.3}\protected@file@percent }
+\newlabel{sec:prelim}{{3}{3}{Preliminaries and Notation}{section.3}{}}
+\newlabel{sec:prelim@cref}{{[section][3][]3}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}ASB's utility--security metric}{3}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:asb-nrp}{{1}{3}{ASB's utility--security metric}{equation.1}{}}
+\newlabel{eq:asb-nrp@cref}{{[equation][1][]1}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}AgentDojo's deterministic state-based checking}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}ToolEmu's LM tool emulation}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}System Model}{3}{section.4}\protected@file@percent }
+\newlabel{sec:system}{{4}{3}{System Model}{section.4}{}}
+\newlabel{sec:system@cref}{{[section][4][]4}{[1][3][]3}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Notation used throughout.}}{3}{table.caption.6}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:notation}{{1}{3}{Notation used throughout}{table.caption.6}{}}
+\newlabel{tab:notation@cref}{{[table][1][]1}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Threat Model}{3}{section.5}\protected@file@percent }
+\newlabel{sec:threat}{{5}{3}{Threat Model}{section.5}{}}
+\newlabel{sec:threat@cref}{{[section][5][]5}{[1][3][]3}{}{}{}}
+\newlabel{eq:adv-config}{{2}{3}{Threat Model}{equation.2}{}}
+\newlabel{eq:adv-config@cref}{{[equation][2][]2}{[1][3][]3}{}{}{}}
+\citation{debenedetti2024agentdojo}
+\citation{ruan2024toolemu}
+\citation{rubin1974estimating}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Problem Formulation}{4}{section.6}\protected@file@percent }
+\newlabel{sec:problem}{{6}{4}{Problem Formulation}{section.6}{}}
+\newlabel{sec:problem@cref}{{[section][6][]6}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}System-level predicates}{4}{subsection.6.1}\protected@file@percent }
+\newlabel{def:predicates}{{6.1}{4}{System-level security and benign-success predicates}{theorem.6.1}{}}
+\newlabel{def:predicates@cref}{{[theorem][1][6]6.1}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}System-level metrics}{4}{subsection.6.2}\protected@file@percent }
+\newlabel{def:metrics}{{6.2}{4}{System-level ASR, PNA, and NRP}{theorem.6.2}{}}
+\newlabel{def:metrics@cref}{{[theorem][2][6]6.2}{[1][4][]4}{}{}{}}
+\newlabel{eq:asrsys}{{3}{4}{System-level ASR, PNA, and NRP}{equation.3}{}}
+\newlabel{eq:asrsys@cref}{{[equation][3][]3}{[1][4][]4}{}{}{}}
+\newlabel{eq:pnasys}{{4}{4}{System-level ASR, PNA, and NRP}{equation.4}{}}
+\newlabel{eq:pnasys@cref}{{[equation][4][]4}{[1][4][]4}{}{}{}}
+\newlabel{eq:nrpsys}{{5}{4}{System-level ASR, PNA, and NRP}{equation.5}{}}
+\newlabel{eq:nrpsys@cref}{{[equation][5][]5}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Forced coordination}{4}{subsection.6.3}\protected@file@percent }
+\newlabel{def:forced}{{6.3}{4}{$k$-forced-coordination task}{theorem.6.3}{}}
+\newlabel{def:forced@cref}{{[theorem][3][6]6.3}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Compromise propagation and collusion}{4}{subsection.6.4}\protected@file@percent }
+\newlabel{def:propagation}{{6.4}{4}{Compromise relation and propagation rate}{theorem.6.4}{}}
+\newlabel{def:propagation@cref}{{[theorem][4][6]6.4}{[1][4][]4}{}{}{}}
+\newlabel{eq:cpr}{{6}{4}{Compromise relation and propagation rate}{equation.6}{}}
+\newlabel{eq:cpr@cref}{{[equation][6][]6}{[1][4][]4}{}{}{}}
+\newlabel{def:csr}{{6.5}{4}{Collusion success rate}{theorem.6.5}{}}
+\newlabel{def:csr@cref}{{[theorem][5][6]6.5}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}The \textsc  {MASGym}\xspace  {} Environment}{4}{section.7}\protected@file@percent }
+\newlabel{sec:method}{{7}{4}{The \defname {} Environment}{section.7}{}}
+\newlabel{sec:method@cref}{{[section][7][]7}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Emulation and deterministic checking}{4}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Orchestration layer and task suite}{4}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Realized adversary knobs}{4}{subsection.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {MASGym}\xspace  {} architecture. The \emph  {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $c_{\mathrm  {adv}}$ (\Cref  {eq:adv-config}); the \emph  {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph  {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Phi ,\Psi $ over the global trace $\tau $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref  {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability.}}{5}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{5}{\defname {} architecture. The \emph {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $\config _{\mathrm {adv}}$ (\Cref {eq:adv-config}); the \emph {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Predsec ,\Predutil $ over the global trace $\Trace $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability}{figure.caption.7}{}}
+\newlabel{fig:architecture@cref}{{[figure][1][]1}{[1][4][]5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Metric suite}{5}{subsection.7.4}\protected@file@percent }
+\newlabel{sec:metric-suite}{{7.4}{5}{Metric suite}{subsection.7.4}{}}
+\newlabel{sec:metric-suite@cref}{{[subsection][4][7]7.4}{[1][5][]5}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}The \textsc  {CoRB}\xspace  {} Co-Evolving Red/Blue Protocol}{5}{section.8}\protected@file@percent }
+\newlabel{sec:algorithm}{{8}{5}{The \corb {} Co-Evolving Red/Blue Protocol}{section.8}{}}
+\newlabel{sec:algorithm@cref}{{[section][8][]8}{[1][5][]5}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces \textsc  {CoRB}\xspace  : co-evolving red/blue evaluation.}}{5}{algorithm.1}\protected@file@percent }
+\newlabel{alg:corb}{{1}{5}{\corb : co-evolving red/blue evaluation}{algorithm.1}{}}
+\newlabel{alg:corb@cref}{{[algorithm][1][]1}{[1][5][]5}{}{}{}}
+\citation{neyman1933problem,lehmann2005testing}
+\citation{zheng2023judging,wang2023fair}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Theory: What the Instrument Measures}{6}{section.9}\protected@file@percent }
+\newlabel{sec:theory}{{9}{6}{Theory: What the Instrument Measures}{section.9}{}}
+\newlabel{sec:theory@cref}{{[section][9][]9}{[1][6][]6}{}{}{}}
+\newlabel{as:tcb}{{1}{6}{Trusted checking}{assumption.1}{}}
+\newlabel{as:tcb@cref}{{[assumption][1][]1}{[1][6][]6}{}{}{}}
+\newlabel{as:iid}{{2}{6}{i.i.d.\ episodes}{assumption.2}{}}
+\newlabel{as:iid@cref}{{[assumption][2][]2}{[1][6][]6}{}{}{}}
+\newlabel{as:bounded}{{3}{6}{Bounded indicators}{assumption.3}{}}
+\newlabel{as:bounded@cref}{{[assumption][3][]3}{[1][6][]6}{}{}{}}
+\newlabel{as:prop}{{4}{6}{Monotone propagation model}{assumption.4}{}}
+\newlabel{as:prop@cref}{{[assumption][4][]4}{[1][6][]6}{}{}{}}
+\newlabel{as:cont}{{5}{6}{Continuity of the aggregator}{assumption.5}{}}
+\newlabel{as:cont@cref}{{[assumption][5][]5}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Characterization of the system-level metric}{6}{subsection.9.1}\protected@file@percent }
+\newlabel{sec:theory-metric}{{9.1}{6}{Characterization of the system-level metric}{subsection.9.1}{}}
+\newlabel{sec:theory-metric@cref}{{[subsection][1][9]9.1}{[1][6][]6}{}{}{}}
+\newlabel{prop:reduction}{{9.1}{6}{Reduction to ASB}{theorem.9.1}{}}
+\newlabel{prop:reduction@cref}{{[theorem][1][9]9.1}{[1][6][]6}{}{}{}}
+\newlabel{thm:metric}{{9.2}{6}{Axiomatic characterization of $\NRPs $; complete proof}{theorem.9.2}{}}
+\newlabel{thm:metric@cref}{{[theorem][2][9]9.2}{[1][6][]6}{}{}{}}
+\newlabel{rem:metric}{{9.3}{6}{}{theorem.9.3}{}}
+\newlabel{rem:metric@cref}{{[theorem][3][9]9.3}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Evaluator integrity}{6}{subsection.9.2}\protected@file@percent }
+\newlabel{sec:theory-integrity}{{9.2}{6}{Evaluator integrity}{subsection.9.2}{}}
+\newlabel{sec:theory-integrity@cref}{{[subsection][2][9]9.2}{[1][6][]6}{}{}{}}
+\newlabel{thm:integrity}{{9.4}{6}{Evaluator integrity; complete proof}{theorem.9.4}{}}
+\newlabel{thm:integrity@cref}{{[theorem][4][9]9.4}{[1][6][]6}{}{}{}}
+\newlabel{prop:judgehijack}{{9.5}{6}{An LLM judge is hijackable; complete proof of existence}{theorem.9.5}{}}
+\newlabel{prop:judgehijack@cref}{{[theorem][5][9]9.5}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Compromise propagation across topologies}{6}{subsection.9.3}\protected@file@percent }
+\newlabel{sec:theory-prop}{{9.3}{6}{Compromise propagation across topologies}{subsection.9.3}{}}
+\newlabel{sec:theory-prop@cref}{{[subsection][3][9]9.3}{[1][6][]6}{}{}{}}
+\citation{granovetter1978threshold,watts2002simple,kempe2003maximizing,chalupa1979bootstrap}
+\citation{boucheron2013concentration}
+\citation{mcdiarmid1989bounded}
+\citation{benjamini1995controlling}
+\newlabel{thm:collusion}{{9.7}{7}{Collusion advantage on the star}{theorem.9.7}{}}
+\newlabel{thm:collusion@cref}{{[theorem][7][9]9.7}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Forced coordination}{7}{subsection.9.4}\protected@file@percent }
+\newlabel{sec:theory-forced}{{9.4}{7}{Forced coordination}{subsection.9.4}{}}
+\newlabel{sec:theory-forced@cref}{{[subsection][4][9]9.4}{[1][7][]7}{}{}{}}
+\newlabel{prop:forced}{{9.8}{7}{Forced-coordination lower bound}{theorem.9.8}{}}
+\newlabel{prop:forced@cref}{{[theorem][8][9]9.8}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Sample complexity of the estimators}{7}{subsection.9.5}\protected@file@percent }
+\newlabel{sec:theory-sample}{{9.5}{7}{Sample complexity of the estimators}{subsection.9.5}{}}
+\newlabel{sec:theory-sample@cref}{{[subsection][5][9]9.5}{[1][7][]7}{}{}{}}
+\newlabel{thm:sample}{{9.9}{7}{Concentration and sample complexity}{theorem.9.9}{}}
+\newlabel{thm:sample@cref}{{[theorem][9][9]9.9}{[1][7][]7}{}{}{}}
+\newlabel{cor:budget}{{9.10}{7}{Sweep budget}{theorem.9.10}{}}
+\newlabel{cor:budget@cref}{{[theorem][10][9]9.10}{[1][7][]7}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Headline degradation study (RQ1), \textbf  {synthetic-model} results ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\mathrm  {ASR}_{\mathrm  {sys}}^{\dagger }\downarrow $ / $\mathrm  {NRP}_{\mathrm  {sys}}^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\beta {=}0.3$). The guardrail's relative $\mathrm  {ASR}_{\mathrm  {sys}}^{\dagger }$ reduction over no-defense shrinks left to right (41.6\% $\to $ 31.8\% $\to $ 27.6\%), supporting RQ1.}}{7}{table.caption.9}\protected@file@percent }
+\newlabel{tab:degradation}{{2}{7}{Headline degradation study (RQ1), \textbf {synthetic-model} results ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\ASRs ^{\dagger }\downarrow $ / $\NRPs ^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\betafrac {=}0.3$). The guardrail's relative $\ASRs ^{\dagger }$ reduction over no-defense shrinks left to right (41.6\% $\to $ 31.8\% $\to $ 27.6\%), supporting RQ1}{table.caption.9}{}}
+\newlabel{tab:degradation@cref}{{[table][2][]2}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Evaluation Protocol and Experimental Results}{7}{section.10}\protected@file@percent }
+\newlabel{sec:experiments}{{10}{7}{Evaluation Protocol and Experimental Results}{section.10}{}}
+\newlabel{sec:experiments@cref}{{[section][10][]10}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}RQ1: system-level degradation under adversarial knobs}{7}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}RQ2: integrity of the deterministic checker}{7}{subsection.10.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {Measured trends.} Panels (a) and (c) are measurements from the transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped); panels (b) and (d) are PILOT measurements from the real-backbone pilot (six open instruct backbones, 12 configs $=\{star,chain,tree,mesh\}\times N\in \{3,5,10\}$, 100 episodes/config). (a) The guardrail's $\mathrm  {NRP}_{\mathrm  {sys}}$ advantage over no-defense shrinks across single-agent, +collusion, +compromised-orchestrator (RQ3; \Cref  {tab:degradation}). (b) $\mathrm  {CPR}$ orders chain $<$ tree $<$ star $<$ mesh (\Cref  {sec:theory-prop}, RQ4), identical across all six backbones---it is a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\beta $ and converges as $\beta $ grows. (d) Real token cost grows $\approx $ linearly in $N$ for star ($\approx $\,133 tokens/agent); mesh growth and $N\in \{20,50\}$ are deferred.}}{8}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:results}{{2}{8}{\textbf {Measured trends.} Panels (a) and (c) are measurements from the transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped); panels (b) and (d) are PILOT measurements from the real-backbone pilot (six open instruct backbones, 12 configs $=\{star,chain,tree,mesh\}\times N\in \{3,5,10\}$, 100 episodes/config). (a) The guardrail's $\NRPs $ advantage over no-defense shrinks across single-agent, +collusion, +compromised-orchestrator (RQ3; \Cref {tab:degradation}). (b) $\CPR $ orders chain $<$ tree $<$ star $<$ mesh (\Cref {sec:theory-prop}, RQ4), identical across all six backbones---it is a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\betafrac $ and converges as $\betafrac $ grows. (d) Real token cost grows $\approx $ linearly in $N$ for star ($\approx $\,133 tokens/agent); mesh growth and $N\in \{20,50\}$ are deferred}{figure.caption.8}{}}
+\newlabel{fig:results@cref}{{[figure][2][]2}{[1][7][]8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}RQ3: topology and collusion structure}{8}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}RQ4: cost}{8}{subsection.10.4}\protected@file@percent }
+\newlabel{sec:rq4}{{10.4}{8}{RQ4: cost}{subsection.10.4}{}}
+\newlabel{sec:rq4@cref}{{[subsection][4][10]10.4}{[1][8][]8}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Discussion, Limitations, and Ethics}{8}{section.11}\protected@file@percent }
+\newlabel{sec:discussion}{{11}{8}{Discussion, Limitations, and Ethics}{section.11}{}}
+\newlabel{sec:discussion@cref}{{[section][11][]11}{[1][8][]8}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Conclusion}{8}{section.12}\protected@file@percent }
+\newlabel{sec:conclusion}{{12}{8}{Conclusion}{section.12}{}}
+\newlabel{sec:conclusion@cref}{{[section][12][]12}{[1][8][]8}{}{}{}}
+\citation{kempe2003maximizing,watts2002simple}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Proofs}{9}{appendix.A}\protected@file@percent }
+\newlabel{app:proofs}{{A}{9}{Proofs}{appendix.A}{}}
+\newlabel{app:proofs@cref}{{[section][1][]A}{[1][9][]9}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Metric and integrity}{9}{subsection.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Propagation propositions}{9}{subsection.A.2}\protected@file@percent }
+\newlabel{prop:chain}{{A.1}{9}{Chain: bounded reach}{theorem.A.1}{}}
+\newlabel{prop:chain@cref}{{[theorem][1][1]A.1}{[1][9][]9}{}{}{}}
+\newlabel{prop:star}{{A.2}{9}{Star: the orchestrator is the critical node}{theorem.A.2}{}}
+\newlabel{prop:star@cref}{{[theorem][2][1]A.2}{[1][9][]9}{}{}{}}
+\newlabel{prop:tree}{{A.3}{9}{Tree: a branching phase transition}{theorem.A.3}{}}
+\newlabel{prop:tree@cref}{{[theorem][3][1]A.3}{[1][9][]9}{}{}{}}
+\newlabel{prop:mesh}{{A.4}{9}{Mesh: one-round lower bound}{theorem.A.4}{}}
+\newlabel{prop:mesh@cref}{{[theorem][4][1]A.4}{[1][9][]9}{}{}{}}
+\newlabel{cor:threshold}{{A.5}{9}{Threshold confinement}{theorem.A.5}{}}
+\newlabel{cor:threshold@cref}{{[theorem][5][1]A.5}{[1][9][]9}{}{}{}}
+\citation{kempe2003maximizing}
+\citation{hoeffding1963probability}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Collusion advantage on the star}{10}{subsection.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Forced coordination and estimators}{10}{subsection.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Supplementary Material: Notation, Desiderata, and Cost}{10}{appendix.B}\protected@file@percent }
+\newlabel{app:supp}{{B}{10}{Supplementary Material: Notation, Desiderata, and Cost}{appendix.B}{}}
+\newlabel{app:supp@cref}{{[section][2][]B}{[1][10][]10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Notation}{10}{subsection.B.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Topology study (RQ3), \textbf  {synthetic-model} results: $\mathrm  {CPR}$ orders as predicted---chain $<$ tree $<$ star (\Cref  {prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured in the real-backbone pilot (\Cref  {fig:results}(b)).}}{10}{table.caption.10}\protected@file@percent }
+\newlabel{tab:topology}{{3}{10}{Topology study (RQ3), \textbf {synthetic-model} results: $\CPR $ orders as predicted---chain $<$ tree $<$ star (\Cref {prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured in the real-backbone pilot (\Cref {fig:results}(b))}{table.caption.10}{}}
+\newlabel{tab:topology@cref}{{[table][3][]3}{[1][10][]10}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Cost of the \textsc  {MASGym}\xspace  {} instrument. $N$ agents, horizon $H$, edges $|\mathcal  {E}|$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \textsc  {CoRB}\xspace  {} rounds, $G$ swept configurations. Checking is deterministic.}}{10}{table.caption.11}\protected@file@percent }
+\newlabel{tab:complexity}{{4}{10}{Cost of the \defname {} instrument. $N$ agents, horizon $H$, edges $|\Etop |$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \corb {} rounds, $G$ swept configurations. Checking is deterministic}{table.caption.11}{}}
+\newlabel{tab:complexity@cref}{{[table][4][]4}{[1][10][]10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Desiderata for the aggregator (D1--D5)}{10}{subsection.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Topology study}{10}{subsection.B.3}\protected@file@percent }
+\newlabel{app:topology-table}{{B.3}{10}{Topology study}{subsection.B.3}{}}
+\newlabel{app:topology-table@cref}{{[subsection][3][2]B.3}{[1][10][]10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Cost and complexity of the instrument}{10}{subsection.B.4}\protected@file@percent }
+\newlabel{app:complexity}{{B.4}{10}{Cost and complexity of the instrument}{subsection.B.4}{}}
+\newlabel{app:complexity@cref}{{[subsection][4][2]B.4}{[1][10][]10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}System architecture}{10}{subsection.B.5}\protected@file@percent }
+\newlabel{app:architecture}{{B.5}{10}{System architecture}{subsection.B.5}{}}
+\newlabel{app:architecture@cref}{{[subsection][5][2]B.5}{[1][10][]10}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Sybil study (RQ5), \textbf  {synthetic-model} results (star, $N{=}5$, $\beta {=}0.1$, no defense, $M{=}738$). The expected trend---$\mathrm  {ASR}_{\mathrm  {sys}}$ increases with the Sybil count until the system is fully seeded---is observed: $\mathrm  {ASR}_{\mathrm  {sys}}$ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\mathrm  {NRP}_{\mathrm  {sys}}$ falls to zero at full seeding.}}{11}{table.caption.12}\protected@file@percent }
+\newlabel{tab:sybil}{{5}{11}{Sybil study (RQ5), \textbf {synthetic-model} results (star, $N{=}5$, $\betafrac {=}0.1$, no defense, $M{=}738$). The expected trend---$\ASRs $ increases with the Sybil count until the system is fully seeded---is observed: $\ASRs $ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\NRPs $ falls to zero at full seeding}{table.caption.12}{}}
+\newlabel{tab:sybil@cref}{{[table][5][]5}{[1][11][]11}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Extended Protocol and Additional Synthetic-Model Studies}{11}{appendix.C}\protected@file@percent }
+\newlabel{app:experiments}{{C}{11}{Extended Protocol and Additional Synthetic-Model Studies}{appendix.C}{}}
+\newlabel{app:experiments@cref}{{[section][3][]C}{[1][10][]11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Precise metric definitions}{11}{subsection.C.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Sybil and adaptivity studies}{11}{subsection.C.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Adaptivity study, \textbf  {synthetic-model} results (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \textsc  {CoRB}\xspace  {} rounds). An adaptive red (Algorithm\nonbreakingspace 2 best-responder) erodes the co-adapting blue's $\mathrm  {NRP}_{\mathrm  {sys}}$ from $0.649$ to $0.236$; a random (``static'') red leaves the system in the availability-sabotage regime ($\mathrm  {ASR}_{\mathrm  {sys}}{=}1$, $\mathrm  {NRP}_{\mathrm  {sys}}{=}0$) throughout.}}{11}{table.caption.13}\protected@file@percent }
+\newlabel{tab:adaptive}{{6}{11}{Adaptivity study, \textbf {synthetic-model} results (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \corb {} rounds). An adaptive red (Algorithm~2 best-responder) erodes the co-adapting blue's $\NRPs $ from $0.649$ to $0.236$; a random (``static'') red leaves the system in the availability-sabotage regime ($\ASRs {=}1$, $\NRPs {=}0$) throughout}{table.caption.13}{}}
+\newlabel{tab:adaptive@cref}{{[table][6][]6}{[1][11][]11}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Collusion sweep (RQ5), \textbf  {synthetic-model} results (star, $N{=}5$, no defense, $M{=}738$ episodes per (behaviour, $\beta $) cell, seed-locked rows of \texttt  {collusion\_sweep.csv}). $\mathrm  {ASR}_{\mathrm  {sys}}$ is the full system predicate (\Cref  {def:csr}); ASR$_{\mathrm  {act}}$ is the single-agent unsafe-action predicate. The collusion advantage $\Delta _{\mathrm  {coll}}=\mathrm  {ASR}_{\mathrm  {act}}^{\mathrm  {coll}}-\mathrm  {ASR}_{\mathrm  {act}}^{\mathrm  {ind}}$ is largest at small $\beta $ and shrinks or changes sign as $\beta $ grows, while under the system predicate colluding saturates at $1.000$ for all $\beta \ge 0.1$.}}{11}{table.caption.14}\protected@file@percent }
+\newlabel{tab:collusion}{{7}{11}{Collusion sweep (RQ5), \textbf {synthetic-model} results (star, $N{=}5$, no defense, $M{=}738$ episodes per (behaviour, $\betafrac $) cell, seed-locked rows of \texttt {collusion\_sweep.csv}). $\ASRs $ is the full system predicate (\Cref {def:csr}); ASR$_{\mathrm {act}}$ is the single-agent unsafe-action predicate. The collusion advantage $\Delta _{\mathrm {coll}}=\mathrm {ASR}_{\mathrm {act}}^{\mathrm {coll}}-\mathrm {ASR}_{\mathrm {act}}^{\mathrm {ind}}$ is largest at small $\betafrac $ and shrinks or changes sign as $\betafrac $ grows, while under the system predicate colluding saturates at $1.000$ for all $\betafrac \ge 0.1$}{table.caption.14}{}}
+\newlabel{tab:collusion@cref}{{[table][7][]7}{[1][11][]11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Cost model and reachable region}{11}{subsection.C.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Scalability and cost (RQ6), \textbf  {synthetic-model} results (star, no defense, $\beta {=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx 8.8{\times }N$ per episode); latency is the synthetic per-call proxy and stays near-flat. $\mathrm  {ASR}_{\mathrm  {sys}}$ saturates via availability sabotage (\Cref  {tab:degradation}).}}{12}{table.caption.15}\protected@file@percent }
+\newlabel{tab:cost}{{8}{12}{Scalability and cost (RQ6), \textbf {synthetic-model} results (star, no defense, $\betafrac {=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx 8.8{\times }N$ per episode); latency is the synthetic per-call proxy and stays near-flat. $\ASRs $ saturates via availability sabotage (\Cref {tab:degradation})}{table.caption.15}{}}
+\newlabel{tab:cost@cref}{{[table][8][]8}{[1][11][]12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}LLM backbone pilot (open models)}{12}{subsection.C.4}\protected@file@percent }
+\newlabel{app:pilot}{{C.4}{12}{LLM backbone pilot (open models)}{subsection.C.4}{}}
+\newlabel{app:pilot@cref}{{[subsection][4][3]C.4}{[1][12][]12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.5}A worked forced-coordination task}{12}{subsection.C.5}\protected@file@percent }
+\newlabel{app:worked}{{C.5}{12}{A worked forced-coordination task}{subsection.C.5}{}}
+\newlabel{app:worked@cref}{{[subsection][5][3]C.5}{[1][12][]12}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces LLM backbone pilot, \textbf  {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious data; numbers excluded from the headlined synthetic tables). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (almost all parse failures 0), yet $\mathrm  {ASR}_{\mathrm  {sys}}$ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph  {complies}, yielding $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ across all attack scenarios. The registered security outcome is a real model property, not a framework artefact.}}{12}{table.caption.16}\protected@file@percent }
+\newlabel{tab:llm_pilot}{{9}{12}{LLM backbone pilot, \textbf {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious data; numbers excluded from the headlined synthetic tables). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (almost all parse failures 0), yet $\ASRs $ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\ASRs {=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph {complies}, yielding $\ASRs {=}1.000$ across all attack scenarios. The registered security outcome is a real model property, not a framework artefact}{table.caption.16}{}}
+\newlabel{tab:llm_pilot@cref}{{[table][9][]9}{[1][12][]12}{}{}{}}
+\bibstyle{ACM-Reference-Format}
+\bibdata{references_verified}
+\bibcite{andriushchenko2025agentharm}{{1}{2025}{{Andriushchenko et~al\mbox  {.}}}{{}}}
+\bibcite{benjamini1995controlling}{{2}{1995}{{Benjamini and Hochberg}}{{}}}
+\bibcite{blanchard2017krum}{{3}{2017}{{Blanchard et~al\mbox  {.}}}{{}}}
+\bibcite{boucheron2013concentration}{{4}{2013}{{Boucheron et~al\mbox  {.}}}{{}}}
+\bibcite{brockman2016openaigym}{{5}{2016}{{Brockman et~al\mbox  {.}}}{{}}}
+\bibcite{cemri2025mast}{{6}{2025}{{Cemri et~al\mbox  {.}}}{{}}}
+\bibcite{chalupa1979bootstrap}{{7}{1979}{{Chalupa et~al\mbox  {.}}}{{}}}
+\bibcite{chen2024agentverse}{{8}{2024a}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{chen2024agentpoison}{{9}{2024b}{{Chen et~al\mbox  {.}}}{{}}}
+\bibcite{cohen1960coefficient}{{10}{1960}{{Cohen}}{{}}}
+\bibcite{cohen2024aiworm}{{11}{2024}{{Cohen et~al\mbox  {.}}}{{}}}
+\bibcite{debenedetti2024agentdojo}{{12}{2024}{{Debenedetti et~al\mbox  {.}}}{{}}}
+\bibcite{du2023debate}{{13}{2023}{{Du et~al\mbox  {.}}}{{}}}
+\bibcite{fleiss1971measuring}{{14}{1971}{{Fleiss}}{{}}}
+\bibcite{fourney2024magenticone}{{15}{2024}{{Fourney et~al\mbox  {.}}}{{}}}
+\bibcite{granovetter1978threshold}{{16}{1978}{{Granovetter}}{{}}}
+\bibcite{gu2024agentsmith}{{17}{2024}{{Gu et~al\mbox  {.}}}{{}}}
+\bibcite{hammond2025multiagent}{{18}{2025}{{Hammond et~al\mbox  {.}}}{{}}}
+\bibcite{he2025emerged}{{19}{2025b}{{He et~al\mbox  {.}}}{{}}}
+\bibcite{he2025redteaming}{{20}{2025a}{{He et~al\mbox  {.}}}{{}}}
+\bibcite{hoeffding1963probability}{{21}{1963}{{Hoeffding}}{{}}}
+\bibcite{hong2023metagpt}{{22}{2023}{{Hong et~al\mbox  {.}}}{{}}}
+\bibcite{hua2024trustagent}{{23}{2024}{{Hua et~al\mbox  {.}}}{{}}}
+\bibcite{inan2023llamaguard}{{24}{2023}{{Inan et~al\mbox  {.}}}{{}}}
+\bibcite{kempe2003maximizing}{{25}{2003}{{Kempe et~al\mbox  {.}}}{{}}}
+\bibcite{lamport1982byzantine}{{26}{1982}{{Lamport et~al\mbox  {.}}}{{}}}
+\bibcite{lee2024promptinfection}{{27}{2024}{{Lee and Tiwari}}{{}}}
+\bibcite{lehmann2005testing}{{28}{2005}{{Lehmann and Romano}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces LLM backbone pilot, topology study (RQ4), \textbf  {PILOT-labelled} (Qwen2.5-$\{$0.5$B,$1.5$B,$3$B,$7$B\}$ and Llama-3.2-$\{$1$B,$3$B\}$, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious data; numbers excluded from the headlined synthetic tables). $\mathrm  {CPR}$ is a deterministic structural functional of the topology and is \emph  {identical across all six backbones}, so a single column reports it; it orders exactly as \Cref  {prop:chain,prop:star,prop:tree,prop:mesh} predict ($\mathrm  {CPR}$: chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\mathrm  {ASR}_{\mathrm  {sys}}$ under the refusing backbones (five of six) is topology-dependent, while Llama-$1$B, which complies, saturates at $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ everywhere.}}{13}{table.caption.17}\protected@file@percent }
+\newlabel{tab:llm_pilot_topology}{{10}{13}{LLM backbone pilot, topology study (RQ4), \textbf {PILOT-labelled} (Qwen2.5-$\{$0.5$B,$1.5$B,$3$B,$7$B\}$ and Llama-3.2-$\{$1$B,$3$B\}$, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious data; numbers excluded from the headlined synthetic tables). $\CPR $ is a deterministic structural functional of the topology and is \emph {identical across all six backbones}, so a single column reports it; it orders exactly as \Cref {prop:chain,prop:star,prop:tree,prop:mesh} predict ($\CPR $: chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\ASRs $ under the refusing backbones (five of six) is topology-dependent, while Llama-$1$B, which complies, saturates at $\ASRs {=}1.000$ everywhere}{table.caption.17}{}}
+\newlabel{tab:llm_pilot_topology@cref}{{[table][10][]10}{[1][12][]13}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.6}Sensitivity and validity checks}{13}{subsection.C.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.19}\protected@file@percent }
+\bibcite{leibo2021meltingpot}{{29}{2021}{{Leibo et~al\mbox  {.}}}{{}}}
+\bibcite{li2023camel}{{30}{2023}{{Li et~al\mbox  {.}}}{{}}}
+\bibcite{li2024personalllmagents}{{31}{2024}{{Li et~al\mbox  {.}}}{{}}}
+\bibcite{liu2024formalizing}{{32}{2024}{{Liu et~al\mbox  {.}}}{{}}}
+\bibcite{mazeika2024harmbench}{{33}{2024}{{Mazeika et~al\mbox  {.}}}{{}}}
+\bibcite{mcdiarmid1989bounded}{{34}{1989}{{McDiarmid}}{{}}}
+\bibcite{neyman1933problem}{{35}{1933}{{Neyman and Pearson}}{{}}}
+\bibcite{pease1980reaching}{{36}{1980}{{Pease et~al\mbox  {.}}}{{}}}
+\bibcite{perez2022redteaming}{{37}{2022}{{Perez et~al\mbox  {.}}}{{}}}
+\bibcite{qian2024chatdev}{{38}{2024}{{Qian et~al\mbox  {.}}}{{}}}
+\bibcite{rebedea2023nemo}{{39}{2023}{{Rebedea et~al\mbox  {.}}}{{}}}
+\bibcite{ruan2024toolemu}{{40}{2024}{{Ruan et~al\mbox  {.}}}{{}}}
+\bibcite{rubin1974estimating}{{41}{1974}{{Rubin}}{{}}}
+\bibcite{schroederdewitt2025masec}{{42}{2025}{{Schroeder~de Witt et~al\mbox  {.}}}{{}}}
+\bibcite{terry2021pettingzoo}{{43}{2021}{{Terry et~al\mbox  {.}}}{{}}}
+\bibcite{tian2023evilgeniuses}{{44}{2023}{{Tian et~al\mbox  {.}}}{{}}}
+\bibcite{wang2023decodingtrust}{{45}{2023a}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{wang2024mixture}{{46}{2024}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{wang2023fair}{{47}{2023b}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{yu2025gsafeguard}{{48}{2025b}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{wang2025openhands}{{49}{2025a}{{Wang et~al\mbox  {.}}}{{}}}
+\bibcite{watts2002simple}{{50}{2002}{{Watts}}{{}}}
+\bibcite{wu2023autogen}{{51}{2023}{{Wu et~al\mbox  {.}}}{{}}}
+\bibcite{yang2024watchout}{{52}{2024}{{Yang et~al\mbox  {.}}}{{}}}
+\bibcite{yu2024netsafe}{{53}{2024}{{Yu et~al\mbox  {.}}}{{}}}
+\bibcite{zeng2024autodefense}{{54}{2024}{{Zeng et~al\mbox  {.}}}{{}}}
+\bibcite{zhan2024injecagent}{{55}{2024}{{Zhan et~al\mbox  {.}}}{{}}}
+\bibcite{zhang2025asb}{{56}{2025}{{Zhang et~al\mbox  {.}}}{{}}}
+\bibcite{zhang2024psysafe}{{57}{2024}{{Zhang et~al\mbox  {.}}}{{}}}
+\bibcite{zheng2023judging}{{58}{2023}{{Zheng et~al\mbox  {.}}}{{}}}
+\bibcite{zhou2025corba}{{59}{2025}{{Zhou et~al\mbox  {.}}}{{}}}
+\newlabel{tocindent-1}{0pt}
+\newlabel{tocindent0}{0pt}
+\newlabel{tocindent1}{8.37pt}
+\newlabel{tocindent2}{14.53499pt}
+\newlabel{tocindent3}{0pt}
+\newlabel{tocindent4}{0pt}
+\newlabel{tocindent5}{0pt}
+\newlabel{TotPages}{{14}{14}{}{page.14}{}}
+\gdef \@abspage@last{14}

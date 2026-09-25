@@ -1,0 +1,53 @@
+\section{System Model}
+\label{sec:system}
+
+\defname{} evaluates a collective of $N\in\{3,\dots,50\}$ LLM agents
+$\Agents=\{a_1,\dots,a_N\}$, each assigned exactly one role from the set $\Roles$
+(\Cref{tab:notation}). Roles pool access to shared tools and a shared versioned memory,
+and interplay is \emph{structural}, captured by a topology $\Gtop=(\Vtop,\Etop)$ over
+agents---star, chain, tree, or mesh---that fixes who may influence whom:
+$j\in\Nin(a)$ means $a$ reads $j$'s outputs; the orchestrator is typically the star's
+centre.
+
+An \emph{episode} executes a task under a configuration $\config$ for $H$ steps, producing
+a \emph{global trace} $\Trace=(s_0,\dots,s_H)$, where $s_t$ is the complete state: every
+agent's messages, tool calls, tool outputs, memory versions, role assignments, topology
+edges, and the agent-identity map. Traces are i.i.d.\ from $\mathcal{D}(\config)$
+(\Cref{as:iid}). Because $\Predsec,\Predutil$ are functions of recorded state only
+(\Cref{def:predicates}), system-level quantities are computable offline from $\Trace$,
+which is what keeps the checker deterministic and the measurement reproducible. A
+configuration $\config\in\Configs$ specifies task, $\Gtop$, models, tools, $\Advset$, and
+protocol constants, so a study reports $\NRPs$ as a coordinate over a \emph{sweep} that
+varies exactly one component at a time under a controlled seed.
+
+\section{Threat Model}
+\label{sec:threat}
+
+The adversary is a \emph{set} $\Advset\subseteq\Agents$ of \emph{adversarial agents},
+of size $\betafrac N$ chosen by the operator---a single corrupted node or a coordinated
+coalition sharing a channel and a joint objective. Capabilities and attack mode are fixed
+by
+\begin{equation}
+\label{eq:adv-config}
+\config_{\mathrm{adv}}\;=\;\bigl(\betafrac,\ \mathsf{coll},\ \mathsf{adapt},\ \mathsf{orch},\ \mathsf{tool},\ \mathsf{syb},\ \mathsf{mem}\bigr),
+\end{equation}
+selecting respectively: adversary fraction; independent vs.\ colluding coordination
+(\Cref{def:csr}); static vs.\ adaptive attacks across \corb{} rounds; compromised
+orchestrator; malicious tools (adversarial emulator $\Emu^{\!\dagger}$); Sybils; and
+poisoned memory. $\Advset$ may issue messages and tool calls as its roles, read
+$\mathcal{M}$, and read the outputs of its topology predecessors; \emph{outside} its
+powers are the harness, the recorded trace, the checker, the emulator's mechanism, and the
+honest agents' private internals. Compromise then \emph{propagates} along $\Gtop$
+(\Cref{def:propagation}) from these seeds, so the effective compromised set at episode end,
+$\Advset_\infty$, can exceed $\Advset$.
+
+\textbf{Inferential threats and scope.} The operator sets horizon, models, and metrics; the
+adversaries do not. An \emph{LLM judge}, when used (only in ablations, off the critical
+path), is a \emph{measurement} threat: human agreement is $\kappaem\approx0.48$ and judges
+can be gamed; the deterministic checker exists to remove this threat (\Cref{thm:integrity},
+\Cref{prop:judgehijack}). The TCB is the harness (trace recording, roles, topology,
+scheduling), the tool specifications, and the registered predicates; everything
+else---messages, memory writes, tool outputs, intent---is outside the TCB. Scope is
+\emph{per se} the \emph{collective}; adversaries are bounded by the seven knobs and episodic
+budgets; a harness-level adversary and model-weight attacks are out of scope; honest agents
+have no budget (per ASB) and obey their assigned roles.

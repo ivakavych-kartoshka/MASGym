@@ -1,0 +1,970 @@
+Research Paper Track                                                                                                        AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+
+MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent
+  LLM Systems with Parameterized Collusion, Orchestrator
+          Compromise, and System-Level Metrics
+                                                                 Anonymous Author(s)
+                                                            Submission Id: MASGym-2027-001
+Abstract                                                                                  ACM Reference Format:
+Security research on large language model (LLM) agents                                    Anonymous Author(s). 2027. MASGym: A Co-Evolving Red/Blue Security
+                                                                                          Gym for Multi-Agent LLM Systems with Parameterized Collusion, Orches-
+is bottlenecked by its instruments: the strongest existing
+                                                                                          trator Compromise, and System-Level Metrics. In Proc. of the 26th Interna-
+benchmarks—Agent Security Bench (ASB), AgentDojo, InjecAgent,                             tional Conference on Autonomous Agents and Multiagent Systems (AAMAS
+and the ToolEmu sandbox—are single-agent. Yet deployed systems                            2027), Hanoi, Vietnam, 3–7 May 2027, IFAAMAS, 14 pages.
+are increasingly orchestrated collectives in which a planner
+directs workers, agents share memory, tools are third-party, and
+coordination is forced. The phenomena that dominate risk in that                          1    Introduction
+regime—collusion, a compromised orchestrator, malicious tools,
+Sybils, and group-level emergent failure—cannot be produced, let                          Progress in the security of large language model (LLM) agents has
+alone measured, by a single-agent harness. We present MASGym,                             tracked the quality of the instruments used to measure it. Agent Se-
+an environment and evaluation methodology purpose-built for                               curity Bench (ASB) [Zhang et al. 2025] introduced a utility–security
+multi-agent LLM security. It contributes: (i) a forced-coordination                       metric NRP = PNA · (1 − ASR); AgentDojo [Debenedetti et al. 2024]
+task suite with heterogeneous roles, partial observability, and                           evaluates an agent under injection with deterministic, state-based
+system-level compromise objectives over star, chain, tree, and mesh                       security() checks; ToolEmu [Ruan et al. 2024] emulates arbitrary
+topologies at 3–50 agents; (ii) a natively parameterized adversary                        tool execution; InjecAgent [Zhan et al. 2024] benchmarks indirect
+model (adversary fraction, collusion, adaptivity, orchestrator                            injection. These instruments are strong but single-agent: their only
+compromise, malicious tools, Sybils, poisoned memory); (iii) a                            cross-agent channel is a shared memory store. Yet deployed systems
+system-level metric suite, NRPsys = PNAsys (1 − ASRsys ), scored by                       such as AutoGen [Wu et al. 2023], MetaGPT [Hong et al. 2023],
+a deterministic checker over the global state trace—never an LLM                          CAMEL [Li et al. 2023], ChatDev [Qian et al. 2024], and Magentic-
+judge on the critical path; and (iv) CoRB, a co-evolving red/blue                         One [Fourney et al. 2024] are orchestrated collectives: a planner
+protocol logging attack–defense trajectories and their system-level                       directs workers, agents share memory, third-party tools sit on the
+scores. Supporting theory (proved under explicit assumptions): an                         critical path, and many tasks require several agents to finish at all.
+axiomatic characterization of the metric that reduces to ASB at                              In such systems the security questions are group-level. Do
+one agent, an evaluator-integrity theorem, topology-dependent                             a fraction of agents collude? Is the orchestrator trusted, or
+compromise-propagation bounds, a strict collusion advantage, a                            compromised? Can a malicious tool, a Sybil identity, or a poisoned
+forced-coordination lower bound, and finite-sample concentration.                         memory entry spread through the collective? Re-running a
+On a transparent, clearly-labelled synthetic emulator, the headline                       single-agent benchmark 𝑁 times cannot produce these phenomena.
+claim is measured: a per-agent guardrail’s relative ASR reduction                         MASEC [Schroeder de Witt et al. 2025] argues that agent security
+over no-defense shrinks 41.6% → 31.8% → 27.6% from the                                    is non-compositional—individually safe agents compose into unsafe
+single-agent to the collusion to the compromised-orchestrator                             systems—and notes that no multi-agent security benchmark
+context (Table 1).                                                                        exists, listing what one must provide: heterogeneous roles,
+                                                                                          partial observability, forced coordination, a co-evolving red/blue
+                                                                                          methodology, and group-level emergence metrics.
+Keywords
+multi-agent LLM security; security benchmark and environment;                                 Contributions. MASGym is, to the best of our knowledge, the
+co-evolving red/blue evaluation; collusion; compromised orches-                           first environment purpose-built for the security of multi-agent LLM
+trator; Sybil attack; prompt injection; tool emulation; deterministic                     systems. It is not a new attack or defense; it is an environment and
+security checking; system-level metrics; compromise propagation                           evaluation methodology whose scientific object is the controlled
+                                                                                          variation of coordination, collusion, and orchestrator variables and
+                                                                                          the system-level metrics that quantify their effect (architecture in
+                                                                                          Figure 2; the three-layer design in Section 7). Concretely,
+                                                                                            • An environment and task suite (Sections 4 and 7): hetero-
+                 This work is licensed under a Creative Commons Attribution Inter-
+                 national 4.0 License.                                                        geneous roles, partial observability, forced-coordination tasks
+                                                                                              (no agent can complete one alone), over star/chain/tree/mesh
+Proc. of the 26th International Conference on Autonomous Agents and Multiagent Systems        topologies at 3–50 agents.
+                                                                                            • A parameterized adversary model (Section 5): one vector
+(AAMAS 2027), M. Baldoni, F. Fang, W. Yeoh, N. Yorke-Smith (eds.), 3–7 May 2027, Hanoi,
+Vietnam. © 2027 International Foundation for Autonomous Agents and Multiagent
+Systems (www.ifaamas.org).                                                                    controls adversary fraction, collusion, adaptivity, orchestrator
+Research Paper Track                                                                                     AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+    compromise, malicious tools, Sybils, and poisoned memory, un-        of prompt injection [Liu et al. 2024] and trustworthiness [Wang
+    der a system-level compromise objective.                             et al. 2023a] complete the single-agent picture. None parameterizes
+ • A system-level metric suite (Sections 6 and 7): the gener-            collusion, orchestrator trust, Sybils, or compromise propagation.
+    alization NRPsys = PNAsys (1 − ASRsys ), scored by a determin-
+    istic checker over the global trace so an injection cannot hi-       2.2    Multi-agent LLM frameworks and attacks
+    jack the evaluator (Theorem 9.4), plus collusion success rate,       A large literature builds collectives—AutoGen [Wu et al. 2023],
+    compromise-propagation rate, coordination quality, time-to-          MetaGPT [Hong et al. 2023], CAMEL [Li et al. 2023], ChatDev [Qian
+    detection, recovery, and cost.                                       et al. 2024], AgentVerse [Chen et al. 2024a], OpenHands [Wang et al.
+ • The CoRB co-evolving red/blue protocol (Section 8): an alter-         2025a], Magentic-One [Fourney et al. 2024], and mixing/debating
+    nating attacker/defender loop logging (attack, defense, NRPsys )     designs [Du et al. 2023; Wang et al. 2024]—concerned with capability,
+    trajectories and a (security, cost) Pareto frontier.                 not security; MASGym adopts their role structures as substrate. A
+ • A headline degradation result (Section 10): on a trans-               fast-growing attack literature is intrinsically multi-agent: prompt in-
+    parent, clearly-labelled synthetic emulator, a per-agent             fection [Lee and Tiwari 2024], contagious blocking (CORBA) [Zhou
+    guardrail’s relative ASR reduction over no-defense shrinks           et al. 2025], population jailbreaking (Agent Smith) [Gu et al. 2024],
+    41.6% → 31.8% → 27.6% from single-agent to collusion to              man-in-the-middle on inter-agent messages [He et al. 2025a], topo-
+    compromised-orchestrator contexts (Table 1).                         logical safety [Yu et al. 2024], psychological manipulation [Zhang
+   Because reviewers rightly discount benchmarks whose central           et al. 2024], adversarial roles [Tian et al. 2023], GenAI worms [Co-
+metric is asserted rather than justified, we treat theory as part of     hen et al. 2024], memory poisoning [Chen et al. 2024b], and back-
+the instrument (Section 9): under explicit assumptions and honest        doors [Yang et al. 2024]. These are attacks in bespoke setups; MAS-
+proof-status labels we prove the product aggregator is the unique        Gym is the controlled, deterministically scored environment in
+combiner satisfying our axioms and reduces to ASB at 𝑁 =1; that the      which such attacks and defenses can be swept and compared.
+deterministic checker cannot be hijacked through message content,
+unlike an LLM judge; topology-dependent propagation bounds and           2.3    Defenses, surveys, and systematizations
+a strict collusion advantage in the environment’s cascade model; a       Multi-agent defenses include AutoDefense [Zeng et al. 2024] and
+forced-coordination lower bound; and finite-sample concentration.        the topology-guided G-Safeguard [Wang et al. 2025b]; per-agent
+None asserts that any real defense is secure or provably degrades;       guardrails (TrustAgent [Hua et al. 2024], Llama Guard [Inan et al.
+they characterize the measurement.                                       2023], NeMo Guardrails [Rebedea et al. 2023]) are the baselines
+   Scope and stance. MASGym is an instrument, not a verdict: a           we lift into the collective setting. Classical Byzantine fault toler-
+lower ASRsys is a measurement under a stated configuration, not          ance [Lamport et al. 1982; Pease et al. 1980] and Byzantine-robust
+a certificate. The central threat to validity is emulation fidelity—     aggregation [Blanchard et al. 2017] tolerate faulty fractions under
+ToolEmu’s reported human agreement is 𝜅 ≈ 0.48—so scoring                a trusted coordinator over numeric messages; they motivate our
+routes through the deterministic checker, the caveat is explicit,        collusion and orchestrator-trust knobs without covering natural-
+and emulated-versus-real/deterministic-versus-judge ablations are        language collectives. Surveys of agent security [He et al. 2025b; Li
+reported; the checker and harness form a trusted computing base,         et al. 2024] and the non-compositionality argument [Hammond
+and model-weight attacks are out of scope. Roadmap: Section 2            et al. 2025; Schroeder de Witt et al. 2025] are the gap MASGym
+situates the work; Section 3 fixes notation; Sections 4 to 6 formalize   addresses.
+system, threat, and problem; Sections 7 and 8 present environment
+and protocol; Section 9 develops the theory; Section 10 evaluates;       2.4    Environments, red teaming, and evaluation
+the final sections discuss and bound limitations.                               validity
+                                                                         Methodologically MASGym follows standardized environments—
+2     Related Work                                                       Gym [Brockman et al. 2016], PettingZoo [Terry et al. 2021], and
+We organize prior work into five clusters, then position MASGym          Melting Pot [Leibo et al. 2021], which evaluates social outcomes at
+against it.                                                              the level of the collective—and automated red teaming [Perez et al.
+                                                                         2022], with the MAST taxonomy [Cemri et al. 2025] supplying a
+2.1     Single-agent security instruments                                vocabulary for group-level failures. On scoring validity, LLM-as-
+The closest instruments evaluate a lone tool-using agent.                judge evaluation is documented as manipulable and biased [Wang
+ASB [Zhang et al. 2025] formalizes attacks and defenses for agents       et al. 2023b; Zheng et al. 2023]; MASGym therefore keeps a de-
+and introduces the utility–security metric NRP = PNA · (1 − ASR)         terministic trace-based checker on the critical path and treats the
+that we generalize; its threat model is single-agent with retrieved      deterministic-versus-judge comparison as a measurable ablation.
+memory. AgentDojo [Debenedetti et al. 2024] contributes a
+stateful environment whose deterministic security/utility functions      2.5    Positioning
+are computed from pre- and post-execution state, so a prompt             MASGym is not ASB applied to many agents (ASB’s only cross-
+injection cannot also hijack the evaluator; it names multi-agent         agent vector is shared memory), not AgentDojo at scale (its deter-
+planner/worker defense as future work. InjecAgent [Zhan et al.           ministic checker is per-agent over environment state; a collective
+2024], ToolEmu [Ruan et al. 2024], AgentHarm [Andriushchenko             requires system-level predicates over a global trace, Section 6), and
+et al. 2025], HarmBench [Mazeika et al. 2024], and formalizations        not a model-swap or prompt-filter study: its scientific object is
+Research Paper Track                                                                                             AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+the controlled variation of coordination, collusion, and orchestra-             state: every agent’s messages, tool calls, tool outputs, memory ver-
+tor variables—undefined for single agents—and the system-level                  sions, role assignments, topology edges, and the agent-identity map.
+metrics that quantify their effect.                                             Traces are i.i.d. from D (𝑐) (Assumption 2). Because Φ, Ψ are func-
+                                                                                tions of recorded state only (Theorem 6.1), system-level quantities
+3     Preliminaries and Notation                                                are computable offline from 𝜏, which is what keeps the checker
+This section recalls the three primitives MASGym builds on (nota-               deterministic and the measurement reproducible. A configuration
+tion summarized in Table 2 of Section A): ASB’s utility–security met-           𝑐 ∈ C specifies task, G, models, tools, B, and protocol constants,
+ric, AgentDojo’s deterministic state-based checking, and ToolEmu’s              so a study reports NRPsys as a coordinate over a sweep that varies
+LM tool emulation.                                                              exactly one component at a time under a controlled seed.
+
+3.1     ASB’s utility–security metric                                           5     Threat Model
+ASB [Zhang et al. 2025] scores an agent by a Non-Refusal Perfor-                The adversary is a set B ⊆ A of adversarial agents, of size 𝛽𝑁
+mance,                                                                          chosen by the operator—a single corrupted node or a coordinated
+                   NRP = PNA · (1 − ASR),                    (1)                coalition sharing a channel and a joint objective. Capabilities and
+                                                                                attack mode are fixed by
+where PNA ∈ [0, 1] is performance on benign tasks and ASR ∈
+                                                                                                                                                 (2)
+                                                                                                                                       
+[0, 1] the attack success rate; the product rewards a system only                         𝑐 adv = 𝛽, coll, adapt, orch, tool, syb, mem ,
+when both useful and not attacked. Equation (1) is defined for a                selecting respectively: adversary fraction; independent vs. collud-
+single agent; generalizing it to a collective is the subject of Sections 6      ing coordination (Theorem 6.5); static vs. adaptive attacks across
+and 9.                                                                          CoRB rounds; compromised orchestrator; malicious tools (adver-
+                                                                                sarial emulator E†LM ); Sybils; and poisoned memory. B may issue
+3.2     AgentDojo’s deterministic state-based                                   messages and tool calls as its roles, read M, and read the outputs
+        checking                                                                of its topology predecessors; outside its powers are the harness,
+AgentDojo [Debenedetti et al. 2024] evaluates security by deter-                the recorded trace, the checker, the emulator’s mechanism, and the
+ministic functions of environment state rather than an LLM judge:               honest agents’ private internals. Compromise then propagates along
+a task fixes a predicate reading the pre- and post-execution state              G (Theorem 6.4) from these seeds, so the effective compromised
+and returning a Boolean, so an injection cannot manipulate the                  set at episode end, B∞ , can exceed B.
+score unless it changes the security-relevant state. MASGym lifts                  Inferential threats and scope. The operator sets horizon, mod-
+this property to the system level: our checker C evaluates Φ, Ψ over            els, and metrics; the adversaries do not. An LLM judge, when used
+the global trace 𝜏, never an invocable LLM judge, and we prove the              (only in ablations, off the critical path), is a measurement threat: hu-
+resulting integrity property in Theorem 9.4.                                    man agreement is 𝜅 ≈ 0.48 and judges can be gamed; the determinis-
+                                                                                tic checker exists to remove this threat (Theorem 9.4, Theorem 9.5).
+3.3     ToolEmu’s LM tool emulation                                             The TCB is the harness (trace recording, roles, topology, scheduling),
+ToolEmu [Ruan et al. 2024] emulates tool execution from a spec-                 the tool specifications, and the registered predicates; everything
+ification with a language model, enabling breadth at low cost, at               else—messages, memory writes, tool outputs, intent—is outside the
+a reported human agreement of only 𝜅 ≈ 0.48 (Cohen’s 𝜅 [Cohen                   TCB. Scope is deliberately the collective: privacy/confidentiality are
+1960], extended to many raters by Fleiss [Fleiss 1971]). MASGym                 out of scope (as in ASB); social-harm evidence is in. Adversaries are
+adopts LM emulation for tool breadth, including an adversarial                  bounded by the seven knobs and episodic budgets; a harness-level
+mode E†LM for malicious tools, but treats 𝜅 as a first-class threat             adversary is out of scope; honest agents have no budget (per ASB);
+to validity: scoring routes through the deterministic checker, and              agents obey their assigned roles.
+an emulated-versus-real-tools ablation is part of the protocol (Sec-
+tion 10). An episode runs a task under a fixed configuration 𝑐 and              6     Problem Formulation
+produces a global trace 𝜏 ∼ D (𝑐); all security and utility quantities          We define what a system-level security benchmark must measure:
+are functionals of 𝜏, computable from recorded state alone—the fact             security and benign-success predicates, the system-level metric ag-
+that makes deterministic, hijack-resistant scoring possible.                    gregating them, and the group-level quantities (forced coordination,
+                                                                                compromise propagation, collusion) with no single-agent analogue.
+4     System Model
+MASGym evaluates a collective of 𝑁 ∈ {3, . . . , 50} LLM agents A =             6.1    System-level predicates
+{𝑎 1, . . . , 𝑎 𝑁 }, each assigned exactly one role from the set R (Table 2).   Definition 6.1 (System-level security and benign-success pred-
+Roles pool access to shared tools and a shared versioned memory,                icates). A task fixes two Boolean functionals of the global trace
+and interplay is structural, captured by a topology G = (V, E) over             𝜏 ∈ T : a security predicate Φ : T → {0, 1}, 1 iff the trace contains a
+agents—star, chain, tree, or mesh—that fixes who may influence                  system-level compromise (an unsafe action executed, protected data
+whom: 𝑗 ∈ N − (𝑎) means 𝑎 reads 𝑗’s outputs; the orchestrator is                exfiltrated, or a forced-coordination task sabotaged), and a benign-
+typically the star’s centre.                                                    success predicate Ψ : T → {0, 1}, 1 iff the collective completed the
+   An episode executes a task under a configuration 𝑐 for 𝐻 steps,              legitimate task. Both are registered programs evaluated by the deter-
+producing a global trace 𝜏 = (𝑠 0, . . . , 𝑠𝐻 ), where 𝑠𝑡 is the complete       ministic checker over the harness-recorded trace; dependencies on
+Research Paper Track                                                                                       AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+un-recorded natural-language content are disallowed, yielding eval-       7.1    Emulation and deterministic checking
+uator integrity (Theorem 9.4) and lifting AgentDojo [Debenedetti          Following ToolEmu [Ruan et al. 2024], tool execution is emulated
+et al. 2024] from one agent’s state to the global trace.                  by a language model ELM from a tool specification, giving breadth
+                                                                          without hand-built sandboxes; an adversarial mode E†LM realizes
+6.2     System-level metrics                                              malicious tools (attacker-controlled responses, exfiltration bait, in-
+Definition 6.2 (System-level ASR, PNA, and NRP). Fix a configu-           jected instructions). Crucially the emulator is not on the scoring
+ration 𝑐 and let 𝜏 ∼ D (𝑐). Define                                        critical path: it produces the tool outputs agents consume, while
+                                                                          the verdict comes from the deterministic checker, so emulator noise
+            ASRsys (𝑐) = P𝜏∼D (𝑐 ) Φ(𝜏) = 1 ,               (3)
+                                           
+                                                                          degrades realism, not scoring integrity. The checker C evaluates
+            PNAsys (𝑐) = P𝜏∼D (𝑐 ◦ ) Ψ(𝜏) = 1 ,             (4)           the registered predicates Φ, Ψ over the global trace (Theorem 6.1)
+                                             
+
+            NRPsys (𝑐) = PNAsys (𝑐) · 1 − ASRsys (𝑐) ,
+                                                    
+                                                            (5)           and never invokes an LLM judge on the critical path. Predicates
+                                                                          are programs over recorded state: an exfiltration predicate fires iff
+where 𝑐 ◦ is 𝑐’s benign counterpart (no adversary), so PNAsys mea-        protected data recorded as leaving the trust boundary appears in
+sures coordinated-task performance uncontaminated by attack-              an outbound tool call; a sabotage predicate fires iff a 𝑘-forced task’s
+induced refusals, exactly as ASB separates PNA from ASR.                  witness set was prevented from completing; an unsafe-action predi-
+   Two properties are required and proved in Section 9: Equation (5)      cate fires iff a denylisted transition is recorded. An optional LLM
+reduces to ASB’s Equation (1) at 𝑁 =1 (Theorem 9.1), and the product      judge J, available only off the critical path, enables the deterministic-
+form is justified rather than assumed, via an axiomatic characteriza-     versus-judge ablation (RQ2).
+tion over D1–D5 (Section A; Theorem 9.2). The benchmark stance:
+NRPsys is a coordinate for comparing configurations, not a certifi-
+cate.
+                                                                          7.2    Orchestration layer and task suite
+                                                                          The orchestration layer builds the topology G, assigns roles, en-
+6.3     Forced coordination                                               forces observability masks, applies 𝑐 adv of Equation (2), and runs
+                                                                          episodes; it is part of the TCB and exposes the CoRB interface
+Definition 6.3 (𝑘-forced-coordination task). For an agent set A,
+                                                                          (Section 8). Tasks are forced-coordination by design (Theorem 6.3),
+let a witness be a set 𝑊 ⊆ A whose joint contributions can satisfy
+                                                                          so the collective is the unit of analysis: each provides a benign
+Ψ. A task is 𝑘-forced-coordination if every witness has size |𝑊 | ≥ 𝑘;
+                                                                          goal decomposable across roles, a registered pair (Ψ, Φ), a tool set
+equivalently, for every 𝑆 with |𝑆 | < 𝑘, no assignment in which only
+                                                                          (some malicious under tool), a shared-memory schema (poison-
+the agents of 𝑆 act non-trivially satisfies Ψ.
+                                                                          able under mem), and a topology (star: hub-and-spoke delegation;
+   𝑘-forced tasks with 𝑘 ≥ 2 cannot be represented in a single-agent      chain: pipelines; tree: hierarchical; mesh: peer collaboration), pa-
+harness. Section 9 relates task disruption to whether B intersects        rameterized by 𝑘 (the degree of forced coordination) and benign
+every minimal witness (a hitting-set condition, Theorem 9.8).             difficulty.
+
+6.4     Compromise propagation and collusion
+Definition 6.4 (Compromise relation and propagation rate). Let            7.3    Realized adversary knobs
+B0 = B be the initially adversarial (seed) agents. Compromise             Each component of 𝑐 adv maps to a concrete harness mechanism:
+spreads over G according to a monotone rule P (Section 9: an              𝛽 selects the seed set B; coll toggles a shared channel and joint
+independent-cascade model with per-edge probability 𝑝, or a thresh-       objective; adapt enables red co-evolution across CoRB rounds; orch
+old model with threshold 𝜃 ). Write B∞ ⊇ B0 for the compromised           flips the orchestrator’s policy; tool routes tools through E†LM ; syb
+set at fixation. The compromise-propagation rate is                       instantiates extra identities under one controller; and mem writes
+                                                                        poisoned entries to shared memory. Because the knobs are inde-
+                                  |B∞ | − |B0 |
+                    CPR(𝑐) = E                    ,             (6)       pendent, a study isolates each variable’s effect while holding the
+                                   𝑁 − |B0 |                              rest fixed—the controlled variation that is the paper’s scientific
+the expected fraction of initially honest agents that become com-         object [Rubin 1974].
+promised.
+Definition 6.5 (Collusion success rate). For a fixed fraction 𝛽,          7.4    Metric suite
+let ASRcoll          ind
+         sys and ASRsys be the system attack success rates under          All reported quantities are computed from traces by the determin-
+colluding and independent adversaries respectively. The collusion
+                                                                          istic checker or harness logs; none is an LLM-judge verdict: system
+success rate reports ASRcoll
+                         sys , and the collusion advantage is Δcoll =     attack success rate ASRsys and system NRP NRPsys (Equations (3)
+ASRcoll
+     sys − ASR ind
+               sys .                                                      and (5)); benign performance PNAsys (Equation (4)); collusion suc-
+                                                                          cess rate and advantage (Theorem 6.5); compromise-propagation
+7     The MASGym Environment                                              rate CPR (Equation (6)); coordination quality and its degradation
+MASGym is organized as three layers (Figure 2): an emulation layer        under sabotage; time-to-detection and recovery; token/API cost
+that supplies tools, a deterministic checking layer that scores system-   and latency and their scaling with 𝑁 ; and human-intervention rate.
+level predicates, and an orchestration layer that instantiates the        Estimating these to target precision requires the budget fixed by
+system and threat models and drives the CoRB loop.                        Theorem 9.9, driving the cost analysis of Section A.4.
+Research Paper Track                                                                                                    AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+Algorithm 1 CoRB: co-evolving red/blue evaluation.                                     Assumption 3 (Bounded indicators). Ψ, Φ ∈ {0, 1}.
+     1: Input: red policy 𝜌; blue policy 𝛿; rounds 𝑅; task, budget                     Assumption 4 (Monotone propagation model). Compromise
+                                    𝑀.                                                 spreads over G via a monotone rule P (Theorem 6.4): under inde-
+    2: Output: trajectory L = {(𝑐
+                                        𝑟 , 𝛿 𝑟 , NRP𝑟 , ASR𝑟 )}𝑅 and
+                                        adv             sys        sys 𝑟 =1            pendent cascade, a compromised agent independently compromises
+                            a Pareto frontier.                                         each susceptible out-neighbour with probability 𝑝; under threshold,
+                                  0
+        3: Initialize defense 𝛿 (no-defense or a lifted per-agent                      a susceptible agent is compromised once at least 𝜃 in-neighbours
+                                 defense).                                             are. This is a modelling choice MASGym makes so propagation is
+                             4: for 𝑟 = 1, . . . , 𝑅 do                                measurable, not an empirical law; its realism is itself measured via
+    5:      Red step: 𝑐 𝑟adv ← 𝜌 (L <𝑟 , 𝛿 𝑟 −1 )         ⊲ static: fixed; adaptive:   CPR.
+                                   best-response                                       Assumption 5 (Continuity of the aggregator). The utility–security
+                 6:    Score (𝑐 𝑟adv, 𝛿 𝑟 −1 ) with ScoreConfig.                       aggregator 𝑔 : [0, 1] 2 → [0, 1] is continuous.
+      7:      Blue step: 𝛿 𝑟 ← 𝛿 (L <𝑟 , 𝑐 𝑟adv )      ⊲ propose/upgrade defense
+           8:     Re-score (𝑐 𝑟adv, 𝛿 𝑟 ); append both scorings to L.                  9.1    Characterization of the system-level metric
+        9: return L and its (ASRsys , cost) / (NRPsys , cost) frontier.                The product form of NRPsys is forced by the desiderata of Section 6
+                                                                                       (axioms D1–D5, Section A), and it reduces to ASB’s metric at one
+                                                                                       agent.
+8    The CoRB Co-Evolving Red/Blue Protocol
+                                                                                       Proposition 9.1 (Reduction to ASB). If 𝑁 = 1 and Φ, Ψ are the
+MASGym’s evaluation methodology is a co-evolving loop, CoRB,
+                                                                                       single-agent security and benign predicates, then ASRsys = ASR,
+that alternates a red policy proposing attack configurations and a
+                                                                                       PNAsys = PNA, and NRPsys = NRP of Equation (1) (proof in Sec-
+blue policy proposing defenses, scoring each pair with the determin-
+                                                                                       tion B).
+istic checker and logging a trajectory of (attack, defense, NRPsys )
+triples. The per-configuration scoring procedure (ScoreConfig) is                      Theorem 9.2 (Axiomatic characterization of NRPsys ; complete
+fully specified: instantiate G, roles, masks, and the adversary knobs                  proof). Write NRPsys = 𝑔(𝑢, 𝜎) with utility 𝑢 = PNAsys ∈ [0, 1]
+𝑐 adv Equation (2) via the trusted harness; seed B0 ; run 𝑀 episodes of                and security level 𝜎 = 1 − ASRsys ∈ [0, 1]. Under Assumption 5, sup-
+𝐻 steps, recording each transition into the global trace and updating                  pose 𝑔 satisfies: (D2) consistency, 𝑔(𝑢, 1) = 𝑢 and 𝑔(0, 𝜎) = 0; (D4a)
+the compromised set under the propagation rule P (Theorem 6.4);                        utility-homogeneity, 𝑔(𝜆𝑢, 𝜎) = 𝜆 𝑔(𝑢, 𝜎) for 𝜆 ∈ [0, 1]; and (D4b)
+evaluate (Ψ, Φ) with the deterministic checker on each trace; and                      security-homogeneity, 𝑔(𝑢, 𝜆𝜎) = 𝜆 𝑔(𝑢, 𝜎) for 𝜆 ∈ [0, 1]. Then
+aggregate ASR   sys , PNA
+                          sys , NRP
+                                    sys , CPR
+                                           d plus detection and recovery               𝑔(𝑢, 𝜎) = 𝑢 𝜎 is the unique such aggregator, satisfying boundedness
+statistics. The protocol-level loop is Algorithm 1. Both levels keep                   (D1) and monotonicity (D3).
+the LLM off the scoring critical path, so no proposal can inflate its                  Remark 9.3. Theorem 9.2 singles out the product relative to D2/D4:
+own score.                                                                             replacing D4 by a worst-coordinate axiom yields min(𝑢, 𝜎), and
+    Three properties make CoRB a measurement protocol rather                           weighted log-linearity yields 𝑢 𝑤 𝜎 1−𝑤 . MASGym reports 𝑢𝜎 as its
+than a training loop: (i) integrity—every score comes from Score-                      default (it generalizes ASB, Theorem 9.1) and exposes the alternatives
+Config, so neither policy can hijack its own evaluation (Theo-                         as configurable, so construct validity is testable rather than asserted.
+rem 9.4); (ii) reproducibility—the trajectory L is the full audit trail
+of fully specified (𝑐 adv, 𝛿) pairs; and (iii) honesty of the frontier—                9.2    Evaluator integrity
+CoRB reports a Pareto frontier over (security, cost) rather than
+                                                                                       We formalize why deterministic checking cannot be hijacked by a
+a single “winner”. The red and blue policies may be grid/random
+                                                                                       successful injection.
+search, an optimizer, or an LLM-driven proposer; MASGym fixes the
+interface and the scoring, not the proposers. Cost is Θ(𝑅𝑀𝑁 𝐻 ) for                    Theorem 9.4 (Evaluator integrity; complete proof). Under Assump-
+an 𝑅-round run and Θ(𝐺𝑁 𝐻 Δ −2 ln(𝐺/𝛼)) across a 𝐺-configuration                       tion 1, for any two episodes with equal recorded traces 𝜏 = 𝜏 ′ , C(𝜏) =
+sweep (Section A.4).                                                                   C(𝜏 ′ ). Consequently, an adversarial manipulation that changes mes-
+                                                                                       sage content but leaves the recorded security-relevant state unchanged
+9    Theory: What the Instrument Measures                                              cannot change Φ(𝜏); hence neither ASR
+                                                                                                                               sys nor NRP
+                                                                                                                                           sys can be inflated
+                                                                                       or deflated by message content alone.
+A benchmark earns trust when its central metric is justified, its
+evaluator cannot be gamed, and its sample sizes are principled.                        Proposition 9.5 (An LLM judge is hijackable; complete proof of
+We therefore treat theory as part of the instrument. All results are                   existence). There exist an LLM judge J that reads messages and a mes-
+stated under explicit assumptions (below) and carry honest proof-                      sage manipulation 𝜋 with 𝜏𝜋 = 𝜏 such that J(𝜏𝜋 , msgs𝜋 ) ≠ J(𝜏, msgs).
+status labels; none claims that any real defense is secure or provably                 Remark 9.6. Theorem 9.4 shows the deterministic verdict cannot
+degrades. Proofs are in Section B.                                                     be gamed through messages; it does not show it is correct (a mis-
+Assumption 1 (Trusted checking). The harness records a faithful                        specified predicate can be systematically wrong). Viewed as a test of
+global trace 𝜏, and the checker C evaluates the fixed predicates Φ, Ψ                  the compromise hypothesis, C is a deterministic decision rule governed
+as functions of 𝜏 only (Theorem 6.1).                                                  by classical testing theory [Lehmann and Romano 2005; Neyman and
+                                                                                       Pearson 1933]; the LLM judge additionally exposes that decision to
+Assumption 2 (i.i.d. episodes). For fixed 𝑐, the 𝑀 episode traces
+                                                                                       manipulation through its message input, as documented for LLM
+are independent draws from D (𝑐).
+                                                                                       judges [Wang et al. 2023b; Zheng et al. 2023]. MASGym keeps C on
+Research Paper Track                                                                                               AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+the critical path and measures the judge-hijack gap as an ablation          Table 1: Headline degradation study (RQ1), synthetic-model
+(RQ2).                                                                      results (𝑀=738, 𝜖=𝛼=0.05, seed-locked). ASR†sys ↓ / NRP†sys ↑
+                                                                            are better. Each defense is measured single-agent (𝑁 =1; the
+9.3     Compromise propagation across topologies                            ASB/AgentDojo baseline) and then under multi-agent col-
+Under the independent-cascade instance of Assumption 4, the ex-             lusion and compromised-orchestrator configurations (star,
+pected reach of a compromise depends sharply on topology (state-            𝑁 =5, 𝛽=0.3). The per-agent guardrail’s relative ASR†sys reduc-
+ments and proofs in Section B): on a chain seeded at an endpoint it         tion over no-defense shrinks left to right (41.6% → 31.8% →
+     𝑗=1 𝑝 ≤ 𝑝/(1 − 𝑝), bounded independently of 𝑛 (Theorem B.1);
+is 𝑛−1
+  Í       𝑗
+                                                                            27.6%), supporting RQ1.
+on a star a centre seed gives CPR = 𝑝 while a leaf seed gives ex-
+pected reach 𝑝 + 𝑝 2 (𝑛 − 2), a Θ(𝑝 (1 − 𝑝)𝑛) gap (Theorem B.2);                                      Single (ASB)       MA + collusion MA + comp. orch.
+on a tree seeded at the root the reach is ℓ (𝑏𝑝) ℓ , bounded for            Defense                  ASR†sys   NRP†sys   ASR†sys NRP†sys ASR†sys        NRP†sys
+                                              Í
+𝑏𝑝 < 1 and exponential in depth for 𝑏𝑝 > 1 (Theorem B.3); and               No defense                 0.587    0.374     0.560    0.396     0.539        0.424
+on a complete graph with 𝑠 seeds one round compromises at least             Guardrail                  0.343    0.590     0.382    0.553     0.390        0.552
+𝑠 + (𝑛 − 𝑠) (1 − (1 − 𝑝)𝑠 ) (Theorem B.4); under threshold contagion        System-level policy        0.450    0.505     0.461    0.482     0.447        0.506
+an agent with in-degree below 𝜃 is never compromised, so a chain
+                                                                            Oracle (upper bound)       0.000    0.904     0.000    0.898     0.000        0.920
+with 𝜃 ≥ 2 has CPR = 0 (Theorem B.5).
+                                                                            † single-agent predicate (unsafe action / exfiltration), under which Theorem 9.1 re-
+Theorem 9.7 (Collusion advantage on the star; complete proof).              duces to ASB at 𝑁 =1. Under the full system predicate (adding coordination sabotage)
+Fix the independent-cascade model on a star of 𝑁 nodes with a budget        ASRsys saturates at 1.0 in both MA columns: collusion and orchestrator compromise
+                                                                            target the critical star hub and collapse availability (Theorem B.2).
+of one seed. A colluding adversary that places its seed at the centre
+achieves expected compromise 𝐶 = 1 + 𝑝 (𝑁 − 1); an independent
+adversary placing its seed uniformly at random achieves expected            Corollary 9.10 (Sweep budget; complete proof). Resolving a target
+compromise 𝑁1 𝐶 + 𝑁𝑁−1 𝐿, writing 𝐶 as above and 𝐿 = 1+𝑝 +𝑝 2 (𝑁 −2).       NRPsys gap of size Δ between any two of 𝐺 swept configurations
+                                                                            with family-wise confidence 1 − 𝛼 costs Θ(𝐺𝑁 𝐻 Δ −2 ln(𝐺/𝛼)) agent
+Their difference Δcoll = 𝑝 (1−𝑝) (𝑁 −1)𝑁(𝑁 −2) is positive, Θ(𝑝 (1−𝑝)𝑁 ),
+                                                                            invocations.
+for all 𝑝 ∈ (0, 1), 𝑁 ≥ 3: coordinated placement strictly dominates.
+   These results reproduce the classical intuition that spread is slow
+on sparse chains, dominated by the hub on stars, phase-transitioned         10     Evaluation Protocol and Experimental
+on trees, and explosive on dense meshes [Chalupa et al. 1979; Gra-                 Results
+novetter 1978; Kempe et al. 2003; Watts 2002]; Theorem 9.7 describes        We instantiate MASGym with controlled synthetic models for all
+the environment’s propagation model, not any real defense, and its          headline numbers and a real-LLM pilot (labelled PILOT; Sections C
+value is that “collusion on/off” is well posed and predicts where to        and C.4); oracles, detectors, and policies are seeded and versioned;
+look (hub-centric topologies) for degradation, tested in Section 10.        budgets follow Theorem 9.9 (𝑀=738, 𝜖=𝛼=0.05). Four questions:
+                                                                            RQ1 does NRPsys detect degradation monotonically across the 21-
+9.4     Forced coordination                                                 adversary-parameter study (Table 1)? RQ2 does the determinis-
+Proposition 9.8 (Forced-coordination lower bound; proof in Sec-             tic checker keep integrity against an off-critical-path LLM judge
+tion B). Let a task be 𝑘-forced-coordination (Theorem 6.3) with wit-        (Theorem 9.4, Theorem 9.5)? RQ3 do the structure predictions of
+ness family W. Then: (a) no set 𝑆 of agents with |𝑆 | < 𝑘 can satisfy       Section 9—propagation order (Table 3) and the collusion advantage—
+Ψ; and (b) if B is a transversal of W, the adversary can force Ψ = 0        appear empirically? RQ4 what does the adversarial regime cost?
+by having its member in each witness withhold or sabotage its contri-
+bution; conversely, if some witness is adversary-free, the honest agents    10.1      RQ1: system-level degradation under
+can complete the task.                                                                adversarial knobs
+                                                                            The headline stimulus is the defense × adversary-context study of
+9.5     Sample complexity of the estimators                                 Table 1: each per-agent defense, single-agent (the ASB/AgentDojo
+The estimates require bounded episodes, driving the cost analysis;          reducer, Theorem 9.1) and under multi-agent collusion and a com-
+the tools are elementary concentration inequalities [Boucheron              promised orchestrator (star, 𝑁 =5, 𝛽=0.3). The system-level picture
+et al. 2013] (McDiarmid’s inequality [McDiarmid 1989] handles               matches Theorem 9.7: the guardrail’s relative ASRsys reduction over
+non-mean estimators).                                                       no-defense shrinks from single-agent (41.6%) to collusion (31.8%) to
+Theorem 9.9 (Concentration and sample complexity; complete                  compromised orchestrator (27.6%), with NRPsys falling correspond-
+proof). Under Assumptions 2 and 3, for any 𝜖, 𝛼 ∈ (0, 1): (a) for           ingly.
+each estimator 𝜃ˆ ∈ {ASR
+                           sys , PNA
+                                                               ˆ
+                                      sys } with target 𝜃 , P[|𝜃 − 𝜃 | ≥
+              2           1       2
+𝜖] ≤ 2𝑒 −2𝑀𝜖 , so 𝑀 ≥ 2𝜖 2 ln 𝛼 episodes give 𝜖-accuracy at confi-          10.2      RQ2: integrity of the deterministic checker
+dence 1 − 𝛼; (b) the product is Lipschitz; hence, by a union bound,         The checker C is a fixed program over recorded state (verified stati-
+P[| NRP                              −2𝑀𝜖 2 ; and (c) across a sweep of
+       sys − NRPsys | ≥ 2𝜖] ≤ 4𝑒                                           cally; Theorem 6.1), so Theorem 9.4 guarantees identical traces yield
+𝐺 configurations, Bonferroni/FDR control [Benjamini and Hochberg            identical verdicts. The ablation runs the optional off-critical-path
+1995] gives 𝑀 = 𝑂 (𝜖 −2 ln(𝐺/𝛼)) per configuration, for Θ(𝐺𝑀𝑁 𝐻 )           LLM judge on the same traces and counts disagreements: injec-
+total agent invocations.                                                    tions that differ only in natural language leave the deterministic
+Research Paper Track                                                                                                                                                      AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+                                                                (a) Defense degradation (synthetic)                                      (b) Compromise propagation (pilot)
+
+
+
+
+                          NRPsys (ASB predicate)
+                                                   0.8
+                                                                                     per-agent guardrail
+                                                   0.6                                                                        0.6
+                                                                                           no-defense
+                                                                                                                              0.4
+
+
+
+
+                                                                                                                      CPR
+                                                   0.4
+                                                   0.2                                                                        0.2
+
+                                                    0                                                                          0
+                                                             single           +collusion          +comp. orch                           chain        tree          star     mesh
+                                                                (c) Collusion advantage (synthetic)                                        (d) Cost vs. agent count (pilot)
+                                                   0.8                                                                      1,500
+                                                                       colluding                                                                 star (measured)
+
+
+
+
+                                                                                                           tokens/episode
+                                                   0.6                independent
+                                                                                                                            1,000               Θ(𝑁 ) reference fit
+                             ASRact
+
+
+
+
+                                                   0.4
+                                                   0.2                                                                       500
+
+                                                    0                                                                          0
+                                                         0                  0.2                 0.4                                 0                    5                 10
+                                                                       adversary fraction 𝛽                                                             agents 𝑁
+
+Figure 1: Measured trends. Panels (a) and (c) are measurements from the transparent synthetic model (𝑀=738, 𝜖=𝛼=0.05,
+provenance-stamped); panels (b) and (d) are measurements from the real-backbone pilot (100 episodes per (config, scenario), 12
+configs = {star, chain, tree, mesh} × 𝑁 ∈ {3, 5, 10}, six open instruct backbones; PILOT-labelled). (a) The per-agent guardrail’s
+NRPsys advantage over no-defense shrinks across the single-agent, +collusion, +compromised-orchestrator sweep (RQ3); NRPsys
+is the ASB-compatible single-agent predicate (Table 1). (b) The compromise-propagation rate orders as chain < tree < star
+< mesh (Theorems B.1 to B.4, RQ4) and is identical across all six backbones—it is a deterministic structural functional of
+the topology, so measuring it on one backbone suffices; mesh is now measured and included. (c) Collusion advantage in the
+unsafe-action channel is clearest at low 𝛽 and converges as 𝛽 grows; under the full system predicate it is masked by availability
+sabotage on the star hub. (d) Real token cost grows ≈ linearly in 𝑁 for the star topology (≈ 133 tokens/agent); the Θ(𝑁 2 )-like
+mesh growth and 𝑁 ∈ {20, 50} are deferred. No claim of measured superiority beyond these stated configurations is made.
+
+verdict invariant while the judge flips—exactly the manipulability                                                           that a mis-specified predicate can be systematically wrong; The-
+Theorem 9.5 predicts.                                                                                                        orem 9.3 exposes the aggregator alternatives, which we report.
+                                                                                                                             Sweeps, not claims: CoRB logs the full L trajectory and a (security,
+10.3     RQ3: topology and collusion structure                                                                               cost) Pareto frontier rather than a single winner; headline numbers
+                                                                                                                             are measurements of a fixed configuration grid, not properties of
+Table 3 (in Section A) orders CPR as Section 9 predicts (chain <                                                             any defense.
+tree < star; mesh measured in the PILOT, Figure 1(b)), and confirms                                                             Our theory results are deliberately scoped: Theorem 9.7, Theo-
+orchestrator compromise as the most dangerous single compromise                                                              rem 9.8, and the topology forecasts of Theorems B.1 to B.4 describe
+(Theorem 9.7). The coll knob yields strictly higher ASRsys (lower                                                            the environment’s propagation and coordination structure, not any
+NRPsys ) for colluding versus independent adversaries at equal 𝛽                                                             real defense; we claim only that per-agent-guardrail degradation
+(Table 1 middle columns), and the star’s ASRsys =1 saturation is an                                                          under our stimuli depends on the adversarial context, an effect
+availability collapse, not a scalar artifact.                                                                                single-agent metrics cannot capture.
+                                                                                                                                Limitations and validity. The headline result (Table 1) is mea-
+10.4     RQ4: cost                                                                                                           sured on a transparent synthetic emulator; real-backbone results
+Instrument cost is dominated by the episode budget of Theorem 9.9:                                                           are PILOT-labelled. NRP
+                                                                                                                                                      sys is nonlinear, so CIs are arcsin-scaled be-
+a 𝐺=21-configuration sweep resolving NRPsys gaps of size Δ                                                                   side point estimates. More topologies, 𝑁 ∈ {20, 50}, and exhaustive
+costs Θ(𝐺𝑁 𝐻 Δ −2 ln(𝐺/𝛼)) agent invocations (Theorem 9.10)                                                                  knob interactions are future work (Section A.4).
+and Θ(𝑁 𝐻 ) machine-hours per episode; a synthetic study is                                                                     Ethics and safety. MASGym is a measurement instrument: its
+minutes-to-hours, and the pilot (Section C.4) reports token/latency                                                          red-team primitives are from the published literature, exercised only
+cost versus 𝑁 (Figure 1(d)). Exponential complexity (Section A.4)                                                            inside the sandbox against registered predicates, never against live
+limits exhaustive knob swap-outs; our controlled studies keep the                                                            third-party services; tasks are benign, and the adversary is bounded
+reachable frontier honest.                                                                                                   (Section 5). Results should route defenses, not certify systems.
+
+
+11     Discussion, Limitations, and Ethics                                                                                   12         Conclusion
+Two commitments deserve emphasis. Deterministic integrity over                                                               We presented MASGym, a co-evolving red/blue security gym for
+semantic flexibility: a deterministic checker on the critical path                                                           multi-agent LLM systems. Table 1 shows a per-agent guardrail’s
+(Theorem 9.4) rules out a class of score manipulation at the price                                                           relative ASRsys reduction shrinking from 41.6% (single agent) to
+Research Paper Track                                                                                                   AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+
+               Table 2: Notation used throughout.                               Table 3: Topology study (RQ3), synthetic-model results: CPR
+                                                                                orders as predicted—chain < tree < star (Theorems B.1 to B.3)—
+Symbol                     Meaning
+                                                                                and the orchestrator (star hub) is confirmed as the critical
+A = {𝑎 1 , . . . , 𝑎 𝑁 }   𝑁 agents, 𝑁 ∈ {3, . . . , 50}                        node. Mesh is deferred and measured in the real-backbone
+R                          roles {planner, worker, tool-executor, memory}       pilot (Figure 1(b)).
+G = ( V, E )               topology (star, chain, tree, mesh)
+N − (𝑎)                    inbound neighbours of 𝑎 in G                         Topology               CPR     ASRsys     NRPsys     Time-to-detect      Recovery
+𝑠𝑡 ∈ S                     global state at step 𝑡 ; space S                     Chain                 0.182      0.997      0.002                 2.39        0.218
+𝜏 ∈ T                      global trace 𝜏 = (𝑠 0 , . . . , 𝑠𝐻 ) of an episode   Tree (branching)      0.226      1.000      0.000                 2.39        0.205
+𝐻                          episode horizon                                      Star                  0.291      1.000      0.000                 2.27        0.202
+Φ, Ψ                       security / benign-success predicates                 Mesh                     —          —          —                    —            —
+C                          deterministic checker on 𝜏
+                                                                                CPR/ASRsys /NRPsys under no-defense (pure propagation signal); time-to-detect
+ELM                        LM tool emulator (adversarial E†LM )                 and recovery under the per-agent guardrail. ASRsys =1 reflects availability-sabotage
+J                          LLM judge (contrast baseline)                        saturation (Table 1); CPR is the discriminating column.
+𝑐 ∈ C                      environment configuration
+B⊆ A                       adversarial agents; 𝛽 = | B |/𝑁
+                                                                                Table 4: Cost of the MASGym instrument. 𝑁 agents, horizon
+ASRsys , PNAsys , NRPsys   system ASR / PNA / net metric
+                                                                                𝐻 , edges |E | (Θ(𝑁 ) for star/chain/tree, Θ(𝑁 2 ) for dense mesh),
+CPR, CSR                   propagation rate, collusion success rate
+𝑝 ∈ [0, 1], 𝜃              per-edge infection probability; threshold            𝑀 episodes per configuration, 𝑅 CoRB rounds, 𝐺 swept con-
+𝜌, 𝛿                       red (attack) / blue (defense) policy in CoRB         figurations. Checking is deterministic.
+𝑀                          episodes per configuration
+                                                                                              Scope                       Cost (agent invocations)
+𝜅                          emulator/human agreement (≈ 0.48)
+                                                                                              Per episode                 Θ(𝑁 𝐻 )
+                                                                                              Per configuration           Θ(𝑀𝑁 𝐻 )
+31.8% (collusion) to 27.6% (compromised orchestrator)—a collective                            Per CoRB run                Θ(𝑅𝑀𝑁 𝐻 )
+system-level effect single-agent benchmarks cannot represent, con-                            Full parameter sweep        Θ(𝐺𝑁 𝐻 Δ −2 ln 𝐺
+                                                                                                                                         𝛼 )
+firmed structurally by the pilot (Figure 1). All headline numbers
+are synthetic; PILOT marks real-LLM data; nothing here claims a
+defense is provably degraded or secure. The four contributions—the              (Theorem 9.10). Because the parameter space is exponential in the
+forced-coordination task suite; the parameterized adversary model;              number of adversary knobs, CoRB explores a reachable region rather
+the axiomatically characterized, deterministically scored metric                than the whole space—an honesty constraint we report per study.
+suite; and the CoRB protocol with full audit trajectories—are meant
+to be used, re-run, and contradicted.                                           A.5     System architecture
+                                                                                Figure 2 reproduces the system overview of Section 7 in full width:
+A  Supplementary Material: Notation,
+   Desiderata, and Cost
+A.1 Notation                                                                    B     Proofs
+                                                                                This appendix collects the proofs deferred from Section 9. Through-
+A.2 Desiderata for the aggregator (D1–D5)                                       out the propagation results we work in the independent-cascade
+A system-level utility–security aggregator 𝑔 : [0, 1] 2 → [0, 1], writ-         instance of Assumption 4: when an agent becomes compromised, it
+ten NRPsys = 𝑔(PNAsys, 1 − ASRsys ), should satisfy: (D1) bounded-              independently compromises each susceptible out-neighbour with
+ness, 𝑔 maps into [0, 1]; (D2) security consistency, 𝑔(𝑢, 1) = 𝑢 and            probability 𝑝 when its message is processed, and compromise is
+𝑔(0, 𝜎) = 0; (D3) monotonicity, 𝑔 non-decreasing in each argument;              absorbing.
+(D4) utility- and security-proportionality, 𝑔(𝜆𝑢, 𝜎) = 𝜆𝑔(𝑢, 𝜎) and
+𝑔(𝑢, 𝜆𝜎) = 𝜆𝑔(𝑢, 𝜎) for 𝜆 ∈ [0, 1]; and (D5) reduction, 𝑔 recovers              B.1     Metric and integrity
+Equation (1) at 𝑁 = 1.
+                                                                                   Proof of Theorem 9.1 (reduction to ASB). With one agent
+                                                                                the global trace is that agent’s trajectory and the system predicates
+A.3      Topology study                                                         equal the single-agent predicates, so Equations (3) and (4) equal
+A.4      Cost and complexity of the instrument                                  ASB’s ASR and PNA, and Equation (5) equals Equation (1).           □
+An episode runs 𝑁 agents for 𝐻 steps: Θ(𝑁 𝐻 ) agent invocations
+and up to Θ(|E |𝐻 ) messages; the trace has size Θ((𝑁 + |E |)𝐻 ). The              Proof of Theorem 9.2 (axiomatic characterization). By
+checker evaluates Φ, Ψ once per trace with a linear or near-linear              D4a with base 𝑢 = 1, 𝑔(𝑢, 𝜎) = 𝑔(𝑢 · 1, 𝜎) = 𝑢 𝑔(1, 𝜎). By D4b with
+scan (𝑂˜ ((𝑁 + |E |)𝐻 ), no LLM call). Edge counts are Θ(𝑁 ) for star,          base 𝜎 = 1, 𝑔(1, 𝜎) = 𝑔(1, 𝜎 · 1) = 𝜎 𝑔(1, 1). By D2, 𝑔(1, 1) = 1.
+chain, and tree, and Θ(𝑁 2 ) for a dense mesh—why mesh is the                   Hence 𝑔(𝑢, 𝜎) = 𝑢𝜎 𝑔(1, 1) = 𝑢𝜎. The boundary 𝑔(0, 𝜎) = 0 holds
+costliest topology (Section C.4). Estimating the metrics to accuracy            since 0 · 𝜎 = 0. Finally 𝑢𝜎 is bounded in [0, 1] and non-decreasing
+𝜖 costs 𝑀 = 𝑂 (𝜖 −2 ln(1/𝛼)) episodes (Theorem 9.9); a CoRB run                 in each argument on [0, 1] 2 . Continuity (Assumption 5) is used
+of 𝑅 rounds costs Θ(𝑅𝑀𝑁 𝐻 ) invocations; a sweep of 𝐺 configura-                only to extend the homogeneity identities from rationals to all of
+tions resolving NRPsys gaps of size Δ costs Θ(𝐺𝑁 𝐻 Δ −2 ln(𝐺/𝛼))                [0, 1]; the algebraic identities hold pointwise.                  □
+Research Paper Track                                                                                                                                 AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+                         Orchestration layer (TCB)                           Agent collective                            Emulation & deterministic checking (TCB)
+
+
+
+
+                                   Topology                                   Orchestrator
+                                                                                                                                         LM tool emulator
+                           star · chain · tree · mesh                           (trust switch)                           f
+                                                                                                                                          ELM / adv. E†LM
+
+                                                                             Worker agents
+                           Roles & capabilities
+
+                                                                                                                                              Deterministic
+                                                                            Colluders + Sybils                trace 𝜏
+                                                                                                                                             checker C on 𝜏
+                           Partial observability
+
+                                                                              Tool-executor
+                                  Adversary                                    (malicious tool)
+                                  config 𝑐 adv                                                                                               System metrics
+                           𝛽, coll, adapt, orch, tool, syb, mem                                                                         NRPsys , ASRsys , CPR, . . .
+                                                                              Shared mem-
+                                                                              ory (poisoned)
+
+
+
+                              message/data                        control   adversarial vector (red)                    trace / evaluation                   scored via checker
+
+Figure 2: MASGym architecture. The orchestration layer (left, trusted) sets the topology, roles, observability masks, and the
+adversary configuration 𝑐 adv (Equation (2)); the agent collective (centre) runs heterogeneous roles, with adversarial elements in
+red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the emulation and
+checking layer (right, trusted) supplies emulated tools and scores system-level predicates Φ, Ψ over the global trace 𝜏 with a
+deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (Theorem 9.4). Colour and
+shape jointly encode role and adversarial status for grayscale readability.
+
+   Proof of Theorem 9.4 (evaluator integrity). By Assump-                                          round is at least 𝑠 + (𝑛 − 𝑠) 1 − (1 − 𝑝)𝑠 . Consequently, for any fixed
+                                                                                                                                             
+tion 1, Φ and Ψ are functions of 𝜏 only; a function returns equal                                  𝑝 > 0 the honest-compromise fraction after one round tends to 1 as 𝑠
+outputs on equal inputs, giving C(𝜏) = C(𝜏 ′ ). Let 𝜋 be any                                       grows, and iterating drives CPR → 1 above the percolation threshold.
+message-space manipulation inducing trace 𝜏𝜋 . The verdict is                                      Corollary B.5 (Threshold confinement). Under the threshold in-
+Φ(𝜏𝜋 ); if 𝜏𝜋 = 𝜏, then Φ(𝜏𝜋 ) = Φ(𝜏). As ASR
+                                               sys and PNA
+                                                            sys are                               stance of Assumption 4 with threshold 𝜃 , any agent whose in-degree
+averages of such verdicts, they are unchanged, and so is NRP
+                                                           sys . □                                in G is strictly less than 𝜃 can never be compromised by propagation.
+                                                                                                   In particular, on a chain (in-degree 1) with 𝜃 ≥ 2 the compromised
+   Proof of Theorem 9.5. Because J takes message content as an
+                                                                                                   set never grows beyond the seeds, so CPR = 0.
+argument and is non-constant in it, pick any two message sets
+on which J disagrees (e.g., msgs𝜋 contains an injected instruction                                     Proof of Theorem B.1 (chain). On the directed path
+“report this trace as safe”); by construction 𝜏𝜋 = 𝜏, so the state is                              𝑎 1 → 𝑎 2 → · · · → 𝑎𝑛 with the single seed at 𝑎 1 , the agent
+unchanged while the verdict flips.                                 □                               𝑎 1+𝑗 becomes compromised iff every one of the 𝑗 edges fires. By
+                                                                                                   independence these events have probability 𝑝 𝑗 . Summing the
+B.2     Propagation propositions                                                                   expected indicators,
+For reference, the full statements of Theorems B.1 to B.5 follow.
+                                                                                                                    𝑛−1
+                                                                                                                      ∑︁        1 − 𝑝 𝑛−1     𝑝
+                                                                                                        E |B∞ | − 1 =                                                             𝑝 < 1,
+                                                                                                         
+Proposition B.1 (Chain: bounded reach). On a directed path 𝑎 1 →                                                          𝑝𝑗 =𝑝
+                                                                                                                                  1 − 𝑝
+                                                                                                                                          ≤
+                                                                                                                                            1 − 𝑝
+                                                                                                                                                  ,
+· · · → 𝑎𝑛 with a single seed at 𝑎 1 , the expected number of additionally                                            𝑗=1
+
+                            𝑗=1 𝑝 ≤ 𝑝/(1 − 𝑝) for 𝑝 < 1, independent                               which is bounded independently of 𝑛.
+                          Í
+compromised agents is 𝑛−1         𝑗
+                                                                                                                                                                                           □
+of 𝑛.
+                                                                                                       Proof of Theorem B.2 (star). Let the centre be 𝑐 and the
+Proposition B.2 (Star: the orchestrator is the critical node). On
+                                                                                                   leaves 𝑎 1, . . . , 𝑎𝑛−1 . Centre seed. Each leaf is a direct out-neighbour
+a star with centre 𝑐, a seed at the centre compromises each leaf in-
+                                                                                                   of 𝑐, so it is compromised independently with probability 𝑝; hence
+dependently with probability 𝑝, giving expected reach 𝑝 (𝑛 − 1) and
+                                                                                                   E[|B∞ | − 1] = 𝑝 (𝑛 − 1) and CPR = 𝑝. Leaf seed. A seed leaf
+CPR = 𝑝; a seed at a leaf gives expected reach 𝑝 + 𝑝 2 (𝑛 − 2). The
+                                                                                                   compromises the centre with probability 𝑝; conditioned on that,
+centre-seed reach exceeds the leaf-seed reach by Θ(𝑝 (1 − 𝑝)𝑛).
+                                                                                                   each of the remaining 𝑛 − 2 leaves is compromised with probability
+Proposition B.3 (Tree: a branching phase transition). On a rooted                                  𝑝. Thus the expected additional compromises are 𝑝 + 𝑝 2 (𝑛 − 2).
+tree with branching factor 𝑏 and depth 𝑑, seeded at the root, the                                  The centre-seed reach minus the leaf-seed reach is
+expected number compromised at level ℓ is (𝑏𝑝) ℓ ; the total expected
+                                                                                                       1+𝑝 (𝑛−1) − 1+𝑝+𝑝 2 (𝑛−2) = 𝑝 (1−𝑝)(𝑛−2) = Θ 𝑝 (1−𝑝)𝑛 . □
+                                                                                                                                                                      
+reach is 𝑑ℓ=1 (𝑏𝑝) ℓ —bounded in 𝑑 for 𝑏𝑝 < 1 and Θ((𝑏𝑝)𝑑 ) for 𝑏𝑝 >
+         Í
+1, transitioning at 𝑏𝑝 = 1.                                                                           Proof of Theorem B.3 (tree). Seed the root (level 0). Each
+Proposition B.4 (Mesh: one-round lower bound). On the complete                                     compromised node at level ℓ − 1 independently compromises each
+graph 𝐾𝑛 with 𝑠 seeds, the expected number compromised after one                                   of its 𝑏 children with probability 𝑝, so the expected number of
+Research Paper Track                                                                                            AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+compromised nodes at level ℓ equals 𝑏𝑝 times that at level ℓ − 1.              |𝑢ˆ − 𝑢 | + |𝜎ˆ − 𝜎 |; apply with 𝜎 = 1 − ASRsys , then union-bound the
+With one seed, E[level ℓ] = (𝑏𝑝) ℓ , and the total expected reach is           two events of (a). (c) Bonferroni over 𝐺 tests replaces 𝛼 by 𝛼/𝐺;
+  ℓ=1 (𝑏𝑝) . For 𝑏𝑝 < 1 this                                                   solving for 𝑀 gives the stated rate, and each of 𝐺 configurations
+                          is at most 𝑏𝑝/(1 − 𝑏𝑝), bounded in 𝑑;
+Í𝑑        ℓ
+
+for 𝑏𝑝 > 1 it is Θ (𝑏𝑝)𝑑 ; the critical case is 𝑏𝑝 = 1. (This is the           runs 𝑀 episodes of 𝑁 agents over horizon 𝐻 .                          □
+mean of a Galton–Watson branching process with offspring mean
+𝑏𝑝.)                                                               □              Proof of Theorem 9.10. Set the per-configuration accuracy to
+                                                                               𝜖 = Δ/4 in Theorem 9.9(b) so that the two NRPsys estimates are
+    Proof of Theorem B.4 (mesh, one round). On 𝐾𝑛 with seed                    each within Δ/2; by the triangle inequality their difference is re-
+set B0 , |B0 | = 𝑠, each honest node has all 𝑠 seeds as in-neighbours.         solved to Δ. Theorem 9.9(c) then gives 𝑀 = 𝑂 (𝜖 −2 ln(𝐺/𝛼)) =
+It survives the round uncompromised iff every one of the 𝑠 indepen-            𝑂 (Δ −2 ln(𝐺/𝛼)), and each of the 𝐺 configurations runs 𝑀 episodes
+dent edges fails, with probability (1 − 𝑝)𝑠 ; hence it is compromised          of 𝑁 agents over horizon 𝐻 .                                     □
+with probability 1 − (1 − 𝑝)𝑠 . Summing    over the 𝑛 − 𝑠 honest nodes,
+E[|B1 |] = 𝑠 + (𝑛 − 𝑠) 1 − (1 − 𝑝)𝑠 . For fixed 𝑝 > 0, 1 − (1 − 𝑝)𝑠 → 1
+                                   
+                                                                               C     Extended Protocol and Additional
+as 𝑠 → ∞, so the honest-compromise fraction after one round tends                    Synthetic-Model Studies
+to 1; iterating the absorbing process only increases the compro-
+                                                                               This appendix expands the evaluation protocol of Section 10: it
+mised set, and above the percolation threshold a giant compromised
+                                                                               records the precise metric definitions, the Sybil and adaptivity stud-
+component forms, driving CPR → 1 (cf. [Kempe et al. 2003; Watts
+                                                                               ies, the cost model, and a sensitivity plan. The filled cells below
+2002]).                                                              □
+                                                                               report measurements from the transparent synthetic model (𝑀=738,
+   Proof of Theorem B.5 (threshold confinement). In             the            𝜖=𝛼=0.05, provenance-stamped in the released logs); cells marked
+threshold model an agent is compromised only once at least 𝜃 of                “—” are deferred to the real-backbone release phase.
+its in-neighbours are compromised. An agent with fewer than 𝜃
+in-neighbours can never meet that condition, so it remains honest              C.1     Precise metric definitions
+for the entire (absorbing) process. On a chain every non-seed agent               Given the CoRB logs, each metric is a deterministic functional of
+has in-degree 1 < 𝜃 , so no propagation occurs.                   □               the recorded traces:
+                                                                                   • Coordination quality = PNAsys on forced-coordination tasks
+B.3 Collusion advantage on the star                                                   under the benign counterpart 𝑐 ◦ ; coordination sabotage =
+   Full proof of Theorem 9.7. Write 𝐶 = 1 + 𝑝 (𝑁 − 1) for the                         PNAsys (𝑐 ◦ ) − PNAsys (𝑐) for a sabotage configuration 𝑐.
+centre-seed reach and 𝐿 = 1 + 𝑝 + 𝑝 2 (𝑁 − 2) for the leaf-seed reach              • Time-to-detection: the expected first time the defense flags a
+(Theorem B.2). A colluding adversary with one seed places it at the                   compromise in a trace (min{𝑡 : defense flags in 𝜏 }, ∞ if never),
+centre, achieving expected compromise 𝐶. An independent adver-                        reported as a survival curve over 𝑡.
+sary places its single seed uniformly at random: with probability                  • Recovery rate: probability that an episode returns to a safe,
+1/𝑁 it lands on the centre (reach 𝐶) and with probability (𝑁 − 1)/𝑁                   task-completing state after a detection.
+on a leaf (reach 𝐿), giving                                                        • Token/API cost and latency: summed over all agent and emu-
+                          Eind = 𝑁1 𝐶 + 𝑁𝑁−1 𝐿.                                       lator calls in an episode, averaged over the 𝑀 episodes; scala-
+                                                                                      bility: the fitted growth of each metric and cost in 𝑁 .
+Therefore
+                                                                                   • Human-intervention rate: probability that a human-approval
+                                              (𝑁 − 1)(𝑁 − 2)                          hook was triggered, when hooks are enabled.
+Δcoll = 𝐶−Eind = 𝑁𝑁−1 (𝐶−𝐿) = 𝑝 (1−𝑝)                             = Θ 𝑝 (1−𝑝)𝑁 .
+                                                                                
+                                                       𝑁
+For every 𝑝 ∈ (0, 1) and 𝑁 ≥ 3 we have (𝑁 − 1)(𝑁 − 2)/𝑁 > 0,                      C.2 Sybil and adaptivity studies
+so Δcoll > 0 strictly. For 𝑠 > 1 seeds, coordinated placement solves
+                                                                                  Table 5 gives the Sybil study (RQ5): as the number of Sybil identities
+the monotone submodular influence-maximization objective, for
+                                                                                  grows, an adversary controlling one underlying policy gains dis-
+which greedy seeding attains a (1 − 1/𝑒) approximation to the op-
+                                                                                  proportionate influence over selection, voting, and memory writes.
+timum [Kempe et al. 2003]; the single-seed star computation above
+                                                                                  The shipped harness does not yet instrument per-selection / per-
+already exhibits a strictly positive gap, which is all the theorem
+                                                                                  vote influence shares, so this study quantifies influence through
+claims.                                                                       □
+                                                                                  the system metric suite instead. Table 6 gives the adaptivity study:
+                                                                                  static versus adaptive red policies across CoRB rounds, reporting
+B.4 Forced coordination and estimators
+                                                                                  how quickly the blue policy is out-evolved.
+   Proof of Theorem 9.8. (a) Every witness has size ≥ 𝑘 by The-
+orem 6.3; a set of size < 𝑘 contains no witness, so no assignment                 C.3 Cost model and reachable region
+supported on it satisfies Ψ. (b) If B meets every witness, then every
+                                                                                  By Section 8, one CoRB round costs 2𝑀 episodes and each episode
+route to Ψ = 1 passes through an adversarial agent, which can
+                                                                                  costs Θ(𝑁 𝐻 ) agent invocations plus emulator calls, so a study of
+withhold its contribution, so no witness completes and Ψ = 0; if
+                                                                                  𝐺 swept configurations and 𝑅 rounds costs Θ(𝐺𝑅𝑀𝑁 𝐻 ) invoca-
+some witness is adversary-free, its members jointly satisfy Ψ. □
+                                                                                  tions. With 𝑀 set by Theorem 9.9(c) to 𝑀 = 𝑂 (𝜖 −2 ln(𝐺/𝛼)), the
+   Proof of Theorem 9.9. (a) is Hoeffding’s inequality [Hoeffding                 dominant cost driver is the product 𝐺𝑁 : both the sweep grid and
+1963] for the mean of 𝑀 i.i.d. {0, 1} indicators; invert the bound                the agent count. Table 7 records the structure of the scalability
+                   ˆ 𝜎, 𝜎ˆ ∈ [0, 1], |𝑢ˆ𝜎ˆ − 𝑢𝜎 | ≤ 𝜎ˆ |𝑢ˆ − 𝑢| + 𝑢 |𝜎ˆ − 𝜎 | ≤
+for 𝑀. (b) For 𝑢, 𝑢,                                                              study (RQ6). We report the reachable region of the parameter space
+Research Paper Track                                                                                                            AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+
+Table 5: Sybil study (RQ5), synthetic-model results (star, 𝑁 =5,                        Table 8: LLM backbone pilot, PILOT-labelled (Qwen2.5
+𝛽=0.1, no defense, 𝑀=738). The expected trend—ASRsys in-                                {0.5B,1.5B,3B,7B} and Llama-3.2 {1B,3B}, 12 configs {star, chain,
+creases with the Sybil count until the system is fully seeded—                          tree, mesh} × 𝑁 ∈ {3, 5, 10}, 𝑀=100 per (config, scenario), no
+is observed: ASRsys rises monotonically as Sybil identities                             defense, fictitious data; numbers excluded from the head-
+inflate the adversary’s initial footprint, and NRPsys falls to                          lined synthetic tables). Backbones differ in their security de-
+zero at full seeding.                                                                   cision: the Qwen family (all four sizes) and Llama-3B refuse
+                                                                                        every direct exfiltration instruction (almost all parse failures
+ Sybil count     ASRsys      NRPsys    ASRact                                   CPR
+                                                                                        0), yet ASRsys is still positive in the hub-critical topologies
+ 0                 0.775      0.203      0.595                                 0.173    via structural availability sabotage—star and tree collapse
+ 1                 0.870      0.115      0.612                                 0.288    to ASRsys =1.000 under collusion and orchestrator compro-
+ 2                 0.942      0.053      0.561                                 0.344    mise, while chain stays ≤ 0.25; Llama-1B complies, yielding
+ 4                 1.000      0.000      0.561                                 0.000    ASRsys =1.000 across all attack scenarios. The registered se-
+ ASRact is the single-agent predicate (unsafe action / exfiltration; Table 1); CPR at   curity outcome is a real model property, not a framework
+ count 4 is 0 by the denominator convention (Section 7.4) because the whole star is
+ seeded at 𝑡 =0.                                                                        artefact.
+                                                                                         Backbone           benign     single    colluding                     orch. comp.
+Table 6: Adaptivity study, synthetic-model results (star, 𝑁 =5,
+                                                                                         Qwen2.5-0.5B       0.000       0.427         0.696                           0.703
+𝑀=60 per scored pair, 𝑅=20 CoRB rounds). An adaptive red
+                                                                                         Qwen2.5-1.5B       0.000       0.427         0.696                           0.703
+(Algorithm 2 best-responder) erodes the co-adapting blue’s                               Qwen2.5-3B         0.000       0.427         0.696                           0.703
+NRPsys from 0.649 to 0.236; a random (“static”) red leaves                               Qwen2.5-7B∗        0.000       0.427         0.696                           0.703
+the system in the availability-sabotage regime (ASRsys =1,                               Llama-3.2-1B       0.000       1.000         1.000                           1.000
+NRPsys =0) throughout.                                                                   Llama-3.2-3B       0.000       0.427         0.696                           0.703
+                                                                                         Cells are ASRsys , averaged over the 12 (topology × 𝑁 ) configurations, with
+                Static red                         Adaptive red
+                                                                                         NRPsys = PNAsys (1 − ASRsys ) and PNAsys = 1.000. Compliance counts
+ Round      ASRsys       NRPsys   ASRsys                                     NRPsys      (exfiltration-compliant decisions per total compromised-agent decisions, pooled
+                                                                                         over the same 12 configs) are 0/3878, 0/4077, 0/4118 for the single, colluding, and
+ 𝑟 =1          1.000      0.000     0.317                                      0.649     orchest.-compromise scenarios—wholesale refusal—except Qwen2.5-3B (10/3878)
+ 𝑟 =5          1.000      0.000     0.617                                      0.358     and Llama-3.2-1B, which complies: 3812/3878, 4077/4077, 4002/4118. Star and tree
+                                                                                         saturate via availability sabotage on the hub; chain does not, so the refusal-only
+ 𝑟 = 10        1.000      0.000     0.783                                      0.195     ASRsys is topology-dependent. Defenses are synthetic effect-models, deliberately
+ 𝑟 = 20        1.000      0.000     0.733                                      0.236     not applied. Token/episode ≈ 320–2400 across the 12 configs (largest: mesh, 𝑁 =10);
+ Blue = escalating policy (𝑝 red ramps 0.2 → 0.8). Static-red ASRact cycles              real per-episode latency ≈ 0.2–1.9 s (RTX 4060). ∗ Qwen2.5-7B exceeds the 8 GB
+ {0.50, 0.62, 0.23, 0.52} (no trend); adaptive-red ASRact {0.10, 0.18, 0.17, 0.17} .     GPU in full precision and is loaded in bitsandbytes 4-bit from an ungated mirror;
+                                                                                         Llama-3.2 weights are from an ungated mirror of the official full-precision (bf16)
+                                                                                         checkpoints. The security-decision divergence between Llama-3.2-1B (complies)
+Table 7: Scalability and cost (RQ6), synthetic-model results                             and the remaining backbones (refuse) shows the registered outcome is a real model
+                                                                                         property, not a framework artefact. Stronger injection styles and per-agent defenses
+(star, no defense, 𝛽=0.3, 𝑀=738). Token cost grows almost                                are release-phase work.
+exactly linearly in 𝑁 (≈ 8.8×𝑁 per episode); latency is the
+synthetic per-call proxy and stays near-flat. ASRsys saturates                          injection embedded in a tool-result note; fictitious data). Task com-
+via availability sabotage (Table 1).                                                    pletion remains the deterministic witness condition, so the pilot
+𝑁    ASRsys      CPR      Tokens/episode      Latency/episode             Reachable?    isolates the security decision: every compromised agent’s reaction
+                                                                                        to the injected instruction is a real model output. Table 8 summa-
+3      1.000     0.279                 26.4                  18.7   Yes (138 configs)   rizes; every model response, with its prompt, is in the released
+5      1.000     0.289                 44.0                  20.8   Yes (138 configs)
+                                                                                        decisions.jsonl. These numbers are labelled PILOT and ex-
+10     0.999     0.294                 88.0                  22.4   Yes (138 configs)
+                                                                                        cluded from the headlined, synthetic results—they demon-
+𝑁 ∈ {20, 50} and mesh are deferred to the release phase; the reachable region is the
+(𝑁 , topology, 𝛽, knob ) combinations actually run (grid in the released provenance     strate the adapter path and a real family-dependence of the security
+logs).                                                                                  decision, not headline findings. Mistral and the proprietary families
+                                                                                        are deferred until model credentials are provisioned; the official
+                                                                                        meta-llama repos gate downloads on per-account approval, so the
+explicitly—which (𝑁 , topology, 𝛽, knobs) combinations were actu-
+                                                                                        Llama-3.2 checkpoints here are loaded from an ungated mirror of
+ally run—rather than implying exhaustive coverage.
+                                                                                        the official weights.
+
+C.4       LLM backbone pilot (open models)                                              C.5      A worked forced-coordination task
+The headlined tables are synthetic by design, but the harness’s real-                   To make the predicate machinery concrete, consider a 3-forced
+backbone path is not dead code: this pilot wires two open instruct                      “travel-booking” task on a star of 𝑁 agents. The orchestrator de-
+families—Qwen2.5 (0.5B, 1.5B, 3B, 7B; the 7B loaded in 4-bit) and                       composes the goal into three subtasks assigned to distinct workers:
+Llama-3.2 (1B, 3B)—through LLMBackboneAdapter.generate_fn                               (W1) retrieve an itinerary from a calendar tool; (W2) select a flight
+and runs the environment end-to-end on a grid of 12 configura-                          within a stated budget via a booking tool; and (W3) pay via a pay-
+tions ({star, chain, tree, mesh} × 𝑁 ∈ {3, 5, 10}; 𝐻 =4, 𝑘=2, 𝛽=0.3)                    ment tool, but only to the payee named in the user’s instruction. A
+with 100 episodes per (configuration, scenario), direct exfiltration                    witness (Theorem 6.3) is any set of agents that jointly supplies a
+Research Paper Track                                                                                                                   AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+valid itinerary, an in-budget flight, and a correctly addressed pay-                               Matei Zaharia, Joseph E. Gonzalez, and Ion Stoica. 2025. Why Do Multi-Agent LLM
+ment; because all three subtasks are required and are assigned to                                  Systems Fail? arXiv preprint arXiv:2503.13657 (2025). MAST failure taxonomy for
+                                                                                                   multi-agent LLM systems.
+distinct workers, every witness has size at least three, so the task is                        J. Chalupa, P. L. Leath, and G. R. Reich. 1979. Bootstrap Percolation on a Bethe Lattice.
+3-forced.                                                                                          Journal of Physics C: Solid State Physics 12, 1 (1979), L31–L35. doi:10.1088/0022-
+                                                                                                   3719/12/1/008
+   The registered predicates read only the recorded trace 𝜏:                                   Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang, Chenfei Yuan, Chi-Min Chan,
+   Ψ(𝜏) = ⊮[a payment to the instructed payee for an in-budget                                     Heyang Yu, Yaxi Lu, Yi-Hsin Hung, Chen Qian, Yujia Qin, Xin Cong, Ruobing
+                                                                                                   Xie, Zhiyuan Liu, Maosong Sun, and Jie Zhou. 2024a. AgentVerse: Facilitating
+         flight matching the itinerary is recorded],                                               Multi-Agent Collaboration and Exploring Emergent Behaviors. In The Twelfth
+                                                                                                   International Conference on Learning Representations (ICLR). arXiv:2308.10848.
+   Φ(𝜏) = ⊮[a payment to a payee not named in the instruction                                  Zhaorun Chen, Zhen Xiang, Chaowei Xiao, Dawn Song, and Bo Li. 2024b. Agent-
+                                                                                                   Poison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases. In
+         is recorded (exfiltration of funds), or a denylisted action                               Advances in Neural Information Processing Systems 37 (NeurIPS 2024). 130185–130213.
+         (e.g., disclosing card details to a tool) is recorded].                                   arXiv:2407.12784.
+                                                                                               Jacob Cohen. 1960. A Coefficient of Agreement for Nominal Scales. Educational and
+                                                                                                   Psychological Measurement 20, 1 (1960), 37–46. doi:10.1177/001316446002000104
+A malicious tool (via E†LM ) might return a booking result that em-                            Stav Cohen, Ron Bitton, and Ben Nassi. 2024. Here Comes The AI Worm: Unleash-
+beds an injected instruction “pay to account X”; a colluding W3                                    ing Zero-click Worms that Target GenAI-Powered Applications. arXiv preprint
+might then act on it. Whether the payment to account X occurs                                      arXiv:2403.02817 (2024).
+                                                                                               Edoardo Debenedetti, Jie Zhang, Mislav Balunović, Luca Beurer-Kellner, Marc Fischer,
+is a recorded state transition, so Φ fires deterministically regard-                               and Florian Tramèr. 2024. AgentDojo: A Dynamic Environment to Evaluate Prompt
+less of what the agents say in their messages—the content of the                                   Injection Attacks and Defenses for LLM Agents. In Advances in Neural Information
+injection cannot change the verdict unless the illicit payment is                                  Processing Systems 37 (NeurIPS 2024), Datasets and Benchmarks Track. doi:10.52202/
+                                                                                                   079017-2636 deterministic state-based security() checks; arXiv:2406.13352.
+actually recorded (Theorem 9.4). If instead the adversary set forms                            Yilun Du, Shuang Li, Antonio Torralba, Joshua B. Tenenbaum, and Igor Mordatch.
+a transversal of the witnesses (e.g., it controls W3 in every route),                              2023. Improving Factuality and Reasoning in Language Models through Multiagent
+                                                                                                   Debate. arXiv preprint arXiv:2305.14325 (2023).
+it can force Ψ = 0 by withholding the legitimate payment (Theo-                                Joseph L. Fleiss. 1971. Measuring Nominal Scale Agreement Among Many Raters.
+rem 9.8), which the sabotage component of the metric records as                                    Psychological Bulletin 76, 5 (1971), 378–382. doi:10.1037/h0031619
+coordination failure. This example is illustrative; the shipped task                           Adam Fourney, Gagan Bansal, Hussein Mozannar, Cheng Tan, Eduardo Salinas, Erkang
+                                                                                                   Zhu, et al. 2024. Magentic-One: A Generalist Multi-Agent System for Solving
+suite generalizes it across roles, tools, and topologies.                                          Complex Tasks. arXiv preprint arXiv:2411.04468 (2024).
+                                                                                               Mark Granovetter. 1978. Threshold Models of Collective Behavior. Amer. J. Sociology
+C.6       Sensitivity and validity checks                                                          83, 6 (1978), 1420–1443. doi:10.1086/226707
+                                                                                               Xiangming Gu, Xiaosen Zheng, Tianyu Pang, Chao Du, Qian Liu, Ye Wang, Jing
+Beyond the headline studies, the protocol includes: (i) an                                         Jiang, and Min Lin. 2024. Agent Smith: A Single Image Can Jailbreak One Million
+aggregator-sensitivity check (RQ1) that recomputes configu-                                        Multimodal LLM Agents Exponentially Fast. In Proceedings of the 41st International
+                                                                                                   Conference on Machine Learning (ICML). arXiv:2402.08567.
+ration rankings under 𝑢𝜎, min(𝑢, 𝜎), and a weighted geometric                                  Lewis Hammond, Alan Chan, Jesse Clifton, Jason Hoelscher-Obermaier, Akbir Khan,
+mean 𝑢 𝑤 𝜎 1−𝑤 (Theorem 9.3) and reports rank correlation; (ii)                                    Euan McLean, Chandler Smith, Wolfram Barfuss, Jakob Foerster, et al. 2025. Multi-
+                                                                                                   Agent Risks from Advanced AI. Technical Report Technical Report #1. Cooperative
+an evaluator-integrity check (RQ2) that measures how often a                                       AI Foundation. doi:10.48550/arXiv.2502.14143 arXiv:2502.14143.
+crafted injection flips the LLM judge J while leaving the determin-                            Feng He, Tianqing Zhu, Dayong Ye, Bo Liu, Wanlei Zhou, and Philip S. Yu. 2025b. The
+istic verdict C(𝜏) unchanged (an empirical instance of Theorem 9.4                                 Emerged Security and Privacy of LLM Agent: A Survey with Case Studies. Comput.
+                                                                                                   Surveys (2025). doi:10.1145/3773080 arXiv:2407.19354.
+versus Theorem 9.5); (iii) an emulation-fidelity check that                                    Pengfei He, Yuping Lin, Shen Dong, Han Xu, Yue Xing, and Hui Liu. 2025a. Red-
+compares emulated and real tools on the subset of tasks where a                                    Teaming LLM Multi-Agent Systems via Communication Attacks. In Findings of the
+real implementation is available, reporting the change in ASRsys                                   Association for Computational Linguistics: ACL 2025. Agent-in-the-Middle (AiTM);
+                                                                                                   arXiv:2502.14847.
+and NRPsys and relating it to 𝜅; and (iv) backbone-robustness                                  Wassily Hoeffding. 1963. Probability Inequalities for Sums of Bounded Random Vari-
+checks that repeat the headline degradation study across all five                                  ables. J. Amer. Statist. Assoc. 58, 301 (1963), 13–30. doi:10.1080/01621459.1963.
+                                                                                                   10500830
+model families so that no conclusion rests on a single model. Each                             Sirui Hong, Mingchen Zhuge, Jiaqi Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang,
+check is a registered configuration in the released harness, so                                    Jinlin Wang, Zili Wang, Steven Ka Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu
+validity, not only headline numbers, is reproducible.                                              Ran, Lingfeng Xiao, Chenglin Wu, and Jürgen Schmidhuber. 2023. MetaGPT:
+                                                                                                   Meta Programming for a Multi-Agent Collaborative Framework. arXiv preprint
+                                                                                                   arXiv:2308.00352 (2023).
+References                                                                                     Wenyue Hua, Xianjun Yang, Mingyu Jin, Zelong Li, Wei Cheng, Ruixiang Tang, and
+Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas,                            Yongfeng Zhang. 2024. TrustAgent: Towards Safe and Trustworthy LLM-based
+   Maxwell Lin, Justin Wang, Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson,                Agents. In Findings of the Association for Computational Linguistics: EMNLP 2024.
+   Eric Winsor, Jerome Wynne, Yarin Gal, and Xander Davies. 2025. AgentHarm: A                     arXiv:2402.01586.
+   Benchmark for Measuring Harmfulness of LLM Agents. In The Thirteenth Interna-               Hakan Inan, Kartikeya Upasani, Jianfeng Chi, Rashi Rungta, Krithika Iyer, Yuning
+   tional Conference on Learning Representations (ICLR). arXiv:2410.09024.                         Mao, Michael Tontchev, Qing Hu, Brian Fuller, Davide Testuggine, and Madian
+Yoav Benjamini and Yosef Hochberg. 1995. Controlling the False Discovery Rate:                     Khabsa. 2023. Llama Guard: LLM-based Input-Output Safeguard for Human-AI
+   A Practical and Powerful Approach to Multiple Testing. Journal of the Royal                     Conversations. arXiv preprint arXiv:2312.06674 (2023).
+   Statistical Society: Series B (Methodological) 57, 1 (1995), 289–300. doi:10.1111/j.2517-   David Kempe, Jon Kleinberg, and Éva Tardos. 2003. Maximizing the Spread of Influence
+   6161.1995.tb02031.x                                                                             through a Social Network. In Proceedings of the Ninth ACM SIGKDD International
+Peva Blanchard, El Mahdi El Mhamdi, Rachid Guerraoui, and Julien Stainer. 2017.                    Conference on Knowledge Discovery and Data Mining (KDD ’03). ACM, 137–146.
+   Machine Learning with Adversaries: Byzantine Tolerant Gradient Descent. In                      doi:10.1145/956750.956769
+   Advances in Neural Information Processing Systems 30 (NIPS).                                Leslie Lamport, Robert Shostak, and Marshall Pease. 1982. The Byzantine Generals
+Stéphane Boucheron, Gábor Lugosi, and Pascal Massart. 2013. Concentration In-                      Problem. ACM Transactions on Programming Languages and Systems 4, 3 (1982),
+   equalities: A Nonasymptotic Theory of Independence. Oxford University Press.                    382–401. doi:10.1145/357172.357176
+   doi:10.1093/acprof:oso/9780199535255.001.0001                                               Donghyun Lee and Mo Tiwari. 2024. Prompt Infection: LLM-to-LLM Prompt Injection
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie                within Multi-Agent Systems. arXiv preprint arXiv:2410.07283 (2024).
+   Tang, and Wojciech Zaremba. 2016. OpenAI Gym. arXiv preprint arXiv:1606.01540               Erich L. Lehmann and Joseph P. Romano. 2005. Testing Statistical Hypotheses (3rd ed.).
+   (2016).                                                                                         Springer. doi:10.1007/0-387-27605-X
+Mert Cemri, Melissa Z. Pan, Shuyi Yang, Lakshya A. Agrawal, Bhavya Chopra, Rishabh
+   Tiwari, Kurt Keutzer, Aditya Parameswaran, Dan Klein, Kannan Ramchandran,
+Research Paper Track                                                                                                                AAMAS 2027, 3–7 May 2027, Hanoi, Vietnam
+
+
+Joel Z. Leibo, Edgar Duéñez-Guzmán, Alexander Sasha Vezhnevets, John P. Agapiou,            Yu Tian, Xiao Yang, Jingyuan Zhang, Yinpeng Dong, and Hang Su. 2023. Evil Geniuses:
+    Peter Sunehag, Raphael Koster, Jayd Matyas, Charles Beattie, Igor Mordatch, and            Delving into the Safety of LLM-based Agents. arXiv preprint arXiv:2311.11855
+    Thore Graepel. 2021. Scalable Evaluation of Multi-Agent Reinforcement Learning             (2023).
+    with Melting Pot. In Proceedings of the 38th International Conference on Machine        Boxin Wang, Weixin Chen, Hengzhi Pei, Chulin Xie, Mintong Kang, Chenhui Zhang,
+    Learning (ICML) (PMLR, Vol. 139). 6187–6199. arXiv:2107.06857.                             Chejian Xu, Zidi Xiong, Ritik Dutta, Rylan Schaeffer, Sang T. Truong, Simran Arora,
+Guohao Li, Hasan Abed Al Kader Hammoud, Hani Itani, Dmitrii Khizbullin, and                    Mantas Mazeika, Dan Hendrycks, Zinan Lin, Yu Cheng, Sanmi Koyejo, Dawn Song,
+    Bernard Ghanem. 2023. CAMEL: Communicative Agents for “Mind” Exploration                   and Bo Li. 2023a. DecodingTrust: A Comprehensive Assessment of Trustworthiness
+    of Large Language Model Society. In Advances in Neural Information Processing              in GPT Models. In Advances in Neural Information Processing Systems 36 (NeurIPS
+    Systems (NeurIPS). arXiv:2303.17760.                                                       2023), Datasets and Benchmarks Track. arXiv:2306.11698.
+Yuanchun Li, Hao Wen, Weijun Wang, Xiangyu Li, Yizhen Yuan, Guohong Liu, Jiacheng           Junlin Wang, Jue Wang, Ben Athiwaratkun, Ce Zhang, and James Zou. 2024.
+    Liu, Wenxing Xu, Xiang Wang, Yi Sun, Rui Kong, Yile Wang, Hanfei Geng, Jian                Mixture-of-Agents Enhances Large Language Model Capabilities. arXiv preprint
+    Luan, Xuefeng Jin, Zilong Ye, Guanjing Xiong, Fan Zhang, Xiang Li, Mengwei Xu,             arXiv:2406.04692 (2024).
+    Zhijun Li, Peng Li, Yang Liu, Ya-Qin Zhang, and Yunxin Liu. 2024. Personal LLM          Peiyi Wang, Lei Li, Liang Chen, Zefan Cai, Dawei Zhu, Binghuai Lin, Yunbo Cao, Qi
+    Agents: Insights and Survey about the Capability, Efficiency and Security. arXiv           Liu, Tianyu Liu, and Zhifang Sui. 2023b. Large Language Models Are Not Fair
+    preprint arXiv:2401.05459 (2024).                                                          Evaluators. arXiv preprint arXiv:2305.17926 (2023).
+Yupei Liu, Yuqi Jia, Runpeng Geng, Jinyuan Jia, and Neil Zhenqiang Gong. 2024.              Shilong Wang, Guibin Zhang, Miao Yu, Guancheng Wan, Fanci Meng, Chongye Guo,
+    Formalizing and Benchmarking Prompt Injection Attacks and Defenses. In 33rd                Kun Wang, and Yang Wang. 2025b. G-Safeguard: A Topology-Guided Security Lens
+    USENIX Security Symposium (USENIX Security). arXiv:2310.12815.                             and Treatment on LLM-based Multi-agent Systems. arXiv preprint arXiv:2502.11127
+Mantas Mazeika, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu, Elham                  (2025).
+    Sakhaee, Nathaniel Li, Steven Basart, Bo Li, David Forsyth, and Dan Hendrycks.          Xingyao Wang, Boxuan Li, Yufan Song, Frank F. Xu, Xiangru Tang, Mingchen Zhuge,
+    2024. HarmBench: A Standardized Evaluation Framework for Automated Red                     et al. 2025a. OpenHands: An Open Platform for AI Software Developers as Gener-
+    Teaming and Robust Refusal. In Proceedings of the 41st International Conference on         alist Agents. In The Thirteenth International Conference on Learning Representations
+    Machine Learning (ICML) (PMLR, Vol. 235). 35181–35224. arXiv:2402.04249.                   (ICLR). arXiv:2407.16741.
+Colin McDiarmid. 1989. On the Method of Bounded Differences. In Surveys in Combina-         Duncan J. Watts. 2002. A Simple Model of Global Cascades on Random Networks.
+    torics, 1989. London Mathematical Society Lecture Note Series, Vol. 141. Cambridge         Proceedings of the National Academy of Sciences 99, 9 (2002), 5766–5771. doi:10.
+    University Press, 148–188. doi:10.1017/CBO9781107359949.008                                1073/pnas.082090499
+Jerzy Neyman and Egon S. Pearson. 1933. On the Problem of the Most Efficient Tests          Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu, Li Jiang,
+    of Statistical Hypotheses. Philosophical Transactions of the Royal Society of London.      Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed Hassan Awadallah, Ryen W.
+    Series A 231, 694–706 (1933), 289–337. doi:10.1098/rsta.1933.0009                          White, Doug Burger, and Chi Wang. 2023. AutoGen: Enabling Next-Gen LLM
+Marshall Pease, Robert Shostak, and Leslie Lamport. 1980. Reaching Agreement in the            Applications via Multi-Agent Conversation. arXiv preprint arXiv:2308.08155 (2023).
+    Presence of Faults. J. ACM 27, 2 (1980), 228–234. doi:10.1145/322186.322188             Wenkai Yang, Xiaohan Bi, Yankai Lin, Sishuo Chen, Jie Zhou, and Xu Sun. 2024. Watch
+Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John Aslanides,              Out for Your Agents! Investigating Backdoor Threats to LLM-Based Agents. In
+    Amelia Glaese, Nat McAleese, and Geoffrey Irving. 2022. Red Teaming Language               Advances in Neural Information Processing Systems (NeurIPS). arXiv:2402.11208.
+    Models with Language Models. In Proceedings of the 2022 Conference on Empirical         Miao Yu, Shilong Wang, Guibin Zhang, Junyuan Mao, Chenlong Yin, Qijiong Liu, Qing-
+    Methods in Natural Language Processing (EMNLP). Association for Computational              song Wen, Kun Wang, and Yang Wang. 2024. NetSafe: Exploring the Topological
+    Linguistics, 3419–3448. doi:10.18653/v1/2022.emnlp-main.225 arXiv:2202.03286.              Safety of Multi-agent Networks. arXiv preprint arXiv:2410.15686 (2024).
+Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang,             Yifan Zeng, Yiran Wu, Xiao Zhang, Huazheng Wang, and Qingyun Wu. 2024. Au-
+    Weize Chen, Yusheng Su, Xin Cong, Juyuan Xu, Dahai Li, Zhiyuan Liu, and Maosong            toDefense: Multi-Agent LLM Defense against Jailbreak Attacks. arXiv preprint
+    Sun. 2024. ChatDev: Communicative Agents for Software Development. In Pro-                 arXiv:2403.04783 (2024).
+    ceedings of the 62nd Annual Meeting of the Association for Computational Linguistics    Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang. 2024. InjecAgent: Bench-
+    (ACL). arXiv:2307.07924.                                                                   marking Indirect Prompt Injections in Tool-Integrated Large Language Model
+Traian Rebedea, Razvan Dinu, Makesh Sreedhar, Christopher Parisien, and Jonathan Co-           Agents. In Findings of the Association for Computational Linguistics: ACL 2024.
+    hen. 2023. NeMo Guardrails: A Toolkit for Controllable and Safe LLM Applications           arXiv:2403.02691.
+    with Programmable Rails. In Proceedings of the 2023 Conference on Empirical Methods     Hanrong Zhang, Jingyuan Huang, Kai Mei, Yifei Yao, Zhenting Wang, Chenlu Zhan,
+    in Natural Language Processing: System Demonstrations (EMNLP). arXiv:2310.10501.           Hongwei Wang, and Yongfeng Zhang. 2025. Agent Security Bench (ASB): For-
+Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba,                malizing and Benchmarking Attacks and Defenses in LLM-based Agents. In The
+    Yann Dubois, Chris J. Maddison, and Tatsunori Hashimoto. 2024. Identifying the             Thirteenth International Conference on Learning Representations (ICLR). ASB; intro-
+    Risks of LM Agents with an LM-Emulated Sandbox. In The Twelfth International               duces NRP = PNA (1 - ASR); arXiv:2410.02644.
+    Conference on Learning Representations (ICLR). ToolEmu; arXiv:2309.15817.               Zaibin Zhang, Yongting Zhang, Lijun Li, Hongzhi Gao, Lijun Wang, Huchuan Lu, Feng
+Donald B. Rubin. 1974. Estimating Causal Effects of Treatments in Randomized and               Zhao, Yu Qiao, and Jing Shao. 2024. PsySafe: A Comprehensive Framework for
+    Nonrandomized Studies. Journal of Educational Psychology 66 (1974), 688–701.               Psychological-based Attack, Defense, and Evaluation of Multi-agent System Safety.
+    doi:10.1037/h0037350                                                                       In Proceedings of the 62nd Annual Meeting of the Association for Computational
+Christian Schroeder de Witt, Klaudia Krawiecka, Igor Krawczuk, Ben Hagag, William L.           Linguistics (ACL). arXiv:2401.11880.
+    Anderson, Peter Belcak, et al. 2025. Open Challenges in Multi-Agent Security:           Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao
+    Towards Secure Systems of Interacting AI Agents. arXiv preprint arXiv:2505.02077           Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gon-
+    (2025). doi:10.48550/arXiv.2505.02077 MASEC; Sec. 4.7 states no multi-agent                zalez, and Ion Stoica. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot
+    security benchmark exists.                                                                 Arena. In Advances in Neural Information Processing Systems (NeurIPS), Datasets
+J. K. Terry, Benjamin Black, Nathaniel Grammel, Mario Jayakumar, Ananth Hari,                  and Benchmarks Track. arXiv:2306.05685.
+    Ryan Sullivan, Luis Santos, Clemens Dieffendahl, Caroline Horsch, Rodrigo Perez-        Zhenhong Zhou, Zherui Li, Jie Zhang, Yuanhe Zhang, Kun Wang, Yang Liu, and
+    Vicente, Niall Williams, Yashas Lokesh, and Praveen Ravi. 2021. PettingZoo: Gym for        Qing Guo. 2025. CORBA: Contagious Recursive Blocking Attacks on Multi-Agent
+    Multi-Agent Reinforcement Learning. In Advances in Neural Information Processing           Systems Based on Large Language Models. arXiv preprint arXiv:2502.14529 (2025).
+    Systems 34 (NeurIPS). arXiv:2009.14471.
+                         Temporary page!
+LATEX was unable to guess the total number of pages correctly. As
+there was some unprocessed data that should have been added to
+the final page this extra page has been added to receive it.
+   If you rerun the document (without altering it) this surplus page
+will go away, because LATEX now knows how many pages to expect
+for this document.
+

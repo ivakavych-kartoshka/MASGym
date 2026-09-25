@@ -1,0 +1,167 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 21 items.
+The style file: ACM-Reference-Format.bst
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Database file #1: references_verified.bib
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 9000 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Warning--empty publisher in andriushchenko2025agentharm
+Warning--empty address in andriushchenko2025agentharm
+Warning--page numbers missing in both pages and numpages fields in andriushchenko2025agentharm
+Warning--empty publisher in blanchard2017krum
+Warning--empty address in blanchard2017krum
+Warning--page numbers missing in both pages and numpages fields in blanchard2017krum
+Warning--empty address in boucheron2013concentration
+Warning--no number and no volume in brockman2016openaigym
+Warning--page numbers missing in both pages and numpages fields in brockman2016openaigym
+Warning--no number and no volume in cemri2025mast
+Warning--page numbers missing in both pages and numpages fields in cemri2025mast
+Warning--empty publisher in chen2024agentverse
+Warning--empty address in chen2024agentverse
+Warning--page numbers missing in both pages and numpages fields in chen2024agentverse
+Warning--empty publisher in chen2024agentpoison
+Warning--empty address in chen2024agentpoison
+Warning--no number and no volume in cohen2024aiworm
+Warning--page numbers missing in both pages and numpages fields in cohen2024aiworm
+Warning--empty publisher in debenedetti2024agentdojo
+Warning--empty address in debenedetti2024agentdojo
+Warning--page numbers missing in both pages and numpages fields in debenedetti2024agentdojo
+Warning--no number and no volume in du2023debate
+Warning--page numbers missing in both pages and numpages fields in du2023debate
+Warning--no number and no volume in fourney2024magenticone
+Warning--page numbers missing in both pages and numpages fields in fourney2024magenticone
+Warning--empty publisher in gu2024agentsmith
+Warning--empty address in gu2024agentsmith
+Warning--page numbers missing in both pages and numpages fields in gu2024agentsmith
+Warning--no number and no volume in he2025emerged
+Warning--page numbers missing in both pages and numpages fields in he2025emerged
+Warning--empty publisher in he2025redteaming
+Warning--empty address in he2025redteaming
+Warning--page numbers missing in both pages and numpages fields in he2025redteaming
+Warning--no number and no volume in hong2023metagpt
+Warning--page numbers missing in both pages and numpages fields in hong2023metagpt
+Warning--empty publisher in hua2024trustagent
+Warning--empty address in hua2024trustagent
+Warning--page numbers missing in both pages and numpages fields in hua2024trustagent
+Warning--no number and no volume in inan2023llamaguard
+Warning--page numbers missing in both pages and numpages fields in inan2023llamaguard
+Warning--empty address in kempe2003maximizing
+Warning--no number and no volume in lee2024promptinfection
+Warning--page numbers missing in both pages and numpages fields in lee2024promptinfection
+Warning--empty address in lehmann2005testing
+Warning--empty publisher in leibo2021meltingpot
+Warning--empty address in leibo2021meltingpot
+Warning--empty publisher in li2023camel
+Warning--empty address in li2023camel
+Warning--page numbers missing in both pages and numpages fields in li2023camel
+Warning--no number and no volume in li2024personalllmagents
+Warning--page numbers missing in both pages and numpages fields in li2024personalllmagents
+Warning--empty publisher in liu2024formalizing
+Warning--empty address in liu2024formalizing
+Warning--page numbers missing in both pages and numpages fields in liu2024formalizing
+Warning--empty publisher in mazeika2024harmbench
+Warning--empty address in mazeika2024harmbench
+Warning--empty address in mcdiarmid1989bounded
+Warning--empty address in perez2022redteaming
+Warning--empty publisher in qian2024chatdev
+Warning--empty address in qian2024chatdev
+Warning--page numbers missing in both pages and numpages fields in qian2024chatdev
+Warning--empty publisher in rebedea2023nemo
+Warning--empty address in rebedea2023nemo
+Warning--page numbers missing in both pages and numpages fields in rebedea2023nemo
+Warning--empty publisher in ruan2024toolemu
+Warning--empty address in ruan2024toolemu
+Warning--page numbers missing in both pages and numpages fields in ruan2024toolemu
+Warning--no number and no volume in schroederdewitt2025masec
+Warning--page numbers missing in both pages and numpages fields in schroederdewitt2025masec
+Warning--empty publisher in terry2021pettingzoo
+Warning--empty address in terry2021pettingzoo
+Warning--page numbers missing in both pages and numpages fields in terry2021pettingzoo
+Warning--no number and no volume in tian2023evilgeniuses
+Warning--page numbers missing in both pages and numpages fields in tian2023evilgeniuses
+Warning--empty publisher in wang2023decodingtrust
+Warning--empty address in wang2023decodingtrust
+Warning--page numbers missing in both pages and numpages fields in wang2023decodingtrust
+Warning--no number and no volume in wang2024mixture
+Warning--page numbers missing in both pages and numpages fields in wang2024mixture
+Warning--no number and no volume in wang2023fair
+Warning--page numbers missing in both pages and numpages fields in wang2023fair
+Warning--no number and no volume in yu2025gsafeguard
+Warning--page numbers missing in both pages and numpages fields in yu2025gsafeguard
+Warning--empty publisher in wang2025openhands
+Warning--empty address in wang2025openhands
+Warning--page numbers missing in both pages and numpages fields in wang2025openhands
+Warning--no number and no volume in wu2023autogen
+Warning--page numbers missing in both pages and numpages fields in wu2023autogen
+Warning--empty publisher in yang2024watchout
+Warning--empty address in yang2024watchout
+Warning--page numbers missing in both pages and numpages fields in yang2024watchout
+Warning--no number and no volume in yu2024netsafe
+Warning--page numbers missing in both pages and numpages fields in yu2024netsafe
+Warning--no number and no volume in zeng2024autodefense
+Warning--page numbers missing in both pages and numpages fields in zeng2024autodefense
+Warning--empty publisher in zhan2024injecagent
+Warning--empty address in zhan2024injecagent
+Warning--page numbers missing in both pages and numpages fields in zhan2024injecagent
+Warning--empty publisher in zhang2025asb
+Warning--empty address in zhang2025asb
+Warning--page numbers missing in both pages and numpages fields in zhang2025asb
+Warning--empty publisher in zhang2024psysafe
+Warning--empty address in zhang2024psysafe
+Warning--page numbers missing in both pages and numpages fields in zhang2024psysafe
+Warning--empty publisher in zheng2023judging
+Warning--empty address in zheng2023judging
+Warning--page numbers missing in both pages and numpages fields in zheng2023judging
+Warning--no number and no volume in zhou2025corba
+Warning--page numbers missing in both pages and numpages fields in zhou2025corba
+You've used 59 entries,
+            6335 wiz_defined-function locations,
+            1873 strings with 34937 characters,
+and the built_in function-call counts, 74811 in all, are:
+= -- 8921
+> -- 3783
+< -- 1
++ -- 1335
+- -- 1308
+* -- 6331
+:= -- 7867
+add.period$ -- 307
+call.type$ -- 59
+change.case$ -- 649
+chr.to.int$ -- 55
+cite$ -- 168
+duplicate$ -- 5874
+empty$ -- 4210
+format.name$ -- 1512
+if$ -- 17827
+int.to.chr$ -- 6
+int.to.str$ -- 1
+missing$ -- 250
+newline$ -- 566
+num.names$ -- 409
+pop$ -- 2774
+preamble$ -- 1
+purify$ -- 1112
+quote$ -- 0
+skip$ -- 1922
+stack$ -- 0
+substring$ -- 4273
+swap$ -- 422
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1305
+warning$ -- 109
+while$ -- 272
+width$ -- 0
+write$ -- 1181
+(There were 109 warnings)

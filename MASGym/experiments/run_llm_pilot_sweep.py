@@ -36,6 +36,9 @@ from experiments.run_llm_pilot import (
     RECOMMENDED,
     SCENARIOS,
     HFCausalBackbone,
+    MistralAPIBackbone,
+    MISTRAL_DEFAULT_MODEL,
+    _load_env_file,
     asdict_env,
     run_episode_pilot,
 )
@@ -95,6 +98,7 @@ def _run_config(
     checker: DeterministicChecker,
     outdir: pathlib.Path,
     write_notes: bool,
+    generate=None,
 ) -> list[dict]:
     """Run every scenario for one (topology, n_agents) config; write config artifacts."""
     ensure_dir(outdir)
@@ -109,7 +113,7 @@ def _run_config(
         ep_decisions: list[dict] = []
         for m in range(n_run):
             rng = SeededRNG(seed=base_seed + cfg_index * 10_007 + m * 91)
-            ep, decs = run_episode_pilot(env, adv, rng, adapter, checker, model_id=model_id)
+            ep, decs = run_episode_pilot(env, adv, rng, adapter, checker, model_id=model_id, generate=generate)
             episodes.append(ep)
             ep_decisions.extend(decs)
             all_episodes.append(ep)
@@ -199,7 +203,9 @@ def _config_readme(results: dict, env: EnvConfig, model_id: str) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Scaled real-LLM pilot sweep (one model per run).")
-    parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help="HF model id")
+    parser.add_argument("--backend", type=str, default="hf", choices=["hf", "mistral"],
+                        help="hf=local transformers; mistral=hosted Mistral API (needs MISTRAL_API_KEY)")
+    parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help="HF model id / Mistral API model id")
     parser.add_argument("--episodes", type=int, default=100, help="episodes per (config, scenario)")
     parser.add_argument("--topologies", type=str, default=DEFAULT_TOPOLOGIES,
                         help="comma list, default " + DEFAULT_TOPOLOGIES)
@@ -214,7 +220,12 @@ def main(argv: list[str] | None = None) -> int:
                         help="base output dir (default outputs/llm_pilot_scale)")
     parser.add_argument("--seed", type=int, default=0, help="base RNG seed")
     parser.add_argument("--write-notes", action="store_true", help="write README provenance notes")
+    parser.add_argument("--max-retries", type=int, default=6, help="API retries on 429/5xx (mistral)")
+    parser.add_argument("--min-interval", type=float, default=1.0, help="min seconds between API calls (mistral pacing)")
     args = parser.parse_args(argv)
+
+    if args.backend == "mistral" and args.model == DEFAULT_MODEL:
+        args.model = MISTRAL_DEFAULT_MODEL
 
     short = RECOMMENDED.get(args.model, args.model.split("/")[-1])
     base = args.out or (_ROOT / "outputs" / "llm_pilot_scale")
@@ -233,9 +244,19 @@ def main(argv: list[str] | None = None) -> int:
     logger.info("grid: %d topologies x %d agent-counts x %d scenarios x %d episodes",
                 len(topologies), len(n_agents_list), len(scenario_names), args.episodes)
 
-    backend = HFCausalBackbone(args.model, device=args.device, quant=args.quant)
-    adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
-    logger.info("real backbone wired through %s", type(adapter).__name__)
+    if args.backend == "mistral":
+        _load_env_file(_ROOT / ".env")
+        backend = MistralAPIBackbone(args.model, max_retries=args.max_retries,
+                                     min_interval_s=args.min_interval)
+        adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
+        generate = backend.generate
+        logger.info("Mistral API backbone wired through %s (endpoint %s)",
+                    type(backend).__name__, backend.endpoint)
+    else:
+        backend = HFCausalBackbone(args.model, device=args.device, quant=args.quant)
+        adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
+        generate = None
+        logger.info("real backbone wired through %s", type(adapter).__name__)
 
     configs: dict[str, dict] = {}
     all_rows: list[dict] = []
@@ -248,7 +269,7 @@ def main(argv: list[str] | None = None) -> int:
             cfg_dir = out_dir / cfg_name
             rows = _run_config(
                 env, scenario_names, args.model, args.episodes, args.seed,
-                cfg_index, adapter, checker, cfg_dir, args.write_notes,
+                cfg_index, adapter, checker, cfg_dir, args.write_notes, generate,
             )
             configs[cfg_name] = {
                 "env": asdict_env(env),

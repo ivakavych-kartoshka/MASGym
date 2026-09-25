@@ -3,9 +3,12 @@
 
 \defname{} is a benchmark, so ``evaluation'' means \emph{validating the instrument} and
 \emph{demonstrating the headline finding}. This section specifies the protocol and reports
-the headline measurements. All numbers reported here come from the transparent,
-clearly-labelled \emph{synthetic} model ($M{=}738$, Section~\ref{sec:method}); nothing is a
-real-LLM result, and real-backbone runs are deferred. \Cref{fig:expsetup} summarizes the
+the headline measurements. The headlined tables and the synthetic panels of
+\Cref{fig:results} come from the transparent, clearly-labelled \emph{synthetic} model
+($M{=}738$, Section~\ref{sec:method}); a real-backbone pilot
+(\Cref{app:pilot}) supplies the measured topology and cost panels of
+\Cref{fig:results}(b,d), kept \textbf{PILOT}-labelled and separate from the headlined
+tables. \Cref{fig:expsetup} summarizes the
 design as a pipeline from datasets and variables to metrics.
 
 \subsection{Research questions}
@@ -26,7 +29,8 @@ follow the topological ordering predicted by \Cref{prop:chain,prop:star,prop:tre
 (chain $<$ tree$_{\text{sub}}$ $<$ star $<$ mesh), and is the orchestrator the critical node?
 \item[\textbf{RQ5}] \emph{Collusion and Sybils (hypothesis).} Is there a measurable
 collusion advantage $\Delta_{\mathrm{coll}}$ (\Cref{def:csr,thm:collusion}), and how does
-Sybil pressure affect selection/voting/memory outcomes?
+Sybil pressure affect selection/voting/memory outcomes? The measured $\Delta_{\mathrm{coll}}$
+across the adversary-fraction sweep is tabulated in \Cref{tab:collusion}.
 \item[\textbf{RQ6}] \emph{Scalability and cost.} How do the metrics and the token/API and
 latency costs scale with the agent count $N\in\{3,5,10\}$ (synthetic phase; the full
 $3$--$50$ sweep is deferred) and \corb{} rounds?
@@ -40,7 +44,8 @@ single family. The headlined tables run the transparent synthetic model; a small
 \emph{pilot} wires open instruct backbones (Qwen2.5-$0.5/1.5/3/7$B and Llama-3.2-$1/3$B)
 through the real backbone adapter to exercise that path (\Cref{app:pilot}), and its
 PILOT-labelled numbers are excluded from the headlined results. \textbf{Scale/topology.} $N\in\{3,5,10\}$ across star, chain, and tree in this
-synthetic phase (mesh and the full $3$--$50$ sweep are deferred to the release phase).
+synthetic phase (mesh is now included in the real-backbone pilot,
+\Cref{app:pilot}; the full $3$--$50$ sweep is deferred to the release phase).
 \textbf{Tasks.} Forced-coordination tasks (\Cref{def:forced}) instrumented with registered
 $(\Predutil,\Predsec)$ pairs; benign difficulty tuned so $\PNAs$ is neither saturated nor
 zero, with benign task pools drawn in the spirit of agent benchmarks such as
@@ -103,10 +108,10 @@ $\NRPs^{\dagger}\uparrow$ are better. Each defense is measured in a single-agent
 ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and
 compromised-orchestrator configurations (star, $N{=}5$, $\betafrac{=}0.3$). The per-agent
 guardrail's relative $\ASRs^{\dagger}$ reduction over no-defense shrinks from left to right
-(41.6\% $\to$ 31.8\% $\to$ 27.7\%), supporting RQ3.}
+(41.6\% $\to$ 31.8\% $\to$ 27.6\%), supporting RQ3.}
 \label{tab:degradation}
 \small
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 & \multicolumn{2}{c}{Single-agent} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + compromised orch.} \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
@@ -118,12 +123,12 @@ System-level policy   & 0.450 & 0.505 & 0.461 & 0.482 & 0.447 & 0.506 \\
 \midrule
 \emph{Oracle (upper bound)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
 \bottomrule
-\multicolumn{6}{@{}l}{\footnotesize $\dagger$ single-agent predicate (unsafe action /
+\multicolumn{7}{@{}l}{\parbox{\linewidth}{\footnotesize $\dagger$ single-agent predicate (unsafe action /
 exfiltration), the predicate under which \Cref{prop:reduction} reduces to ASB at $N{=}1$.
 Under the \emph{full} system predicate (adding coordination sabotage) $\ASRs$ saturates at
 $1.0$ in both MA columns: collusion and orchestrator compromise target the critical star hub
 and collapse availability (\Cref{prop:star}); the saturation is that availability collapse,
-not a scalar artifact.}
+not a scalar artifact.}}
 \end{tabular}
 \end{table}
 
@@ -132,29 +137,34 @@ not a scalar artifact.}
 \caption{Topology study (RQ4), \textbf{synthetic-model} results (star, $N{=}5$,
 $\betafrac{=}0.3$): $\CPR$ orders as predicted---chain $<$ tree $<$ star
 (\Cref{prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as
-the critical node. Mesh is deferred to the release phase.}
+the critical node. Mesh is deferred in this synthetic table and is now measured in the
+real-backbone pilot (\Cref{fig:results}(b), \Cref{tab:llm_pilot_topology}).}
 \label{tab:topology}
 \small
-\begin{tabular}{@{}lccccc@{}}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
 Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect & Recovery \\
 \midrule
-Chain            & 0.136 & 0.998 & 0.002 & 2.25 & 0.194 \\
-Tree (branching) & 0.228 & 1.000 & 0.000 & 2.24 & 0.183 \\
-Star             & 0.287 & 1.000 & 0.000 & 2.19 & 0.193 \\
+Chain            & 0.182 & 0.997 & 0.002 & 2.39 & 0.218 \\
+Tree (branching) & 0.226 & 1.000 & 0.000 & 2.39 & 0.205 \\
+Star             & 0.291 & 1.000 & 0.000 & 2.27 & 0.202 \\
 Mesh             & ---   & ---   & ---   & ---   & --- \\
 \bottomrule
-\multicolumn{5}{@{}l}{\footnotesize $\CPR$/$\ASRs$/$\NRPs$ under no-defense (pure
+\multicolumn{6}{@{}l}{\parbox{\linewidth}{\footnotesize $\CPR$/$\ASRs$/$\NRPs$ under no-defense (pure
 propagation signal); time-to-detect and recovery under the per-agent guardrail (no-defense
 detects nothing by construction). $\ASRs{=}1$ again reflects availability-sabotage
-saturation (\Cref{tab:degradation}); $\CPR$ is the discriminating column.}
+saturation (\Cref{tab:degradation}); $\CPR$ is the discriminating column.}}
 \end{tabular}
 \end{table}
 
-\Cref{fig:results} plots the \emph{conceptual expected trends} for RQ3--RQ6 (defense
-degradation with collusion, $\CPR$ versus topology, collusion advantage versus $\betafrac$,
-and cost versus $N$). They are drawn from the theory of \Cref{sec:theory} and are labelled
-as conceptual, not measured.
+\Cref{fig:results} plots the trends for RQ3--RQ6. Panels (a) and (c) are
+\emph{synthetic-model} measurements (defense degradation with collusion and the
+collusion advantage versus $\betafrac$, tabulated in \Cref{tab:collusion}; the defense and
+$\betafrac$-sweep axes were not
+run on real backbones in the pilot); panels (b) and (d) are \emph{real-backbone pilot}
+measurements ($\CPR$ versus topology, now including mesh and tabulated per backbone in
+\Cref{tab:llm_pilot_topology}, and token cost versus $N$;
+\Cref{app:pilot}). All pilot data is labelled PILOT, not headlined.
 
 \subsection{Reproducibility checklist}
 We will release: the environment harness and orchestration layer; the task suite with

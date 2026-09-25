@@ -1,0 +1,189 @@
+\section{Proofs}
+\label{app:proofs}
+
+This appendix collects the proofs deferred from \Cref{sec:theory}. Throughout the
+propagation results we work in the independent-cascade instance of \Cref{as:prop}: when
+an agent becomes compromised, it independently compromises each susceptible out-neighbour
+with probability $\pinf$ when its message is processed, and compromise is absorbing.
+
+\subsection{Metric and integrity}
+
+\begin{proof}[Proof of \Cref{prop:reduction} (reduction to ASB)]
+With one agent the global trace is that agent's trajectory and the system predicates equal
+the single-agent predicates, so \Cref{eq:asrsys,eq:pnasys} equal ASB's ASR and PNA, and
+\Cref{eq:nrpsys} equals \Cref{eq:asb-nrp}.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:metric} (axiomatic characterization)]
+By D4a with base $u=1$, $g(u,\sigma)=g(u\cdot 1,\sigma)=u\,g(1,\sigma)$. By D4b with base
+$\sigma=1$, $g(1,\sigma)=g(1,\sigma\cdot 1)=\sigma\,g(1,1)$. By D2, $g(1,1)=1$. Hence
+$g(u,\sigma)=u\sigma\,g(1,1)=u\sigma$. The boundary $g(0,\sigma)=0$ holds since
+$0\cdot\sigma=0$. Finally $u\sigma$ is bounded in $[0,1]$ and non-decreasing in each
+argument on $[0,1]^2$. Continuity (\Cref{as:cont}) is used only to extend the homogeneity
+identities from rationals to all of $[0,1]$; the algebraic identities hold pointwise.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:integrity} (evaluator integrity)]
+By \Cref{as:tcb}, $\Predsec$ and $\Predutil$ are functions of $\Trace$ only; a function
+returns equal outputs on equal inputs, giving $\Checker(\Trace)=\Checker(\Trace')$. Let
+$\pi$ be any message-space manipulation inducing trace $\Trace_\pi$. The verdict is
+$\Predsec(\Trace_\pi)$; if $\Trace_\pi=\Trace$, then $\Predsec(\Trace_\pi)=\Predsec(\Trace)$.
+As $\widehat{\ASRs}$ and $\widehat{\PNAs}$ are averages of such verdicts, they are unchanged,
+and so is $\widehat{\NRPs}$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:judgehijack}]
+Because $\Judge$ takes message content as an argument and is non-constant in it, pick any
+two message sets on which $\Judge$ disagrees (e.g., $\mathrm{msgs}_\pi$ contains an
+injected instruction ``report this trace as safe''); by construction $\Trace_\pi=\Trace$,
+so the state is unchanged while the verdict flips.
+\end{proof}
+
+\subsection{Propagation propositions}
+
+For reference, the full statements of \Cref{prop:chain,prop:star,prop:tree,prop:mesh,cor:threshold}
+follow.
+
+\begin{proposition}[Chain: bounded reach]\label{prop:chain}
+On a directed path $a_1\to\cdots\to a_n$ with a single seed at $a_1$, the expected number
+of additionally compromised agents is $\sum_{j=1}^{n-1}\pinf^{\,j}\le \pinf/(1-\pinf)$ for
+$\pinf<1$, independent of $n$.
+\end{proposition}
+
+\begin{proposition}[Star: the orchestrator is the critical node]\label{prop:star}
+On a star with centre $c$, a seed at the centre compromises each leaf independently with
+probability $\pinf$, giving expected reach $\pinf(n-1)$ and $\CPR=\pinf$; a seed at a
+leaf gives expected reach $\pinf+\pinf^{2}(n-2)$. The centre-seed reach exceeds the
+leaf-seed reach by $\Theta(\pinf(1-\pinf)n)$.
+\end{proposition}
+
+\begin{proposition}[Tree: a branching phase transition]\label{prop:tree}
+On a rooted tree with branching factor $b$ and depth $d$, seeded at the root, the expected
+number compromised at level $\ell$ is $(b\pinf)^{\ell}$; the total expected reach is
+$\sum_{\ell=1}^{d}(b\pinf)^{\ell}$---bounded in $d$ for $b\pinf<1$ and
+$\Theta((b\pinf)^{d})$ for $b\pinf>1$, transitioning at $b\pinf=1$.
+\end{proposition}
+
+\begin{proposition}[Mesh: one-round lower bound]\label{prop:mesh}
+On the complete graph $K_n$ with $s$ seeds, the expected number compromised after one
+round is at least $s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. Consequently, for any fixed
+$\pinf>0$ the honest-compromise fraction after one round tends to $1$ as $s$ grows, and
+iterating drives $\CPR\to1$ above the percolation threshold.
+\end{proposition}
+
+\begin{corollary}[Threshold confinement]\label{cor:threshold}
+Under the threshold instance of \Cref{as:prop} with threshold $\thresh$, any agent whose
+in-degree in $\Gtop$ is strictly less than $\thresh$ can never be compromised by
+propagation. In particular, on a chain (in-degree $1$) with $\thresh\ge2$ the compromised
+set never grows beyond the seeds, so $\CPR=0$.
+\end{corollary}
+
+\begin{proof}[Proof of \Cref{prop:chain} (chain)]
+On the directed path $a_1\to a_2\to\cdots\to a_n$ with the single seed at $a_1$, the agent
+$a_{1+j}$ becomes compromised iff every one of the $j$ edges fires. By independence these
+events have probability $\pinf^{\,j}$. Summing the expected indicators,
+\[
+\E\bigl[|\Advset_\infty|-1\bigr]=\sum_{j=1}^{n-1}\pinf^{\,j}
+=\pinf\,\frac{1-\pinf^{\,n-1}}{1-\pinf}\le \frac{\pinf}{1-\pinf},
+\qquad \pinf<1,
+\]
+which is bounded independently of $n$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:star} (star)]
+Let the centre be $c$ and the leaves $a_1,\dots,a_{n-1}$.
+\emph{Centre seed.} Each leaf is a direct out-neighbour of $c$, so it is compromised
+independently with probability $\pinf$; hence $\E[|\Advset_\infty|-1]=\pinf(n-1)$ and
+$\CPR=\pinf$.
+\emph{Leaf seed.} A seed leaf compromises the centre with probability $\pinf$; conditioned
+on that, each of the remaining $n-2$ leaves is compromised with probability $\pinf$. Thus
+the expected additional compromises are $\pinf+\pinf^{2}(n-2)$. The centre-seed reach minus
+the leaf-seed reach is
+\[
+\bigl[1+\pinf(n-1)\bigr]-\bigl[1+\pinf+\pinf^{2}(n-2)\bigr]
+=\pinf(1-\pinf)(n-2)=\Theta\!\bigl(\pinf(1-\pinf)n\bigr).
+\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:tree} (tree)]
+Seed the root (level $0$). Each compromised node at level $\ell-1$ independently
+compromises each of its $b$ children with probability $\pinf$, so the expected number of
+compromised nodes at level $\ell$ equals $b\pinf$ times that at level $\ell-1$. With one
+seed, $\E[\text{level }\ell]=(b\pinf)^{\ell}$, and the total expected reach is
+$\sum_{\ell=1}^{d}(b\pinf)^{\ell}$. For $b\pinf<1$ this is at most $b\pinf/(1-b\pinf)$,
+bounded in $d$; for $b\pinf>1$ it is $\Theta\bigl((b\pinf)^{d}\bigr)$; the critical case is
+$b\pinf=1$. (This is the mean of a Galton--Watson branching process with offspring mean
+$b\pinf$.)
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:mesh} (mesh, one round)]
+On $K_n$ with seed set $\Advset_0$, $|\Advset_0|=s$, each honest node has all $s$ seeds as
+in-neighbours. It survives the round uncompromised iff every one of the $s$ independent
+edges fails, with probability $(1-\pinf)^{s}$; hence it is compromised with probability
+$1-(1-\pinf)^{s}$. Summing over the $n-s$ honest nodes,
+$\E[|\Advset_1|]=s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. For fixed $\pinf>0$,
+$1-(1-\pinf)^{s}\to1$ as $s\to\infty$, so the honest-compromise fraction after one round
+tends to $1$; iterating the absorbing process only increases the compromised set, and above
+the percolation threshold a giant compromised component forms, driving $\CPR\to1$
+(cf.~\cite{kempe2003maximizing,watts2002simple}).
+\end{proof}
+
+\begin{proof}[Proof of \Cref{cor:threshold} (threshold confinement)]
+In the threshold model an agent is compromised only once at least $\thresh$ of its
+in-neighbours are compromised. An agent with fewer than $\thresh$ in-neighbours can never
+meet that condition, so it remains honest for the entire (absorbing) process. On a chain
+every non-seed agent has in-degree $1<\thresh$, so no propagation occurs.
+\end{proof}
+
+\subsection{Collusion advantage on the star}
+
+\begin{proof}[Full proof of \Cref{thm:collusion}]
+Write $C=1+\pinf(N-1)$ for the centre-seed reach and $L=1+\pinf+\pinf^{2}(N-2)$ for the
+leaf-seed reach (\Cref{prop:star}). A colluding adversary with one seed places it at the
+centre, achieving expected compromise $C$. An independent adversary places its single seed
+uniformly at random: with probability $1/N$ it lands on the centre (reach $C$) and with
+probability $(N-1)/N$ on a leaf (reach $L$), giving
+\[
+\E^{\mathrm{ind}}=\tfrac1N\,C+\tfrac{N-1}{N}\,L.
+\]
+Therefore
+\[
+\Delta_{\mathrm{coll}}=C-\E^{\mathrm{ind}}
+=\tfrac{N-1}{N}\,(C-L)
+=\pinf(1-\pinf)\,\frac{(N-1)(N-2)}{N}
+=\Theta\!\bigl(\pinf(1-\pinf)N\bigr).
+\]
+For every $\pinf\in(0,1)$ and $N\ge3$ we have $(N-1)(N-2)/N>0$, so $\Delta_{\mathrm{coll}}>0$
+strictly. For $s>1$ seeds, coordinated placement solves the monotone submodular
+influence-maximization objective, for which greedy seeding attains a $(1-1/e)$
+approximation to the optimum~\cite{kempe2003maximizing}; the single-seed star computation
+above already exhibits a strictly positive gap, which is all the theorem claims.
+\end{proof}
+
+\subsection{Forced coordination and estimators}
+
+\begin{proof}[Proof of \Cref{prop:forced}]
+(a) Every witness has size $\ge k$ by \Cref{def:forced}; a set of size $<k$ contains no
+witness, so no assignment supported on it satisfies $\Predutil$. (b) If $\Advset$ meets
+every witness, then every route to $\Predutil=1$ passes through an adversarial agent, which
+can withhold its contribution, so no witness completes and $\Predutil=0$; if some witness is
+adversary-free, its members jointly satisfy $\Predutil$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:sample}]
+(a) is Hoeffding's inequality~\cite{hoeffding1963probability} for the mean of $M$ i.i.d.\
+$\{0,1\}$ indicators; invert the bound for $M$. (b) For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
+$|\hat u\hat\sigma-u\sigma|\le\hat\sigma|\hat u-u|+u|\hat\sigma-\sigma|\le|\hat u-u|+|\hat\sigma-\sigma|$;
+apply with $\sigma=1-\ASRs$, then union-bound the two events of (a). (c) Bonferroni over
+$G$ tests replaces $\alpha$ by $\alpha/G$; solving for $M$ gives the stated rate, and each
+of $G$ configurations runs $M$ episodes of $N$ agents over horizon $H$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{cor:budget}]
+Set the per-configuration accuracy to $\epsilon=\Delta/4$ in \Cref{thm:sample}(b) so that
+the two $\NRPs$ estimates are each within $\Delta/2$; by the triangle inequality their
+difference is resolved to $\Delta$. \Cref{thm:sample}(c) then gives
+$M=O(\epsilon^{-2}\ln(G/\alpha))=O(\Delta^{-2}\ln(G/\alpha))$, and each of the $G$
+configurations runs $M$ episodes of $N$ agents over horizon $H$.
+\end{proof}

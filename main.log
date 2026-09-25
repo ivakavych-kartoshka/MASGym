@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  14 SEP 2026 13:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  21 SEP 2026 02:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -895,8 +895,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 41.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 44.
+(Font)              <12> on input line 42.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 45.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
@@ -1012,13 +1012,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{algline.9}) ha
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.11 \subsection
-                {Assumptions}] [18] [19] [20] [21]) (figures/tikz_theory_diagram.tex) (sections/experiments.tex [22] [23]
-Overfull \hbox (1352.64479pt too wide) in paragraph at lines 109--128
+                {Assumptions}] [18] [19] [20] [21]) (figures/tikz_theory_diagram.tex) (sections/experiments.tex [22] [23] [24]
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 114--133
  [][] 
  []
 
-[24]
-Overfull \hbox (802.66058pt too wide) in paragraph at lines 138--152
+
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 144--158
  [][] 
  []
 
@@ -1038,39 +1038,44 @@ Overfull \hbox (13.7042pt too wide) in paragraph at lines 51--51
  []
 
 ) (figures/pgfplots_placeholder_results.tex
-Package pgfplots info on input line 22: Using 'lua backend=false' for axis: x coord trafo unsupported.
-Package pgfplots info on input line 31: Using 'lua backend=false' for axis: x coord trafo unsupported.
-) (sections/discussion.tex [25] [26]) (sections/limitations.tex [27]) (sections/ethics.tex [28]) (sections/conclusion.tex) [29] (appendix/proofs.tex [30]) (appendix/additional_experiments.tex
+Package pgfplots info on input line 23: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 32: Using 'lua backend=false' for axis: x coord trafo unsupported.
+) (sections/discussion.tex [25] [26]) (sections/limitations.tex [27]) (sections/ethics.tex [28]) (sections/conclusion.tex [29]) (appendix/proofs.tex [30] [31]) (appendix/additional_experiments.tex
 Overfull \hbox (3.44939pt too wide) in paragraph at lines 1--1
 []\T1/lmr/bx/sc/17.28 (-20) Extended Pro-to-col and Ad-di-tional Synthetic-Model
  []
 
-[31]
+
 Overfull \hbox (3.45685pt too wide) in paragraph at lines 18--20
 []\T1/lmr/bx/sc/12 (-20) Recovery rate $\OT1/lmr/m/n/12 (-20) = \U/msb/m/n/12 P\OT1/lmr/m/n/12 (-20) [[]]$\T1/lmr/m/n/12 (-20) . 
  []
 
 
-Overfull \hbox (348.74199pt too wide) in paragraph at lines 44--58
- [][] 
- []
-
-
-Overfull \hbox (217.68837pt too wide) in paragraph at lines 68--83
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 44--58
  [][] 
  []
 
 [32]
-Overfull \hbox (305.91147pt too wide) in paragraph at lines 103--115
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 68--83
  [][] 
  []
 
-[33]
-Overfull \hbox (78.8278pt too wide) detected at line 189
+
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 108--127
+ [][] 
+ []
+
+
+Overfull \hbox (6.00002pt too wide) in paragraph at lines 147--159
+ [][] 
+ []
+
+[33] [34]
+Overfull \hbox (78.8278pt too wide) detected at line 279
 []
  []
 
-) [34] (main.bbl [35] [36] [37] [38] [39] [40] [41]) [42] (main.aux)
+[35]) (main.bbl [36] [37] [38] [39] [40] [41] [42] [43]) [44] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -1083,17 +1088,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 6EC40B398FF97AF2E70D4190FB85D38E;14512.
  ) 
 Here is how much of TeX's memory you used:
- 43453 strings out of 467871
- 992760 string characters out of 5417892
- 1573936 words of memory out of 5000000
- 70599 multiletter control sequences out of 15000+600000
- 831856 words of font info for 475 fonts, out of 8000000 for 9000
+ 43498 strings out of 467871
+ 993342 string characters out of 5417892
+ 1577048 words of memory out of 5000000
+ 70606 multiletter control sequences out of 15000+600000
+ 833390 words of font info for 492 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,20n,94p,1185b,2678s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,20n,94p,1630b,2678s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbsy10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (42 pages, 884071 bytes).
+Output written on main.pdf (44 pages, 898168 bytes).
 PDF statistics:
- 1275 PDF objects out of 1440 (max. 8388607)
- 294 named destinations out of 1000 (max. 500000)
+ 1312 PDF objects out of 1440 (max. 8388607)
+ 298 named destinations out of 1000 (max. 500000)
  110765 words of extra memory for PDF output out of 128383 (max. 10000000)
 

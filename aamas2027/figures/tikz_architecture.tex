@@ -1,0 +1,88 @@
+% ============================================================================
+% figures/tikz_architecture.tex  --  MASGym system architecture (Fig. 1)
+% Three layers: Orchestration (TCB) | Agent collective | Emulation + Checker.
+% Lanes: control (gray dashed), data/message (blue), adversarial (red dashed),
+% evaluation/trace (green). Icons sit to the LEFT of named nodes.
+% ============================================================================
+\begin{figure*}[t]
+\centering
+\resizebox{0.72\textwidth}{!}{%
+\begin{tikzpicture}[node distance=6mm]
+
+% ---------- Layer group backgrounds (coordinate-based fit) ----------
+\begin{scope}[on background layer]
+  \node[grp=infra,   fit={(-0.3,-0.1) (3.2,6.5)}, label={[font=\footnotesize\bfseries,infra]above:Orchestration layer (TCB)}] {};
+  \node[grp=honest,  fit={(4.1,-0.1) (9.6,6.5)}, label={[font=\footnotesize\bfseries,honest]above:Agent collective}] {};
+  \node[grp=defense, fit={(10.5,-0.1) (14.7,6.5)}, label={[font=\footnotesize\bfseries,defense]above:Emulation \& deterministic checking (TCB)}] {};
+\end{scope}
+
+% ---------- Column 1: orchestration knobs ----------
+\node[infrablock, text width=25mm] (topo)  at (1.5,5.5) {Topology\\ \scriptsize star $\cdot$ chain $\cdot$ tree $\cdot$ mesh};
+\node[infrablock, text width=25mm] (roles) at (1.5,4.1) {Roles \& capabilities};
+\node[infrablock, text width=25mm] (obs)   at (1.5,2.9) {Partial observability};
+\node[amberblock, text width=25mm] (adv)   at (1.5,1.4) {Adversary config $\config_{\mathrm{adv}}$\\ \scriptsize $\betafrac,\mathsf{coll},\mathsf{adapt},\mathsf{orch},\mathsf{tool},\mathsf{syb},\mathsf{mem}$};
+
+% ---------- Column 2: the collective (vertical stack; icons to the left) ----------
+\node[honestblock, text width=24mm] (orchp) at (6.85,5.5) {Orchestrator \scriptsize(trust switch)};
+\node[honestblock, text width=24mm] (wk)    at (6.85,4.3) {Worker agents};
+\node[advblock,    text width=24mm] (col)   at (6.85,3.1) {Colluders + Sybils};
+\node[advblock,    text width=24mm] (te)    at (6.85,1.9) {Tool-executor \scriptsize(malicious tool)};
+\node[advblock,    text width=24mm] (mem)   at (6.85,0.7) {Shared memory \scriptsize(poisoned)};
+\pic at ([xshift=-10mm]orchp.west) {orchbadicon};
+\pic at ([xshift=-10mm]wk.west)    {agenticon};
+\pic at ([xshift=-10mm]col.west)   {sybilicon};
+\pic at ([xshift=-10mm]te.west)    {toolbadicon};
+\pic at ([xshift=-10mm]mem.west)   {membadicon};
+
+% message edges within the collective (blue), on the right side
+\draw[dataflow] (orchp.east) to[out=0,in=0] (wk.east);
+\draw[dataflow] (wk.east)    to[out=0,in=0] (col.east);
+\draw[dataflow] (orchp.east) to[out=0,in=0] (te.east);
+\draw[dataflow] (te.east)    to[out=0,in=0] (mem.east);
+
+% ---------- Column 3: emulation + checker + metrics ----------
+\node[defblock,   text width=24mm] (emubox) at (12.6,5.3) {LM tool emulator $\Emu$ / adv.\ $\Emu^{\!\dagger}$};
+\node[defblock,   text width=24mm] (chk)    at (12.6,3.3) {Deterministic checker $\Checker$ \scriptsize on $\Trace$};
+\node[theoryblock,text width=24mm] (met)    at (12.6,1.3) {System metrics \scriptsize $\NRPs,\ASRs,\CPR,\dots$};
+\pic at ([xshift=-10mm]emubox.west) {emuicon};
+\pic at ([xshift=-10mm]chk.west)    {checkericon};
+\pic at ([xshift=-10mm]met.west)    {theoremicon};
+
+% ---------- Cross-layer arrows ----------
+% control: orchestration configures the collective (gray dashed)
+\draw[ctrlflow] (topo.east)  to[out=0,in=180] (orchp.west);
+\draw[ctrlflow] (roles.east) to[out=0,in=180] (wk.west);
+\draw[ctrlflow] (obs.east)   to[out=0,in=180] ([yshift=2mm]col.west);
+% adversary knobs inject adversarial elements (red dashed)
+\draw[advflow]  (adv.east)   to[out=0,in=180] ([yshift=-2mm]col.west);
+\draw[advflow]  (adv.east)   to[out=-10,in=180] (mem.west);
+% tool-exec <-> emulator (blue data)
+\draw[dataflow] (te.east)    to[out=0,in=180] (emubox.west);
+% global trace to checker (green), then to metrics
+\draw[defflow]  (col.east)   to[out=0,in=180] node[arlbl]{trace $\Trace$} (chk.west);
+\draw[defflow]  (chk.south)  -- (met.north);
+% emulator scored via checker, not its own verdict (dotted green)
+\draw[defflow, densely dotted] (emubox.south) -- (chk.north);
+
+% ---------- Legend ----------
+\begin{scope}[shift={(-0.2,-0.8)}]
+  \draw[dataflow] (0,0) -- (0.6,0); \node[right, font=\scriptsize] at (0.65,0) {message/data};
+  \draw[ctrlflow] (3.1,0) -- (3.7,0); \node[right, font=\scriptsize] at (3.75,0) {control};
+  \draw[advflow] (5.3,0) -- (5.9,0); \node[right, font=\scriptsize] at (5.95,0) {adversarial vector (red)};
+  \draw[defflow] (9.5,0) -- (10.1,0); \node[right, font=\scriptsize] at (10.15,0) {trace / evaluation};
+  \draw[defflow, densely dotted] (12.6,0) -- (13.2,0); \node[right, font=\scriptsize] at (13.25,0) {scored via checker};
+\end{scope}
+
+\end{tikzpicture}}
+\caption{\defname{} architecture. The \emph{orchestration layer} (left, trusted) sets the
+topology, roles, observability masks, and the adversary configuration $\config_{\mathrm{adv}}$
+(\Cref{eq:adv-config}); the \emph{agent collective} (centre) runs heterogeneous roles, with
+adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious
+tool, and poisoned shared memory); the \emph{emulation and checking layer} (right, trusted)
+supplies emulated tools and scores system-level predicates $\Predsec,\Predutil$ over the global
+trace $\Trace$ with a deterministic checker rather than an LLM judge, so a successful injection
+cannot hijack the score (\Cref{thm:integrity}). Colour and shape jointly encode role and
+adversarial status for grayscale readability.}
+\label{fig:architecture}
+\Description{MASGym system architecture: an orchestration layer with topology, roles, observability masks and adversary configuration; an agent collective with an orchestrator, worker agents, colluders and Sybils, a malicious tool executor and poisoned shared memory; and an emulation and checking layer with an LM tool emulator and a deterministic checker over the global trace.}
+\end{figure*}

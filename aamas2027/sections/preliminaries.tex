@@ -1,0 +1,72 @@
+\section{Preliminaries and Notation}
+\label{sec:prelim}
+
+This section recalls the three primitives \defname{} builds on (notation summarized in
+\Cref{tab:notation}): ASB's utility--security metric, AgentDojo's
+deterministic state-based checking, and ToolEmu's LM tool emulation.
+
+\subsection{ASB's utility--security metric}
+ASB~\cite{zhang2025asb} scores an agent by a \emph{Non-Refusal Performance},
+\begin{equation}
+\label{eq:asb-nrp}
+\mathrm{NRP} \;=\; \mathrm{PNA}\cdot(1-\mathrm{ASR}),
+\end{equation}
+where $\mathrm{PNA}\in[0,1]$ is performance on benign tasks and $\mathrm{ASR}\in[0,1]$ the
+attack success rate; the product rewards a system only when both useful and not attacked.
+\Cref{eq:asb-nrp} is defined for a single agent; generalizing it to a collective is the
+subject of \Cref{sec:problem,sec:theory}.
+
+\subsection{AgentDojo's deterministic state-based checking}
+AgentDojo~\cite{debenedetti2024agentdojo} evaluates security by \emph{deterministic}
+functions of environment state rather than an LLM judge: a task fixes a predicate reading
+the pre- and post-execution state and returning a Boolean, so an injection cannot
+manipulate the score unless it changes the security-relevant state. \defname{} lifts this
+property to the system level: our checker $\Checker$ evaluates $\Predsec,\Predutil$ over the
+\emph{global} trace $\Trace$, never an invocable LLM judge, and we prove the resulting
+integrity property in \Cref{thm:integrity}.
+
+\subsection{ToolEmu's LM tool emulation}
+ToolEmu~\cite{ruan2024toolemu} emulates tool execution from a specification with a language
+model, enabling breadth at low cost, at a reported human agreement of only
+$\kappaem\approx0.48$ (Cohen's $\kappa$~\cite{cohen1960coefficient}, extended to many
+raters by Fleiss~\cite{fleiss1971measuring}). \defname{} adopts LM emulation for tool
+breadth, including an adversarial mode $\Emu^{\!\dagger}$ for malicious tools, but treats
+$\kappaem$ as a first-class threat to validity: scoring routes through the deterministic
+checker, and an emulated-versus-real-tools ablation is part of the protocol
+(\Cref{sec:experiments}). An \emph{episode} runs a task under a fixed configuration
+$\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$, from which all
+security and utility quantities are computable---the fact that makes deterministic,
+hijack-resistant scoring possible.
+
+\begin{table}[t]
+\centering
+\caption{Notation used throughout.}
+\label{tab:notation}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\Agents=\{a_1,\dots,a_N\}$ & $N$ agents, $N\in\{3,\dots,50\}$ \\
+$\Roles$ & roles $\{$planner, worker, tool-executor, memory$\}$ \\
+$\Gtop=(\Vtop,\Etop)$ & topology (star, chain, tree, mesh) \\
+$\Nin(a)$ & inbound neighbours of $a$ in $\Gtop$ \\
+$s_t\in\Statesp$ & global state at step $t$; space $\Statesp$ \\
+$\Trace\in\TraceSp$ & global trace $\Trace=(s_0,\dots,s_H)$ of an episode \\
+$H$ & episode horizon \\
+$\Predsec,\Predutil$ & security / benign-success predicates \\
+$\Checker$ & deterministic checker on $\Trace$ \\
+$\Emu$ & LM tool emulator (adversarial $\Emu^{\!\dagger}$) \\
+$\Judge$ & LLM judge (contrast baseline) \\
+$\config\in\Configs$ & environment configuration \\
+$\Advset\subseteq\Agents$ & adversarial agents; $\betafrac=|\Advset|/N$ \\
+$\ASRs,\PNAs,\NRPs$ & system ASR / PNA / net metric \\
+$\CPR,\ \CSR$ & propagation rate, collusion success rate \\
+$\pinf\in[0,1],\ \thresh$ & per-edge infection probability; threshold \\
+$\red,\ \blue$ & red (attack) / blue (defense) policy in \corb \\
+$M$ & episodes per configuration \\
+$\kappaem$ & emulator/human agreement ($\approx 0.48$) \\
+\bottomrule
+\end{tabular}
+\end{table}

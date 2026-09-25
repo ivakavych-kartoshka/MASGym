@@ -1,0 +1,32 @@
+\begin{abstract}
+Security research on large language model (LLM) agents is bottlenecked by its
+instruments: the strongest existing benchmarks---Agent Security Bench (ASB),
+AgentDojo, InjecAgent, and the ToolEmu sandbox---are single-agent. Yet deployed
+systems are increasingly orchestrated \emph{collectives} in which a planner directs
+workers, agents share memory, tools are third-party, and coordination is forced.
+The phenomena that dominate risk in that regime---collusion, a compromised
+orchestrator, malicious tools, Sybils, and group-level emergent failure---cannot be
+produced, let alone measured, by a single-agent harness. We present \defname{}, an
+environment and evaluation methodology purpose-built for multi-agent LLM security.
+It contributes: (i) a forced-coordination task suite with heterogeneous roles,
+partial observability, and system-level compromise objectives over star, chain,
+tree, and mesh topologies at $3$--$50$ agents; (ii) a natively parameterized
+adversary model (adversary fraction, collusion, adaptivity, orchestrator
+compromise, malicious tools, Sybils, poisoned memory); (iii) a system-level metric
+suite, $\NRPs=\PNAs(1-\ASRs)$, scored by a deterministic checker over the global
+state trace---never an LLM judge on the critical path; and (iv) \corb, a
+co-evolving red/blue protocol logging attack--defense trajectories and their
+system-level scores. Supporting theory (proved under explicit assumptions):
+an axiomatic characterization of the metric that reduces to ASB at one agent, an
+evaluator-integrity theorem, topology-dependent compromise-propagation bounds, a
+strict collusion advantage, a forced-coordination lower bound, and finite-sample
+concentration. On a transparent, clearly-labelled \emph{synthetic} emulator, the
+headline claim is measured: a per-agent guardrail's relative ASR reduction over
+no-defense shrinks $41.6\%\to31.8\%\to27.6\%$ from the single-agent to the
+collusion to the compromised-orchestrator context (Table~\ref{tab:degradation}).
+\end{abstract}
+
+\keywords{multi-agent LLM security; security benchmark and environment;
+co-evolving red/blue evaluation; collusion; compromised orchestrator; Sybil attack;
+prompt injection; tool emulation; deterministic security checking; system-level
+metrics; compromise propagation}

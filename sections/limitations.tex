@@ -15,8 +15,8 @@ measurements.
 result (RQ3)---that a per-agent guardrail's relative ASR reduction over no-defense shrinks
 from the single-agent to the collusion to the compromised-orchestrator context
 (\Cref{tab:degradation})---is measured on the transparent synthetic emulator at the stated
-operating point ($M{=}738$). Whether it replicates across real backbone families, larger
-$N$, and the deferred mesh topology is untested; the release phase runs that replication, and
+operating point ($M{=}738$). Whether it replicates across real backbone families and larger
+$N$ is untested; the release phase runs that replication, and
 a failed replication reframes the contribution as a still-informative negative result.
 Either way, the environment retains its value as an instrument.
 
@@ -32,7 +32,9 @@ compromise dynamics among LLM agents may not be independent-cascade; the theorem
 the environment's dynamics and predict where to look, and the measured $\CPR$ is what
 adjudicates realism: in the synthetic phase the measured ordering
 $\CPR_{\mathrm{chain}}<\CPR_{\mathrm{tree}}<\CPR_{\mathrm{star}}$ matches the predicted
-one (\Cref{tab:topology}), while the mesh prediction remains pending that sweep.
+one (\Cref{tab:topology}), and the real-backbone pilot now also orders
+$\CPR_{\mathrm{star}}<\CPR_{\mathrm{mesh}}$ (\Cref{fig:results}(b)); the synthetic
+headline mesh row and $N\le50$ remain pending that sweep.
 
 \paragraph{TCB and predicate specification.} \Cref{thm:integrity} assumes a trusted harness
 and checker (\Cref{as:tcb}) and shows non-gameability, not correctness: a mis-specified

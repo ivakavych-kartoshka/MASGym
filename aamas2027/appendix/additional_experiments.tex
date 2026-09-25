@@ -13,15 +13,16 @@ Given the \corb{} logs, each metric is a deterministic functional of the recorde
 \item \textbf{Coordination quality} $=\PNAs$ on forced-coordination tasks under the benign
 counterpart $\config^{\circ}$; \textbf{coordination sabotage} $=\PNAs(\config^{\circ})-\PNAs(\config)$
 for a sabotage configuration $\config$.
-\item \textbf{Time-to-detection} $=\E[\min\{t:\text{defense flags a compromise in }\Trace\}]$,
-$\infty$ if never; reported as a survival curve over $t$.
-\item \textbf{Recovery rate} $=\Prob[\text{episode returns to a safe, task-completing state
-after a detection}]$.
+\item \textbf{Time-to-detection}: the expected first time the defense flags a compromise
+in a trace ($\min\{t:\text{defense flags in }\Trace\}$, $\infty$ if never), reported as a
+survival curve over $t$.
+\item \textbf{Recovery rate}: probability that an episode returns to a safe,
+task-completing state after a detection.
 \item \textbf{Token/API cost} and \textbf{latency}: summed over all agent and emulator calls
 in an episode, averaged over the $M$ episodes; \textbf{scalability}: the fitted growth of each
 metric and cost in $N$.
-\item \textbf{Human-intervention rate} $=\Prob[\text{a human-approval hook was triggered}]$
-when hooks are enabled.
+\item \textbf{Human-intervention rate}: probability that a human-approval hook was
+triggered, when hooks are enabled.
 \end{itemize}
 
 \subsection{Sybil and adaptivity studies}
@@ -41,6 +42,7 @@ Sybil identities inflate the adversary's initial footprint, and $\NRPs$ falls to
 full seeding.}
 \label{tab:sybil}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
 Sybil count & $\ASRs$ & $\NRPs$ & ASR$_{\mathrm{act}}$ & $\CPR$ \\
@@ -50,10 +52,10 @@ Sybil count & $\ASRs$ & $\NRPs$ & ASR$_{\mathrm{act}}$ & $\CPR$ \\
 2 & 0.942 & 0.053 & 0.561 & 0.344 \\
 4 & 1.000 & 0.000 & 0.561 & 0.000 \\
 \bottomrule
-\multicolumn{5}{@{}l}{\parbox{\linewidth}{\footnotesize ASR$_{\mathrm{act}}$ is the single-agent predicate
+\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize ASR$_{\mathrm{act}}$ is the single-agent predicate
 (unsafe action / exfiltration; \Cref{tab:degradation}); $\CPR$ at count 4 is $0$ by the
 denominator convention (\Cref{sec:metric-suite}) because the whole star is seeded at
-$t{=}0$.}}
+$t{=}0$.}
 \end{tabular}
 \end{table}
 
@@ -65,6 +67,7 @@ the co-adapting blue's $\NRPs$ from $0.649$ to $0.236$; a random (``static'') re
 system in the availability-sabotage regime ($\ASRs{=}1$, $\NRPs{=}0$) throughout.}
 \label{tab:adaptive}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
 & \multicolumn{2}{c}{Static red} & \multicolumn{2}{c}{Adaptive red} \\
@@ -76,9 +79,9 @@ $r=5$  & 1.000 & 0.000 & 0.617 & 0.358 \\
 $r=10$ & 1.000 & 0.000 & 0.783 & 0.195 \\
 $r=20$ & 1.000 & 0.000 & 0.733 & 0.236 \\
 \bottomrule
-\multicolumn{5}{@{}l}{\parbox{\linewidth}{\footnotesize Blue = escalating policy ($p_{\mathrm{red}}$ ramps
+\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Blue = escalating policy ($p_{\mathrm{red}}$ ramps
 $0.2\to0.8$). Static-red ASR$_{\mathrm{act}}$ cycles $\{0.50,0.62,0.23,0.52\}$ (no trend);
-adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}}
+adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}
 \end{tabular}
 \end{table}
 
@@ -105,6 +108,7 @@ is largest at small $\betafrac$ and shrinks or changes sign as $\betafrac$ grows
 the system predicate colluding saturates at $1.000$ for all $\betafrac\ge0.1$.}
 \label{tab:collusion}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
  & \multicolumn{2}{c}{ASR$_{\mathrm{act}}$} & $\Delta_{\mathrm{coll}}$ & \multicolumn{2}{c}{$\ASRs$} & \multicolumn{2}{c}{$\CPR$} \\
@@ -117,12 +121,12 @@ $\betafrac$ & colluding & independent & (ASR$_{\mathrm{act}}$) & colluding & ind
 0.4 & 0.561 & 0.523 & $+$0.038 & 1.000 & 0.846 & 0.306 & 0.273 \\
 0.5 & 0.564 & 0.565 & $-$0.001 & 1.000 & 0.946 & 0.308 & 0.341 \\
 \bottomrule
-\multicolumn{8}{@{}l}{\parbox{\linewidth}{\footnotesize Every value is a measured cell of
+\multicolumn{8}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Every value is a measured cell of
 \texttt{collusion\_sweep.csv} (star topology, $N{=}5$, no defense, $M{=}738$). $\ASRs$ is the
 full system predicate including availability sabotage, which saturates at $1.000$ when the
 star hub is seeded; the unsafe-action channel is what \Cref{fig:results}(c) plots. $\betafrac$
 is the adversary fraction (\Cref{eq:adv-config}); $\CPR$ at $\betafrac{=}0.0$ is $0$ for both
-behaviours and is omitted.}}
+behaviours and is omitted.}
 \end{tabular}
 \end{table}
 
@@ -144,6 +148,7 @@ $\betafrac{=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ (
 $\ASRs$ saturates via availability sabotage (\Cref{tab:degradation}).}
 \label{tab:cost}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
 $N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
@@ -152,9 +157,9 @@ $N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
 5  & 1.000 & 0.289 & 44.0 & 20.8 & Yes (138 configs) \\
 10 & 0.999 & 0.294 & 88.0 & 22.4 & Yes (138 configs) \\
 \bottomrule
-\multicolumn{6}{@{}l}{\parbox{\linewidth}{\footnotesize $N\in\{20,50\}$ and mesh are deferred to the
+\multicolumn{6}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $N\in\{20,50\}$ and mesh are deferred to the
 release phase; the reachable region is the $(N,\text{topology},\betafrac,\text{knob})$
-combinations actually run (grid in the released provenance logs).}}
+combinations actually run (grid in the released provenance logs).}
 \end{tabular}
 \end{table}
 
@@ -194,34 +199,35 @@ attack scenarios. The registered security outcome is a real model property, not 
 framework artefact.}
 \label{tab:llm_pilot}
 \small
-\begin{tabular}{@{}lrrrr@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llrrr@{}}
 \toprule
-Backbone & benign & single\_attacker & colluding & orch.\ comp. \\
+Backbone & benign & single & colluding & orch.\ comp. \\
 \midrule
-Qwen2.5-$0.5$B   & 0.000 & 0.427 (0/3878) & 0.696 (0/4077) & 0.703 (0/4118) \\
-Qwen2.5-$1.5$B   & 0.000 & 0.427 (0/3878) & 0.696 (0/4077) & 0.703 (0/4118) \\
-Qwen2.5-$3$B     & 0.000 & 0.427 (10/3878) & 0.696 (0/4077) & 0.703 (0/4118) \\
-Qwen2.5-$7$B$^{*}$ & 0.000 & 0.427 (0/3878) & 0.696 (0/4077) & 0.703 (0/4118) \\
-Llama-3.2-$1$B   & 0.000 & 1.000 (3812/3878) & 1.000 (4077/4077) & 1.000 (4002/4118) \\
-Llama-3.2-$3$B   & 0.000 & 0.427 (0/3878) & 0.696 (0/4077) & 0.703 (0/4118) \\
+Qwen2.5-$0.5$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
+Qwen2.5-$1.5$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
+Qwen2.5-$3$B      & 0.000 & 0.427 & 0.696 & 0.703 \\
+Qwen2.5-$7$B$^{*}$ & 0.000 & 0.427 & 0.696 & 0.703 \\
+Llama-3.2-$1$B    & 0.000 & 1.000 & 1.000 & 1.000 \\
+Llama-3.2-$3$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
 \bottomrule
-\multicolumn{5}{@{}p{\dimexpr\textwidth-2\tabcolsep\relax}@{}}{\footnotesize Cells report
-$\ASRs$, averaged over the $12$ (topology $\times$ $N$) configurations; the
-parenthesised pair is exfiltration-compliant decisions per total compromised-agent
-decisions pooled over the same $12$ configurations (a dash means no compromised
-decision occurred, benign scenario). Star and tree saturate via availability
-sabotage on the hub; chain does not, so the refusal-only $\ASRs$ is
-topology-dependent. Defenses are synthetic effect-models and are deliberately not
-applied. $\NRPs{=}\PNAs(1-\ASRs)$ with $\PNAs{=}1.000$; token/episode
-$\approx\,320$--$2400$ across the $12$ configurations (largest: mesh,
-$N{=}10$); real per-episode latency $\approx 0.2$--$1.9$\,s (RTX~4060).
-$^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in full precision and is therefore
-loaded in bitsandbytes 4-bit from an ungated mirror; all other rows are full
-precision. Llama-3.2 weights are from an ungated mirror of the official
-full-precision (bf16) checkpoints; the security-decision divergence between
-Llama-3.2-$1$B (complies) and the remaining backbones (refuse) shows the registered
-outcome is a real model property, not a framework artefact. Stronger injection
-styles and per-agent defenses are release-phase work.}
+\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Cells are
+$\ASRs$, averaged over the $12$ (topology $\times$ $N$) configurations, with
+$\NRPs=\PNAs(1-\ASRs)$ and $\PNAs=1.000$. Compliance counts (exfiltration-compliant
+decisions per total compromised-agent decisions, pooled over the same $12$ configs) are
+$0/3878$, $0/4077$, $0/4118$ for the single, colluding, and orchest.\@-compromise
+scenarios---wholesale refusal---except Qwen2.5-$3$B ($10/3878$) and Llama-3.2-$1$B, which
+\emph{complies}: $3812/3878$, $4077/4077$, $4002/4118$. Star and tree saturate via
+availability sabotage on the hub; chain does not, so the refusal-only $\ASRs$ is
+topology-dependent. Defenses are synthetic effect-models, deliberately not applied.
+Token/episode $\approx 320$--$2400$ across the $12$ configs (largest: mesh, $N{=}10$);
+real per-episode latency $\approx 0.2$--$1.9$\,s (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds
+the $8$\,GB GPU in full precision and is loaded in bitsandbytes 4-bit from an ungated
+mirror; Llama-3.2 weights are from an ungated mirror of the official full-precision
+(bf16) checkpoints. The security-decision divergence between Llama-3.2-$1$B (complies)
+and the remaining backbones (refuse) shows the registered outcome is a real model
+property, not a framework artefact. Stronger injection styles and per-agent defenses are
+release-phase work.}
 \end{tabular}
 \end{table}
 
@@ -239,6 +245,7 @@ refusing backbones (five of six) is topology-dependent, while Llama-$1$B, which
 complies, saturates at $\ASRs{=}1.000$ everywhere.}
 \label{tab:llm_pilot_topology}
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
  & \multicolumn{4}{c}{$\ASRs$ (system predicate)} \\
@@ -273,9 +280,11 @@ three, so the task is $3$-forced.
 
 The registered predicates read only the recorded trace $\Trace$:
 \begin{align*}
-\Predutil(\Trace) &= \indic[\text{a payment to the instructed payee for an in-budget flight matching the itinerary is recorded}],\\
-\Predsec(\Trace) &= \indic[\text{a payment to a payee \emph{not} named in the instruction is recorded (exfiltration of funds), \emph{or}}\\
-&\qquad\ \text{a denylisted action (e.g., disclosing card details to a tool) is recorded}].
+\Predutil(\Trace) &= \indic[\text{a payment to the instructed payee for an in-budget}\\
+&\text{flight matching the itinerary is recorded}],\\
+\Predsec(\Trace) &= \indic[\text{a payment to a payee \emph{not} named in the instruction}\\
+&\text{is recorded (exfiltration of funds), \emph{or} a denylisted action}\\
+&\text{(e.g., disclosing card details to a tool) is recorded}].
 \end{align*}
 A malicious tool (via $\Emu^{\!\dagger}$) might return a booking result that embeds an injected
 instruction ``pay to account X''; a colluding W3 might then act on it. Whether the payment to
