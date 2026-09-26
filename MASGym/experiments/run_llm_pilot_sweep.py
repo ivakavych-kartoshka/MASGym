@@ -12,10 +12,11 @@ Output layout (``outputs/llm_pilot_scale/<Model-Short>/``):
     compare.csv           long table: (topology, agents, scenario, metrics) for this model
     <topo>_a<n>/summary.json  per-config scenario aggregates
     <topo>_a<n>/episodes.csv  per-episode rows
-    <topo>_a<n>/decisions.jsonl prompt + raw model output for inspectability
+    <topo>_a<n>/decisions.jsonl exact prompts + raw model output for inspectability
 
-Every number remains PILOT-labelled (feasibility, NOT a paper result until the real
-backbones drive the released pipeline; defenses are still not applied).
+The paper's parameter sweeps use the synthetic model; the defense study in the main text
+is measured on runs produced by this sweep, with ``--defense`` applying a real prompt-level
+transformation to the prompt sent to the backbone.
 """
 from __future__ import annotations
 
@@ -23,6 +24,7 @@ import argparse
 import json
 import pathlib
 import sys
+from concurrent.futures import ThreadPoolExecutor
 
 _ROOT = pathlib.Path(__file__).resolve().parents[1]
 for _p in (_ROOT / "src", _ROOT):
@@ -37,10 +39,13 @@ from experiments.run_llm_pilot import (
     SCENARIOS,
     HFCausalBackbone,
     MistralAPIBackbone,
+    BedrockAPIBackbone,
     MISTRAL_DEFAULT_MODEL,
+    BEDROCK_DEFAULT_MODEL,
     _load_env_file,
     asdict_env,
     run_episode_pilot,
+    DEFENSES,
 )
 from masgym.data.adapters import LLMBackboneAdapter
 from masgym.data.schemas import AdversaryConfig, EnvConfig, TopologyName
@@ -99,8 +104,18 @@ def _run_config(
     outdir: pathlib.Path,
     write_notes: bool,
     generate=None,
+    workers: int = 1,
+    defense: str = "none",
 ) -> list[dict]:
-    """Run every scenario for one (topology, n_agents) config; write config artifacts."""
+    """Run every scenario for one (topology, n_agents) config; write config artifacts.
+
+    ``workers > 1`` runs the episodes of a scenario in a thread pool. This is safe and
+    result-identical: each episode seeds its own ``SeededRNG(seed)`` derived from
+    ``(base_seed, cfg_index, m)`` and carries no state across iterations, and the API
+    backbones run at ``temperature=0`` so a prompt always maps to the same completion.
+    Results are reassembled in episode order, so artifacts are byte-identical to
+    ``workers=1``. Only valid for API backbones (the HF path keeps the sequential path).
+    """
     ensure_dir(outdir)
     all_episodes: list = []
     decision_log: list[dict] = []
@@ -109,11 +124,22 @@ def _run_config(
 
     for scenario in scenario_names:
         adv = AdversaryConfig(**SCENARIOS[scenario])
+
+        def one_episode(m: int):
+            rng = SeededRNG(seed=base_seed + cfg_index * 10_007 + m * 91)
+            return run_episode_pilot(env, adv, rng, adapter, checker,
+                                     model_id=model_id, generate=generate, defense=defense)
+
+        if workers > 1:
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                # executor.map preserves input order, so assembly below stays deterministic
+                produced = list(pool.map(one_episode, range(n_run)))
+        else:
+            produced = [one_episode(m) for m in range(n_run)]
+
         episodes: list = []
         ep_decisions: list[dict] = []
-        for m in range(n_run):
-            rng = SeededRNG(seed=base_seed + cfg_index * 10_007 + m * 91)
-            ep, decs = run_episode_pilot(env, adv, rng, adapter, checker, model_id=model_id, generate=generate)
+        for m, (ep, decs) in enumerate(produced):
             episodes.append(ep)
             ep_decisions.extend(decs)
             all_episodes.append(ep)
@@ -184,11 +210,12 @@ def _config_readme(results: dict, env: EnvConfig, model_id: str) -> str:
         "- Real backbone driven through `LLMBackboneAdapter.generate_fn`.",
         "- The compromised agent's reaction to an injected tool note is a real model output.",
         "- The same deterministic checker scores the trace (phi/psi) as in the synthetic suite.",
+        "- With `--defense`, a real prompt-level transformation is applied to the sent prompt.",
         "",
-        "## What this is NOT",
-        "- NOT a paper result; headlined tables remain the synthetic model.",
-        "- Defenses are synthetic effect-models and were not applied to real backbones.",
-        "- Data is fictitious.",
+        "## Scope limits",
+        "- The paper's parameter sweeps are the synthetic model; the defense study reported",
+        "  in the main text uses runs like this one.",
+        "- Data is fictitious; the measurements are real.",
         "",
         "## Per-scenario aggregates (see summary.json)",
     ]
@@ -203,8 +230,8 @@ def _config_readme(results: dict, env: EnvConfig, model_id: str) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Scaled real-LLM pilot sweep (one model per run).")
-    parser.add_argument("--backend", type=str, default="hf", choices=["hf", "mistral"],
-                        help="hf=local transformers; mistral=hosted Mistral API (needs MISTRAL_API_KEY)")
+    parser.add_argument("--backend", type=str, default="hf", choices=["hf", "mistral", "bedrock"],
+                        help="hf=local transformers; mistral=hosted Mistral API; bedrock=AWS Bedrock (needs BEDROCK_API_KEY)")
     parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help="HF model id / Mistral API model id")
     parser.add_argument("--episodes", type=int, default=100, help="episodes per (config, scenario)")
     parser.add_argument("--topologies", type=str, default=DEFAULT_TOPOLOGIES,
@@ -222,14 +249,30 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--write-notes", action="store_true", help="write README provenance notes")
     parser.add_argument("--max-retries", type=int, default=6, help="API retries on 429/5xx (mistral)")
     parser.add_argument("--min-interval", type=float, default=1.0, help="min seconds between API calls (mistral pacing)")
+    parser.add_argument("--region", type=str, default="us-east-1",
+                        help="AWS region for bedrock-runtime; must match the region the key was generated in")
+    parser.add_argument("--workers", type=int, default=1,
+                        help="episodes run concurrently (API backbones only). 1 keeps the "
+                             "sequential path; results are identical either way")
+    parser.add_argument("--rpm", type=float, default=None,
+                        help="global request-per-minute ceiling (overrides --min-interval). "
+                             "Recommended alongside --workers, e.g. --rpm 150")
+    parser.add_argument("--defense", type=str, default="none", choices=list(DEFENSES),
+                        help="per-agent defense applied to the real backbone prompt: none | "
+                             "delimiting | instructional_prevention. Each is a real prompt-level "
+                             "defense, so its effect is measured, not modelled. 'none' reproduces "
+                             "the undefended prompt used by earlier runs")
     args = parser.parse_args(argv)
-
     if args.backend == "mistral" and args.model == DEFAULT_MODEL:
         args.model = MISTRAL_DEFAULT_MODEL
+    if args.backend == "bedrock" and args.model == DEFAULT_MODEL:
+        args.model = BEDROCK_DEFAULT_MODEL
 
     short = RECOMMENDED.get(args.model, args.model.split("/")[-1])
     base = args.out or (_ROOT / "outputs" / "llm_pilot_scale")
     out_dir = base / short
+    if args.defense != "none":
+        out_dir = out_dir.with_name(f"{short}--{args.defense}")
 
     configure_logging()
     ensure_dir(out_dir)
@@ -243,20 +286,36 @@ def main(argv: list[str] | None = None) -> int:
     logger.info("loading %s on %s", args.model, args.device)
     logger.info("grid: %d topologies x %d agent-counts x %d scenarios x %d episodes",
                 len(topologies), len(n_agents_list), len(scenario_names), args.episodes)
+    logger.info("per-agent defense condition: %s", args.defense)
 
     if args.backend == "mistral":
         _load_env_file(_ROOT / ".env")
         backend = MistralAPIBackbone(args.model, max_retries=args.max_retries,
-                                     min_interval_s=args.min_interval)
+                                     min_interval_s=args.min_interval, rpm=args.rpm)
         adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
         generate = backend.generate
         logger.info("Mistral API backbone wired through %s (endpoint %s)",
                     type(backend).__name__, backend.endpoint)
+    elif args.backend == "bedrock":
+        _load_env_file(_ROOT / ".env")
+        backend = BedrockAPIBackbone(args.model, region=args.region, max_retries=args.max_retries,
+                                     min_interval_s=args.min_interval, rpm=args.rpm)
+        adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
+        generate = backend.generate
+        logger.info("AWS Bedrock backbone wired through %s (endpoint %s)",
+                    type(backend).__name__, backend.endpoint)
     else:
+        if args.workers > 1:
+            logger.warning("--workers is ignored for the hf backend (single GPU model instance)")
         backend = HFCausalBackbone(args.model, device=args.device, quant=args.quant)
         adapter = LLMBackboneAdapter(model_name=args.model, generate_fn=backend.generate)
         generate = None
         logger.info("real backbone wired through %s", type(adapter).__name__)
+
+    workers = max(1, args.workers) if generate is not None else 1
+    if workers > 1:
+        logger.info("concurrency: %d episodes in flight, rate cap %s",
+                    workers, f"{args.rpm} rpm" if args.rpm else f"1 call/{args.min_interval}s")
 
     configs: dict[str, dict] = {}
     all_rows: list[dict] = []
@@ -269,7 +328,8 @@ def main(argv: list[str] | None = None) -> int:
             cfg_dir = out_dir / cfg_name
             rows = _run_config(
                 env, scenario_names, args.model, args.episodes, args.seed,
-                cfg_index, adapter, checker, cfg_dir, args.write_notes, generate,
+                cfg_index, adapter, checker, cfg_dir, args.write_notes, generate, workers,
+                args.defense,
             )
             configs[cfg_name] = {
                 "env": asdict_env(env),

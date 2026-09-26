@@ -12,10 +12,10 @@
   every axis/.append style={
     font=\footnotesize, line width=0.7pt, tick align=outside,
     grid=both, grid style={gray!18, line width=0.3pt},
-    axis line style={gray!55}, width=5.9cm, height=3.6cm},
+    axis line style={gray!55}, width=5.5cm, height=2.5cm},
 }
 \begin{tikzpicture}
-\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.1cm, vertical sep=1.1cm}]
+\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.1cm, vertical sep=0.65cm}]
 
 % ---- (a) defense degradation (measured): NRP_action ----
 \nextgroupplot[title={(a) Defense degradation \emph{(synthetic)}},
@@ -50,18 +50,15 @@
 
 \end{groupplot}
 \end{tikzpicture}
-\caption{\textbf{Measured trends.} Panels (a) and (c) are measurements from the
-transparent synthetic model ($M{=}738$, $\epsilon{=}\alpha{=}0.05$,
-provenance-stamped); panels (b) and (d) are PILOT measurements from the real-backbone
-pilot (six open instruct backbones, 12 configs $=\{star,chain,tree,mesh\}\times
-N\in\{3,5,10\}$, 100 episodes/config). (a) The guardrail's $\NRPs$ advantage over
-no-defense shrinks across single-agent, +collusion, +compromised-orchestrator (RQ3;
-\Cref{tab:degradation}). (b) $\CPR$ orders chain $<$ tree $<$ star $<$ mesh
-(\Cref{sec:theory-prop}, RQ4), identical across all six
-backbones---it is a deterministic structural functional of the topology. (c) Collusion
-advantage in the unsafe-action channel is clearest at low $\betafrac$ and converges as
-$\betafrac$ grows. (d) Real token cost grows $\approx$ linearly in $N$ for star
-($\approx$\,133 tokens/agent); mesh growth and $N\in\{20,50\}$ are deferred.}
+\caption{\textbf{Measured trends.} (a), (c): transparent synthetic model ($M{=}738$,
+$\epsilon{=}\alpha{=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real
+backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\NRPs$ advantage over
+no-defense shrinks across single-agent, $+$collusion, $+$compromised-orchestrator (grid in
+the Supplementary Material). (b) $\CPR$ orders chain $<$ tree $<$ star $<$ mesh
+(\Cref{sec:theory-prop}) and is identical across all backbones---a deterministic
+structural functional of the topology. (c) Collusion advantage in the unsafe-action
+channel is clearest at low $\betafrac$. (d) Real token cost grows $\approx$ linearly in
+$N$; mesh and $N\in\{20,50\}$ are deferred.}
 \label{fig:results}
 \Description{Four measured panels: (a) net-risk defense degradation across single-agent, collusion, and compromised-orchestrator settings; (b) compromise-propagation rate by topology, ordered chain, tree, star, mesh; (c) collusion advantage versus adversary fraction; (d) token cost versus number of agents.}
 \end{figure*}

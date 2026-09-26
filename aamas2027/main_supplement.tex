@@ -1,0 +1,42 @@
+% ============================================================================
+% MASGym -- SUPPLEMENTARY MATERIAL (separate PDF, submitted alongside main.pdf)
+%
+% WHY A SEPARATE FILE: AAMAS 2027 main-track papers are at most EIGHT (8) pages
+% plus any number of reference pages. Only *bibliographic references* are exempt,
+% so the appendices must not sit inside main.pdf. They are built here instead and
+% uploaded as the technical supplement.
+%
+% BUILD ORDER (the supplement resolves ~57 cross-references into main.pdf, so
+% main.aux must exist first):
+%   pdflatex main; bibtex main; pdflatex main; pdflatex main
+%   pdflatex main_supplement; bibtex main_supplement; pdflatex main_supplement; pdflatex main_supplement
+% or simply:  build_all.bat
+%
+% The shared preamble (theorems, notation macros, title metadata) lives in
+% preamble.tex so the two documents cannot drift apart.
+% ============================================================================
+\input{preamble.tex}
+
+% Resolve labels defined in the main paper (thm:*, tab:*, sec:*, fig:*, def:*).
+\externaldocument{main}
+
+\begin{document}
+
+\maketitle
+
+% ---------------------------------------------------------------------------
+% Appendices
+% ---------------------------------------------------------------------------
+\appendix
+\input{appendix/proofs.tex}
+\input{appendix/supplement.tex}
+\input{appendix/additional_experiments.tex}
+
+% ---------------------------------------------------------------------------
+% Bibliography
+% ---------------------------------------------------------------------------
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references_verified}
+
+\end{document}

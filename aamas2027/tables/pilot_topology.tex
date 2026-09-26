@@ -1,0 +1,43 @@
+% ============================================================================
+% tables/pilot_topology.tex -- Table: LLM backbone pilot, topology study (RQ4)
+%
+% Shared by main.tex and (historically) the supplement. Kept in ONE place so the
+% label tab:llm_pilot_topology is defined exactly once across the two PDFs:
+% the supplement pulls it in through xr/externaldocument{main}.
+%
+% PILOT-labelled throughout: these are measurements from the real-backbone pilot,
+% not from the transparent synthetic model. Do not present them as synthetic.
+% ============================================================================
+\begin{table}[t]
+\centering
+\caption{LLM backbone pilot, topology study (RQ4), \textbf{PILOT-labelled}: six open
+instruct backbones, $12$ configs, $M{=}100$ per (config, scenario), no defense.
+$\CPR$ is a deterministic structural functional of the topology and is \emph{identical
+across all six backbones}, so one column reports it; it orders as
+\Cref{prop:chain,prop:star,prop:tree,prop:mesh} predict
+(chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\ASRs$ is topology-dependent
+for the five refusing backbones; the complying backbone saturates at $\ASRs{=}1.000$
+everywhere.}
+\label{tab:llm_pilot_topology}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+ & \multicolumn{4}{c}{$\ASRs$ (system predicate)} \\
+\cmidrule(lr){2-5}
+Backbone & chain & tree & star & mesh\\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Refusing backbones (5 of 6)}}\\
+Qwen2.5-$0.5$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
+Qwen2.5-$1.5$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
+Qwen2.5-$3$B    & 0.108 & 0.766 & 0.873 & 0.688 \\
+Qwen2.5-$7$B$^{*}$ & 0.108 & 0.766 & 0.873 & 0.688 \\
+Llama-3.2-$3$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
+\multicolumn{5}{@{}l}{\emph{Complying backbone}}\\
+Llama-3.2-$1$B  & 1.000 & 1.000 & 1.000 & 1.000 \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Structural functional (identical across all backbones)}}\\
+$\CPR$           & 0.130 & 0.198 & 0.286 & 0.627 \\
+\bottomrule
+\end{tabular}
+\end{table}

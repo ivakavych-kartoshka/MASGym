@@ -27,11 +27,11 @@ heterogeneous roles, partial observability, forced coordination, a co-evolving r
 methodology, and group-level emergence metrics.
 
 \paragraph{Contributions.}
-\defname{} is, to the best of our knowledge, the first environment purpose-built for the
+To the best of our knowledge \defname{} is the first environment purpose-built for the
 security of multi-agent LLM systems. It is not a new attack or defense; it is an
 environment and evaluation methodology whose scientific object is the controlled variation
 of coordination, collusion, and orchestrator variables and the system-level metrics that
-quantify their effect (architecture in \Cref{fig:architecture}; the three-layer design in
+quantify their effect (architecture in the Supplementary Material; three-layer design in
 \Cref{sec:method}). Concretely,
 \begin{itemize}[leftmargin=1.4em]
 \item \textbf{An environment and task suite} (\Cref{sec:system,sec:method}): heterogeneous
@@ -46,18 +46,23 @@ global trace so an injection cannot hijack the evaluator (\Cref{thm:integrity}),
 collusion-success and compromise-propagation rates, coordination quality, cost, and
 recovery.
 \item \textbf{The \corb{} co-evolving red/blue protocol} (\Cref{sec:algorithm}), logging
-$(\text{attack},\text{defense},\NRPs)$ trajectories and a (security, cost) Pareto frontier,
-which on a transparent synthetic emulator measures a headline degradation result:
-a per-agent guardrail's relative ASR reduction over no-defense shrinks
-$41.6\%\to31.8\%\to27.6\%$ from single-agent to collusion to
-compromised-orchestrator contexts (\Cref{sec:experiments},\Cref{tab:degradation}).
+$(\text{attack},\text{defense},\NRPs)$ trajectories and a (security, cost) Pareto frontier.
+\item \textbf{An answer to ``does the defense work?''} (\Cref{sec:defense}): on four real
+backbones in three model families a prompt-level defense drives action-channel compliance
+to $0/1075$ decisions---$\ASRa{=}0$---yet $\ASRs$ stays $1.000$ on tree and star, because
+the residual failure is deterministic availability sabotage that topology alone determines,
+and one backbone ignores the defense entirely (\Cref{tab:defense}). A defense scored on the
+action channel cannot certify system-level security. The controlled synthetic sweep
+separately measures the guardrail's shrinking margin, $41.6\%\to31.8\%\to27.6\%$
+(degradation grid, Supplementary Material).
 \end{itemize}
 
 Because reviewers rightly discount benchmarks whose central metric is asserted rather than
 justified, we treat theory as part of the instrument (\Cref{sec:theory}): under explicit
 assumptions and honest proof-status labels we prove the product aggregator is the unique
 combiner satisfying our axioms and reduces to ASB at $N{=}1$; that the deterministic
-checker cannot be hijacked through message content, unlike an LLM judge;
+checker cannot be hijacked through message content, unlike a message-reading LLM judge,
+which we measure pushed off the recorded state in roughly a third of injected traces;
 topology-dependent propagation bounds and a strict collusion advantage in the cascade
 model; a forced-coordination lower bound; and finite-sample concentration. None
 asserts that any real defense is secure or provably degrades.
@@ -66,9 +71,12 @@ asserts that any real defense is secure or provably degrades.
 \defname{} is an instrument, not a verdict: a lower $\ASRs$ is a measurement under a stated
 configuration, not a certificate. The central threat to validity is emulation
 fidelity---ToolEmu's reported human agreement is $\kappaem\approx0.48$---so scoring routes
-through the deterministic checker, the caveat is explicit, and
-emulated-versus-real/deterministic-versus-judge ablations are reported; the checker and
-harness form a trusted computing base, and model-weight attacks are out of scope. Roadmap:
+through the deterministic checker, the caveat is explicit, and the harness registers
+emulated-versus-real ablations for independent re-testing. Of those two we ran the
+deterministic-versus-judge half on real judge backbones (\Cref{sec:integrity}); the
+emulated-versus-real-tools half is unmeasured, since no real tool backend is wired in.
+The checker and harness form a trusted computing base, and model-weight attacks are out
+of scope. Roadmap:
 \Cref{sec:related}--\Cref{sec:prelim} situate and fix notation; \Cref{sec:system,sec:threat,sec:problem}
 formalize; \Cref{sec:method,sec:algorithm} present the environment and protocol;
 \Cref{sec:theory} justifies; \Cref{sec:experiments} evaluates; the final sections discuss and

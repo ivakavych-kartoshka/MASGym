@@ -7,6 +7,44 @@ sensitivity plan. The filled cells below report measurements from the transparen
 synthetic model ($M{=}738$, $\epsilon{=}\alpha{=}0.05$, provenance-stamped in the released
 logs); cells marked ``---'' are deferred to the real-backbone release phase.
 
+\subsection{Headline degradation study (RQ1), full grid}
+\label{app:degradation}
+\Cref{tab:degradation} gives the defense $\times$ adversary-context grid underlying the
+shrinkage reported in the main text: each per-agent defense, single-agent (the
+ASB/AgentDojo reducer, \Cref{prop:reduction}) and then under multi-agent collusion and a
+compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$). Table generated in the same
+seed-locked run ($M{=}738$, $\epsilon{=}\alpha{=}0.05$).
+\begin{table}[t]
+\centering
+\caption{Headline degradation study (RQ1), \textbf{synthetic-model} results ($M{=}738$,
+$\epsilon{=}\alpha{=}0.05$, seed-locked). $\ASRs^{\dagger}\downarrow$ /
+$\NRPs^{\dagger}\uparrow$ are better. Each defense is measured single-agent ($N{=}1$; the
+ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator
+configurations (star, $N{=}5$, $\betafrac{=}0.3$). The guardrail's relative
+$\ASRs^{\dagger}$ reduction over no-defense shrinks left to right
+(41.6\% $\to$ 31.8\% $\to$ 27.6\%), supporting RQ1.}
+\label{tab:degradation}
+\small
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{Single (ASB)} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + comp.\ orch.} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Defense & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ \\
+\midrule
+No defense           & 0.587 & 0.374 & 0.560 & 0.396 & 0.539 & 0.424 \\
+Guardrail            & 0.343 & 0.590 & 0.382 & 0.553 & 0.390 & 0.552 \\
+System-level policy  & 0.450 & 0.505 & 0.461 & 0.482 & 0.447 & 0.506 \\
+\midrule
+\emph{Oracle (upper bound)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
+\bottomrule
+\multicolumn{7}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $\dagger$ single-agent predicate
+(unsafe action / exfiltration), under which \Cref{prop:reduction} reduces to ASB at
+$N{=}1$. Under the \emph{full} system predicate (adding coordination sabotage) $\ASRs$
+saturates at $1.0$ in both MA columns: collusion and orchestrator compromise target the
+critical star hub and collapse availability (\Cref{sec:theory-prop}).}
+\end{tabular}
+\end{table}
 \subsection{Precise metric definitions}
 Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
 \begin{itemize}[leftmargin=1.4em]
@@ -176,27 +214,28 @@ note; \emph{fictitious data}). Task completion remains the
 deterministic witness condition, so the pilot isolates the \emph{security} decision: every
 compromised agent's reaction to the injected instruction is a real model output.
 \Cref{tab:llm_pilot} summarizes; every model response, with its prompt, is in the released
-\texttt{decisions.jsonl}. These numbers are \textbf{labelled PILOT and excluded from the
-headlined, synthetic results}---they demonstrate the adapter path and a real
-family-dependence of the security decision, not headline findings. Mistral and the
-proprietary families are deferred until model credentials are provisioned; the official
-\verb+meta-llama+ repos gate downloads on per-account approval, so the Llama-3.2 checkpoints
-here are loaded from an ungated mirror of the official weights.
+\texttt{decisions.jsonl}. These are \textbf{PILOT-labelled real-model measurements}, reported
+as such and not folded into the synthetic tables. Mistral-7B-Instruct has since been run at
+full scale ($12$ configs, $M{=}100$ per (config, scenario)) and, unlike the six backbones
+here, \emph{complies} on every attack scenario. That is what makes the defense study of
+\Cref{sec:experiments} possible at all: with no baseline refusal there is room for a
+prompt-level defense to move the compliance rate. The official \verb+meta-llama+ repos gate
+downloads on per-account approval, so the Llama-3.2 checkpoints here are loaded from an
+ungated mirror of the official weights.
 
 \begin{table}[t]
 \centering
 \caption{LLM backbone pilot, \textbf{PILOT-labelled} (Qwen2.5
 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs
 $\{$star, chain, tree, mesh$\}$ $\times$ $N\in\{3,5,10\}$, $M{=}100$ per
-(config, scenario), no defense, fictitious data; numbers excluded from the
-headlined synthetic tables). Backbones differ in their security decision: the Qwen
-family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction
-(almost all parse failures 0), yet $\ASRs$ is still positive in the hub-critical
+(config, scenario), no defense, fictitious payload data). Backbones differ in their security
+decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration
+instruction (almost all parse failures 0), yet $\ASRs$ is still positive in the hub-critical
 topologies via structural availability sabotage---star and tree collapse to
 $\ASRs{=}1.000$ under collusion and orchestrator compromise, while chain stays
 $\leq\!0.25$; Llama-$1$B \emph{complies}, yielding $\ASRs{=}1.000$ across all
-attack scenarios. The registered security outcome is a real model property, not a
-framework artefact.}
+attack scenarios, as does Mistral-7B (\Cref{sec:experiments}). The registered security
+outcome is a real model property, not a framework artefact.}
 \label{tab:llm_pilot}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -212,60 +251,27 @@ Llama-3.2-$1$B    & 0.000 & 1.000 & 1.000 & 1.000 \\
 Llama-3.2-$3$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
 \bottomrule
 \multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Cells are
-$\ASRs$, averaged over the $12$ (topology $\times$ $N$) configurations, with
-$\NRPs=\PNAs(1-\ASRs)$ and $\PNAs=1.000$. Compliance counts (exfiltration-compliant
-decisions per total compromised-agent decisions, pooled over the same $12$ configs) are
-$0/3878$, $0/4077$, $0/4118$ for the single, colluding, and orchest.\@-compromise
-scenarios---wholesale refusal---except Qwen2.5-$3$B ($10/3878$) and Llama-3.2-$1$B, which
-\emph{complies}: $3812/3878$, $4077/4077$, $4002/4118$. Star and tree saturate via
-availability sabotage on the hub; chain does not, so the refusal-only $\ASRs$ is
-topology-dependent. Defenses are synthetic effect-models, deliberately not applied.
-Token/episode $\approx 320$--$2400$ across the $12$ configs (largest: mesh, $N{=}10$);
-real per-episode latency $\approx 0.2$--$1.9$\,s (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds
-the $8$\,GB GPU in full precision and is loaded in bitsandbytes 4-bit from an ungated
-mirror; Llama-3.2 weights are from an ungated mirror of the official full-precision
-(bf16) checkpoints. The security-decision divergence between Llama-3.2-$1$B (complies)
-and the remaining backbones (refuse) shows the registered outcome is a real model
-property, not a framework artefact. Stronger injection styles and per-agent defenses are
-release-phase work.}
+$\ASRs$, averaged over the $12$ configurations, with $\NRPs=\PNAs(1-\ASRs)$ and
+$\PNAs=1.000$. Compliance is $0$ wholesale refusal for the single, colluding, and
+orchest.\@-compromise scenarios, except Qwen2.5-$3$B ($10/3878$) and Llama-3.2-$1$B
+($3812/3878$, $4077/4077$, $4002/4118$). Star and tree saturate via availability sabotage
+on the hub; chain does not, so refusal-only $\ASRs$ is topology-dependent. Defenses here
+are synthetic effect-models, deliberately not applied. Token/episode $\approx 320$--$2400$
+(largest: mesh, $N{=}10$); latency $\approx 0.2$--$1.9$\,s (RTX~4060).
+$^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in full precision and is loaded 4-bit; Llama
+weights are ungated mirrors of the official bf16 checkpoints. The security-decision
+divergence between Llama-3.2-$1$B (complies) and the rest (refuse) shows the registered
+outcome is a real model property, not a framework artefact.}
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
-\centering
-\caption{LLM backbone pilot, topology study (RQ4), \textbf{PILOT-labelled}
-(Qwen2.5-$\{$0.5$B,$1.5$B,$3$B,$7$B\}$ and Llama-3.2-$\{$1$B,$3$B\}$, $12$ configs
-$\{$star, chain, tree, mesh$\}$ $\times$ $N\in\{3,5,10\}$, $M{=}100$ per
-(config, scenario), no defense, fictitious data; numbers excluded from the
-headlined synthetic tables). $\CPR$ is a deterministic structural functional of the
-topology and is \emph{identical across all six backbones}, so a single column reports
-it; it orders exactly as \Cref{prop:chain,prop:star,prop:tree,prop:mesh} predict
-($\CPR$: chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\ASRs$ under the
-refusing backbones (five of six) is topology-dependent, while Llama-$1$B, which
-complies, saturates at $\ASRs{=}1.000$ everywhere.}
-\label{tab:llm_pilot_topology}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
- & \multicolumn{4}{c}{$\ASRs$ (system predicate)} \\
-\cmidrule(lr){2-5}
-Backbone & chain & tree & star & mesh\\
-\midrule
-\multicolumn{5}{@{}l}{\emph{Refusing backbones (5 of 6)}}\\
-Qwen2.5-$0.5$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
-Qwen2.5-$1.5$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
-Qwen2.5-$3$B    & 0.108 & 0.766 & 0.873 & 0.688 \\
-Qwen2.5-$7$B$^{*}$ & 0.108 & 0.766 & 0.873 & 0.688 \\
-Llama-3.2-$3$B  & 0.108 & 0.766 & 0.873 & 0.688 \\
-\multicolumn{5}{@{}l}{\emph{Complying backbone}}\\
-Llama-3.2-$1$B  & 1.000 & 1.000 & 1.000 & 1.000 \\
-\midrule
-\multicolumn{5}{@{}l}{\emph{Structural functional (identical across all backbones)}}\\
-$\CPR$           & 0.130 & 0.198 & 0.286 & 0.627 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{LLM backbone pilot: topology study}
+\label{app:pilot-topology}
+The table below is the per-backbone topology study (RQ4); the main paper's
+\Cref{sec:experiments} refers to it as a supplementary table, since the 8-page
+main-track limit does not admit it in the body. The companion per-scenario table
+\Cref{tab:llm_pilot} gives the backbone $\times$ scenario breakdown.
+\input{tables/pilot_topology.tex}
 
 \subsection{A worked forced-coordination task}
 \label{app:worked}
@@ -297,15 +303,57 @@ component of the metric records as coordination failure. This example is illustr
 task suite generalizes it across roles, tools, and topologies.
 
 \subsection{Sensitivity and validity checks}
-Beyond the headline studies, the protocol includes: (i) an \textbf{aggregator-sensitivity}
-check (RQ1) that recomputes configuration rankings under $u\sigma$, $\min(u,\sigma)$, and a
-weighted geometric mean $u^{w}\sigma^{1-w}$ (\Cref{rem:metric}) and reports rank correlation;
-(ii) an \textbf{evaluator-integrity} check (RQ2) that measures how often a crafted injection
-flips the LLM judge $\Judge$ while leaving the deterministic verdict $\Checker(\Trace)$
-unchanged (an empirical instance of \Cref{thm:integrity} versus \Cref{prop:judgehijack});
-(iii) an \textbf{emulation-fidelity} check that compares emulated and real tools on the
-subset of tasks where a real implementation is available, reporting the change in $\ASRs$ and
-$\NRPs$ and relating it to $\kappaem$; and (iv) \textbf{backbone-robustness} checks that repeat
-the headline degradation study across all five model families so that no conclusion rests on a
-single model. Each check is a registered configuration in the released harness, so validity,
-not only headline numbers, is reproducible.
+The released harness registers four checks beyond the headline studies, and we state
+plainly which of them this submission reports and which it does not.
+\emph{Reported in \Cref{sec:experiments}:} \textbf{evaluator integrity} (RQ2), which counts
+how often a crafted injection flips the off-critical-path judge while leaving
+$\Checker(\Trace)$ unchanged ($80/80$ judge, $0/80$ checker, over $80$ compromised
+episodes). The axiom check additionally records that only the product satisfies
+(D1)--(D4) and reduces to ASB.
+\textbf{Backbone robustness} is reported in \Cref{sec:experiments} for the defense study
+across four backbones in three model families, which is where the model dependence
+mattered most.
+\emph{Reported here, in full:} \textbf{aggregator sensitivity} (RQ1). Since
+\Cref{thm:metric} fixes $\NRPs$ under (D1)--(D4), we test whether the reported ranking
+survives \Cref{rem:metric}'s alternatives. Re-ranking the $81$ attacked configurations
+gives Spearman $\rho$ against the product of $1.000$ for $u^{0.5}\sigma^{0.5}$ (a monotone
+transform of $u\sigma$, so exact agreement doubles as an implementation check), $0.956$ and
+$0.879$ for $w{=}0.25,0.75$, but only $0.586$ for $\min(u,\sigma)$, which keeps $2$ of $5$
+top configurations. The ranking is robust across the log-linear family and \emph{not}
+across the worst-coordinate choice, and the axiom check agrees: only the product satisfies
+(D1)--(D4) and reduces to ASB, $\min$ violates both homogeneity axioms, and
+$u^{w}\sigma^{1-w}$ also violates consistency. Every cell is recomputed offline by
+\texttt{experiments/run\_aggregator\_sensitivity.py} from
+\texttt{outputs/full\_matrix/matrix\_metrics.csv}; the headline table is therefore ranked by
+one specified aggregator, and a reader who prefers a different one can rerun the check
+without touching the harness.
+\emph{Registered but not run for this submission:} an \textbf{emulation-fidelity} check
+comparing emulated and real tools where a real implementation is available, relating the
+change in $\ASRs$ and $\NRPs$ to $\kappaem$. Each remaining gap is a configuration in the
+released harness and can be run without modifying it, so validity---not only headline
+numbers---is independently reproducible; we prefer naming these gaps to implying coverage
+we do not have.
+
+\subsection{Why three rows of \Cref{tab:defense} are identical}
+\label{app:defense-degeneracy}
+Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B agree to the last digit in all twelve cells of the
+defense study. This is a structural consequence, not independent corroboration, and we
+state it explicitly because a reader could otherwise reasonably over-weight it.
+
+The system predicate is a disjunction: it is discharged either by an unsafe action
+(requiring a compliant compromised agent) or by the deterministic availability path of
+\Cref{prop:forced}. The defense drives compliance to $0/1075$ on all three backbones, so
+the first disjunct is unavailable in every cell and only the second remains. That path is
+computed from topology, scenario, and propagation, with no model in the loop, so once
+compliance is pinned at zero the metric is no longer a function of the backbone at all. The
+three rows are one structural result observed three times.
+
+Two consequences for reading the study. First, the cross-backbone evidence is
+\emph{evidential about the pattern}, namely the hub-critical ordering chain $<$ mesh $<$
+tree $=$ star and the size of the action-to-system gap, not about the values, which are a
+property of the harness. Second, the model-dependence of the instrument is real but shows
+up in the \emph{other} regime: with compliance at $1$ versus $0$ the measured collusion
+advantage moves from $0.00$ to $0.33$, an effect no topology constant can produce, and the
+Llama-3.2-1B row is entirely a different instrument reading. A metric that silently
+collapses to a topology lookup when a defense succeeds is also a metric that cannot detect
+a defense failing, which is why we report the decision-level compliance count alongside it.

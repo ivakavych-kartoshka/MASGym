@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{59}
+\begin{thebibliography}{53}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -136,31 +136,11 @@
 \href{https://doi.org/10.1088/0022-3719/12/1/008}{doi:\nolinkurl{10.1088/0022-3719/12/1/008}}
 
 
-\bibitem[Chen et~al\mbox{.}(2024a)]%
-        {chen2024agentverse}
-\bibfield{author}{\bibinfo{person}{Weize Chen}, \bibinfo{person}{Yusheng Su},
-  \bibinfo{person}{Jingwei Zuo}, \bibinfo{person}{Cheng Yang},
-  \bibinfo{person}{Chenfei Yuan}, \bibinfo{person}{Chi-Min Chan},
-  \bibinfo{person}{Heyang Yu}, \bibinfo{person}{Yaxi Lu},
-  \bibinfo{person}{Yi-Hsin Hung}, \bibinfo{person}{Chen Qian},
-  \bibinfo{person}{Yujia Qin}, \bibinfo{person}{Xin Cong},
-  \bibinfo{person}{Ruobing Xie}, \bibinfo{person}{Zhiyuan Liu},
-  \bibinfo{person}{Maosong Sun}, {and} \bibinfo{person}{Jie Zhou}.}
-  \bibinfo{year}{2024}\natexlab{a}.
-\newblock \showarticletitle{{AgentVerse}: Facilitating Multi-Agent
-  Collaboration and Exploring Emergent Behaviors}. In
-  \bibinfo{booktitle}{\emph{The Twelfth International Conference on Learning
-  Representations (ICLR)}}.
-\newblock
-\newblock
-\shownote{arXiv:2308.10848}.
-
-
-\bibitem[Chen et~al\mbox{.}(2024b)]%
+\bibitem[Chen et~al\mbox{.}(2024)]%
         {chen2024agentpoison}
 \bibfield{author}{\bibinfo{person}{Zhaorun Chen}, \bibinfo{person}{Zhen Xiang},
   \bibinfo{person}{Chaowei Xiao}, \bibinfo{person}{Dawn Song}, {and}
-  \bibinfo{person}{Bo Li}.} \bibinfo{year}{2024}\natexlab{b}.
+  \bibinfo{person}{Bo Li}.} \bibinfo{year}{2024}\natexlab{}.
 \newblock \showarticletitle{{AgentPoison}: Red-teaming {LLM} Agents via
   Poisoning Memory or Knowledge Bases}. In \bibinfo{booktitle}{\emph{Advances
   in Neural Information Processing Systems 37 (NeurIPS 2024)}}.
@@ -290,12 +270,12 @@
 \shownote{arXiv:2502.14143}.
 
 
-\bibitem[He et~al\mbox{.}(2025b)]%
+\bibitem[He et~al\mbox{.}(2025)]%
         {he2025emerged}
 \bibfield{author}{\bibinfo{person}{Feng He}, \bibinfo{person}{Tianqing Zhu},
   \bibinfo{person}{Dayong Ye}, \bibinfo{person}{Bo Liu},
   \bibinfo{person}{Wanlei Zhou}, {and} \bibinfo{person}{Philip~S. Yu}.}
-  \bibinfo{year}{2025}\natexlab{b}.
+  \bibinfo{year}{2025}\natexlab{}.
 \newblock \showarticletitle{The Emerged Security and Privacy of {LLM} Agent: A
   Survey with Case Studies}.
 \newblock \bibinfo{journal}{\emph{Comput. Surveys}} (\bibinfo{year}{2025}).
@@ -303,32 +283,6 @@
 \href{https://doi.org/10.1145/3773080}{doi:\nolinkurl{10.1145/3773080}}
 \newblock
 \shownote{arXiv:2407.19354}.
-
-
-\bibitem[He et~al\mbox{.}(2025a)]%
-        {he2025redteaming}
-\bibfield{author}{\bibinfo{person}{Pengfei He}, \bibinfo{person}{Yuping Lin},
-  \bibinfo{person}{Shen Dong}, \bibinfo{person}{Han Xu}, \bibinfo{person}{Yue
-  Xing}, {and} \bibinfo{person}{Hui Liu}.} \bibinfo{year}{2025}\natexlab{a}.
-\newblock \showarticletitle{Red-Teaming {LLM} Multi-Agent Systems via
-  Communication Attacks}. In \bibinfo{booktitle}{\emph{Findings of the
-  Association for Computational Linguistics: ACL 2025}}.
-\newblock
-\newblock
-\shownote{Agent-in-the-Middle (AiTM); arXiv:2502.14847}.
-
-
-\bibitem[Hoeffding(1963)]%
-        {hoeffding1963probability}
-\bibfield{author}{\bibinfo{person}{Wassily Hoeffding}.}
-  \bibinfo{year}{1963}\natexlab{}.
-\newblock \showarticletitle{Probability Inequalities for Sums of Bounded Random
-  Variables}.
-\newblock \bibinfo{journal}{\emph{J. Amer. Statist. Assoc.}}
-  \bibinfo{volume}{58}, \bibinfo{number}{301} (\bibinfo{year}{1963}),
-  \bibinfo{pages}{13--30}.
-\newblock
-\href{https://doi.org/10.1080/01621459.1963.10500830}{doi:\nolinkurl{10.1080/01621459.1963.10500830}}
 
 
 \bibitem[Hong et~al\mbox{.}(2023)]%
@@ -696,18 +650,6 @@
 \shownote{arXiv:2306.11698}.
 
 
-\bibitem[Wang et~al\mbox{.}(2024)]%
-        {wang2024mixture}
-\bibfield{author}{\bibinfo{person}{Junlin Wang}, \bibinfo{person}{Jue Wang},
-  \bibinfo{person}{Ben Athiwaratkun}, \bibinfo{person}{Ce Zhang}, {and}
-  \bibinfo{person}{James Zou}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{Mixture-of-Agents Enhances Large Language Model
-  Capabilities}.
-\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2406.04692}}
-  (\bibinfo{year}{2024}).
-\newblock
-
-
 \bibitem[Wang et~al\mbox{.}(2023b)]%
         {wang2023fair}
 \bibfield{author}{\bibinfo{person}{Peiyi Wang}, \bibinfo{person}{Lei Li},
@@ -722,32 +664,18 @@
 \newblock
 
 
-\bibitem[Wang et~al\mbox{.}(2025b)]%
+\bibitem[Wang et~al\mbox{.}(2025)]%
         {yu2025gsafeguard}
 \bibfield{author}{\bibinfo{person}{Shilong Wang}, \bibinfo{person}{Guibin
   Zhang}, \bibinfo{person}{Miao Yu}, \bibinfo{person}{Guancheng Wan},
   \bibinfo{person}{Fanci Meng}, \bibinfo{person}{Chongye Guo},
   \bibinfo{person}{Kun Wang}, {and} \bibinfo{person}{Yang Wang}.}
-  \bibinfo{year}{2025}\natexlab{b}.
+  \bibinfo{year}{2025}\natexlab{}.
 \newblock \showarticletitle{{G-Safeguard}: A Topology-Guided Security Lens and
   Treatment on {LLM}-based Multi-agent Systems}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2502.11127}}
   (\bibinfo{year}{2025}).
 \newblock
-
-
-\bibitem[Wang et~al\mbox{.}(2025a)]%
-        {wang2025openhands}
-\bibfield{author}{\bibinfo{person}{Xingyao Wang}, \bibinfo{person}{Boxuan Li},
-  \bibinfo{person}{Yufan Song}, \bibinfo{person}{Frank~F. Xu},
-  \bibinfo{person}{Xiangru Tang}, \bibinfo{person}{Mingchen Zhuge},
-  {et~al\mbox{.}}} \bibinfo{year}{2025}\natexlab{a}.
-\newblock \showarticletitle{{OpenHands}: An Open Platform for {AI} Software
-  Developers as Generalist Agents}. In \bibinfo{booktitle}{\emph{The Thirteenth
-  International Conference on Learning Representations (ICLR)}}.
-\newblock
-\newblock
-\shownote{arXiv:2407.16741}.
 
 
 \bibitem[Watts(2002)]%
@@ -848,22 +776,6 @@
 \newblock
 \newblock
 \shownote{ASB; introduces NRP = PNA (1 - ASR); arXiv:2410.02644}.
-
-
-\bibitem[Zhang et~al\mbox{.}(2024)]%
-        {zhang2024psysafe}
-\bibfield{author}{\bibinfo{person}{Zaibin Zhang}, \bibinfo{person}{Yongting
-  Zhang}, \bibinfo{person}{Lijun Li}, \bibinfo{person}{Hongzhi Gao},
-  \bibinfo{person}{Lijun Wang}, \bibinfo{person}{Huchuan Lu},
-  \bibinfo{person}{Feng Zhao}, \bibinfo{person}{Yu Qiao}, {and}
-  \bibinfo{person}{Jing Shao}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{{PsySafe}: A Comprehensive Framework for
-  Psychological-based Attack, Defense, and Evaluation of Multi-agent System
-  Safety}. In \bibinfo{booktitle}{\emph{Proceedings of the 62nd Annual Meeting
-  of the Association for Computational Linguistics (ACL)}}.
-\newblock
-\newblock
-\shownote{arXiv:2401.11880}.
 
 
 \bibitem[Zheng et~al\mbox{.}(2023)]%

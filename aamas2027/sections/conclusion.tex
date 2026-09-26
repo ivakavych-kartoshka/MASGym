@@ -2,11 +2,13 @@
 \label{sec:conclusion}
 
 We presented \defname{}, a co-evolving red/blue security gym for multi-agent LLM systems.
-\Cref{tab:degradation} shows a per-agent guardrail's relative $\ASRs$ reduction shrinking
-from $41.6\%$ (single agent) to $31.8\%$ (collusion) to $27.6\%$ (compromised
-orchestrator)---a \emph{collective, system-level} effect single-agent benchmarks cannot
-represent, confirmed by the pilot (\Cref{fig:results}). All headline numbers
-are synthetic; PILOT marks real-LLM data; nothing here claims a defense is provably
-degraded or secure. The four contributions---the forced-coordination task suite; the
-parameterized adversary model; the axiomatically characterized, deterministically scored
-metric suite; and the \corb{} protocol---are meant to be used, re-run, contradicted.
+The two studies bracket the problem: the degradation grid (Supplementary Material) shows a
+per-agent guardrail's relative $\ASRs$ reduction shrinking as context becomes adversarial,
+and the real-backbone study of \Cref{sec:defense} shows why that margin is the wrong thing to
+watch---a defense that drives action-channel compliance to $0/1075$ decisions still leaves
+$\ASRs{=}1.000$ on tree and star, because the residual failure is availability sabotage that
+topology alone determines, and one of four backbones ignores the defense altogether. The
+sweeps are synthetic; the defense study is measured on real backbones; neither claims a
+defense is provably degraded or secure. Both the artifacts and the four
+contributions---the task suite, the adversary model, the deterministically scored metric
+suite, and the \corb{} protocol---are meant to be used, re-run, contradicted.

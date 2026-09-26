@@ -1,8 +1,6 @@
 \section{Related Work}
 \label{sec:related}
 
-We organize prior work into five clusters, then position \defname{} against it.
-
 \subsection{Single-agent security instruments}
 The closest instruments evaluate a lone tool-using agent. ASB~\cite{zhang2025asb}
 formalizes attacks and defenses for agents and introduces the utility--security metric
@@ -20,19 +18,16 @@ parameterizes collusion, orchestrator trust, Sybils, or compromise propagation.
 \subsection{Multi-agent LLM frameworks and attacks}
 A large literature builds collectives---AutoGen~\cite{wu2023autogen},
 MetaGPT~\cite{hong2023metagpt}, CAMEL~\cite{li2023camel},
-ChatDev~\cite{qian2024chatdev}, AgentVerse~\cite{chen2024agentverse},
-OpenHands~\cite{wang2025openhands}, Magentic-One~\cite{fourney2024magenticone}, and
-mixing/debating designs~\cite{wang2024mixture,du2023debate}---concerned with capability,
-not security; \defname{} adopts their role structures as substrate. A fast-growing attack
-literature is intrinsically multi-agent: prompt infection~\cite{lee2024promptinfection},
-contagious blocking (CORBA)~\cite{zhou2025corba}, population jailbreaking (Agent
-Smith)~\cite{gu2024agentsmith}, man-in-the-middle on inter-agent
-messages~\cite{he2025redteaming}, topological safety~\cite{yu2024netsafe},
-psychological manipulation~\cite{zhang2024psysafe}, adversarial
-roles~\cite{tian2023evilgeniuses}, GenAI worms~\cite{cohen2024aiworm}, memory
-poisoning~\cite{chen2024agentpoison}, and backdoors~\cite{yang2024watchout}. These are
-attacks in bespoke setups; \defname{} is the controlled, deterministically scored
-environment in which such attacks and defenses can be swept and compared.
+ChatDev~\cite{qian2024chatdev}, Magentic-One~\cite{fourney2024magenticone}, and
+mixing/debating designs~\cite{du2023debate}---concerned with capability, not security;
+\defname{} adopts their role structures as substrate. A fast-growing attack literature is
+intrinsically multi-agent: prompt infection~\cite{lee2024promptinfection},
+contagious blocking~\cite{zhou2025corba}, population jailbreaking~\cite{gu2024agentsmith},
+topological safety~\cite{yu2024netsafe}, adversarial roles~\cite{tian2023evilgeniuses},
+GenAI worms~\cite{cohen2024aiworm}, memory poisoning~\cite{chen2024agentpoison}, and
+backdoors~\cite{yang2024watchout}. These are attacks in bespoke setups; \defname{} is the
+controlled, deterministically scored environment in which such attacks and defenses can be
+swept and compared.
 
 \subsection{Defenses, surveys, and systematizations}
 Multi-agent defenses include AutoDefense~\cite{zeng2024autodefense} and the

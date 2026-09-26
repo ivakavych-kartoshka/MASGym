@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  21 SEP 2026 02:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  26 SEP 2026 11:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -7,7 +7,7 @@ entering extended mode
 (d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
-(aamas.cls
+(preamble.tex (aamas.cls
 Document Class: aamas 2026/06/27 v2.19 Typesetting articles for the Association for Computing Machinery
 (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
@@ -933,7 +933,9 @@ File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfplots@group@current@column=\count372
 ) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.fillbetween.code.tex (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfcontrib\tikzlibraryfillbetween.code.tex (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryintersections.code.tex (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryintersections.code.tex
 \pgf@intersect@solutions=\count373
-)) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfcontrib\tikzlibrarydecorations.softclip.code.tex (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfcontrib\pgflibraryfillbetween.code.tex))) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.decorations.softclip.code.tex)) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
+)) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfcontrib\tikzlibrarydecorations.softclip.code.tex (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/pgfcontrib\pgflibraryfillbetween.code.tex))) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.decorations.softclip.code.tex)) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/tools\xr.sty
+Package: xr 2024-12-22 v6.00 eXternal References (DPC)
+) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
 LaTeX Info: Redefining \cref on input line 2370.
@@ -956,137 +958,137 @@ Package cleveref Info: `amsthm' support loaded on input line 3026.
 \c@algorithm=\count376
 \c@algline=\count377
 \algind=\skip91
- (sections/abstract.tex)
-Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 168.
+ (sections/abstract.tex))
+Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 18.
  Excluding comment 'screenonly' Include comment 'printonly' Excluding comment 'anonsuppress' Excluding comment 'acks' (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count378
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 168.
-LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line 168.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 18.
+LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 168.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 168.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 18.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 168.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 168.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 18.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 168.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 168.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 18.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 168.
+LaTeX Font Info:    ... okay on input line 18.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 168.
-LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF on input line 168.
+(Font)              scaled to size 7.0pt on input line 18.
+LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/libertine\ot1linuxlibertinet-tlf.fd
 File: OT1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for OT1/LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 <<ot1.cmap>>
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 <<oml.cmap>>
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 168.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 168.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxmia.fd
 File: untxmia.fd 2024/04/09 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 5.5pt on input line 168.
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 18.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 7.3pt on input line 168.
+(Font)              scaled to size 7.3pt on input line 18.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 5.5pt on input line 168.
-LaTeX Info: Command `\dddot' is already robust on input line 168.
-LaTeX Info: Command `\ddddot' is already robust on input line 168.
-LaTeX Info: Redefining \microtypecontext on input line 168.
-Package microtype Info: Applying patch `item' on input line 168.
-Package microtype Info: Applying patch `toc' on input line 168.
-Package microtype Info: Applying patch `eqnum' on input line 168.
-Package microtype Info: Applying patch `footnote' on input line 168.
-Package microtype Info: Applying patch `verbatim' on input line 168.
-LaTeX Info: Redefining \microtypesetup on input line 168.
+(Font)              scaled to size 5.5pt on input line 18.
+LaTeX Info: Command `\dddot' is already robust on input line 18.
+LaTeX Info: Command `\ddddot' is already robust on input line 18.
+LaTeX Info: Redefining \microtypecontext on input line 18.
+Package microtype Info: Applying patch `item' on input line 18.
+Package microtype Info: Applying patch `toc' on input line 18.
+Package microtype Info: Applying patch `eqnum' on input line 18.
+Package microtype Info: Applying patch `footnote' on input line 18.
+Package microtype Info: Applying patch `verbatim' on input line 18.
+LaTeX Info: Redefining \microtypesetup on input line 18.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1101,7 +1103,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package hyperref Info: Link coloring OFF on input line 168.
+Package hyperref Info: Link coloring OFF on input line 18.
  (main.out) (main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -1171,122 +1173,127 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 170.
-LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF on input line 170.
+(Font)              scaled to size 17.28pt on input line 21.
+LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF on input line 21.
 (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/libertine\t1linuxbiolinumt-tlf.fd
 File: T1LinuxBiolinumT-TLF.fd 2017/03/20 (autoinst) Font definitions for T1/LinuxBiolinumT-TLF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 170.
+(Font)              scaled to size 17.28pt on input line 21.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 17.28pt on input line 170.
+(Font)              scaled to size 17.28pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/sc' will be
-(Font)              scaled to size 17.28pt on input line 170.
+(Font)              scaled to size 17.28pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 170.
+(Font)              scaled to size 12.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 170.
-<by.pdf, id=262, 121.45375pt x 43.16125pt>
+(Font)              scaled to size 10.0pt on input line 21.
+<by.pdf, id=194, 121.45375pt x 43.16125pt>
 File: by.pdf Graphic file (type pdf)
 <use by.pdf>
-Package pdftex.def Info: by.pdf  used on input line 170.
+Package pdftex.def Info: by.pdf  used on input line 21.
 (pdftex.def)             Requested size: 43.40558pt x 15.42474pt.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.0pt on input line 170.
-LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF on input line 170.
+(Font)              scaled to size 7.0pt on input line 21.
+LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF on input line 21.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/libertine\ts1linuxlibertinet-tlf.fd
 File: TS1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for TS1/LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 170.
+(Font)              scaled to size 7.0pt on input line 21.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 170.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 10.95pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 9.0pt on input line 170.
+(Font)              scaled to size 9.0pt on input line 21.
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 6.6pt on input line 170.
+(Font)              scaled to size 6.6pt on input line 21.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 9.0pt on input line 21.
 
-Overfull \hbox (6.91667pt too wide) in paragraph at lines 170--170
-\T1/LinuxLibertineT-TLF/m/n/9 (-20) Agent Se-cu-rity Bench (ASB), Agent-Dojo, In-jecA-gent, and the ToolEmu
+Overfull \hbox (1.0672pt too wide) in paragraph at lines 21--21
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) multi-agent LLM se-cu-rity; se-cu-rity bench-mark; co-evolving red/blue
+ []
+
+
+Overfull \hbox (1.2944pt too wide) in paragraph at lines 21--21
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) eval-u-a-tion; col-lu-sion; prompt in-jec-tion; de-ter-min-is-tic se-cu-rity check-
  []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 170.
+(Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 8.0pt on input line 170.
+(Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 8.0pt on input line 170.
+(Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 170.
+(Font)              scaled to size 8.0pt on input line 21.
 
-Underfull \vbox (badness 5756) has occurred while \output is active []
+Underfull \vbox (badness 2744) has occurred while \output is active []
 
  (sections/introduction.tex
 LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 9.
@@ -1310,29 +1317,35 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 (Font)              scaled to size 7.0pt on input line 43.
 [1.1{C:/Users/Lenovo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_jtta5h.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}
 
-{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc} <./by.pdf>]
+{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc} <./by.pdf>]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/sc' will be
 (Font)              scaled to size 9.0pt on input line 48.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 6.6pt on input line 49.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 49.
-
-Overfull \hbox (4.97963pt too wide) in paragraph at lines 48--54
-\OT1/LinuxLibertineT-TLF/m/n/9 (-20) 27\OML/nxlmi/m/it/9 :\OT1/LinuxLibertineT-TLF/m/n/9 (-20) 6%$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) from single-agent to col-lu-sion to compromised-orchestrator
- []
-
 ) (sections/related_work.tex
-Overfull \hbox (3.74663pt too wide) in paragraph at lines 7--19
+Overfull \hbox (3.74663pt too wide) in paragraph at lines 5--17
 \T1/LinuxLibertineT-TLF/m/n/9 (-20) The clos-est in-stru-ments eval-u-ate a lone tool-using agent. ASB [[]Zhang
  []
 
 
-Overfull \hbox (27.71951pt too wide) in paragraph at lines 7--19
+Overfull \hbox (27.71951pt too wide) in paragraph at lines 5--17
 \T1/LinuxLibertineT-TLF/m/n/9 (-20) et al[][] []2024[]], Agen-tHarm [[]An-driushchenko et al[][] []2025[]], Harm-Bench [[]Mazeika
  []
 
-) (sections/preliminaries.tex [2.2{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_tlukpt.enc}]
+
+Underfull \vbox (badness 3199) has occurred while \output is active []
+
+
+Overfull \hbox (2.44234pt too wide) in paragraph at lines 19--31
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) et al[][] []2024[]], Magentic-One [[]Four-ney et al[][] []2024[]], and mix-ing/debating
+ []
+
+) (sections/preliminaries.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2.2{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_tlukpt.enc}]
 LaTeX Font Info:    Freeze math alphabet allocation in version normal.
 (Font)              Allocated math groups: 14 (local: 2) on input line 24.
 LaTeX Font Info:    Trying to load font information for OT1+LinuxBiolinumT-TLF on input line 24.
@@ -1356,135 +1369,54 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 31.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 33.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 34.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 8.0pt on input line 47.
-LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 6.0pt on input line 47.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 51.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 51.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 51.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 53.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 54.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 54.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 54.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 55.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 55.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 55.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 56.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 56.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 57.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 58.
-LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 59.
-LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 59.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 59.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 59.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 60.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 60.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 61.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 62.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 63.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 63.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 64.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 65.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 66.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 67.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 68.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 69.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 69.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 71.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 39.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 39.
 ) (sections/system_model.tex
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 4.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 5.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 5.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 9.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 9.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 9.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 8.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 10.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 10.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 10.
+
+Underfull \vbox (badness 1603) has occurred while \output is active []
+
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 16.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 17.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 27.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 32.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 32.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 33.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 33.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 36.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 28.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 31.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 31.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 31.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 31.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 33.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 33.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 34.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 34.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 40.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-) (sections/threat_model.tex) (sections/problem_formulation.tex [3.3{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_edcawa.enc}]
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 39.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 41.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 43.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 43.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 47.
+) (sections/threat_model.tex) (sections/problem_formulation.tex
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 11.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
+ [3.3{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_edcawa.enc}]
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 25.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 25.
 LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 33.
@@ -1553,95 +1485,39 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 ) (sections/methodology.tex
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/sc' will be
 (Font)              scaled to size 10.95pt on input line 1.
- (figures/tikz_architecture.tex
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 76.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 76.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    Font shape `OT1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 6.5pt on input line 76.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 76.
-
-Overfull \hbox (17.26433pt too wide) in paragraph at lines 76--76
- []$\OML/nxlmi/m/it/6.5 ^^L; []; []; []; []; []; []$[] 
- []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.0pt on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 9.0pt on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-)
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 18.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 25.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 28.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 19.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 26.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 29.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 33.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 33.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 30.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 34.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 34.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 35.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 39.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 35.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 36.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 40.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 40.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 40.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 41.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 41.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 41.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 42.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 43.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 43.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 43.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 44.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 44.
- [4.4]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 52.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 45.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 52.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 55.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 57.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 56.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 58.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
 ) (sections/algorithm.tex
+Underfull \vbox (badness 6893) has occurred while \output is active []
+
+ [4.4]
 LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 7.
 LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 7.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
@@ -1654,6 +1530,8 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 19.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 22.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
@@ -1679,7 +1557,7 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 44.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 44.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 45.
-) (sections/theory.tex [5.5{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}]
+) (sections/theory.tex
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 13.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
@@ -1706,107 +1584,100 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 56.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 56.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 57.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 57.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 58.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 58.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 60.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 62.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 62.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 65.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 66.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 69.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 74.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 74.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 77.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 77.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 69.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 72.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 78.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 79.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 86.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 86.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 96.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 97.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 79.
+[5.5]
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 89.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 90.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 97.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 98.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 98.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 104.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 104.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 104.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 100.
+
+Overfull \hbox (3.04784pt too wide) in paragraph at lines 97--101
+[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) By As-sump-tion []1[] the pred-i-cates are func-
+ []
+
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 107.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 107.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 107.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 113.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 113.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 114.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 115.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 121.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 125.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 133.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 117.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 125.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 126.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 126.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 127.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 127.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 128.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 129.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 130.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 130.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 134.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 134.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 137.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 137.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 138.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 138.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 139.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 140.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 140.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 141.
-[6.6]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 145.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 147.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 149.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 150.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 151.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 151.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 151.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 166.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 168.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 168.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 168.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 174.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 174.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 175.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 175.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 176.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 140.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 155.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 156.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 156.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 156.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 156.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 163.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 163.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 163.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 164.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 164.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 165.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 165.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 177.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 178.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 189.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 178.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 179.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 182.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 183.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 184.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 184.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 190.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 190.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 190.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 191.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 192.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 192.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 192.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 194.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 195.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 196.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 196.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 202.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 202.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 202.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 203.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 204.
 ) (figures/pgfplots_placeholder_results.tex
 Package pgfplots info on input line 23: Using 'lua backend=false' for axis: x coord trafo unsupported.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
@@ -1839,838 +1710,328 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
+LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
+(Font)              scaled to size 6.5pt on input line 51.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
 ) (sections/experiments.tex
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 8.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 8.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 17.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 52.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 57.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 65.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 65.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 66.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 66.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 66.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 72.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 72.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 72.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 72.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 25.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 25.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 25.
+ [6.6]
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 34.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 35.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 35.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 36.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 36.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
+LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 38.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 40.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 40.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 43.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 74.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 74.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
 
-Underfull \vbox (badness 5203) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7.7]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 80.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 80.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 80.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 81.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 82.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 82.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 82.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-) (sections/discussion.tex
-Overfull \hbox (2.4558pt too wide) in paragraph at lines 79--1
-\U/ntxmia/m/it/9 ^^B\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 GNH\U/ntxmia/m/it/9 ^^A[] []\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 G\LMS/ntxsy/m/n/9 \OML/nxlmi/m/it/9 \LMS/ntxsy/m/n/9 บบ$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) agent in-vo-ca-tions (The-o-rem []9.10[]) and $\U/ntxmia/m/it/9 ^^B\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 NH\LMS/ntxsy/m/n/9 บ$
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
+(Font)              scaled to size 9.0pt on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
+(Font)              scaled to size 9.0pt on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
+ (../MASGym/outputs/defense_table/defense_table.tex
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `OML/nxlmi/b/it' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
+(Font)              scaled to size 8.0pt on input line 6.
+LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
+(Font)              scaled to size 6.0pt on input line 6.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 8.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 12.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 12.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 12.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 14.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 14.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 14.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 14.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 16.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 16.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 16.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 16.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 16.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 18.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 18.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 18.
+LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 18.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
+)
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 105.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 107.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 109.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 113.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 114.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 119.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 119.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 120.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 120.
+
+Overfull \hbox (1.21172pt too wide) in paragraph at lines 112--122
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B re-turn \T1/LinuxLibertineT-TLF/m/it/9 (-20) bit-identical $[][]$
  []
 
-
-Overfull \hbox (2.80391pt too wide) in paragraph at lines 79--1
-\T1/LinuxLibertineT-TLF/m/n/9 (-20) machine-hours per episode ($\U/ntxmia/m/it/9 ^^B\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 MNH\LMS/ntxsy/m/n/9 บ$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) per con-fig-u-ra-tion, $\U/ntxmia/m/it/9 ^^B\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 RMNH\LMS/ntxsy/m/n/9 บ$
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 124.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 124.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 125.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 125.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 129.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 129.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 130.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 134.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 139.
+) (sections/discussion.tex
+Overfull \hbox (43.26308pt too wide) in paragraph at lines 134--1
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) configuration sweep re-solv-ing $[][]$ gaps of size $\U/ntxmia/m/it/9 ^^A$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) costs $\U/ntxmia/m/it/9 ^^B\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 GNH\U/ntxmia/m/it/9 ^^A[] []\LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 G\LMS/ntxsy/m/n/9 \OML/nxlmi/m/it/9 \LMS/ntxsy/m/n/9 บบ$
  []
 
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 8.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 17.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
-) (sections/conclusion.tex
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 5.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 6.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 6.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 6.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8.8] (appendix/proofs.tex
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
-
-Overfull \hbox (6.20833pt too wide) in paragraph at lines 12--15
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) With one agent the
- []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 20.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-
-Overfull \hbox (7.53781pt too wide) in paragraph at lines 18--24
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) By D4a
- []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 27.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 27.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 27.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 28.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 29.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 29.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 30.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 30.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 30.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 31.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 31.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-
-Overfull \hbox (10.9533pt too wide) in paragraph at lines 27--33
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) By As-sump-tion []1[],
- []
-
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 36.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 37.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 37.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 48.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 48.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 49.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 55.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 55.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 55.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 56.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 57.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 62.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 62.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 64.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 69.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 69.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 69.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 70.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 75.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 77.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 77.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 78.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 82.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 82.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 86.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 86.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 89.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 90.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 94.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 94.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 95.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 96.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 96.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 97.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 98.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 99.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 100.
-
-Overfull \hbox (1.75418pt too wide) in paragraph at lines 94--102
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) Let the cen-tre be $\OML/nxlmi/m/it/9 c$ \T1/LinuxLibertineT-TLF/m/n/9 (-20) and the leaves
- []
-
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 103.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 103.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 103.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 103.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 104.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 104.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 106.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 110.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 110.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 111.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 111.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 112.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 112.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 112.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 113.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 113.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 114.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 114.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 114.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 115.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 115.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 115.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 115.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 115.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 116.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 117.
-
-Overfull \hbox (2.0935pt too wide) in paragraph at lines 110--118
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) Seed the root (level $\OT1/LinuxLibertineT-TLF/m/n/9 (-20) 0$\T1/LinuxLibertineT-TLF/m/n/9 (-20) ). Each com-
- []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 121.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 121.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 121.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 121.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 122.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 123.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 124.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 124.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 125.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 125.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 125.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 125.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 126.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 126.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 127.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 128.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 133.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 134.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-
-Overfull \hbox (12.52057pt too wide) in paragraph at lines 133--137
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) In the thresh-
- []
-
-[9.9]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 142.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 142.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 144.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 145.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 145.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 146.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 146.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 149.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 155.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 155.
-
-Overfull \hbox (19.21269pt too wide) detected at line 156
-\U/ntxmia/m/it/9 ^^A[] = \OML/nxlmi/m/it/9 C \LMS/ntxsy/m/n/9 ^^@ \U/ntxsym/m/n/9 E[] \U/ntxmia/m/it/9 = [] \LMS/ntxsy/m/n/9 น\OML/nxlmi/m/it/9 C \LMS/ntxsy/m/n/9 ^^@ \OML/nxlmi/m/it/9 L\LMS/ntxsy/m/n/9 บ \U/ntxmia/m/it/9 = \OML/nxlmi/m/it/9 p\LMS/ntxsy/m/n/9 น\OT1/LinuxLibertineT-TLF/m/n/9 1 \LMS/ntxsy/m/n/9 ^^@ \OML/nxlmi/m/it/9 p\LMS/ntxsy/m/n/9 บ [] \U/ntxmia/m/it/9 = ^^B []\OML/nxlmi/m/it/9 p\LMS/ntxsy/m/n/9 น\OT1/LinuxLibertineT-TLF/m/n/9 1 \LMS/ntxsy/m/n/9 ^^@ \OML/nxlmi/m/it/9 p\LMS/ntxsy/m/n/9 บ\OML/nxlmi/m/it/9 N[]:
- []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 156.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 157.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 158.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 159.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 167.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 168.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 168.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 169.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 170.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 171.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 175.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 176.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 176.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 176.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 177.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 178.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 179.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 179.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 179.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 179.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 180.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 184.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 185.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 185.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 186.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 187.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 187.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 188.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 188.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 188.
-) (appendix/supplement.tex
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 9.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 10.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 10.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 11.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 11.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 11.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 12.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 30.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 40.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 41.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 47.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 47.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 48.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 49.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 49.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 50.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 52.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 52.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 53.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 54.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 63.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 71.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 72.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 73.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 74.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 76.
-) (appendix/additional_experiments.tex
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
- [10.10]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 13.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 14.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 15.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 16.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 17.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 17.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 17.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 18.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 19.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 21.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 22.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 24.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 42.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 48.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 48.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 48.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 48.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 58.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 58.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 58.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 58.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 67.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 75.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 75.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 75.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 75.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 77.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 78.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 79.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 80.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 84.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 85.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 88.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 91.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 92.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 93.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 93.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 93.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 93.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 94.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 94.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 95.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 97.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 97.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    Font shape `T1/zi4/b/n' will be
-(Font)              scaled to size 9.0pt on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 108.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 114.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 114.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 114.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 114.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 116.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 116.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 118.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 119.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 120.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 121.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 122.
-LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 7.0pt on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 129.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 130.
+) (sections/conclusion.tex
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 6.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 8.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 9.
+) Excluding 'acks' comment. (main.bbl
+Underfull \vbox (badness 5533) has occurred while \output is active []
 
-Overfull \hbox (64.11833pt too wide) in paragraph at lines 112--131
- [][] 
- []
 
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 134.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 135.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 137.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 138.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 140.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 140.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 140.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 148.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 154.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 154.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 154.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 162.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 162.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 162.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 162.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 163.
 
-Overfull \hbox (3.32478pt too wide) in paragraph at lines 152--164
- [][] 
- []
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
 
-[11.11]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 169.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 169.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 169.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 170.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 170.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 170.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 170.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 172.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 172.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 172.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 172.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 173.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 173.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 173.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 173.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 173.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 199.
-
-Underfull \hbox (badness 1540) in paragraph at lines 199--199
-[]\T1/LinuxLibertineT-TLF/b/n/9 (+20) Table 9: |LLM back-bone pi-lot, PILOT-labelled (Qwen2.5
- []
-
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 207.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 208.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 209.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 210.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 210.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 211.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 212.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 230.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 231.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 245.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 251.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 256.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 257.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 258.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 259.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 259.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 260.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 262.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 265.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 267.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 272.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 273.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 279.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 281.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-LaTeX Font Info:    Nested math: keeping math alphabet allocation in version normal on input line 288.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 288.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 289.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 291.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 295.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 301.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 301.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 302.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 304.
-LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 304.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 307.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 308.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 308.
-)
-Overfull \hbox (2.72612pt too wide) in paragraph at lines 300--196
-\T1/LinuxLibertineT-TLF/m/n/9 (-20) Beyond the head-line stud-ies, the pro-to-col in-cludes: (i) an \T1/LinuxLibertineT-TLF/b/n/9 (-20) aggregator-
- []
-
-[12.12] Excluding 'acks' comment. (main.bbl
+[8.8{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_fygcup.enc}]
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 95.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 182.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 207.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 234.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 258.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 288.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 303.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 331.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 390.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 403.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 426.
- [13.13]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 526.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 539.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 551.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 567.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 629.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 644.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 763.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 162.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 187.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 214.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 238.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 268.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 283.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 344.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 357.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 380.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 480.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 493.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 505.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 521.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 583.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 598.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (1.37248pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.7065pt too high) has occurred while \output is active []
+
+ [9.9]
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 691.
 )
 
 Class aamas Warning: CCS concepts are mandatory for papers over two pages.
 
 
-Overfull \vbox (1.159pt too high) has occurred while \output is active []
+Overfull \vbox (1.333pt too high) has occurred while \output is active []
 
  (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [14.14] (main.aux)
+) [10.10] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 86F29B23FAF3FC5B072F7DCA54682DD4;12636.
+(rerunfilecheck)             Checksum: 39AA527FB16896D37755ECD375DC1559;8853.
  )
-(\end occurred when \ifx on line 14 was incomplete) 
+(\end occurred when \ifx on line 12 was incomplete) 
 Here is how much of TeX's memory you used:
- 48867 strings out of 467871
- 1096959 string characters out of 5417892
- 1654959 words of memory out of 5000000
- 75399 multiletter control sequences out of 15000+600000
- 950501 words of font info for 863 fonts, out of 8000000 for 9000
+ 48376 strings out of 467871
+ 1086431 string characters out of 5417892
+ 1644452 words of memory out of 5000000
+ 75108 multiletter control sequences out of 15000+600000
+ 911425 words of font info for 759 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 90i,19n,131p,1174b,2703s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on main.pdf (14 pages, 834270 bytes).
+ 95i,19n,134p,1049b,2704s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
+Output written on main.pdf (10 pages, 810859 bytes).
 PDF statistics:
- 1006 PDF objects out of 1200 (max. 8388607)
- 189 named destinations out of 1000 (max. 500000)
- 170058 words of extra memory for PDF output out of 184870 (max. 10000000)
+ 783 PDF objects out of 1000 (max. 8388607)
+ 147 named destinations out of 1000 (max. 500000)
+ 146882 words of extra memory for PDF output out of 154059 (max. 10000000)
 

@@ -51,12 +51,6 @@ then $\ASRs=\mathrm{ASR}$, $\PNAs=\mathrm{PNA}$, and $\NRPs=\mathrm{NRP}$ of
 \Cref{eq:asb-nrp}.
 \end{proposition}
 
-\begin{proof}[Proof of \Cref{prop:reduction}]
-With one agent the global trace is that agent's trajectory and the system predicates equal
-the single-agent predicates, so \Cref{eq:asrsys,eq:pnasys} equal ASB's ASR and PNA, and
-\Cref{eq:nrpsys} equals \Cref{eq:asb-nrp}.
-\end{proof}
-
 \begin{theorem}[Axiomatic characterization of $\NRPs$; complete proof]
 \label{thm:metric}
 Write $\NRPs=g(u,\sigma)$ with utility $u=\PNAs\in[0,1]$ and security level
@@ -71,12 +65,11 @@ and monotonicity (D3).
 \end{theorem}
 
 \begin{proof}[Proof of \Cref{thm:metric}]
-By D4a with base $u=1$, $g(u,\sigma)=g(u\cdot1,\sigma)=u\,g(1,\sigma)$. By D4b with base
-$\sigma=1$, $g(1,\sigma)=g(1,\sigma\cdot1)=\sigma\,g(1,1)$. By D2, $g(1,1)=1$. Hence
-$g(u,\sigma)=u\sigma$. The boundary $g(0,\sigma)=0$ holds since $0\cdot\sigma=0$; and
-$u\sigma$ is bounded in $[0,1]$ and non-decreasing in each argument. Continuity
-(\Cref{as:cont}) is used only to extend the homogeneity identities from rationals to all
-of $[0,1]$; the algebraic identities hold pointwise.
+By D4a with base $u=1$ and D4b with base $\sigma=1$,
+$g(u,\sigma)=u\,g(1,\sigma)=u\sigma\,g(1,1)=u\sigma$ by D2. The boundary $g(0,\sigma)=0$ holds
+since $0\cdot\sigma=0$; and $u\sigma$ is bounded in $[0,1]$ and non-decreasing in each
+argument. Continuity (\Cref{as:cont}) extends the homogeneity identities from rationals to
+all of $[0,1]$; the identities hold pointwise.
 \end{proof}
 
 \begin{remark}
@@ -101,11 +94,10 @@ inflated or deflated by message content alone.
 \end{theorem}
 
 \begin{proof}[Proof of \Cref{thm:integrity}]
-By \Cref{as:tcb}, $\Predsec$ and $\Predutil$ are functions of $\Trace$ only; a function
-returns equal outputs on equal inputs, giving $\Checker(\Trace)=\Checker(\Trace')$. Let
-$\pi$ be any message-space manipulation inducing trace $\Trace_\pi$. The verdict is
-$\Predsec(\Trace_\pi)$; if $\Trace_\pi=\Trace$ then the verdict is unchanged, and so are
-the averages $\widehat{\ASRs},\widehat{\PNAs}$ and their product $\widehat{\NRPs}$.
+By \Cref{as:tcb} the predicates are functions of $\Trace$ only, so equal traces give equal
+verdicts. For any manipulation $\pi$ inducing $\Trace_\pi=\Trace$ the verdict
+$\Predsec(\Trace_\pi)=\Predsec(\Trace)$, and hence so are
+$\widehat{\ASRs},\widehat{\PNAs},\widehat{\NRPs}$.
 \end{proof}
 
 \begin{proposition}[An LLM judge is hijackable; complete proof of existence]
@@ -128,17 +120,14 @@ path and measures the judge-hijack gap as an ablation (RQ2).
 
 \subsection{Compromise propagation across topologies}
 \label{sec:theory-prop}
-Under the independent-cascade instance of \Cref{as:prop}, the expected reach of a
-compromise depends sharply on topology (derivations in the Supplementary Material): on a
-chain \emph{seeded at an endpoint} it is $\sum_{j=1}^{n-1}\pinf^{j}\le\pinf/(1-\pinf)$,
-bounded independently of $n$; on a star a centre seed gives $\CPR=\pinf$
-while a leaf seed gives expected reach $\pinf+\pinf^{2}(n-2)$, a $\Theta(\pinf(1-\pinf)n)$
-gap; on a tree seeded at the root the reach is
-$\sum_{\ell}(b\pinf)^{\ell}$, bounded for $b\pinf<1$ and exponential in depth for
-$b\pinf>1$; and on a complete graph with $s$ seeds one round compromises
-at least $s+(n-s)(1-(1-\pinf)^{s})$; under threshold contagion an agent
-with in-degree below $\thresh$ is never compromised, so a chain with $\thresh\ge2$ has
-$\CPR=0$.
+Under the independent-cascade instance of \Cref{as:prop}, expected reach depends sharply
+on topology (all four derivations in the Supplementary Material): on a chain
+\emph{seeded at an endpoint} it is $\sum_{j=1}^{n-1}\pinf^{j}\le\pinf/(1-\pinf)$,
+bounded independently of $n$; on a star a centre seed gives $\CPR=\pinf$ while a leaf seed
+gives $\pinf+\pinf^{2}(n-2)$, a $\Theta(\pinf(1-\pinf)n)$ gap; trees show a
+$b\pinf$-depth phase transition and complete graphs grow superlinearly in seed count.
+Under threshold contagion an agent with in-degree below $\thresh$ is never compromised, so
+a chain with $\thresh\ge2$ has $\CPR=0$.
 
 \begin{theorem}[Collusion advantage on the star]
 \label{thm:collusion}
@@ -171,11 +160,10 @@ if some witness is adversary-free, the honest agents can complete the task.
 \end{proposition}
 
 \begin{proof}[Proof of \Cref{prop:forced}]
-(a) Every witness has size $\ge k$ (\Cref{def:forced}); a set of size $<k$ contains no
-witness, so no assignment supported on it satisfies $\Predutil$. (b) If $\Advset$ meets
-every witness, every route to $\Predutil=1$ passes through an adversarial agent, which can
-withhold its contribution, so no witness completes and $\Predutil=0$; if some witness is
-adversary-free, its members jointly satisfy $\Predutil$.
+(a) Every witness has size $\ge k$, so a set $S$ with $|S|<k$ supports no witness and
+cannot satisfy $\Predutil$. (b) If $\Advset$ is a transversal, every route to
+$\Predutil=1$ passes through an adversarial agent that can withhold, so $\Predutil=0$; if
+some witness is adversary-free its members jointly satisfy it.
 \end{proof}
 
 \subsection{Sample complexity of the estimators}

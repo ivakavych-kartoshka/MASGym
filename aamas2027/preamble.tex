@@ -1,0 +1,169 @@
+% ============================================================================
+% Shared preamble for BOTH documents:
+%   main.tex            -- the 8-page main-track paper
+%   main_supplement.tex -- the separate supplementary PDF
+%
+% Kept in one file so theorem environments, notation macros, and title metadata
+% cannot drift between the paper and its supplement. xr is loaded here (inert
+% unless \externaldocument is called) so the supplement can resolve the ~57
+% main-body cross-references it makes.
+% ============================================================================
+\documentclass[sigconf,anonymous]{aamas}
+
+% ---- AAMAS 2027 IFAAMAS copyright block (do not change!) ----
+\makeatletter
+\gdef\@copyrightpermission{
+  \begin{minipage}{0.2\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{\includegraphics[width=0.90\textwidth]{by}}
+  \end{minipage}\hfill
+  \begin{minipage}{0.8\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{This work is licensed under a Creative Commons Attribution International 4.0 License.}
+  \end{minipage}
+  \vspace{5pt}
+}
+\makeatother
+
+\setcopyright{ifaamas}
+\acmConference[AAMAS 2027]{Proc.\@ of the 26th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, Vietnam}{M.~Baldoni, F.~Fang, W.~Yeoh, N.~Yorke-Smith (eds.)}
+\copyrightyear{2027}
+\acmYear{2027}
+\acmDOI{}
+\acmISBN{}
+\acmSubmissionID{MASGym-2027-001}
+\submissionType{Research Paper Track}
+
+% ---- encoding / fonts ----
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{balance}
+
+% ---- math ----
+% NOTE: use amsfonts (not amssymb): acmart/sigconf loads newtxmath, and
+% amssymb's \Bbbk redefinition conflicts with it.
+\usepackage{amsmath,amsfonts,amsthm,mathtools,bm}
+\usepackage{xspace}
+
+% ---- citations (author--year, natbib is loaded by acmart) ----
+\citestyle{acmauthoryear}
+
+% ---- lists / tables / floats ----
+\usepackage{enumitem}
+\usepackage{booktabs,multirow,array}
+\usepackage{xcolor}
+\usepackage{float}
+
+% ---- graphics: TikZ / PGFPlots ----
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,shapes.geometric,%
+  shapes.symbols,decorations.pathreplacing,patterns,matrix,shadows.blur}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots,fillbetween}
+
+% ---- cross-document references (inert unless \externaldocument is used) ----
+% Must be loaded before hyperref/cleveref resolve, hence its position here.
+\usepackage{xr}
+
+% ---- hyperlinks + clever references (hyperref is loaded by acmart) ----
+\usepackage{cleveref}
+
+% ---- shared TikZ styles (visual grammar) ----
+\input{figures/tikz_styles.tex}
+
+% ============================================================================
+% Theorem environments
+% ============================================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{assumption}{Assumption}{Assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+
+% ============================================================================
+% Lightweight algorithm float + pseudocode macros
+% (reproduce a numbered, ruled pseudocode listing with float.sty only)
+% ============================================================================
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\crefname{algorithm}{Algorithm}{Algorithms}
+\Crefname{algorithm}{Algorithm}{Algorithms}
+\newcounter{algline}
+\newlength{\algind}
+\newcommand{\algreset}{\setcounter{algline}{0}\setlength{\algind}{0pt}}
+\newcommand{\PL}[1]{\par\refstepcounter{algline}\noindent
+  \makebox[2.6em][r]{\scriptsize\thealgline:\,}\hspace{0.5em}\hspace{\algind}%
+  \ignorespaces#1\strut}
+\newcommand{\Ind}{\addtolength{\algind}{1.5em}}
+\newcommand{\Ded}{\addtolength{\algind}{-1.5em}}
+\newcommand{\kw}[1]{\textbf{#1}}
+\newcommand{\comm}[1]{\hfill{\footnotesize\itshape\color{black!55}\(\triangleright\)~#1}}
+
+% ============================================================================
+% Notation macros
+% ============================================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\indic}{\mathbb{1}}
+\newcommand{\Agents}{\mathcal{A}}          % set of agents
+\newcommand{\Roles}{\mathcal{R}}           % role set
+\newcommand{\Gtop}{\mathcal{G}}            % topology graph
+\newcommand{\Vtop}{\mathcal{V}}
+\newcommand{\Etop}{\mathcal{E}}
+\newcommand{\Nin}{\mathcal{N}^{-}}          % inbound neighbourhood
+\newcommand{\Trace}{\tau}                  % global state trace
+\newcommand{\TraceSp}{\mathcal{T}}         % trace space
+\newcommand{\Statesp}{\mathcal{S}}         % state space
+\newcommand{\Predsec}{\Phi}                % system-level security predicate
+\newcommand{\Predutil}{\Psi}               % benign-success predicate
+\newcommand{\Checker}{\mathsf{C}}          % deterministic checker
+\newcommand{\Emu}{\mathcal{E}_{\mathrm{LM}}} % LM tool emulator
+\newcommand{\Judge}{\mathsf{J}}            % LLM judge (contrast)
+\newcommand{\Advset}{\mathcal{B}}          % adversarial agent set
+\newcommand{\betafrac}{\beta}              % adversary fraction
+\newcommand{\config}{c}                    % environment configuration
+\newcommand{\Configs}{\mathcal{C}}         % configuration space
+\newcommand{\ASRs}{\mathrm{ASR}_{\mathrm{sys}}}
+\newcommand{\ASRa}{\mathrm{ASR}_{\mathrm{act}}}
+\newcommand{\PNAs}{\mathrm{PNA}_{\mathrm{sys}}}
+\newcommand{\NRPs}{\mathrm{NRP}_{\mathrm{sys}}}
+\newcommand{\CPR}{\mathrm{CPR}}            % compromise-propagation rate
+\newcommand{\CSR}{\mathrm{CSR}}            % collusion success rate
+\newcommand{\red}{\rho}                    % red policy
+\newcommand{\blue}{\delta}                 % blue policy (defense)
+\newcommand{\pinf}{p}                      % per-edge propagation probability
+\newcommand{\thresh}{\theta}               % threshold (bootstrap percolation)
+\newcommand{\kappaem}{\kappa}              % emulation agreement
+\newcommand{\defname}{\textsc{MASGym}\xspace}
+\newcommand{\corb}{\textsc{CoRB}\xspace}
+
+% ============================================================================
+% Title and author metadata (in the preamble, as in the official sample)
+% ============================================================================
+\title[MASGym: A Security Gym for Multi-Agent LLM Systems]{\defname: A
+Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems with
+Parameterized Collusion, Orchestrator Compromise, and System-Level Metrics}
+
+% Anonymous double-blind submission: the author block is suppressed by the
+% `anonymous' class option. For camera-ready, remove that option and fill in
+% your full author list, affiliations, and emails.
+\author{Thanh Pham}
+\affiliation{%
+  \institution{School of Computing Technologies, RMIT University}
+  \country{Melbourne, Australia}}
+\email{thanhphamchivn@gmail.com}
+
+% Abstract and keywords must be defined in the preamble, before \maketitle.
+\input{sections/abstract.tex}

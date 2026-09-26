@@ -1,8 +1,8 @@
 \section{Preliminaries and Notation}
 \label{sec:prelim}
 
-This section recalls the three primitives \defname{} builds on (notation summarized in
-\Cref{tab:notation}): ASB's utility--security metric, AgentDojo's
+This section recalls the three primitives \defname{} builds on (notation summarized in the
+Supplementary Material): ASB's utility--security metric, AgentDojo's
 deterministic state-based checking, and ToolEmu's LM tool emulation.
 
 \subsection{ASB's utility--security metric}
@@ -32,41 +32,13 @@ $\kappaem\approx0.48$ (Cohen's $\kappa$~\cite{cohen1960coefficient}, extended to
 raters by Fleiss~\cite{fleiss1971measuring}). \defname{} adopts LM emulation for tool
 breadth, including an adversarial mode $\Emu^{\!\dagger}$ for malicious tools, but treats
 $\kappaem$ as a first-class threat to validity: scoring routes through the deterministic
-checker, and an emulated-versus-real-tools ablation is part of the protocol
-(\Cref{sec:experiments}). An \emph{episode} runs a task under a fixed configuration
+  checker, and the harness registers an emulated-versus-real-tools ablation for
+  independent re-testing. We did not run it: no real tool backend is wired into our
+  environment, so we report it as an unmeasured gap rather than let the registration
+  imply coverage (\Cref{sec:limitations}). An \emph{episode} runs a task under a fixed configuration
 $\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$, from which all
 security and utility quantities are computable---the fact that makes deterministic,
 hijack-resistant scoring possible.
 
-\begin{table}[t]
-\centering
-\caption{Notation used throughout.}
-\label{tab:notation}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Symbol & Meaning \\
-\midrule
-$\Agents=\{a_1,\dots,a_N\}$ & $N$ agents, $N\in\{3,\dots,50\}$ \\
-$\Roles$ & roles $\{$planner, worker, tool-executor, memory$\}$ \\
-$\Gtop=(\Vtop,\Etop)$ & topology (star, chain, tree, mesh) \\
-$\Nin(a)$ & inbound neighbours of $a$ in $\Gtop$ \\
-$s_t\in\Statesp$ & global state at step $t$; space $\Statesp$ \\
-$\Trace\in\TraceSp$ & global trace $\Trace=(s_0,\dots,s_H)$ of an episode \\
-$H$ & episode horizon \\
-$\Predsec,\Predutil$ & security / benign-success predicates \\
-$\Checker$ & deterministic checker on $\Trace$ \\
-$\Emu$ & LM tool emulator (adversarial $\Emu^{\!\dagger}$) \\
-$\Judge$ & LLM judge (contrast baseline) \\
-$\config\in\Configs$ & environment configuration \\
-$\Advset\subseteq\Agents$ & adversarial agents; $\betafrac=|\Advset|/N$ \\
-$\ASRs,\PNAs,\NRPs$ & system ASR / PNA / net metric \\
-$\CPR,\ \CSR$ & propagation rate, collusion success rate \\
-$\pinf\in[0,1],\ \thresh$ & per-edge infection probability; threshold \\
-$\red,\ \blue$ & red (attack) / blue (defense) policy in \corb \\
-$M$ & episodes per configuration \\
-$\kappaem$ & emulator/human agreement ($\approx 0.48$) \\
-\bottomrule
-\end{tabular}
-\end{table}
+% Notation table moved to the Supplementary Material to keep the main paper
+% within its page limit; main-text references it in prose.
