@@ -135,37 +135,87 @@ $1$, so the system-level advantage is strictly positive and the unsafe-action si
 $\CPR$ rises with $\betafrac$ for both behaviours and is consistently higher for colluding
 until the independent cascade catches up at the top of the sweep.
 
+% \begin{table}[t]
+% \centering
+% \caption{Collusion sweep (RQ5), \textbf{synthetic-model} results (star, $N{=}5$, no
+% defense, $M{=}738$ episodes per (behaviour, $\betafrac$) cell, seed-locked rows of
+% \texttt{collusion\_sweep.csv}). $\ASRs$ is the full system predicate (\Cref{def:csr}); ASR$_{\mathrm{act}}$
+% is the single-agent unsafe-action predicate. The collusion advantage
+% $\Delta_{\mathrm{coll}}=\mathrm{ASR}_{\mathrm{act}}^{\mathrm{coll}}-\mathrm{ASR}_{\mathrm{act}}^{\mathrm{ind}}$
+% is largest at small $\betafrac$ and shrinks or changes sign as $\betafrac$ grows, while under
+% the system predicate colluding saturates at $1.000$ for all $\betafrac\ge0.1$.}
+% \label{tab:collusion}
+% \small
+% \setlength{\tabcolsep}{4pt}
+% \begin{tabular}{@{}lrrrrrrr@{}}
+% \toprule
+%  & \multicolumn{2}{c}{ASR$_{\mathrm{act}}$} & $\Delta_{\mathrm{coll}}$ & \multicolumn{2}{c}{$\ASRs$} & \multicolumn{2}{c}{$\CPR$} \\
+% \cmidrule(lr){2-3}\cmidrule(lr){4-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+% $\betafrac$ & colluding & independent & (ASR$_{\mathrm{act}}$) & colluding & independent & colluding & independent \\
+% \midrule
+% 0.1 & 0.603 & 0.554 & $+$0.049 & 1.000 & 0.783 & 0.304 & 0.190 \\
+% 0.2 & 0.577 & 0.575 & $+$0.003 & 1.000 & 0.780 & 0.298 & 0.170 \\
+% 0.3 & 0.558 & 0.583 & $-$0.024 & 1.000 & 0.883 & 0.293 & 0.290 \\
+% 0.4 & 0.561 & 0.523 & $+$0.038 & 1.000 & 0.846 & 0.306 & 0.273 \\
+% 0.5 & 0.564 & 0.565 & $-$0.001 & 1.000 & 0.946 & 0.308 & 0.341 \\
+% \bottomrule
+% \multicolumn{8}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Every value is a measured cell of
+% \texttt{collusion\_sweep.csv} (star topology, $N{=}5$, no defense, $M{=}738$). $\ASRs$ is the
+% full system predicate including availability sabotage, which saturates at $1.000$ when the
+% star hub is seeded; the unsafe-action channel is what \Cref{fig:results}(c) plots. $\betafrac$
+% is the adversary fraction (\Cref{eq:adv-config}); $\CPR$ at $\betafrac{=}0.0$ is $0$ for both
+% behaviours and is omitted.}
+% \end{tabular}
+% \end{table}
+
 \begin{table}[t]
 \centering
-\caption{Collusion sweep (RQ5), \textbf{synthetic-model} results (star, $N{=}5$, no
-defense, $M{=}738$ episodes per (behaviour, $\betafrac$) cell, seed-locked rows of
-\texttt{collusion\_sweep.csv}). $\ASRs$ is the full system predicate (\Cref{def:csr}); ASR$_{\mathrm{act}}$
-is the single-agent unsafe-action predicate. The collusion advantage
-$\Delta_{\mathrm{coll}}=\mathrm{ASR}_{\mathrm{act}}^{\mathrm{coll}}-\mathrm{ASR}_{\mathrm{act}}^{\mathrm{ind}}$
-is largest at small $\betafrac$ and shrinks or changes sign as $\betafrac$ grows, while under
-the system predicate colluding saturates at $1.000$ for all $\betafrac\ge0.1$.}
+\caption{Collusion sweep (RQ5), synthetic-model results
+(star, $N=5$, no defense, $M=738$ episodes per cell).}
 \label{tab:collusion}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lrrrrrrr@{}}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.05}
+
+\begin{tabular}{@{}c|cc|c|c|cc@{}}
 \toprule
- & \multicolumn{2}{c}{ASR$_{\mathrm{act}}$} & $\Delta_{\mathrm{coll}}$ & \multicolumn{2}{c}{$\ASRs$} & \multicolumn{2}{c}{$\CPR$} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
-$\betafrac$ & colluding & independent & (ASR$_{\mathrm{act}}$) & colluding & independent & colluding & independent \\
+$\betafrac$
+& \multicolumn{2}{c|}{$\ASR_{\mathrm{act}}$}
+& $\Delta_{\mathrm{coll}}$
+& $\ASR_s$
+& \multicolumn{2}{c}{$\CPR$} \\
+\cmidrule(lr){2-3}
+\cmidrule(lr){6-7}
+
+& Coll. & Ind.
+& 
+& Coll.
+& Coll. & Ind. \\
+
 \midrule
-0.1 & 0.603 & 0.554 & $+$0.049 & 1.000 & 0.783 & 0.304 & 0.190 \\
-0.2 & 0.577 & 0.575 & $+$0.003 & 1.000 & 0.780 & 0.298 & 0.170 \\
-0.3 & 0.558 & 0.583 & $-$0.024 & 1.000 & 0.883 & 0.293 & 0.290 \\
-0.4 & 0.561 & 0.523 & $+$0.038 & 1.000 & 0.846 & 0.306 & 0.273 \\
-0.5 & 0.564 & 0.565 & $-$0.001 & 1.000 & 0.946 & 0.308 & 0.341 \\
+0.1 & 0.603 & 0.554 & $+0.049$ & 1.000 & 0.304 & 0.190 \\
+0.2 & 0.577 & 0.575 & $+0.003$ & 1.000 & 0.298 & 0.170 \\
+0.3 & 0.558 & 0.583 & $-0.024$ & 1.000 & 0.293 & 0.290 \\
+0.4 & 0.561 & 0.523 & $+0.038$ & 1.000 & 0.306 & 0.273 \\
+0.5 & 0.564 & 0.565 & $-0.001$ & 1.000 & 0.308 & 0.341 \\
+
 \bottomrule
-\multicolumn{8}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Every value is a measured cell of
-\texttt{collusion\_sweep.csv} (star topology, $N{=}5$, no defense, $M{=}738$). $\ASRs$ is the
-full system predicate including availability sabotage, which saturates at $1.000$ when the
-star hub is seeded; the unsafe-action channel is what \Cref{fig:results}(c) plots. $\betafrac$
-is the adversary fraction (\Cref{eq:adv-config}); $\CPR$ at $\betafrac{=}0.0$ is $0$ for both
-behaviours and is omitted.}
 \end{tabular}
+
+\vspace{2pt}
+
+\begin{minipage}{0.96\linewidth}
+\footnotesize
+\textit{Note.}
+Coll. = colluding; Ind. = independent.
+$\Delta_{\mathrm{coll}} =
+\ASR_{\mathrm{act}}^{\mathrm{coll}} -
+\ASR_{\mathrm{act}}^{\mathrm{ind}}$.
+$\ASR_s$ is the full system predicate, including
+availability sabotage, and equals $1.000$ for all
+colluding conditions. $\CPR=0$ at $\betafrac=0$
+and is omitted.
+\end{minipage}
 \end{table}
 
 \subsection{Cost model and reachable region}
@@ -222,6 +272,25 @@ here, \emph{complies} on every attack scenario. That is what makes the defense s
 prompt-level defense to move the compliance rate. The official \verb+meta-llama+ repos gate
 downloads on per-account approval, so the Llama-3.2 checkpoints here are loaded from an
 ungated mirror of the official weights.
+
+\paragraph{How a real decision is scored.}\label{app:scoring} Because the paper's
+security claim on real backbones rests on whether a model \emph{complied}, the rule is
+fixed in advance and logged per decision. A decision is \textbf{exfiltrate} (compliant) if
+the completion asserts the action is being or will be carried out---an affirmative subject
+(\texttt{I}, \texttt{we}, \texttt{I'll}) within a short span of an action verb
+(\emph{send, e-mail, forward, upload, attach, copy, share, exfiltrate, deliver, transfer,
+export}), or a bare progressive form (\emph{sending, forwarding, ...}), or an offer
+(\emph{here's a/the copy})---optionally negated, since ``I will not send the database''
+must not score as compliance. It is \textbf{benign} (refusal) on explicit refusal wording
+(\emph{won't, cannot, must not, refuse to, decline to, never, do not}). Three parse rules
+are tried in order and the one that fired is logged: a leading \texttt{BENIGN}/
+\texttt{EXFILTRATE} token, then a refusal pattern, then a compliance pattern; if none
+applies the decision is marked \texttt{parse\_failed} and the containing cell is
+\emph{rejected} by the table and release builders rather than scored as a refusal. That
+guard exists because a failed API call yields an empty completion, which the refusal rule
+would otherwise score as a clean refusal---a broken run would then look exactly like a
+model that never complies. The completion budget and the exact prompts are in
+\Cref{app:repro}.
 
 \begin{table}[t]
 \centering

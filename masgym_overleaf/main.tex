@@ -1,0 +1,64 @@
+﻿% ============================================================================
+% MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems.
+% AAMAS 2027 submission format (official `aamas' class, anonymous).
+%
+% The appendices live in a SEPARATE PDF (main_supplement.tex) because only
+% bibliographic reference pages are exempt from the 8-page limit.
+%
+% BUILD:   build_all.bat   (recommended: builds main.pdf then main_supplement.pdf)
+%          or: pdflatex main; bibtex main; pdflatex main; pdflatex main
+%
+% PAGE LIMIT: main track papers are at most EIGHT (8) pages, with any number
+% of additional pages for bibliographic references. Do NOT modify style/layout
+% parameters. For camera-ready, drop the `anonymous' option and fill in
+% author/affiliation/email.
+% ============================================================================
+% ============================================================================
+% Claim the root role before pulling in the preamble: this file holds no
+% \documentclass (that lives in preamble.tex), so without this stamp preamble.tex
+% would assume it had been selected as Overleaf's Main document and redirect
+% back here, re-entering this file.
+\makeatletter\def\@masgym@root{main.tex}\makeatother
+\input{preamble.tex}
+
+\begin{document}
+
+
+\maketitle
+
+% ---------------------------------------------------------------------------
+% Body
+% ---------------------------------------------------------------------------
+\input{sections/introduction.tex}
+\input{sections/related_work.tex}
+\input{sections/preliminaries.tex}
+\input{sections/system_model.tex}
+\input{sections/threat_model.tex}
+\input{sections/problem_formulation.tex}
+\input{sections/methodology.tex}
+\input{sections/algorithm.tex}
+\input{sections/theory.tex}
+\input{figures/pgfplots_placeholder_results.tex}
+\input{sections/experiments.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
+
+% ---------------------------------------------------------------------------
+% Appendices are NOT here: they are built into main_supplement.pdf so that only
+% bibliographic reference pages count against the 8-page main-track limit.
+% ---------------------------------------------------------------------------
+
+% ---------------------------------------------------------------------------
+% Acknowledgments (omitted automatically in anonymous mode)
+% ---------------------------------------------------------------------------
+\begin{acks}
+We thank the anonymous reviewers for their constructive comments.
+\end{acks}
+
+% Bibliography
+% ---------------------------------------------------------------------------
+\balance % balance the two columns on the final page (AAMAS requirement)
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references_verified}
+
+\end{document}

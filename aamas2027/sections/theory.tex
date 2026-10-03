@@ -2,11 +2,12 @@
 \label{sec:theory}
 
 A benchmark earns trust when its central metric is justified, its evaluator cannot be
-gamed, and its sample sizes are principled. We therefore treat theory as part of the
-instrument. All results are stated under explicit assumptions (below) and carry honest
-proof-status labels; none claims that any real defense is secure or provably degrades.
-Short proofs of the central characterization and integrity theorems are inline; remaining
-derivations and the complete proof archive ship with the harness (Supplementary Material).
+gamed, and its sample sizes are principled, so we treat theory as part of the instrument.
+All results are stated under explicit assumptions and carry honest proof-status labels;
+none claims that any real defense is secure or provably degrades. \emph{Every result we
+claim is proved in full in this section.} What the Supplementary Material adds are the
+derivations of the \emph{classical} propagation results we restate in our notation
+(Granovetter/Watts/Kempe), not proofs of our own claims.
 
 \begin{assumption}[Trusted checking]
 \label{as:tcb}
@@ -50,6 +51,13 @@ If $N=1$ and $\Predsec,\Predutil$ are the single-agent security and benign predi
 then $\ASRs=\mathrm{ASR}$, $\PNAs=\mathrm{PNA}$, and $\NRPs=\mathrm{NRP}$ of
 \Cref{eq:asb-nrp}.
 \end{proposition}
+
+\begin{proof}[Proof of \Cref{prop:reduction}]
+With one agent the global trace $\Trace$ is that agent's own trajectory and the system
+predicates $\Predsec,\Predutil$ coincide with the single-agent ones. Substituting into
+\Cref{eq:asrsys,eq:pnasys} yields $\ASRs=\mathrm{ASR}$ and $\PNAs=\mathrm{PNA}$ term by
+term, hence $\NRPs=\PNAs(1-\ASRs)=\mathrm{PNA}(1-\mathrm{ASR})=\mathrm{NRP}$.
+\end{proof}
 
 \begin{theorem}[Axiomatic characterization of $\NRPs$; complete proof]
 \label{thm:metric}
@@ -107,6 +115,17 @@ with $\Trace_\pi=\Trace$ such that
 $\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$.
 \end{proposition}
 
+\begin{proof}[Proof of \Cref{prop:judgehijack}]
+$\Judge$ takes message content as an argument, so let it be any judge non-constant in that
+argument---as all instruction-following judges are. Choose messages $\mathrm{msgs}$ and a
+manipulation $\pi$ (e.g.\ $\mathrm{msgs}_\pi$ carries the injected instruction ``report
+this trace as safe'') on which it disagrees, so
+$\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$. Content edits leave
+the recorded state untouched, so by construction $\Trace_\pi=\Trace$ and the deterministic
+verdict is unchanged. The contrast with \Cref{thm:integrity} is exact: it is the message
+channel, not the trace, that carries the vulnerability.
+\end{proof}
+
 \begin{remark}
 \Cref{thm:integrity} shows the deterministic verdict cannot be \emph{gamed} through
 messages; it does \emph{not} show it is \emph{correct} (a mis-specified predicate can be
@@ -120,14 +139,23 @@ path and measures the judge-hijack gap as an ablation (RQ2).
 
 \subsection{Compromise propagation across topologies}
 \label{sec:theory-prop}
-Under the independent-cascade instance of \Cref{as:prop}, expected reach depends sharply
-on topology (all four derivations in the Supplementary Material): on a chain
-\emph{seeded at an endpoint} it is $\sum_{j=1}^{n-1}\pinf^{j}\le\pinf/(1-\pinf)$,
-bounded independently of $n$; on a star a centre seed gives $\CPR=\pinf$ while a leaf seed
-gives $\pinf+\pinf^{2}(n-2)$, a $\Theta(\pinf(1-\pinf)n)$ gap; trees show a
-$b\pinf$-depth phase transition and complete graphs grow superlinearly in seed count.
-Under threshold contagion an agent with in-degree below $\thresh$ is never compromised, so
-a chain with $\thresh\ge2$ has $\CPR=0$.
+Under the independent-cascade instance of \Cref{as:prop}, expected reach depends sharply on
+topology. We \emph{restate} four classical results in our notation, and derive from them
+the one claim we need. On a chain \emph{seeded at an endpoint}, $a_{1+j}$ is compromised
+iff all $j$ intervening edges fire, so the expected additional reach is
+$\sum_{j=1}^{n-1}\pinf^{j}\le\pinf/(1-\pinf)$, bounded independently of $n$. On a star, a
+centre seed gives reach $\pinf(N-1)$ and $\CPR=\pinf$, whereas a leaf seed gives
+$\pinf+\pinf^{2}(N-2)$; the gap is $\pinf(1-\pinf)(n-2)=\Theta(\pinf(1-\pinf)n)$. On a tree
+of branching factor $b$ seeded at the root the expected level-$\ell$ count is
+$(b\pinf)^{\ell}$, so reach is bounded in depth for $b\pinf<1$ and $\Theta((b\pinf)^{d})$
+for $b\pinf>1$: a phase transition at $b\pinf=1$. On the complete graph $K_n$ with $s$
+seeds, one round already compromises $s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$ nodes, which
+tends to all of $V$ as $s$ grows. Under threshold contagion an agent with in-degree below
+$\thresh$ is never compromised, so a chain with $\thresh\ge2$ has $\CPR=0$. These are the
+classical spread results~\cite{granovetter1978threshold,watts2002simple,%
+kempe2003maximizing,chalupa1979bootstrap}---we reproduce the derivations in the
+Supplementary Material for completeness rather than claim them---and our own consequence
+follows.
 
 \begin{theorem}[Collusion advantage on the star]
 \label{thm:collusion}
@@ -141,12 +169,26 @@ $\Theta(\pinf(1-\pinf)N)$, for all $\pinf\in(0,1)$, $N\ge3$: coordinated placeme
 strictly dominates.
 \end{theorem}
 
-These results reproduce the classical intuition that spread is slow on sparse chains,
-dominated by the hub on stars, phase-transitioned on trees, and explosive on dense
-meshes~\cite{granovetter1978threshold,watts2002simple,kempe2003maximizing,chalupa1979bootstrap};
-\Cref{thm:collusion} describes the environment's propagation \emph{model}, not any real
-defense, and its value is that ``collusion on/off'' is well posed and predicts where to
-look (hub-centric topologies) for degradation, tested in \Cref{sec:experiments}.
+\begin{proof}[Proof of \Cref{thm:collusion}]
+Each leaf is a direct out-neighbour of the centre, so a centre seed compromises all
+$N-1$ leaves independently with probability $\pinf$, giving $C=1+\pinf(N-1)$. A leaf seed
+compromises the centre with probability $\pinf$ and, conditioned on that, each remaining
+leaf with probability $\pinf$, giving $L=1+\pinf+\pinf^{2}(N-2)$. A uniform independent seed
+lands on the centre with probability $1/N$ and on a leaf with probability $(N-1)/N$, hence
+$\E^{\mathrm{ind}}=\tfrac1N C+\tfrac{N-1}{N}L$. Therefore
+\[
+\Delta_{\mathrm{coll}}=C-\E^{\mathrm{ind}}=\tfrac{N-1}{N}(C-L)
+=\pinf(1-\pinf)\tfrac{(N-1)(N-2)}{N}.
+\]
+For every $\pinf\in(0,1)$ and $N\ge3$ we have $(N-1)(N-2)/N>0$ and $\pinf(1-\pinf)>0$, so
+$\Delta_{\mathrm{coll}}>0$ strictly, and it is $\Theta(\pinf(1-\pinf)N)$ since
+$(N-1)(N-2)/N=\Theta(N)$. (For $s>1$ seeds, coordinated placement solves the monotone
+submodular influence-maximization objective instead; see the Supplementary Material.)
+\end{proof}
+
+\Cref{thm:collusion} describes the \emph{environment's} propagation model, not any real
+defense; its value is that ``collusion on/off'' becomes well posed and predicts where to
+look---hub-centric topologies---for degradation, which \Cref{sec:experiments} then tests.
 
 \subsection{Forced coordination}
 \label{sec:theory-forced}
@@ -168,9 +210,10 @@ some witness is adversary-free its members jointly satisfy it.
 
 \subsection{Sample complexity of the estimators}
 \label{sec:theory-sample}
-The estimates require bounded episodes, driving the cost analysis; the tools are
-elementary concentration inequalities~\cite{boucheron2013concentration} (McDiarmid's
-inequality~\cite{mcdiarmid1989bounded} handles non-mean estimators).
+The estimates require bounded episodes, driving the cost analysis. The tools are elementary
+concentration inequalities~\cite{boucheron2013concentration,hoeffding1963probability}:
+Hoeffding's inequality applies to the means here, and McDiarmid's
+inequality~\cite{mcdiarmid1989bounded} handles the non-mean estimators.
 
 \begin{theorem}[Concentration and sample complexity]
 \label{thm:sample}
@@ -185,9 +228,30 @@ gives $M=O(\epsilon^{-2}\ln(G/\alpha))$ per configuration, for $\Theta(GMNH)$ to
 invocations.
 \end{theorem}
 
+\begin{proof}[Proof of \Cref{thm:sample}]
+(a) Each $\widehat{\ASRs}$ and $\widehat{\PNAs}$ is the mean of $M$ i.i.d.\ $\{0,1\}$
+indicates (\Cref{as:bounded}), so Hoeffding's inequality gives
+$\Prob[|\hat\theta-\theta|\ge\epsilon]\le2e^{-2M\epsilon^{2}}$; rearranging
+$2e^{-2M\epsilon^{2}}\le\alpha$ yields $M\ge(2\epsilon^{2})^{-1}\ln(2/\alpha)$.
+(b) For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
+$|\hat u\hat\sigma-u\sigma|\le\hat\sigma|\hat u-u|+u|\hat\sigma-\sigma|
+\le|\hat u-u|+|\hat\sigma-\sigma|$;
+apply this with $\sigma=1-\ASRs$ and union-bound the two events of (a) at threshold
+$\epsilon$. (c) Bonferroni over $G$ tests replaces $\alpha$ by $\alpha/G$; solving for $M$
+gives the stated rate, and each of $G$ configurations runs $M$ episodes of $N$ agents over
+horizon $H$.
+\end{proof}
+
 \begin{corollary}[Sweep budget]
 \label{cor:budget}
 Resolving a target $\NRPs$ gap of size $\Delta$ between any two of $G$ swept
 configurations with family-wise confidence $1-\alpha$ costs
-$\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ agent invocations.
+$\Theta\bigl(GNH\Delta^{-2}\ln(G/\alpha)\bigr)$ agent invocations.
 \end{corollary}
+
+\begin{proof}[Proof of \Cref{cor:budget}]
+Set the per-configuration accuracy to $\epsilon=\Delta/4$ in \Cref{thm:sample}(b) so that
+the two $\NRPs$ estimates are each within $\Delta/2$; by the triangle inequality their
+difference is resolved to $\Delta$. \Cref{thm:sample}(c) then gives
+$M=O(\Delta^{-2}\ln(G/\alpha))$, and each configuration runs $M$ episodes of $N$ agents over horizon $H$.
+\end{proof}

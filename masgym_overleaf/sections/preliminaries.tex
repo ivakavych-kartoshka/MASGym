@@ -1,0 +1,44 @@
+\section{Preliminaries and Notation}
+\label{sec:prelim}
+
+This section recalls the three primitives \defname{} builds on (notation summarized in the
+Supplementary Material): ASB's utility--security metric, AgentDojo's
+deterministic state-based checking, and ToolEmu's LM tool emulation.
+
+\subsection{ASB's utility--security metric}
+ASB~\cite{zhang2025asb} scores an agent by a \emph{Non-Refusal Performance},
+\begin{equation}
+\label{eq:asb-nrp}
+\mathrm{NRP} \;=\; \mathrm{PNA}\cdot(1-\mathrm{ASR}),
+\end{equation}
+where $\mathrm{PNA}\in[0,1]$ is performance on benign tasks and $\mathrm{ASR}\in[0,1]$ the
+attack success rate; the product rewards a system only when both useful and not attacked.
+\Cref{eq:asb-nrp} is defined for a single agent; generalizing it to a collective is the
+subject of \Cref{sec:problem,sec:theory}.
+
+\subsection{AgentDojo's deterministic state-based checking}
+AgentDojo~\cite{debenedetti2024agentdojo} evaluates security by \emph{deterministic}
+functions of environment state rather than an LLM judge: a task fixes a predicate reading
+the pre- and post-execution state and returning a Boolean, so an injection cannot
+manipulate the score unless it changes the security-relevant state. \defname{} lifts this
+property to the system level: our checker $\Checker$ evaluates $\Predsec,\Predutil$ over the
+\emph{global} trace $\Trace$, never an invocable LLM judge, and we prove the resulting
+integrity property in \Cref{thm:integrity}.
+
+\subsection{ToolEmu's LM tool emulation}
+ToolEmu~\cite{ruan2024toolemu} emulates tool execution from a specification with a language
+model, enabling breadth at low cost, at a reported human agreement of only
+$\kappaem\approx0.48$ (Cohen's $\kappa$~\cite{cohen1960coefficient}, extended to many
+raters by Fleiss~\cite{fleiss1971measuring}). \defname{} adopts LM emulation for tool
+breadth, including an adversarial mode $\Emu^{\!\dagger}$ for malicious tools, but treats
+$\kappaem$ as a first-class threat to validity: scoring routes through the deterministic
+  checker, and the harness registers an emulated-versus-real-tools ablation for
+  independent re-testing. We did not run it: no real tool backend is wired into our
+  environment, so we report it as an unmeasured gap rather than let the registration
+  imply coverage (\Cref{sec:limitations}). An \emph{episode} runs a task under a fixed configuration
+$\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$, from which all
+security and utility quantities are computable---the fact that makes deterministic,
+hijack-resistant scoring possible.
+
+% Notation table moved to the Supplementary Material to keep the main paper
+% within its page limit; main-text references it in prose.

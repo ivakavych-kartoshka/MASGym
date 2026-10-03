@@ -1,0 +1,30 @@
+\begin{abstract}
+The strongest existing LLM-agent security benchmarks---Agent Security Bench, AgentDojo,
+InjecAgent, ToolEmu---are single-agent, yet deployed systems are collectives in which a
+planner directs workers, agents share memory, and tools are third-party. The phenomena
+that dominate risk there---collusion, a compromised orchestrator, malicious tools, Sybils,
+group-level emergent failure---cannot be produced by a single-agent harness. We present
+\defname{}, an environment and evaluation methodology for multi-agent LLM security: a
+forced-coordination task suite with heterogeneous roles and partial observability over star,
+chain, tree, and mesh topologies at $3$--$50$ agents; a parameterized adversary model; a
+system-level metric $\NRPs=\PNAs(1-\ASRs)$ scored by a deterministic checker over the global
+state trace, never an LLM judge on the critical path; and \corb, a co-evolving red/blue
+protocol logging attack--defense trajectories and a (security, cost) Pareto frontier.
+Supporting theory, proved under explicit assumptions, characterizes the metric
+axiomatically (reducing to ASB at one agent), bounds compromise propagation across
+topologies, establishes a strict collusion advantage and a forced-coordination lower bound,
+and proves evaluator integrity. On a clearly-labelled \emph{synthetic} emulator, a
+per-agent guardrail's relative ASR reduction shrinks
+$41.6\%\to31.8\%\to27.6\%$ from single-agent to collusion to compromised-orchestrator
+context. We then ask what that guardrail buys, and answer on four real backbones in three
+model families: a prompt-level defense drives action-channel compliance to $0/1075$
+decisions, so $\ASRa{=}0$ throughout, yet $\ASRs$ remains $1.000$ on tree and star,
+because once the unsafe action is blocked the system predicate is still discharged by
+deterministic availability sabotage that topology alone determines. A fourth backbone
+ignores the defense entirely. A defense measured on the action channel therefore cannot
+certify system-level security, and its efficacy is a property of the model as much as of
+the defense.
+\end{abstract}
+
+\keywords{multi-agent LLM security; security benchmark; co-evolving red/blue evaluation;
+collusion; prompt injection; deterministic security checking; system-level metrics}

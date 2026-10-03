@@ -109,45 +109,45 @@ Warning--empty address in zheng2023judging
 Warning--page numbers missing in both pages and numpages fields in zheng2023judging
 Warning--no number and no volume in zhou2025corba
 Warning--page numbers missing in both pages and numpages fields in zhou2025corba
-You've used 53 entries,
+You've used 54 entries,
             6335 wiz_defined-function locations,
-            1843 strings with 33434 characters,
-and the built_in function-call counts, 67584 in all, are:
-= -- 8173
-> -- 3390
+            1852 strings with 33599 characters,
+and the built_in function-call counts, 68619 in all, are:
+= -- 8324
+> -- 3407
 < -- 1
-+ -- 1194
-- -- 1172
-* -- 5701
-:= -- 7083
-add.period$ -- 277
-call.type$ -- 53
-change.case$ -- 582
-chr.to.int$ -- 52
-cite$ -- 148
-duplicate$ -- 5283
-empty$ -- 3784
-format.name$ -- 1359
-if$ -- 16147
++ -- 1198
+- -- 1179
+* -- 5764
+:= -- 7175
+add.period$ -- 282
+call.type$ -- 54
+change.case$ -- 587
+chr.to.int$ -- 53
+cite$ -- 149
+duplicate$ -- 5382
+empty$ -- 3855
+format.name$ -- 1366
+if$ -- 16410
 int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 222
-newline$ -- 513
-num.names$ -- 370
-pop$ -- 2457
+missing$ -- 226
+newline$ -- 522
+num.names$ -- 377
+pop$ -- 2487
 preamble$ -- 1
-purify$ -- 1003
+purify$ -- 1016
 quote$ -- 0
-skip$ -- 1736
+skip$ -- 1768
 stack$ -- 0
-substring$ -- 3916
-swap$ -- 388
+substring$ -- 4013
+swap$ -- 398
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1165
+type$ -- 1181
 warning$ -- 95
-while$ -- 247
+while$ -- 257
 width$ -- 0
-write$ -- 1067
+write$ -- 1087
 (There were 95 warnings)

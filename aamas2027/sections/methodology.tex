@@ -48,13 +48,9 @@ variation that is the paper's scientific object~\cite{rubin1974estimating}.
 
 \subsection{Metric suite}
 \label{sec:metric-suite}
-All reported quantities are computed from traces by the deterministic checker or harness
-logs; none is an LLM-judge verdict: system attack success rate $\ASRs$ and system NRP
-$\NRPs$ (\Cref{eq:asrsys,eq:nrpsys}); benign performance $\PNAs$ (\Cref{eq:pnasys});
-collusion success rate and advantage (\Cref{def:csr}); compromise-propagation rate $\CPR$
-(\Cref{eq:cpr}); coordination quality and its degradation under sabotage; time-to-detection
-and recovery; token/API cost and latency and their scaling with $N$; and human-intervention
-rate. Estimating these to target precision requires the budget fixed by \Cref{thm:sample};
-the resulting cost model---$\Theta(MNH)$ agent invocations per configuration,
-$\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ for a sweep---is reported with each study and
-archived in full with the harness.
+All reported quantities come from traces via the deterministic checker or harness logs;
+none is an LLM-judge verdict: $\ASRs$ and $\NRPs$ (\Cref{eq:asrsys,eq:nrpsys}), $\PNAs$
+(\Cref{eq:pnasys}), collusion success and advantage (\Cref{def:csr}), $\CPR$
+(\Cref{eq:cpr}), coordination quality, time-to-detection and recovery, cost and latency
+scaling, and human-intervention rate. Precise definitions are in the Supplementary
+Material; the budget is fixed by \Cref{thm:sample} and \Cref{cor:budget}.

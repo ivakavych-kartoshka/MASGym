@@ -1,30 +1,26 @@
 \section{Evaluation Protocol and Experimental Results}
 \label{sec:experiments}
 
-We instantiate \defname{} with controlled synthetic models for the sweeps and with real
-LLM backbones for the defense study, which is the claim that most needs real agents; oracles,
-detectors, and
-policies are seeded and versioned; budgets follow \Cref{thm:sample} ($M{=}738$,
-$\epsilon{=}\alpha{=}0.05$). Four questions: \emph{RQ1} does $\NRPs$ detect degradation
-monotonically across the 21-adversary-parameter study (degradation grid, Supplementary Material)?
-\emph{RQ2} does the deterministic checker keep integrity against an off-critical-path
-LLM judge (\Cref{thm:integrity}, \Cref{prop:judgehijack})? \emph{RQ3} do the structure
-predictions of \Cref{sec:theory}---propagation order (chain $<$ tree $<$ star) and the
-collusion advantage---appear empirically (per-backbone and per-$\betafrac$ tables in the
-supplementary material)? \emph{RQ4} what does the adversarial regime
-cost?
+We instantiate \defname{} with controlled synthetic models for the sweeps and real LLM
+backbones for the defense study, which is the claim that most needs real agents; oracles,
+detectors, and policies are seeded and versioned; budgets follow \Cref{thm:sample}
+($M{=}738$, $\epsilon{=}\alpha{=}0.05$). Four questions: \emph{RQ1} does $\NRPs$ detect
+degradation monotonically across the 21-adversary-parameter study? \emph{RQ2} does the
+deterministic checker keep integrity against an off-critical-path LLM judge
+(\Cref{thm:integrity}, \Cref{prop:judgehijack})? \emph{RQ3} do the structure predictions of
+\Cref{sec:theory}---propagation order (chain $<$ tree $<$ star) and the collusion
+advantage---appear empirically? \emph{RQ4} what does the adversarial regime cost?
+Per-study tables and grids are in the Supplementary Material.
 
 \subsection{RQ1: system-level degradation under adversarial knobs}
 The headline stimulus is the defense $\times$ adversary-context study: each per-agent
 defense, single-agent (the ASB/AgentDojo reducer, \Cref{prop:reduction}) and under
-multi-agent collusion and a compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$).
-The full grid is in the Supplementary Material. The system-level picture matches
-\Cref{thm:collusion}: the guardrail's relative $\ASRs$ reduction over no-defense shrinks
-from single-agent ($41.6\%$) to collusion ($31.8\%$) to compromised orchestrator
-($27.6\%$). Under the single-agent predicate the guardrail cuts $\ASRs$ from $0.587$ to
-$0.343$; under the full system predicate $\ASRs$ saturates at $1.0$ in both
-multi-agent columns, because collusion and orchestrator compromise target the critical
-star hub and collapse availability rather than exfiltrate.
+multi-agent collusion and a compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$). The
+full grid is in the Supplementary Material. The guardrail's relative $\ASRs$ reduction over
+no-defense shrinks from single-agent ($41.6\%$) to collusion ($31.8\%$) to compromised
+orchestrator ($27.6\%$). Under the single-agent predicate the guardrail cuts $\ASRs$ from
+$0.587$ to $0.343$; under the full system predicate $\ASRs$ saturates at $1.0$ in both
+multi-agent columns because the star hub collapses availability rather than exfiltrating.
 
 % tab:degradation moved to Supplementary Material (page limit); its numbers remain in the text.
 
@@ -58,7 +54,9 @@ prompts sent, so the defense reaching the model is checkable from the artifact r
 taken on trust; the hosted Mistral run predates prompt logging, records the defense
 condition and raw outputs only, and we say so rather than imply symmetry. Every cell in
 \Cref{tab:defense} is regenerated from that release by script, and the re-run is
-deterministic: all $36$ local cells reproduce bit-identically from their seeds.
+deterministic: all $36$ local cells reproduce bit-identically from their seeds. Backbone
+ids, decoding parameters, the verbatim system/user prompts and the defense transform, and
+the compliance-scoring rule are all in the Supplementary Material.
 
 The result is not ``the defense works'' but a \emph{two-channel} picture, and both halves
 matter for how a system-level metric should be read.
@@ -102,38 +100,25 @@ defense and fails on every topology. Table generated from the run summaries by
 \setlength{\tabcolsep}{3.5pt}
 \input{../MASGym/outputs/defense_table/defense_table.tex}
 \begin{minipage}{\columnwidth}\footnotesize
-$^{a}$4-bit quantized. $^{b}$hosted, $M{=}30$. Episode-level $0.00$ and $1.00$ are
-$0/30$ and $30/30$, i.e.\ $95\%$ intervals $[0,0.10]$ and $[0.90,1]$; $0.43$ is $13/30$,
-$[0.26,0.62]$. Point estimates are episode-level; the compliance column is
-decision-level.
+$^{a}$4-bit quantized. $^{b}$hosted, $M{=}30$. Episode-level $0.00$ and $1.00$ are $95\%$
+intervals $[0,0.10]$ and $[0.90,1]$; $0.43$ is $[0.26,0.62]$.
 \end{minipage}
 \end{table}
 
-One number in \Cref{tab:defense} deserves a caveat rather than a claim. Qwen2.5-3B,
-Qwen2.5-7B, and Mistral-7B return \emph{bit-identical} $\ASRs$ in all twelve cells, and
-this is neither coincidence nor three independent confirmations: once compliance is $0$ the
-action channel is closed for all three, leaving the system predicate to the deterministic
-availability path, whose value depends on topology and propagation only. What replicates
-across backbones is the hub-critical \emph{pattern}, not the values; we flag the
-degeneracy so the agreement is not read as stronger evidence than it is. The regime where
-the metric \emph{does} depend on the model is the other one---compliance $1$ versus $0$
-moves the collusion advantage from $0.00$ to $0.33$---and no topology constant produces
-that. We expand both points in the Supplementary Material.
+Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B return \emph{bit-identical} $\ASRs$ in all twelve
+cells; once compliance is $0$ the action channel is closed, so the system predicate follows
+topology and propagation only. The compliance split ($1$ vs.\ $0$) moves the collusion
+advantage from $0.00$ to $0.33$; see Supplementary Material.
 
 \subsection{RQ3: topology and collusion structure}
 \Cref{sec:theory-prop} predicts chain $<$ tree $<$ star. The synthetic study confirms the
-order ($\CPR$ rising $0.18\to0.29$) and confirms orchestrator compromise as the most
-dangerous single compromise (\Cref{thm:collusion}); \Cref{tab:defense} reproduces the same
-hub-critical pattern on real backbones. The measured collusion advantage is \emph{not}
-strict in the unsafe-action channel, but under the system predicate colluding saturates at
-$\ASRs{=}1.000$ for all $\betafrac\ge0.1$, and the star's saturation is an availability
-collapse, not a scalar artifact. Per-backbone and per-$\betafrac$ tables are in the
-Supplementary Material.
+order and the hub effect; \Cref{tab:defense} shows the same pattern on real backbones.
+Under the system predicate, collusion saturates at $\ASRs{=}1.000$ for all
+$\betafrac\ge0.1$, with star saturation reflecting availability collapse. Per-backbone and
+per-$\betafrac$ tables are in the Supplementary Material.
 \subsection{RQ4: cost}
 \label{sec:rq4}
 Cost is dominated by the episode budget of \Cref{thm:sample}: a $G{=}21$-configuration sweep
-resolving $\NRPs$ gaps of size $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ agent
-invocations (\Cref{cor:budget}) and $\Theta(MNH)$ machine-hours per configuration. The
-exponential knob space (\Cref{cor:budget}) bounds exhaustive swap-outs, so our studies keep
-the reachable frontier honest rather than pretending to cover it; the full cost model and
-measured token/latency-versus-$N$ pilot are in the Supplementary Material.
+with target gap $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ agent invocations
+(\Cref{cor:budget}). Measured token/latency-versus-$N$ and the full cost model are in the
+Supplementary Material.

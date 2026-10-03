@@ -59,25 +59,14 @@ separately measures the guardrail's shrinking margin, $41.6\%\to31.8\%\to27.6\%$
 
 Because reviewers rightly discount benchmarks whose central metric is asserted rather than
 justified, we treat theory as part of the instrument (\Cref{sec:theory}): under explicit
-assumptions and honest proof-status labels we prove the product aggregator is the unique
-combiner satisfying our axioms and reduces to ASB at $N{=}1$; that the deterministic
-checker cannot be hijacked through message content, unlike a message-reading LLM judge,
-which we measure pushed off the recorded state in roughly a third of injected traces;
-topology-dependent propagation bounds and a strict collusion advantage in the cascade
-model; a forced-coordination lower bound; and finite-sample concentration. None
-asserts that any real defense is secure or provably degrades.
+assumptions and honest proof-status labels, \emph{every result we claim is proved in the
+paper}. We prove the product aggregator is the unique combiner satisfying our axioms and
+reduces to ASB at $N{=}1$; that the deterministic checker cannot be hijacked through
+message content, unlike a message-reading LLM judge, which we measure pushed off the
+recorded state in roughly a third of injected traces; and finite-sample concentration
+bounds. None asserts that any real defense is secure or provably degrades.
 
 \paragraph{Scope and stance.}
 \defname{} is an instrument, not a verdict: a lower $\ASRs$ is a measurement under a stated
-configuration, not a certificate. The central threat to validity is emulation
-fidelity---ToolEmu's reported human agreement is $\kappaem\approx0.48$---so scoring routes
-through the deterministic checker, the caveat is explicit, and the harness registers
-emulated-versus-real ablations for independent re-testing. Of those two we ran the
-deterministic-versus-judge half on real judge backbones (\Cref{sec:integrity}); the
-emulated-versus-real-tools half is unmeasured, since no real tool backend is wired in.
-The checker and harness form a trusted computing base, and model-weight attacks are out
-of scope. Roadmap:
-\Cref{sec:related}--\Cref{sec:prelim} situate and fix notation; \Cref{sec:system,sec:threat,sec:problem}
-formalize; \Cref{sec:method,sec:algorithm} present the environment and protocol;
-\Cref{sec:theory} justifies; \Cref{sec:experiments} evaluates; the final sections discuss and
-bound limitations.
+configuration, not a certificate. Scoring uses a deterministic critical path
+(\Cref{thm:integrity}); emulation fidelity is the main validity gap (\Cref{sec:limitations}). The TCB is the harness and checker; model-weight attacks are out of scope.

@@ -32,13 +32,11 @@ $\kappaem\approx0.48$ (Cohen's $\kappa$~\cite{cohen1960coefficient}, extended to
 raters by Fleiss~\cite{fleiss1971measuring}). \defname{} adopts LM emulation for tool
 breadth, including an adversarial mode $\Emu^{\!\dagger}$ for malicious tools, but treats
 $\kappaem$ as a first-class threat to validity: scoring routes through the deterministic
-  checker, and the harness registers an emulated-versus-real-tools ablation for
-  independent re-testing. We did not run it: no real tool backend is wired into our
-  environment, so we report it as an unmeasured gap rather than let the registration
-  imply coverage (\Cref{sec:limitations}). An \emph{episode} runs a task under a fixed configuration
-$\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$, from which all
-security and utility quantities are computable---the fact that makes deterministic,
-hijack-resistant scoring possible.
+checker, and the emulated-versus-real-tools ablation is registered but unmeasured, since no
+real tool backend is wired in (\Cref{sec:limitations}). An \emph{episode} runs a task under a
+fixed configuration $\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$,
+from which all security and utility quantities are computable---the fact that makes
+deterministic, hijack-resistant scoring possible.
 
 % Notation table moved to the Supplementary Material to keep the main paper
 % within its page limit; main-text references it in prose.

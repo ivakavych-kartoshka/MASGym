@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{53}
+\begin{thebibliography}{54}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -283,6 +283,19 @@
 \href{https://doi.org/10.1145/3773080}{doi:\nolinkurl{10.1145/3773080}}
 \newblock
 \shownote{arXiv:2407.19354}.
+
+
+\bibitem[Hoeffding(1963)]%
+        {hoeffding1963probability}
+\bibfield{author}{\bibinfo{person}{Wassily Hoeffding}.}
+  \bibinfo{year}{1963}\natexlab{}.
+\newblock \showarticletitle{Probability Inequalities for Sums of Bounded Random
+  Variables}.
+\newblock \bibinfo{journal}{\emph{J. Amer. Statist. Assoc.}}
+  \bibinfo{volume}{58}, \bibinfo{number}{301} (\bibinfo{year}{1963}),
+  \bibinfo{pages}{13--30}.
+\newblock
+\href{https://doi.org/10.1080/01621459.1963.10500830}{doi:\nolinkurl{10.1080/01621459.1963.10500830}}
 
 
 \bibitem[Hong et~al\mbox{.}(2023)]%

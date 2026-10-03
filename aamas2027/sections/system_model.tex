@@ -14,9 +14,8 @@ An \emph{episode} executes a task under a configuration $\config$ for $H$ steps,
 a \emph{global trace} $\Trace=(s_0,\dots,s_H)$, where $s_t$ is the complete state: every
 agent's messages, tool calls, tool outputs, memory versions, role assignments, topology
 edges, and the agent-identity map. Traces are i.i.d.\ from $\mathcal{D}(\config)$
-(\Cref{as:iid}). Because $\Predsec,\Predutil$ are functions of recorded state only
-(\Cref{def:predicates}), system-level quantities are computable offline from $\Trace$,
-which is what keeps the checker deterministic and the measurement reproducible. A
+(\Cref{as:iid}), so system-level quantities are computable offline from $\Trace$---the
+property that keeps the checker deterministic and the measurement reproducible. A
 configuration $\config\in\Configs$ specifies task, $\Gtop$, models, tools, $\Advset$, and
 protocol constants, so a study reports $\NRPs$ as a coordinate over a \emph{sweep} that
 varies exactly one component at a time under a controlled seed.
@@ -48,7 +47,7 @@ path), is a \emph{measurement} threat: human agreement is $\kappaem\approx0.48$ 
 can be gamed; the deterministic checker exists to remove this threat (\Cref{thm:integrity},
 \Cref{prop:judgehijack}). The TCB is the harness (trace recording, roles, topology,
 scheduling), the tool specifications, and the registered predicates; everything
-else---messages, memory writes, tool outputs, intent---is outside the TCB. Scope is
-\emph{per se} the \emph{collective}; adversaries are bounded by the seven knobs and episodic
-budgets; a harness-level adversary and model-weight attacks are out of scope; honest agents
-have no budget (per ASB) and obey their assigned roles.
+else---messages, memory writes, tool outputs, intent---is outside it. Scope is \emph{per
+se} the \emph{collective}; adversaries are bounded by the seven knobs and episodic budgets;
+a harness-level adversary and model-weight attacks are out of scope; honest agents have no
+budget (per ASB) and obey their roles.
