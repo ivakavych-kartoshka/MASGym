@@ -56,6 +56,7 @@ within its page limit.
 paper within its page limit; the main text references this table in prose.}
 \label{tab:notation}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}ll@{}}
 \toprule
@@ -103,6 +104,7 @@ orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and 
 in the real-backbone pilot (\Cref{fig:results}(b)).}
 \label{tab:topology}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
@@ -113,11 +115,11 @@ Tree (branching) & 0.226 & 1.000 & 0.000 & 2.39 & 0.205 \\
 Star             & 0.291 & 1.000 & 0.000 & 2.27 & 0.202 \\
 Mesh (pilot, partial) & 0.000 & 0.000 & 1.000 & --    & -- \\
 \bottomrule
-\multicolumn{6}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $\CPR$/$\ASRs$/$\NRPs$ under
-no-defense (pure propagation signal); time-to-detect and recovery under the per-agent
-guardrail. $\ASRs{=}1$ reflects availability-sabotage saturation (\Cref{tab:degradation});
-$\CPR$ is the discriminating column.}
 \end{tabular}
+\tabnote{$\CPR$/$\ASRs$/$\NRPs$ under no-defense (pure propagation signal); time-to-detect
+and recovery under the per-agent guardrail. $\ASRs{=}1$ reflects
+availability-sabotage saturation (\Cref{tab:degradation}); $\CPR$ is the
+discriminating column.}
 \end{table}
 
 \subsection{Cost and complexity of the instrument}
@@ -142,6 +144,7 @@ report per study.
 configuration, $R$ \corb{} rounds, $G$ swept configurations. Checking is deterministic.}
 \label{tab:complexity}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}ll@{}}
 \toprule
@@ -190,6 +193,7 @@ backbones are greedy (\texttt{do\_sample=False}); both hosted cells use
 \texttt{temperature=0.0}, \texttt{max\_tokens=160}.}
 \label{tab:backbones}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llll@{}}
 \toprule

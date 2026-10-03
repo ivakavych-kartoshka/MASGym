@@ -20,7 +20,7 @@
 \node[infrablock, text width=25mm] (topo)  at (1.5,5.5) {Topology\\ \scriptsize star $\cdot$ chain $\cdot$ tree $\cdot$ mesh};
 \node[infrablock, text width=25mm] (roles) at (1.5,4.1) {Roles \& capabilities};
 \node[infrablock, text width=25mm] (obs)   at (1.5,2.9) {Partial observability};
-\node[amberblock, text width=25mm] (adv)   at (1.5,1.4) {Adversary config $\config_{\mathrm{adv}}$\\ \scriptsize $\betafrac,\mathsf{coll},\mathsf{adapt},\mathsf{orch},\mathsf{tool},\mathsf{syb},\mathsf{mem}$};
+\node[amberblock, text width=25mm] (adv)   at (1.5,1.4) {Adversary config $\config_{\mathrm{adv}}$\\ \scriptsize $\betafrac,\mathsf{coll},\mathsf{adapt},$\\[-3pt]\scriptsize $\mathsf{orch},\mathsf{tool},\mathsf{syb},\mathsf{mem}$};
 
 % ---------- Column 2: the collective (vertical stack; icons to the left) ----------
 \node[honestblock, text width=24mm] (orchp) at (6.85,5.5) {Orchestrator \scriptsize(trust switch)};
@@ -43,7 +43,7 @@
 % ---------- Column 3: emulation + checker + metrics ----------
 \node[defblock,   text width=24mm] (emubox) at (12.6,5.3) {LM tool emulator $\Emu$ / adv.\ $\Emu^{\!\dagger}$};
 \node[defblock,   text width=24mm] (chk)    at (12.6,3.3) {Deterministic checker $\Checker$ \scriptsize on $\Trace$};
-\node[theoryblock,text width=24mm] (met)    at (12.6,1.3) {System metrics \scriptsize $\NRPs,\ASRs,\CPR,\dots$};
+\node[theoryblock,text width=24mm] (met)    at (12.6,1.3) {System metrics\\[-1pt]\scriptsize $\NRPs,\ \ASRs,$\\[-3pt]\scriptsize $\CPR,\ \dots$};
 \pic at ([xshift=-10mm]emubox.west) {emuicon};
 \pic at ([xshift=-10mm]chk.west)    {checkericon};
 \pic at ([xshift=-10mm]met.west)    {theoremicon};

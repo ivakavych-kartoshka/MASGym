@@ -54,6 +54,27 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 \usepackage{xcolor}
 \usepackage{float}
 
+% ============================================================================
+% Shared table style
+%
+% Tables are set at their NATURAL width and centred (\centering in the float),
+% never stretched to the measure: the AAMAS text block is a single very wide
+% column (\columnwidth = 506.295pt), so a table faked out to \columnwidth with
+% tabular*/\extracolsep{\fill} ends up with absurd column gaps and floating
+% headers, and one parked inside the tabular as a
+% \multicolumn{...p{\columnwidth}} note row both widens and inflates the float.
+% The house style, as in the venue's own supplementary template, is:
+%
+%   \begin{table}[t]\centering\caption{...}\label{...}\small
+%   \renewcommand{\arraystretch}{1.08}\setlength{\tabcolsep}{4pt}
+%   \begin{tabular}{@{}<cols>@{}} ... \end{tabular}
+%   \tabnote{...}          <- optional, below \bottomrule
+%   \end{table}
+% ============================================================================
+\newcommand{\tabnote}[1]{%
+  \par\vspace{5pt}%
+  \begin{minipage}{\columnwidth}\footnotesize #1\end{minipage}}
+
 % ---- graphics: TikZ / PGFPlots ----
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds,shapes.geometric,%

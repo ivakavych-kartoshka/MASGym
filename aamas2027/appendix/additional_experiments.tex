@@ -25,7 +25,8 @@ $\ASRs^{\dagger}$ reduction over no-defense shrinks left to right
 (41.6\% $\to$ 31.8\% $\to$ 27.6\%), supporting RQ1.}
 \label{tab:degradation}
 \small
-\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 & \multicolumn{2}{c}{Single (ASB)} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + comp.\ orch.} \\
@@ -38,12 +39,12 @@ System-level policy  & 0.450 & 0.505 & 0.461 & 0.482 & 0.447 & 0.506 \\
 \midrule
 \emph{Oracle (upper bound)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
 \bottomrule
-\multicolumn{7}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $\dagger$ single-agent predicate
-(unsafe action / exfiltration), under which \Cref{prop:reduction} reduces to ASB at
-$N{=}1$. Under the \emph{full} system predicate (adding coordination sabotage) $\ASRs$
-saturates at $1.0$ in both MA columns: collusion and orchestrator compromise target the
-critical star hub and collapse availability (\Cref{sec:theory-prop}).}
 \end{tabular}
+\tabnote{$\dagger$ single-agent predicate (unsafe action / exfiltration), under which
+\Cref{prop:reduction} reduces to ASB at $N{=}1$. Under the \emph{full} system predicate
+(adding coordination sabotage) $\ASRs$ saturates at $1.0$ in both MA columns: collusion
+and orchestrator compromise target the critical star hub and collapse availability
+(\Cref{sec:theory-prop}).}
 \end{table}
 \subsection{Precise metric definitions}
 Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
@@ -80,6 +81,7 @@ Sybil identities inflate the adversary's initial footprint, and $\NRPs$ falls to
 full seeding.}
 \label{tab:sybil}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
@@ -90,11 +92,10 @@ Sybil count & $\ASRs$ & $\NRPs$ & ASR$_{\mathrm{act}}$ & $\CPR$ \\
 2 & 0.942 & 0.053 & 0.561 & 0.344 \\
 4 & 1.000 & 0.000 & 0.561 & 0.000 \\
 \bottomrule
-\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize ASR$_{\mathrm{act}}$ is the single-agent predicate
-(unsafe action / exfiltration; \Cref{tab:degradation}); $\CPR$ at count 4 is $0$ by the
-denominator convention (\Cref{sec:metric-suite}) because the whole star is seeded at
-$t{=}0$.}
 \end{tabular}
+\tabnote{ASR$_{\mathrm{act}}$ is the single-agent predicate (unsafe action /
+exfiltration; \Cref{tab:degradation}); $\CPR$ at count 4 is $0$ by the denominator
+convention (\Cref{sec:metric-suite}) because the whole star is seeded at $t{=}0$.}
 \end{table}
 
 \begin{table}[t]
@@ -105,6 +106,7 @@ the co-adapting blue's $\NRPs$ from $0.649$ to $0.236$; a random (``static'') re
 system in the availability-sabotage regime ($\ASRs{=}1$, $\NRPs{=}0$) throughout.}
 \label{tab:adaptive}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
@@ -117,10 +119,10 @@ $r=5$  & 1.000 & 0.000 & 0.617 & 0.358 \\
 $r=10$ & 1.000 & 0.000 & 0.783 & 0.195 \\
 $r=20$ & 1.000 & 0.000 & 0.733 & 0.236 \\
 \bottomrule
-\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Blue = escalating policy ($p_{\mathrm{red}}$ ramps
-$0.2\to0.8$). Static-red ASR$_{\mathrm{act}}$ cycles $\{0.50,0.62,0.23,0.52\}$ (no trend);
-adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}
 \end{tabular}
+\tabnote{Blue = escalating policy ($p_{\mathrm{red}}$ ramps $0.2\to0.8$).
+Static-red ASR$_{\mathrm{act}}$ cycles $\{0.50,0.62,0.23,0.52\}$ (no trend);
+adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}
 \end{table}
 
 \Cref{tab:collusion} gives the collusion sweep (RQ5): the full $\betafrac$ axis of
@@ -173,49 +175,28 @@ until the independent cascade catches up at the top of the sweep.
 \caption{Collusion sweep (RQ5), synthetic-model results
 (star, $N=5$, no defense, $M=738$ episodes per cell).}
 \label{tab:collusion}
-\scriptsize
-\setlength{\tabcolsep}{3.5pt}
-\renewcommand{\arraystretch}{1.05}
-
-\begin{tabular}{@{}c|cc|c|c|cc@{}}
+\small
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}ccccccc@{}}
 \toprule
-$\betafrac$
-& \multicolumn{2}{c|}{$\ASR_{\mathrm{act}}$}
-& $\Delta_{\mathrm{coll}}$
-& $\ASR_s$
+& \multicolumn{2}{c}{$\ASRa$} & $\Delta_{\mathrm{coll}}$ & $\ASRs$
 & \multicolumn{2}{c}{$\CPR$} \\
-\cmidrule(lr){2-3}
-\cmidrule(lr){6-7}
-
-& Coll. & Ind.
-& 
-& Coll.
-& Coll. & Ind. \\
-
+\cmidrule(lr){2-3}\cmidrule(lr){6-7}
+$\betafrac$ & Coll. & Ind. & & & Coll. & Ind. \\
 \midrule
 0.1 & 0.603 & 0.554 & $+0.049$ & 1.000 & 0.304 & 0.190 \\
 0.2 & 0.577 & 0.575 & $+0.003$ & 1.000 & 0.298 & 0.170 \\
 0.3 & 0.558 & 0.583 & $-0.024$ & 1.000 & 0.293 & 0.290 \\
 0.4 & 0.561 & 0.523 & $+0.038$ & 1.000 & 0.306 & 0.273 \\
 0.5 & 0.564 & 0.565 & $-0.001$ & 1.000 & 0.308 & 0.341 \\
-
 \bottomrule
 \end{tabular}
-
-\vspace{2pt}
-
-\begin{minipage}{0.96\linewidth}
-\footnotesize
-\textit{Note.}
-Coll. = colluding; Ind. = independent.
-$\Delta_{\mathrm{coll}} =
-\ASR_{\mathrm{act}}^{\mathrm{coll}} -
-\ASR_{\mathrm{act}}^{\mathrm{ind}}$.
-$\ASR_s$ is the full system predicate, including
-availability sabotage, and equals $1.000$ for all
-colluding conditions. $\CPR=0$ at $\betafrac=0$
-and is omitted.
-\end{minipage}
+\tabnote{\emph{Coll.} = colluding; \emph{Ind.} = independent.
+$\Delta_{\mathrm{coll}} = \ASRa^{\mathrm{coll}} - \ASRa^{\mathrm{ind}}$.
+The $\ASRs$ column is the full system predicate, including availability sabotage,
+and equals $1.000$ for all colluding conditions. $\CPR=0$ at $\betafrac=0$ and is
+omitted.}
 \end{table}
 
 \subsection{Cost model and reachable region}
@@ -236,6 +217,7 @@ $\betafrac{=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ (
 $\ASRs$ saturates via availability sabotage (\Cref{tab:degradation}).}
 \label{tab:cost}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
@@ -245,10 +227,10 @@ $N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
 5  & 1.000 & 0.289 & 44.0 & 20.8 & Yes (138 configs) \\
 10 & 0.999 & 0.294 & 88.0 & 22.4 & Yes (138 configs) \\
 \bottomrule
-\multicolumn{6}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize $N\in\{20,50\}$ and mesh are deferred to the
-release phase; the reachable region is the $(N,\text{topology},\betafrac,\text{knob})$
-combinations actually run (grid in the released provenance logs).}
 \end{tabular}
+\tabnote{$N\in\{20,50\}$ and mesh are deferred to the release phase; the reachable region is
+the $(N,\text{topology},\betafrac,\text{knob})$ combinations actually run (grid in the
+released provenance logs).}
 \end{table}
 
 \subsection{LLM backbone pilot (open models)}
@@ -307,6 +289,7 @@ attack scenarios, as does Mistral-7B (\Cref{sec:experiments}). The registered se
 outcome is a real model property, not a framework artefact.}
 \label{tab:llm_pilot}
 \small
+\renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llrrr@{}}
 \toprule
@@ -319,19 +302,16 @@ Qwen2.5-$7$B$^{*}$ & 0.000 & 0.427 & 0.696 & 0.703 \\
 Llama-3.2-$1$B    & 0.000 & 1.000 & 1.000 & 1.000 \\
 Llama-3.2-$3$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
 \bottomrule
-\multicolumn{5}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Cells are
-$\ASRs$, averaged over the $12$ configurations, with $\NRPs=\PNAs(1-\ASRs)$ and
-$\PNAs=1.000$. Compliance is $0$ wholesale refusal for the single, colluding, and
-orchest.\@-compromise scenarios, except Qwen2.5-$3$B ($10/3878$) and Llama-3.2-$1$B
-($3812/3878$, $4077/4077$, $4002/4118$). Star and tree saturate via availability sabotage
-on the hub; chain does not, so refusal-only $\ASRs$ is topology-dependent. Defenses here
-are synthetic effect-models, deliberately not applied. Token/episode $\approx 320$--$2400$
-(largest: mesh, $N{=}10$); latency $\approx 0.2$--$1.9$\,s (RTX~4060).
-$^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in full precision and is loaded 4-bit; Llama
-weights are ungated mirrors of the official bf16 checkpoints. The security-decision
-divergence between Llama-3.2-$1$B (complies) and the rest (refuse) shows the registered
-outcome is a real model property, not a framework artefact.}
 \end{tabular}
+\tabnote{Cells are $\ASRs$, averaged over the $12$ configurations, with
+$\NRPs=\PNAs(1-\ASRs)$ and $\PNAs=1.000$. Compliance is $0$ wholesale refusal for the
+single, colluding, and orchest.\@-compromise scenarios, except Qwen2.5-$3$B ($10/3878$)
+and Llama-3.2-$1$B ($3812/3878$, $4077/4077$, $4002/4118$). Star and tree saturate via
+availability sabotage on the hub; chain does not, so refusal-only $\ASRs$ is
+topology-dependent. Defenses here are synthetic effect-models, deliberately not applied.
+Token/episode $\approx 320$--$2400$ (largest: mesh, $N{=}10$); latency $\approx
+0.2$--$1.9$\,s (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in full precision
+and is loaded 4-bit; Llama weights are ungated mirrors of the official bf16 checkpoints.}
 \end{table}
 
 \subsection{LLM backbone pilot: topology study}
