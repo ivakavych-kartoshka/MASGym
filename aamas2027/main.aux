@@ -191,15 +191,8 @@
 \newlabel{sec:defense@cref}{{[subsection][3][10]10.3}{[1][7][]7}{}{}{}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{references_verified}
-\bibcite{andriushchenko2025agentharm}{{1}{2025}{{Andriushchenko et~al\mbox  {.}}}{{}}}
-\bibcite{benjamini1995controlling}{{2}{1995}{{Benjamini and Hochberg}}{{}}}
-\bibcite{blanchard2017krum}{{3}{2017}{{Blanchard et~al\mbox  {.}}}{{}}}
-\bibcite{boucheron2013concentration}{{4}{2013}{{Boucheron et~al\mbox  {.}}}{{}}}
-\bibcite{brockman2016openaigym}{{5}{2016}{{Brockman et~al\mbox  {.}}}{{}}}
-\bibcite{cemri2025mast}{{6}{2025}{{Cemri et~al\mbox  {.}}}{{}}}
-\bibcite{chalupa1979bootstrap}{{7}{1979}{{Chalupa et~al\mbox  {.}}}{{}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Measured trends.} (a), (c): transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\mathrm  {NRP}_{\mathrm  {sys}}$ advantage over no-defense shrinks across single-agent, $+$collusion, $+$compromised-orchestrator (grid in the Supplementary Material). (b) $\mathrm  {CPR}$ orders chain $<$ tree $<$ star $<$ mesh (\Cref  {sec:theory-prop}) and is identical across all backbones---a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\beta $. (d) Real token cost grows $\approx $ linearly in $N$; mesh and $N\in \{20,50\}$ are deferred.}}{8}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:results}{{1}{8}{\textbf {Measured trends.} (a), (c): transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\NRPs $ advantage over no-defense shrinks across single-agent, $+$collusion, $+$compromised-orchestrator (grid in the Supplementary Material). (b) $\CPR $ orders chain $<$ tree $<$ star $<$ mesh (\Cref {sec:theory-prop}) and is identical across all backbones---a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\betafrac $. (d) Real token cost grows $\approx $ linearly in $N$; mesh and $N\in \{20,50\}$ are deferred}{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Measured trends.} (a), (c): transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\mathrm  {NRP}_{\mathrm  {sys}}$ advantage over no-defense shrinks across single-agent, $+$collusion ($+$coll.), and $+$compromised-orchestrator ($+$orch.) (grid in the Supplementary Material). (b) $\mathrm  {CPR}$ orders chain $<$ tree $<$ star $<$ mesh (\Cref  {sec:theory-prop}) and is identical across all backbones---a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\beta $. (d) Real token cost grows $\approx $ linearly in $N$; mesh and $N\in \{20,50\}$ are deferred.}}{8}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:results}{{1}{8}{\textbf {Measured trends.} (a), (c): transparent synthetic model ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\NRPs $ advantage over no-defense shrinks across single-agent, $+$collusion ($+$coll.), and $+$compromised-orchestrator ($+$orch.) (grid in the Supplementary Material). (b) $\CPR $ orders chain $<$ tree $<$ star $<$ mesh (\Cref {sec:theory-prop}) and is identical across all backbones---a deterministic structural functional of the topology. (c) Collusion advantage in the unsafe-action channel is clearest at low $\betafrac $. (d) Real token cost grows $\approx $ linearly in $N$; mesh and $N\in \{20,50\}$ are deferred}{figure.caption.6}{}}
 \newlabel{fig:results@cref}{{[figure][1][]1}{[1][7][]8}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Real-LLM defense study, prompt-level defense applied, $N{=}5$, $M{=}30$ episodes per cell, fictitious payload. \emph  {Compliance} is pooled over all $12$ attack cells ($1075$ decisions, Wilson $95\%$ upper bound $0.0036$ where $0$ is shown). $\mathrm  {ASR}_{\mathrm  {sys}}$ is the system predicate under collusion. Where the defense holds, $\mathrm  {ASR}_{\mathrm  {act}}{=}0$ in every cell yet $\mathrm  {ASR}_{\mathrm  {sys}}$ remains $1.000$ on tree and star; Llama-3.2-1B does not obey the defense and fails on every topology. Table generated from the run summaries by \texttt  {experiments/make\_defense\_table.py}.}}{8}{table.caption.7}\protected@file@percent }
 \newlabel{tab:defense}{{1}{8}{Real-LLM defense study, prompt-level defense applied, $N{=}5$, $M{=}30$ episodes per cell, fictitious payload. \emph {Compliance} is pooled over all $12$ attack cells ($1075$ decisions, Wilson $95\%$ upper bound $0.0036$ where $0$ is shown). $\ASRs $ is the system predicate under collusion. Where the defense holds, $\ASRa {=}0$ in every cell yet $\ASRs $ remains $1.000$ on tree and star; Llama-3.2-1B does not obey the defense and fails on every topology. Table generated from the run summaries by \texttt {experiments/make\_defense\_table.py}}{table.caption.7}{}}
@@ -214,7 +207,13 @@
 \@writefile{toc}{\contentsline {section}{\numberline {12}Conclusion}{8}{section.12}\protected@file@percent }
 \newlabel{sec:conclusion}{{12}{8}{Conclusion}{section.12}{}}
 \newlabel{sec:conclusion@cref}{{[section][12][]12}{[1][8][]8}{}{}{}}
-\@writefile{toc}{\contentsline {section}{References}{8}{section*.9}\protected@file@percent }
+\bibcite{andriushchenko2025agentharm}{{1}{2025}{{Andriushchenko et~al\mbox  {.}}}{{}}}
+\bibcite{benjamini1995controlling}{{2}{1995}{{Benjamini and Hochberg}}{{}}}
+\bibcite{blanchard2017krum}{{3}{2017}{{Blanchard et~al\mbox  {.}}}{{}}}
+\bibcite{boucheron2013concentration}{{4}{2013}{{Boucheron et~al\mbox  {.}}}{{}}}
+\bibcite{brockman2016openaigym}{{5}{2016}{{Brockman et~al\mbox  {.}}}{{}}}
+\bibcite{cemri2025mast}{{6}{2025}{{Cemri et~al\mbox  {.}}}{{}}}
+\bibcite{chalupa1979bootstrap}{{7}{1979}{{Chalupa et~al\mbox  {.}}}{{}}}
 \bibcite{chen2024agentpoison}{{8}{2024}{{Chen et~al\mbox  {.}}}{{}}}
 \bibcite{cohen1960coefficient}{{9}{1960}{{Cohen}}{{}}}
 \bibcite{cohen2024aiworm}{{10}{2024}{{Cohen et~al\mbox  {.}}}{{}}}
@@ -249,6 +248,7 @@
 \bibcite{rubin1974estimating}{{39}{1974}{{Rubin}}{{}}}
 \bibcite{schroederdewitt2025masec}{{40}{2025}{{Schroeder~de Witt et~al\mbox  {.}}}{{}}}
 \bibcite{terry2021pettingzoo}{{41}{2021}{{Terry et~al\mbox  {.}}}{{}}}
+\@writefile{toc}{\contentsline {section}{References}{9}{section*.9}\protected@file@percent }
 \bibcite{tian2023evilgeniuses}{{42}{2023}{{Tian et~al\mbox  {.}}}{{}}}
 \bibcite{wang2023decodingtrust}{{43}{2023a}{{Wang et~al\mbox  {.}}}{{}}}
 \bibcite{wang2023fair}{{44}{2023b}{{Wang et~al\mbox  {.}}}{{}}}

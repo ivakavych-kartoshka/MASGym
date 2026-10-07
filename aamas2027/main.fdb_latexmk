@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1791004984.60829 "main.aux" "main.bbl" "main" 1791304150.73308 0
+["bibtex main"] 1791365257.725 "main.aux" "main.bbl" "main" 1791365273.66264 0
   "./references_verified.bib" 1789354412 34450 4253a84110885975e12d411aeccc0454 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/bibtex/bst/acmart/ACM-Reference-Format.bst" 1787996669 94292 6c9c536013d461258ea4a4813fe90aa8 ""
-  "main.aux" 1791304149 21688 4de684528b8775658e6397c137218126 "pdflatex"
+  "main.aux" 1791365272 21740 24355801b83e4a82baca96c5a62a97e9 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1791304144.92038 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" "main.pdf" "main" 1791304150.73402 0
+["pdflatex"] 1791365270.662 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" "main.pdf" "main" 1791365273.66319 0
   "../MASGym/outputs/defense_table/defense_table.tex" 1790394141 1064 0b617956a4625e786af4d5686985c52f ""
   "C:/Users/Lenovo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1790771409 195126 44af36e525da010db90ff0d57b0b9339 ""
   "C:/Users/Lenovo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1789124336 13333971 8c75762d71537131b0bd9e1c1d9246a7 ""
@@ -389,13 +389,13 @@
   "aamas.cls" 1789924110 122209 65113db2770441df189925e574f1dbe2 ""
   "by.pdf" 1789924110 5004 981f6317db1b416da3b30e5922ad167c ""
   "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" 1790358414 2464 8bde261a674b0cc96f61a05cdde9f3f9 ""
-  "figures/pgfplots_placeholder_results.tex" 1790391268 4154 6828fbcf587ff5ea46b6b2a28cb1c02c ""
+  "figures/pgfplots_placeholder_results.tex" 1791365254 4633 03273c8c60282bbde846953dc4935e8d ""
   "figures/tikz_styles.tex" 1789354412 9684 4288702aa3d48177da7335a919dde7ee ""
-  "main.aux" 1791304149 21688 4de684528b8775658e6397c137218126 "pdflatex"
-  "main.bbl" 1791032503 37503 f12aef0bd2b7842fdad04b0927734e3d "bibtex main"
-  "main.out" 1791304149 8603 d09c9f9515888662ab6e09b460ad2bb9 "pdflatex"
+  "main.aux" 1791365272 21740 24355801b83e4a82baca96c5a62a97e9 "pdflatex"
+  "main.bbl" 1791365257 37503 f12aef0bd2b7842fdad04b0927734e3d "bibtex main"
+  "main.out" 1791365272 8603 d09c9f9515888662ab6e09b460ad2bb9 "pdflatex"
   "main.tex" 1790358414 2464 8bde261a674b0cc96f61a05cdde9f3f9 ""
-  "preamble.tex" 1791032487 7945 6a866e5b435b4da945f727d058893231 ""
+  "preamble.tex" 1791362679 9184 28ded0a4ebabdf679b6049fe208813cd ""
   "sections/abstract.tex" 1790396103 2278 64fa1c129dd1d5374aad76b05a7a69db ""
   "sections/algorithm.tex" 1789928341 2893 5ac5ac42bee2c39c191bb4b6f7de9173 ""
   "sections/conclusion.tex" 1791005245 565 008f5d9bcb60cfdb95d469f884c17a55 ""

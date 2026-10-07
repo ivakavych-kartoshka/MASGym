@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  6 OCT 2026 23:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  7 OCT 2026 16:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -959,20 +959,8 @@ Package cleveref Info: `amsthm' support loaded on input line 3026.
 \c@algline=\count377
 \algind=\skip91
  (sections/abstract.tex))
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 18.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 18.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 18.
-
 Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 18.
-Excluding comment 'screenonly' Include comment 'printonly' Excluding comment 'anonsuppress' Excluding comment 'acks' (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+ Excluding comment 'screenonly' Include comment 'printonly' Excluding comment 'anonsuppress' Excluding comment 'acks' (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count378
 ) (main.aux)
@@ -1294,18 +1282,6 @@ Overfull \hbox (1.2944pt too wide) in paragraph at lines 21--21
 \T1/LinuxLibertineT-TLF/m/n/9 (-20) eval-u-a-tion; col-lu-sion; prompt in-jec-tion; de-ter-min-is-tic se-cu-rity check-
  []
 
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 21.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 21.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 21.
-
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
@@ -1313,7 +1289,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 21.
 
-Underfull \vbox (badness 1661) has occurred while \output is active []
+Underfull \vbox (badness 6842) has occurred while \output is active []
 
  (sections/introduction.tex
 LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 9.
@@ -1357,6 +1333,9 @@ Overfull \hbox (3.74663pt too wide) in paragraph at lines 5--16
 Overfull \hbox (2.44234pt too wide) in paragraph at lines 18--37
 \T1/LinuxLibertineT-TLF/m/n/9 (-20) et al[][] []2024[]], Magentic-One [[]Four-ney et al[][] []2024[]], and mix-ing/debating
  []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ) (sections/preliminaries.tex [2.2{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_tlukpt.enc}]
 LaTeX Font Info:    Freeze math alphabet allocation in version normal.
@@ -1767,37 +1746,7 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 256.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 256.
 ) (figures/pgfplots_placeholder_results.tex
-Package pgfplots info on input line 23: Using 'lua backend=false' for axis: x coord trafo unsupported.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 32.
-Package pgfplots info on input line 32: Using 'lua backend=false' for axis: x coord trafo unsupported.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 38.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 46.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+Package pgfplots info on input line 42: Using 'lua backend=false' for axis: x coord trafo unsupported.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 6.5pt on input line 51.
 LaTeX Font Info:    Font shape `OML/nxlmi/m/it' will be
@@ -1823,32 +1772,68 @@ LaTeX Font Info:    Font shape `LMS/ntxsy/b/n' will be
 LaTeX Font Info:    Font shape `LMX/ntxexx/b/n' will be
 (Font)              scaled to size 6.5pt on input line 51.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 61.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 51.
+Package pgfplots info on input line 51: Using 'lua backend=false' for axis: x coord trafo unsupported.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 59.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 68.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 73.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 83.
 ) (sections/experiments.tex
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
@@ -2025,11 +2010,7 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 7.
 ) Excluding 'acks' comment. (main.bbl
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 95.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
-
-Underfull \vbox (badness 2401) has occurred while \output is active []
+Underfull \vbox (badness 2057) has occurred while \output is active []
 
 
 
@@ -2037,6 +2018,9 @@ Package balance Warning: You have called \balance in second column
 (balance)                Columns might not be balanced.
 
 [8.8{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_fygcup.enc}]
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 71.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 95.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 136.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 162.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 187.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 214.
@@ -2047,24 +2031,25 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 357.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 370.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 393.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 493.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 506.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 518.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 534.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 596.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 611.
+
+Underfull \vbox (badness 1881) has occurred while \output is active []
+
+ [9.9]
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 704.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [9.9])
+)
 
 Class aamas Warning: CCS concepts are mandatory for papers over two pages.
 
-(C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.def
+
+Overfull \vbox (1.319pt too high) has occurred while \output is active []
+
+ (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
@@ -2082,17 +2067,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
  )
 (\end occurred when \ifx on line 12 was incomplete) 
 Here is how much of TeX's memory you used:
- 48336 strings out of 467871
- 1085383 string characters out of 5417892
- 1637595 words of memory out of 5000000
- 75109 multiletter control sequences out of 15000+600000
- 900292 words of font info for 736 fonts, out of 8000000 for 9000
+ 48359 strings out of 467871
+ 1085892 string characters out of 5417892
+ 1640451 words of memory out of 5000000
+ 75128 multiletter control sequences out of 15000+600000
+ 900720 words of font info for 737 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 95i,19n,134p,1049b,2704s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 95i,19n,134p,1049b,2777s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathRM.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTZ.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI7.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsym.pfb><C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on main.pdf (10 pages, 799878 bytes).
+Output written on main.pdf (10 pages, 800038 bytes).
 PDF statistics:
  768 PDF objects out of 1000 (max. 8388607)
  147 named destinations out of 1000 (max. 500000)
- 138682 words of extra memory for PDF output out of 154059 (max. 10000000)
+ 140730 words of extra memory for PDF output out of 154059 (max. 10000000)
 

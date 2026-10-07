@@ -1,52 +1,73 @@
 \begin{figure*}[t]
 \centering
+% Fallback colours (no effect if already defined in tikz_styles.tex)
+\providecolor{honest}{HTML}{1F77B4}
+\providecolor{advers}{HTML}{D62728}
+\providecolor{infra}{HTML}{2CA02C}
+\providecolor{theorycol}{HTML}{7F3FBF}
 \pgfplotsset{
   every axis/.append style={
     font=\footnotesize, line width=0.7pt, tick align=outside,
     grid=both, grid style={gray!18, line width=0.3pt},
     axis line style={gray!55},
-    width=6.4cm, height=3.6cm,
+    width=6.4cm, height=4.0cm,
     title style={font=\footnotesize, yshift=-2pt},
     label style={font=\footnotesize},
     tick label style={font=\scriptsize},
-    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.8,
-                  text opacity=1, inner sep=2pt},
+    legend style={font=\scriptsize, draw=gray!40, fill=white, fill opacity=0.9,
+                  text opacity=1, inner sep=2pt, nodes={inner sep=1pt}},
+    legend image post style={mark options={solid}},
   },
+  guard/.style={color=honest, draw=honest, mark=*, thick,
+                mark options={fill=honest, draw=honest, solid}},
+  nodef/.style={color=advers, draw=advers, mark=square*, thick, dashed,
+                mark options={fill=advers, draw=advers, solid}},
+  collu/.style={color=advers, draw=advers, mark=*, thick,
+                mark options={fill=advers, draw=advers, solid}},
+  indep/.style={color=honest, draw=honest, mark=triangle*, thick, dashed,
+                mark options={fill=honest, draw=honest, solid}},
+  meas/.style={color=infra, draw=infra, mark=*, thick,
+               mark options={fill=infra, draw=infra, solid}},
+  fit/.style={color=honest, draw=honest, mark=none, thick, dashed},
 }
 \begin{tikzpicture}
 \begin{groupplot}[group style={group size=2 by 2,
     horizontal sep=2.0cm, vertical sep=1.9cm}]
 
-% ---- (a) defense degradation (measured): NRP_action ----
+% ---- (a): legend in the empty band below the data ----
 \nextgroupplot[title={(a) Defense degradation \emph{(synthetic)}},
   symbolic x coords={single,+coll.,+orch.}, xtick=data,
-  ylabel={$\NRPs$ (ASB predicate)}, ymin=0, ymax=0.95,
-  enlarge x limits=0.2, legend pos=north east]
-\addplot[honest, mark=*, thick] coordinates {(single,0.590) (+coll.,0.553) (+orch.,0.552)};
-\addplot[advers, mark=square*, thick, dashed] coordinates {(single,0.374) (+coll.,0.396) (+orch.,0.424)};
+  ylabel={$\NRPs$ (ASB predicate)}, ymin=0, ymax=0.8,
+  enlarge x limits=0.2,
+  legend style={at={(0.97,0.05)}, anchor=south east}]
+\addplot[guard] coordinates {(single,0.590) (+coll.,0.553) (+orch.,0.552)};
+\addplot[nodef] coordinates {(single,0.374) (+coll.,0.396) (+orch.,0.424)};
 \legend{per-agent guardrail, no-defense}
 
-% ---- (b) CPR vs topology (measured, pilot; identical across all 6 backbones) ----
+% ---- (b) ----
 \nextgroupplot[title={(b) Compromise propagation \emph{(pilot)}},
   ybar, bar width=10pt, symbolic x coords={chain,tree,star,mesh},
   xtick=data, ylabel={$\CPR$}, ymin=0, ymax=0.8,
   enlarge x limits=0.18]
-\addplot[fill=theorycol!35, draw=theorycol] coordinates {(chain,0.130) (tree,0.198) (star,0.286) (mesh,0.627)};
+\addplot[fill=theorycol!35, draw=theorycol, line width=0.7pt]
+  coordinates {(chain,0.130) (tree,0.198) (star,0.286) (mesh,0.627)};
 
-% ---- (c) collusion advantage vs beta (measured): ASR_action ----
+% ---- (c): legend in the empty bottom-right corner ----
 \nextgroupplot[title={(c) Collusion advantage \emph{(synthetic)}},
   xlabel={adversary fraction $\betafrac$}, ylabel={ASR$_{\mathrm{act}}$},
-  xmin=0, xmax=0.5, ymin=0, ymax=1.0, legend pos=north east]
-\addplot[advers, mark=*, thick] coordinates {(0,0)(0.1,0.603)(0.2,0.577)(0.3,0.558)(0.4,0.561)(0.5,0.564)};
-\addplot[honest, mark=triangle*, thick, dashed] coordinates {(0,0)(0.1,0.554)(0.2,0.575)(0.3,0.583)(0.4,0.523)(0.5,0.565)};
+  xmin=0, xmax=0.5, ymin=0, ymax=1.0,
+  legend style={at={(0.97,0.05)}, anchor=south east}]
+\addplot[collu] coordinates {(0,0)(0.1,0.603)(0.2,0.577)(0.3,0.558)(0.4,0.561)(0.5,0.564)};
+\addplot[indep] coordinates {(0,0)(0.1,0.554)(0.2,0.575)(0.3,0.583)(0.4,0.523)(0.5,0.565)};
 \legend{colluding, independent}
 
-% ---- (d) cost vs N (measured, pilot: star, real LLM tokens) ----
+% ---- (d): legend in the empty top-left corner ----
 \nextgroupplot[title={(d) Cost vs.\ agent count \emph{(pilot)}},
   xlabel={agents $N$}, ylabel={tokens/episode},
-  xmin=0, xmax=12, ymin=0, ymax=1900, legend pos=north west]
-\addplot[infra, mark=*, thick] coordinates {(3,386)(5,702)(10,1301)};
-\addplot[honest, mark=none, thick, dashed] coordinates {(3,399)(5,665)(10,1330)};
+  xmin=0, xmax=12, ymin=0, ymax=1600,
+  legend style={at={(0.03,0.97)}, anchor=north west}]
+\addplot[meas] coordinates {(3,386)(5,702)(10,1301)};
+\addplot[fit]  coordinates {(3,399)(5,665)(10,1330)};
 \legend{star (measured), $\Theta(N)$ reference fit}
 
 \end{groupplot}

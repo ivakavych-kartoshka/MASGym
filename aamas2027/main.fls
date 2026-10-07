@@ -793,6 +793,12 @@ INPUT .\main.bbl
 INPUT main.bbl
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-ot1.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1--base.tfm
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\nxlmi7.vf
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\LibertineMathMI7.tfm
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\NewTXMI7.tfm
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\stxscr.tfm
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-ot1.vf
+INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\nxlmia.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\LibertineMathRM.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txmiaSTbb.tfm
@@ -800,10 +806,6 @@ INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txmia
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\ntxsy7.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\nxlmi7.vf
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\LibertineMathMI7.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\NewTXMI7.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\stxscr.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTBI-tlf-t1.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTBI-tlf-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_ki75ao.enc
