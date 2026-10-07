@@ -1,60 +1,61 @@
-% ============================================================================
-% figures/pgfplots_placeholder_results.tex  --  Fig. 6: RQ3-RQ6 trends (MEASURED)
-% Panels (a) and (c): measurements from the transparent synthetic model (M=738,
-% eps=alpha=0.05); see outputs/full_matrix and outputs/{degradation,collusion}.
-% Panels (b) and (d): measurements from the real-backbone pilot, 100 episodes per
-% (config, scenario), 12 configs = {star,chain,tree,mesh} x {3,5,10} agents, 6 open
-% instruct backbones; see outputs/llm_pilot_scale. PILOT-labelled, honest labels.
-% ============================================================================
 \begin{figure*}[t]
 \centering
 \pgfplotsset{
   every axis/.append style={
     font=\footnotesize, line width=0.7pt, tick align=outside,
     grid=both, grid style={gray!18, line width=0.3pt},
-    axis line style={gray!55}, width=5.5cm, height=2.5cm},
+    axis line style={gray!55},
+    width=6.4cm, height=3.6cm,
+    title style={font=\footnotesize, yshift=-2pt},
+    label style={font=\footnotesize},
+    tick label style={font=\scriptsize},
+    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.8,
+                  text opacity=1, inner sep=2pt},
+  },
 }
 \begin{tikzpicture}
-\begin{groupplot}[group style={group size=2 by 2, horizontal sep=1.1cm, vertical sep=0.65cm}]
+\begin{groupplot}[group style={group size=2 by 2,
+    horizontal sep=2.0cm, vertical sep=1.9cm}]
 
 % ---- (a) defense degradation (measured): NRP_action ----
 \nextgroupplot[title={(a) Defense degradation \emph{(synthetic)}},
-  symbolic x coords={single,+collusion,+comp.\,orch}, xtick=data,
-  ylabel={$\NRPs$ (ASB predicate)}, ymin=0, ymax=0.8, x tick label style={font=\scriptsize}]
-\addplot[honest, mark=*, thick] coordinates {(single,0.590) (+collusion,0.553) (+comp.\,orch,0.552)};
-\addplot[advers, mark=square*, thick, dashed] coordinates {(single,0.374) (+collusion,0.396) (+comp.\,orch,0.424)};
-\legend{\scriptsize per-agent guardrail, \scriptsize no-defense}
+  symbolic x coords={single,+coll.,+orch.}, xtick=data,
+  ylabel={$\NRPs$ (ASB predicate)}, ymin=0, ymax=0.95,
+  enlarge x limits=0.2, legend pos=north east]
+\addplot[honest, mark=*, thick] coordinates {(single,0.590) (+coll.,0.553) (+orch.,0.552)};
+\addplot[advers, mark=square*, thick, dashed] coordinates {(single,0.374) (+coll.,0.396) (+orch.,0.424)};
+\legend{per-agent guardrail, no-defense}
 
 % ---- (b) CPR vs topology (measured, pilot; identical across all 6 backbones) ----
 \nextgroupplot[title={(b) Compromise propagation \emph{(pilot)}},
-  ybar, bar width=8pt, symbolic x coords={chain,tree,star,mesh},
-  xtick=data, ylabel={$\CPR$}, ymin=0, ymax=0.75, x tick label style={font=\scriptsize},
-  enlarge x limits=0.16]
+  ybar, bar width=10pt, symbolic x coords={chain,tree,star,mesh},
+  xtick=data, ylabel={$\CPR$}, ymin=0, ymax=0.8,
+  enlarge x limits=0.18]
 \addplot[fill=theorycol!35, draw=theorycol] coordinates {(chain,0.130) (tree,0.198) (star,0.286) (mesh,0.627)};
 
 % ---- (c) collusion advantage vs beta (measured): ASR_action ----
 \nextgroupplot[title={(c) Collusion advantage \emph{(synthetic)}},
   xlabel={adversary fraction $\betafrac$}, ylabel={ASR$_{\mathrm{act}}$},
-  xmin=0, xmax=0.5, ymin=0, ymax=0.8, legend pos=north west]
+  xmin=0, xmax=0.5, ymin=0, ymax=1.0, legend pos=north east]
 \addplot[advers, mark=*, thick] coordinates {(0,0)(0.1,0.603)(0.2,0.577)(0.3,0.558)(0.4,0.561)(0.5,0.564)};
 \addplot[honest, mark=triangle*, thick, dashed] coordinates {(0,0)(0.1,0.554)(0.2,0.575)(0.3,0.583)(0.4,0.523)(0.5,0.565)};
-\legend{\scriptsize colluding, \scriptsize independent}
+\legend{colluding, independent}
 
 % ---- (d) cost vs N (measured, pilot: star, real LLM tokens) ----
 \nextgroupplot[title={(d) Cost vs.\ agent count \emph{(pilot)}},
   xlabel={agents $N$}, ylabel={tokens/episode},
-  xmin=0, xmax=12, ymin=0, ymax=1600, legend pos=north west]
+  xmin=0, xmax=12, ymin=0, ymax=1900, legend pos=north west]
 \addplot[infra, mark=*, thick] coordinates {(3,386)(5,702)(10,1301)};
 \addplot[honest, mark=none, thick, dashed] coordinates {(3,399)(5,665)(10,1330)};
-\legend{\scriptsize star (measured), \scriptsize $\Theta(N)$ reference fit}
+\legend{star (measured), $\Theta(N)$ reference fit}
 
 \end{groupplot}
 \end{tikzpicture}
 \caption{\textbf{Measured trends.} (a), (c): transparent synthetic model ($M{=}738$,
 $\epsilon{=}\alpha{=}0.05$, provenance-stamped). (b), (d): PILOT measurements, real
 backbones, 12 configs, 100 episodes/config. (a) The guardrail's $\NRPs$ advantage over
-no-defense shrinks across single-agent, $+$collusion, $+$compromised-orchestrator (grid in
-the Supplementary Material). (b) $\CPR$ orders chain $<$ tree $<$ star $<$ mesh
+no-defense shrinks across single-agent, $+$collusion ($+$coll.), and $+$compromised-orchestrator
+($+$orch.) (grid in the Supplementary Material). (b) $\CPR$ orders chain $<$ tree $<$ star $<$ mesh
 (\Cref{sec:theory-prop}) and is identical across all backbones---a deterministic
 structural functional of the topology. (c) Collusion advantage in the unsafe-action
 channel is clearest at low $\betafrac$. (d) Real token cost grows $\approx$ linearly in
