@@ -6,7 +6,6 @@ MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent
   LLM Systems with Parameterized Collusion, Orchestrator
           Compromise, and System-Level Metrics
                                                                  Anonymous Author(s)
-                                                            Submission Id: MASGym-2027-001
 Abstract                                                                                  ACM Reference Format:
 Security research on large language model (LLM) agents                                    Anonymous Author(s). 2027. MASGym: A Co-Evolving Red/Blue Security
                                                                                           Gym for Multi-Agent LLM Systems with Parameterized Collusion, Orches-

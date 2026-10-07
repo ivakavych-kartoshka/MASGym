@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1791013646.39633 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/preamble.tex" "preamble.pdf" "preamble" 1791013647.79376 2
+["pdflatex"] 1791031496.69799 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/preamble.tex" "preamble.pdf" "preamble" 1791031498.22969 2
   "C:/Users/Lenovo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1789124336 13333971 8c75762d71537131b0bd9e1c1d9246a7 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/symbol/psyr.tfm" 1136747054 1408 5937f58aa508ea2cea4901c07d10f5fe ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136747054 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
@@ -240,10 +240,10 @@
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
   "aamas.cls" 1789924110 122209 65113db2770441df189925e574f1dbe2 ""
-  "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/preamble.tex" 1791013645 7967 5ae55d8e340661063e8fa62900bf9da7 ""
+  "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/preamble.tex" 1791031496 7933 71e362dd94ac3789cd5223180f5f7b6d ""
   "figures/tikz_styles.tex" 1789354412 9684 4288702aa3d48177da7335a919dde7ee ""
-  "preamble.aux" 1791013638 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "preamble.tex" 1791013645 7967 5ae55d8e340661063e8fa62900bf9da7 ""
+  "preamble.aux" 1791031482 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "preamble.tex" 1791031496 7933 71e362dd94ac3789cd5223180f5f7b6d ""
   "sections/abstract.tex" 1790396103 2278 64fa1c129dd1d5374aad76b05a7a69db ""
   (generated)
   "preamble.aux"

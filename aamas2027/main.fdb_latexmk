@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1791004984.60829 "main.aux" "main.bbl" "main" 1791005943.01804 0
+["bibtex main"] 1791004984.60829 "main.aux" "main.bbl" "main" 1791304150.73308 0
   "./references_verified.bib" 1789354412 34450 4253a84110885975e12d411aeccc0454 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/bibtex/bst/acmart/ACM-Reference-Format.bst" 1787996669 94292 6c9c536013d461258ea4a4813fe90aa8 ""
-  "main.aux" 1791005942 21688 4de684528b8775658e6397c137218126 "pdflatex"
+  "main.aux" 1791304149 21688 4de684528b8775658e6397c137218126 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1791005940.22231 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" "main.pdf" "main" 1791005943.01864 0
+["pdflatex"] 1791304144.92038 "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" "main.pdf" "main" 1791304150.73402 0
   "../MASGym/outputs/defense_table/defense_table.tex" 1790394141 1064 0b617956a4625e786af4d5686985c52f ""
   "C:/Users/Lenovo/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1790771409 195126 44af36e525da010db90ff0d57b0b9339 ""
   "C:/Users/Lenovo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1789124336 13333971 8c75762d71537131b0bd9e1c1d9246a7 ""
@@ -17,7 +17,6 @@
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1497089888 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_edcawa.enc" 1497089888 2833 ab571e969b0d4b8e87f8f63627b1db02 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_fygcup.enc" 1497089888 2824 67c67e7402c76b84866a6f91f9790b12 ""
-  "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_jtta5h.enc" 1497089888 3288 24b998cbd2e52bbe04beca3f8371dd27 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc" 1497089888 2943 6327ae0d29530d8ab185a235635acf5b ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_naooyc.enc" 1497089888 3357 5261ce65ba03aef9faf6135657b9abb6 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc" 1497089888 3288 25b5d43be7be8cba51d85b642598b3b0 ""
@@ -40,8 +39,6 @@
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumT-tlf-ot1.tfm" 1732620802 5524 73ddab0081406b67479e5d1823e183c3 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumT-tlf-t1--base.tfm" 1732620802 1744 9486ddc64e90094bbb83f53a83b0e415 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumT-tlf-t1.tfm" 1732620802 19548 768852037f39958c435d71846b8877ea ""
-  "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumTB-tlf-sc-t1--base.tfm" 1732620802 1732 7f40ade03fffd4382298f88e72c0eaa0 ""
-  "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumTB-tlf-sc-t1.tfm" 1732620802 15500 ac957d6f0a1c909d63e3483bb8d37627 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumTB-tlf-t1--base.tfm" 1732620802 1768 23aace73e6def3193d6e0453af90487b ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinBiolinumTB-tlf-t1.tfm" 1732620802 19416 aedd2db224ad278ddf2c411f52d86014 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/tfm/public/libertine/LinLibertineT-tlf-ot1--base.tfm" 1732620802 1396 df4e2f70d789eb9c1c42455cf249fa0c ""
@@ -114,7 +111,6 @@
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb" 1736607166 45985 fd5f8adcc4f0e93e9a95469e12126723 ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinBiolinumT-tlf-ot1.vf" 1732620847 876 63a0e347787dc3cc254d639e57906aac ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinBiolinumT-tlf-t1.vf" 1732620847 1728 e76e04a950024a95b620698b679c9810 ""
-  "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinBiolinumTB-tlf-sc-t1.vf" 1732620847 1732 ae72ccfc34b69e665e265413ff53c6df ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinBiolinumTB-tlf-t1.vf" 1732620847 1728 4ae633ddccb76ba8d0a0906a5e2e8fdf ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinLibertineT-tlf-ot1.vf" 1732620847 968 633f2e9600614ced16b39ff258710cde ""
   "C:/Users/Lenovo/AppData/Local/Programs/MiKTeX/fonts/vf/public/libertine/LinLibertineT-tlf-sc-t1.vf" 1732620847 1732 19a98a3416ac208cfc1e8cd877852bec ""
@@ -395,11 +391,11 @@
   "d:/NCKH/Topic08_MASGym/Idea_08_MASGym/aamas2027/main.tex" 1790358414 2464 8bde261a674b0cc96f61a05cdde9f3f9 ""
   "figures/pgfplots_placeholder_results.tex" 1790391268 4154 6828fbcf587ff5ea46b6b2a28cb1c02c ""
   "figures/tikz_styles.tex" 1789354412 9684 4288702aa3d48177da7335a919dde7ee ""
-  "main.aux" 1791005942 21688 4de684528b8775658e6397c137218126 "pdflatex"
-  "main.bbl" 1791004984 37503 f12aef0bd2b7842fdad04b0927734e3d "bibtex main"
-  "main.out" 1791005942 8603 d09c9f9515888662ab6e09b460ad2bb9 "pdflatex"
+  "main.aux" 1791304149 21688 4de684528b8775658e6397c137218126 "pdflatex"
+  "main.bbl" 1791032503 37503 f12aef0bd2b7842fdad04b0927734e3d "bibtex main"
+  "main.out" 1791304149 8603 d09c9f9515888662ab6e09b460ad2bb9 "pdflatex"
   "main.tex" 1790358414 2464 8bde261a674b0cc96f61a05cdde9f3f9 ""
-  "preamble.tex" 1791002075 7857 c2c9e5233a021c35e4bddeda0a67cad2 ""
+  "preamble.tex" 1791032487 7945 6a866e5b435b4da945f727d058893231 ""
   "sections/abstract.tex" 1790396103 2278 64fa1c129dd1d5374aad76b05a7a69db ""
   "sections/algorithm.tex" 1789928341 2893 5ac5ac42bee2c39c191bb4b6f7de9173 ""
   "sections/conclusion.tex" 1791005245 565 008f5d9bcb60cfdb95d469f884c17a55 ""

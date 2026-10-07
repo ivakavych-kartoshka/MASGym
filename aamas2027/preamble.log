@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  3 OCT 2026 14:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.11)  3 OCT 2026 19:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -968,7 +968,7 @@ Package cleveref Info: `amsthm' support loaded on input line 3026.
 Here is how much of TeX's memory you used:
  43545 strings out of 467871
  968395 string characters out of 5417892
- 1568649 words of memory out of 5000000
+ 1568634 words of memory out of 5000000
  71572 multiletter control sequences out of 15000+600000
  634327 words of font info for 45 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191

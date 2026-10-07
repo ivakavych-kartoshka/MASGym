@@ -548,7 +548,6 @@ INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex\latex\libertine\t1linuxb
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\tex\latex\libertine\t1linuxbiolinumt-tlf.fd
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-sc-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT .\by.pdf
@@ -601,7 +600,6 @@ INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\ntxbe
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
 INPUT .\sections\introduction.tex
 INPUT .\sections\introduction.tex
@@ -616,9 +614,6 @@ INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\Li
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_25tcsq.enc
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-sc-t1.vf
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-sc-t1--base.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_jtta5h.enc
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
@@ -662,8 +657,6 @@ INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\Li
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-sc-t1.vf
-INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1--base.tfm
 INPUT C:\Users\Lenovo\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\inconsolata\i4-t1-4.enc

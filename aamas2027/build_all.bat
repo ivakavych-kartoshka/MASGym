@@ -15,20 +15,22 @@ REM ===========================================================================
 setlocal
 cd /d "%~dp0"
 
-echo === [1/4] main.pdf (pass 1) ===
+echo === [1/5] main.pdf (pass 1 -- initial compile + bibtex) ===
 pdflatex -interaction=nonstopmode main.tex > nul || goto :fail
 bibtex main > nul
 
-echo === [2/4] main.pdf (pass 2) ===
+echo === [2/5] main.pdf (pass 2 -- resolve citations) ===
 pdflatex -interaction=nonstopmode main.tex > nul || goto :fail
 
-echo === [3/4] main_supplement.pdf ===
+echo === [3/5] main_supplement.pdf (pass 1 + bibtex) ===
 pdflatex -interaction=nonstopmode main_supplement.tex > nul || goto :fail
 bibtex main_supplement > nul
 
-echo === [4/4] finalising cross-references ===
-pdflatex -interaction=nonstopmode main.tex > nul || goto :fail
+echo === [4/5] main_supplement.pdf (pass 2 -- resolve citations) ===
 pdflatex -interaction=nonstopmode main_supplement.tex > nul || goto :fail
+
+echo === [5/5] final pass -- resolve all cross-references ===
+pdflatex -interaction=nonstopmode main.tex > nul || goto :fail
 pdflatex -interaction=nonstopmode main_supplement.tex > nul || goto :fail
 
 echo.
@@ -41,9 +43,9 @@ for %%F in (main.pdf main_supplement.pdf) do (
   )
 )
 echo.
-echo Page counts (verify main content is <= 8 pages before references):
-pdfinfo main.pdf 2^> nul | findstr /C:"Pages"
-pdfinfo main_supplement.pdf 2^> nul | findstr /C:"Pages"
+echo Page counts (verify main content is ^<= 8 pages before references):
+pdfinfo "main.pdf" 2^>nul | findstr /C:"Pages:"
+pdfinfo "main_supplement.pdf" 2^>nul | findstr /C:"Pages:"
 goto :eof
 
 :fail
