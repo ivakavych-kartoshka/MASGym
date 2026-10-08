@@ -16,6 +16,7 @@ orchestrated \emph{collectives}: a planner directs workers, agents share memory,
 third-party tools sit on the critical path, and many tasks require several agents to
 finish at all.
 
+\begingroup\emergencystretch=2em
 In such systems the security questions are group-level. Do a fraction of agents
 \emph{collude}? Is the \emph{orchestrator} trusted, or compromised? Can a \emph{malicious
 tool}, a \emph{Sybil} identity, or a \emph{poisoned} memory entry spread through the
@@ -24,7 +25,8 @@ MASEC~\cite{schroederdewitt2025masec} argues that agent security is
 \emph{non-compositional}---individually safe agents compose into unsafe systems---and
 notes that no multi-agent security benchmark exists, listing what one must provide:
 heterogeneous roles, partial observability, forced coordination, a co-evolving red/blue
-methodology, and group-level emergence metrics.
+methodology, and group-level emergence metrics.\par
+\endgroup
 
 \paragraph{Contributions.}
 To the best of our knowledge \defname{} is the first environment purpose-built for the

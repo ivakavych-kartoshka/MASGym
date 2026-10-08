@@ -108,17 +108,18 @@ intervals $[0,0.10]$ and $[0.90,1]$; $0.43$ is $[0.26,0.62]$.
 Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B return \emph{bit-identical} $\ASRs$ in all twelve
 cells; once compliance is $0$ the action channel is closed, so the system predicate follows
 topology and propagation only. The compliance split ($1$ vs.\ $0$) moves the collusion
-advantage from $0.00$ to $0.33$; see Supplementary Material.
+advantage from $0.00$ to $0.33$ (Supplementary Material).
 
 \subsection{RQ3: topology and collusion structure}
-\Cref{sec:theory-prop} predicts chain $<$ tree $<$ star. The synthetic study confirms the
-order and the hub effect; \Cref{tab:defense} shows the same pattern on real backbones.
-Under the system predicate, collusion saturates at $\ASRs{=}1.000$ for all
-$\betafrac\ge0.1$, with star saturation reflecting availability collapse. Per-backbone and
-per-$\betafrac$ tables are in the Supplementary Material.
+\Cref{sec:theory-prop} predicts chain $<$ tree $<$ star; the synthetic study confirms the
+order and the hub effect, and \Cref{tab:defense} shows the same pattern on real backbones.
+Under the system predicate collusion saturates at $\ASRs{=}1.000$ for all $\betafrac\ge0.1$
+(availability collapse); per-backbone and per-$\betafrac$ tables are in the Supplementary
+Material.
 \subsection{RQ4: cost}
 \label{sec:rq4}
-Cost is dominated by the episode budget of \Cref{thm:sample}: a $G{=}21$-configuration sweep
-with target gap $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ agent invocations
-(\Cref{cor:budget}). Measured token/latency-versus-$N$ and the full cost model are in the
-Supplementary Material.
+\begingroup\emergencystretch=2em
+Cost follows the episode budget of \Cref{thm:sample}: a $G{=}21$-configuration sweep resolving
+a gap $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ invocations (\Cref{cor:budget});
+token/latency-versus-$N$ and the full cost model are in the Supplementary Material.\par
+\endgroup

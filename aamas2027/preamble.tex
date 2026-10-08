@@ -30,7 +30,8 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 \acmYear{2027}
 \acmDOI{}
 \acmISBN{}
-% \submissionType{Research Paper Track}  % removed: not needed outside submission portal
+\acmSubmissionID{MASGym-2027-001}
+\submissionType{Research Paper Track}
 
 % ---- encoding / fonts ----
 \usepackage[utf8]{inputenc}
@@ -105,6 +106,7 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 \newtheorem{assumption}{Assumption}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\renewcommand{\qedsymbol}{}
 
 \crefname{assumption}{Assumption}{Assumptions}
 \Crefname{assumption}{Assumption}{Assumptions}
@@ -116,12 +118,14 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 \floatstyle{ruled}
 \newfloat{algorithm}{tbp}{loa}
 \floatname{algorithm}{Algorithm}
+\floatevery{algorithm}{\raggedright}
 \crefname{algorithm}{Algorithm}{Algorithms}
 \Crefname{algorithm}{Algorithm}{Algorithms}
 \newcounter{algline}
 \newlength{\algind}
 \newcommand{\algreset}{\setcounter{algline}{0}\setlength{\algind}{0pt}}
-\newcommand{\PL}[1]{\par\refstepcounter{algline}\noindent
+\newcommand{\PL}[1]{\par\refstepcounter{algline}%
+  \hangindent=\dimexpr3.1em+\algind\relax\noindent
   \makebox[2.6em][r]{\scriptsize\thealgline:\,}\hspace{0.5em}\hspace{\algind}%
   \ignorespaces#1\strut}
 \newcommand{\Ind}{\addtolength{\algind}{1.5em}}
