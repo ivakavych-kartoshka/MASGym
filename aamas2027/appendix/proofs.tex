@@ -6,8 +6,13 @@
 (\Cref{thm:integrity}), judge hijackability (\Cref{prop:judgehijack}), the collusion
 advantage (\Cref{thm:collusion}), the forced-coordination bound (\Cref{prop:forced}), and
 the concentration and sweep-budget bounds (\Cref{thm:sample,cor:budget})---is stated and
-proved \emph{in full in the main paper} (\Cref{sec:theory}), so that no conclusion of this
-paper depends on this appendix.
+proved \emph{in full in the main paper} (\Cref{sec:theory}). Nothing
+\emph{theoretical} therefore depends on this appendix, and a reader who skips the
+supplement loses no proof. The \emph{experimental} appendix is a different matter: the
+per-cell numbers behind RQ1, RQ3 and RQ4, the collusion sweep of \Cref{tab:collusion}, the
+no-defense pilot of \Cref{tab:llm_pilot} that bounds the defense claim, the harness
+sabotage rule of \Cref{app:harness}, and the model/decoding record of \Cref{app:repro}
+exist only here, and the main text says where it relies on them.
 
 What follows are full derivations of the \emph{classical} spread results that
 \Cref{sec:theory-prop} restates in our notation. They are reproduced here for
@@ -18,12 +23,16 @@ maximization~\cite{kempe2003maximizing}, and bootstrap
 percolation~\cite{chalupa1979bootstrap}. Throughout we work in the independent-cascade
 instance of \Cref{as:prop}: when an agent becomes compromised, it independently
 compromises each susceptible out-neighbour with probability $\pinf$ when its message is
-processed, and compromise is absorbing.
+processed, and compromise is absorbing. Two quantities must be kept apart: \emph{reach}
+below counts agents compromised \emph{beyond} the seed, whereas the compromise counts of
+\Cref{thm:collusion} include the seed; the two differ by exactly the seed set, and the
+main text's $\CPR$ (\Cref{eq:cpr}) is defined on the reach.
 
 \subsection{Statements}
 
 \begin{proposition}[Chain: bounded reach]\label{prop:chain}
-On a directed path $a_1\to\cdots\to a_n$ with a single seed at $a_1$, the expected number
+On a path $a_1\leftrightarrow\cdots\leftrightarrow a_n$ with a single seed at $a_1$, with
+influence directed away from the seed, the expected number
 of additionally compromised agents is $\sum_{j=1}^{n-1}\pinf^{\,j}\le \pinf/(1-\pinf)$ for
 $\pinf<1$, independent of $n$.
 \end{proposition}
@@ -35,16 +44,19 @@ leaf gives expected reach $\pinf+\pinf^{2}(n-2)$. The centre-seed reach exceeds 
 leaf-seed reach by $\Theta(\pinf(1-\pinf)n)$.
 \end{proposition}
 
-\begin{proposition}[Tree: a branching phase transition]\label{prop:tree}
+\begin{proposition}[Tree: a branching critical point]\label{prop:tree}
 On a rooted tree with branching factor $b$ and depth $d$, seeded at the root, the expected
 number compromised at level $\ell$ is $(b\pinf)^{\ell}$; the total expected reach is
 $\sum_{\ell=1}^{d}(b\pinf)^{\ell}$---bounded in $d$ for $b\pinf<1$ and
-$\Theta((b\pinf)^{d})$ for $b\pinf>1$, transitioning at $b\pinf=1$.
+$\Theta((b\pinf)^{d})$ for $b\pinf>1$, with critical branching mean $b\pinf=1$. The
+transition is a property of the expected process in the infinite-depth limit; at finite $d$
+the growth is smooth in $b\pinf$, so calling $b\pinf=1$ a ``phase transition'' is a
+statement about the limit, not about any run of finite depth.
 \end{proposition}
 
-\begin{proposition}[Mesh: one-round lower bound]\label{prop:mesh}
+\begin{proposition}[Mesh: one-round expected compromise]\label{prop:mesh}
 On the complete graph $K_n$ with $s$ seeds, the expected number compromised after one
-round is at least $s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. Consequently, for any fixed
+round is exactly $s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. Consequently, for any fixed
 $\pinf>0$ the honest-compromise fraction after one round tends to $1$ as $s$ grows, and
 iterating drives $\CPR\to1$ above the percolation threshold.
 \end{proposition}
@@ -103,8 +115,10 @@ $b\pinf$.)
 On $K_n$ with seed set $\Advset_0$, $|\Advset_0|=s$, each honest node has all $s$ seeds as
 in-neighbours. It survives the round uncompromised iff every one of the $s$ independent
 edges fails, with probability $(1-\pinf)^{s}$; hence it is compromised with probability
-$1-(1-\pinf)^{s}$. Summing over the $n-s$ honest nodes,
-$\E[|\Advset_1|]=s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. For fixed $\pinf>0$,
+$1-(1-\pinf)^{s}$. The number compromised is the sum of these indicators, so by linearity
+of expectation (no independence between the honest nodes is needed)
+$\E[|\Advset_1|]=s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$ \emph{exactly}---the ``at least'' in a
+lower-bound reading is unnecessary. For fixed $\pinf>0$,
 $1-(1-\pinf)^{s}\to1$ as $s\to\infty$, so the honest-compromise fraction after one round
 tends to $1$; iterating the absorbing process only increases the compromised set, and above
 the percolation threshold a giant compromised component forms, driving $\CPR\to1$
@@ -118,12 +132,22 @@ meet that condition, so it remains honest for the entire (absorbing) process. On
 every non-seed agent has in-degree $1<\thresh$, so no propagation occurs.
 \end{proof}
 
-\subsection{Why the star is the environment's critical topology}
+\subsection{Why the hub topologies are the environment's critical ones}
 
-\Cref{prop:star} and \Cref{thm:collusion} together explain the empirical pattern in
-\Cref{sec:defense}: on a star or tree the orchestrator is the single hub through which
-every message passes, so one successful injection reaches all workers, whereas on a chain
-the reachable set stays bounded by $\pinf/(1-\pinf)$ regardless of length. This is why
-\Cref{tab:defense} shows $\ASRs=1.000$ on tree and star but degrades on the chain, and
-why \emph{collusion} and \emph{orchestrator compromise} are separate knobs in
-\Cref{sec:threat} even though they coincide on the star.
+\Cref{prop:star} and \Cref{thm:collusion} explain the empirical pattern in
+\Cref{sec:defense}, but three qualifications belong here so that the explanation is not
+over-read. \emph{First}, the mechanism is the harness's hub-availability rule
+(\Cref{app:harness}), not the influence bound: on a star or tree every route to the sink
+passes through the orchestrator, so once it is compromised the harness records availability
+sabotage without any agent taking an unsafe action, whereas on a chain the reachable set
+stays bounded by $\pinf/(1-\pinf)$ regardless of length and the hub rule never fires.
+\emph{Second}, ``one successful injection reaches all workers'' holds only in the limit
+$\pinf\to1$: under independent cascade with $\pinf<1$ a centre seed reaches each worker with
+probability $\pinf$, and the saturation of $\ASRs$ on star and tree at the reported
+operating points reflects the availability rule together with the fraction of episodes in
+which the hub is seeded. \emph{Third}, the ordering chain $<$ tree $<$ star is an empirical
+pattern from the sweeps (\Cref{tab:topology,tab:llm_pilot_topology}), not a corollary of
+the per-topology bounds, which hold at different operating points; no theorem in this paper
+compares the three topologies at equal $N$ and $\pinf$. This is why \emph{collusion} and
+\emph{orchestrator compromise} are separate knobs in \Cref{sec:threat} even though they
+coincide on the star.

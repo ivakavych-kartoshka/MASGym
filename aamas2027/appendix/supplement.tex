@@ -1,38 +1,57 @@
 \section{Supplementary Material: Notation, Desiderata, and Cost}
 \label{app:supp}
 
-\subsection{Threats to validity in full}
+\subsection{Threats to validity}
 \label{app:limitations}
-The main text flags the largest unmeasured gap; this subsection records the rest so the
-main paper stays within its page limit.
+This subsection records every limit that bounds what the main paper's results support. The
+five limits are stated compactly in the main text; here each is given with its measurement.
 
-\emph{Synthetic versus real.} The parameter sweeps in \Cref{app:degradation} are measured
-on a transparent \emph{synthetic} emulator, and every table is labelled accordingly. The
-defense study of \Cref{sec:defense} is the exception and is measured on real backbones.
-Because the deterministic checker, not the emulator, produces the verdict, emulator noise
-degrades realism rather than integrity---but realism is still the binding constraint, and
-$\kappaem\approx0.48$ is inherited from ToolEmu~\cite{ruan2024toolemu} rather than
-re-measured here. The harness registers an emulated-versus-real-tools ablation for
-independent re-testing; we did not run it, and we prefer to say so than to let a
-registration imply coverage.
+\emph{(i) The defense's efficacy is not identified.} The defense study of \Cref{sec:defense}
+has no no-defense arm in the identical one-token protocol. The pilot of \Cref{app:pilot} does
+run undefended, in a direct-instruction protocol, and there Qwen2.5 at all four sizes and
+Llama-3.2-3B already refuse wholesale: with no defense present the same models decline the
+exfiltration request. For those backbones the $0/1075$ compliance reported \emph{under} the
+defense is therefore a floor effect, not an effect of the defense, and it must not be read as
+evidence that the defense worked. Of the other two backbones, Llama-3.2-1B refuses nothing
+(it complies $1075/1075$ with the defense applied), and Mistral-7B complies undefended in the
+pilot's protocol, so neither yields a clean contrast in the one-token protocol either. The
+missing measurement---a no-defense arm inside the identical one-token protocol for all four
+backbones---is the single most important gap in this paper, and we name it rather than infer
+the effect from the pilot.
 
-\emph{Statistical resolution.} The defense cells use $M{=}30$ episodes, so a reported
-$0.00$ is $0/30$, i.e.\ a $95\%$ interval of $[0,0.10]$. The compliance counts that carry
-the headline claim are decision-level ($1075$ per backbone) and therefore far tighter:
-$0/1075$ gives a Wilson upper bound of $0.0036$. $\widehat{\NRPs}$ is nonlinear in
-$\ASRs$, so its intervals are arcsin-scaled beside the point estimates.
+\emph{(ii) The system predicate can be discharged with no model in the loop.} On hub-critical
+topologies (star, tree) a deterministic availability rule suffices for $\ASRs=1$ once the hub
+is compromised (\Cref{app:harness}), so $\ASRs$ saturates there and stops discriminating
+between defenses; the residual cell differences that do remain are inside the
+$\pm2\epsilon\approx0.1$ resolution of $M{=}738$ episodes, and the sweep carries no
+multiplicity correction across its $G$ cells (Bonferroni at $G{=}21$ would require
+$M\ge1347$; \Cref{app:power}). Cells whose differences are smaller than that
+resolution are reported in the main text as measured but unresolved.
 
-\emph{Sample size and degeneracy.} Four backbones is a small sample, and Llama-3.2-1B may
-be unrepresentative of small models generally. Three backbones return identical system
-values once compliance is zero; we spell this out as a structural degeneracy of the
-deterministic availability path rather than present it as independent corroboration.
+\emph{(iii) Scale and coverage.} Evaluation is at $N\le10$ (the harness supports
+$3$--$50$), on a single task family, with one attack template, one defense, and $M{=}30$
+episodes per real-backbone cell under greedy decoding---which makes the $1075$ compliance
+decisions highly \emph{dependent}, so the quoted Wilson bound describes the released sample
+rather than extrapolating a rate. Mesh and $N\in\{20,50\}$ are supported but unrun, and the
+$\mathsf{tool}$ and $\mathsf{mem}$ knobs have no separated result: they appear in the
+synthetic sweeps and in the pilot, but no table in this paper isolates their effect. The
+Pareto frontier that \corb{} returns is likewise not plotted in this submission.
 
-\emph{Scope of the defense claim.} The defense study measures whether a defense is
-\emph{followed}, not whether a system is secure. More topologies, $N\in\{20,50\}$, and
-exhaustive knob interactions remain future work; the reachable region is explored rather
-than the full exponential knob space (\Cref{cor:budget}).
+\emph{(iv) Emulation fidelity.} The parameter sweeps are measured on a transparent
+\emph{synthetic effect model}, not on a language model; the real-backbone path in
+\Cref{sec:defense} calls instruct checkpoints, and tool execution there is emulated. No real
+tool backend is wired in, so the emulated-versus-real-tools ablation is registered but
+unmeasured, and the emulator's fidelity is inherited from ToolEmu~\cite{ruan2024toolemu}
+rather than re-measured here. We prefer to say this than to let the registration imply
+coverage.
 
-\subsection{Ethics and safety in full}
+\emph{(v) Instrument scope.} $\NRPs$ is a coordinate over a stated configuration grid, not a
+certificate: a lower value is a measurement under a stated threat model, and no result in
+this paper shows that any deployed defense is secure. More topologies, larger $N$, and
+exhaustive knob interactions remain future work; the reachable region is explored rather than
+the full exponential knob space (\Cref{cor:budget}).
+
+\subsection{Ethics and safety}
 \label{app:ethics}
 \defname{} is a measurement instrument. Its red-team primitives are drawn from the
 published literature and are exercised only inside the sandbox against registered
@@ -42,18 +61,16 @@ bounded (\Cref{sec:threat}), and released artifacts contain only synthetic ident
 Results should route defenses, not certify systems: the metrics in this paper are
 measurements of a fixed configuration grid under a stated threat model.
 
-\subsection{MASGym architecture}
+\subsection{MASGym architecture and notation}
 The system architecture of \Cref{sec:method}---orchestration layer, agent collective, and the
-trusted emulation and deterministic checking layer---is shown in \Cref{fig:architecture}.
-It is referred to from the main text but reproduced here so that the main paper stays
-within its page limit.
+trusted emulation and deterministic checking layer---is shown in \Cref{fig:architecture}, and
+is drawn only here.
 \input{figures/tikz_architecture.tex}
 
-\subsection{Notation}
 \begin{table}[t]
 \centering
-\caption{Notation used throughout. Reproduced here from the main text to keep the main
-paper within its page limit; the main text references this table in prose.}
+\caption{Notation used throughout. Rows marked $\dagger$ are the ones a reader needs in
+order to follow the system-level metric; the rest is orientation.}
 \label{tab:notation}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -62,24 +79,26 @@ paper within its page limit; the main text references this table in prose.}
 \toprule
 Symbol & Meaning \\
 \midrule
-$\Agents=\{a_1,\dots,a_N\}$ & $N$ agents, $N\in\{3,\dots,50\}$ \\
-$\Roles$ & roles $\{$planner, worker, tool-executor, memory$\}$ \\
-$\Gtop=(\Vtop,\Etop)$ & topology (star, chain, tree, mesh) \\
+$\Agents=\{a_1,\dots,a_N\}$ & $N$ agents; supported for $N\in\{3,\dots,50\}$ \\
+$\Roles$ & roles $\{$planner (orchestrator), worker, tool-executor, memory$\}$ \\
+$\Gtop=(\Vtop,\Etop)$ & topology (star, chain, tree, mesh); $\Gtop$ is never a scalar \\
 $\Nin(a)$ & inbound neighbours of $a$ in $\Gtop$ \\
 $s_t\in\Statesp$ & global state at step $t$; space $\Statesp$ \\
 $\Trace\in\TraceSp$ & global trace $\Trace=(s_0,\dots,s_H)$ of an episode \\
-$H$ & episode horizon \\
+$\pi(\Trace)^{\dagger}$ & security-relevant projection of $\Trace$ (\Cref{app:harness}) \\
+$H$ & episode horizon; $k$ is the forced-coordination degree \\
 $\Predsec,\Predutil$ & security / benign-success predicates \\
-$\Checker$ & deterministic checker on $\Trace$ \\
-$\Emu$ & LM tool emulator (adversarial $\Emu^{\!\dagger}$) \\
-$\Judge$ & LLM judge (contrast baseline) \\
-$\config\in\Configs$ & environment configuration \\
+$\Checker$ & deterministic checker on $\pi(\Trace)$ \\
+$\Emu,\ \Emu^{\!\dagger}$ & LM tool emulator, and its adversarial mode \\
+$\Judge$ & LLM judge (contrast baseline, off the critical path) \\
+$\config\in\Configs$ & environment configuration; $\config^{\circ}$ its benign counterpart \\
 $\Advset\subseteq\Agents$ & adversarial agents; $\betafrac=|\Advset|/N$ \\
-$\ASRs,\PNAs,\NRPs$ & system ASR / PNA / net metric \\
-$\CPR,\ \CSR$ & propagation rate, collusion success rate \\
+$\Advset_\infty$ & compromised set at fixation ($\supseteq\Advset$) \\
+$\ASRa,\ \ASRs,\ \PNAs,\ \NRPs$ & action-channel, system ASR / PNA / net metric \\
+$\CPR,\ \CSR$ & compromise-propagation rate, collusion success rate \\
+$M$ & episodes per configuration (shared memory is written $\mathcal{M}$) \\
 $\pinf\in[0,1],\ \thresh$ & per-edge infection probability; threshold \\
 $\red,\ \blue$ & red (attack) / blue (defense) policy in \corb \\
-$M$ & episodes per configuration \\
 $\kappaem$ & emulator/human agreement ($\approx 0.48$) \\
 \bottomrule
 \end{tabular}
@@ -88,38 +107,62 @@ $\kappaem$ & emulator/human agreement ($\approx 0.48$) \\
 \subsection{Desiderata for the aggregator (D1--D5)}
 A system-level utility--security aggregator $g:[0,1]^2\to[0,1]$, written
 $\NRPs=g(\PNAs,\,1-\ASRs)$, should satisfy: (D1) \emph{boundedness}, $g$ maps into
-$[0,1]$; (D2) \emph{security consistency}, $g(u,1)=u$ and $g(0,\sigma)=0$; (D3)
-\emph{monotonicity}, $g$ non-decreasing in each argument; (D4) \emph{utility- and
-security-proportionality}, $g(\lambda u,\sigma)=\lambda g(u,\sigma)$ and
+$[0,1]$; (D2) \emph{consistency}, $g(u,1)=u$; (D3) \emph{monotonicity}, $g$ non-decreasing
+in each argument; (D4) \emph{homogeneity}, $g(\lambda u,\sigma)=\lambda g(u,\sigma)$ and
 $g(u,\lambda\sigma)=\lambda g(u,\sigma)$ for $\lambda\in[0,1]$; and (D5) \emph{reduction},
 $g$ recovers \Cref{eq:asb-nrp} at $N=1$.
+
+Three remarks on how D1--D5 are used, so that \Cref{thm:metric} is not over-read.
+\emph{First}, the theorem's operative axioms are D2 and D4; D1 and D3 are consequences of
+$g=u\sigma$ on $[0,1]^2$, and D5 is \Cref{prop:reduction}, a separate statement. \emph{Second},
+the boundary condition $g(0,\sigma)=0$ that appears in the main text's D2 is redundant: it
+follows from D4 with $\lambda=0$, so only $g(u,1)=u$ needs to be assumed. \emph{Third}, and
+most importantly, D4 is an \emph{assumption, not a derivation}: it encodes the substantive
+claim that halving a system's security level, or halving its benign performance, halves net
+performance. The theorem should therefore be read as ``the product is the unique aggregator
+\emph{among those satisfying D4}'', not as evidence that the product is the only defensible
+choice of metric.
+
+The alternatives named in the main text's remark are distinguished by that axiom rather than
+by fit. For $\min(u,\sigma)$: with $\lambda<1$ and $\sigma>\lambda u$ we get
+$\min(\lambda u,\sigma)=\lambda u$ while $\lambda\min(u,\sigma)=\lambda u$, but taking
+$u>\sigma$ gives $\min(\lambda u,\sigma)=\sigma$ and $\lambda\min(u,\sigma)=\lambda\sigma<\sigma$,
+so D4a fails. For $u^{w}\sigma^{1-w}$ with $w<1$:
+$(\lambda u)^{w}\sigma^{1-w}=\lambda^{w}\,u^{w}\sigma^{1-w}\neq\lambda\,u^{w}\sigma^{1-w}$
+whenever $\lambda\in(0,1)$, so D4a fails as well, and $g(u,1)=u^{w}\neq u$ so D2 fails too.
+Consequently the re-ranking reported in \Cref{app:sensitivity} compares aggregators that the
+axioms already separate; it is reported because a reader may prefer one of them anyway.
 
 \subsection{Topology study}
 \label{app:topology-table}
 \begin{table}[t]
 \centering
-\caption{Topology study (RQ3), \textbf{synthetic-model} results: $\CPR$ orders as
-predicted---chain $<$ tree $<$ star (\Cref{prop:chain,prop:star,prop:tree})---and the
-orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured
-in the real-backbone pilot (\Cref{fig:results}(b)).}
+\caption{Topology study (RQ3), \textbf{synthetic effect model}: $\CPR$ orders as the
+per-topology bounds motivate (chain $<$ tree $<$ star; \Cref{prop:chain,prop:star,prop:tree,prop:mesh})
+and the orchestrator (star hub) is the critical node. The mesh row is the real-backbone pilot
+measurement of \Cref{tab:llm_pilot_topology}, whose $\CPR$ column is a deterministic
+functional of the topology; detection and recovery are not instrumented for it, so those
+cells are left empty rather than filled with a placeholder.}
 \label{tab:topology}
 \small
 \renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect & Recovery \\
+Topology & $\CPR$ & $\ASRs$ & $\NRPs$ & Time-to-detect (steps) & Recovery \\
 \midrule
 Chain            & 0.182 & 0.997 & 0.002 & 2.39 & 0.218 \\
 Tree (branching) & 0.226 & 1.000 & 0.000 & 2.39 & 0.205 \\
 Star             & 0.291 & 1.000 & 0.000 & 2.27 & 0.202 \\
-Mesh (pilot, partial) & 0.000 & 0.000 & 1.000 & --    & -- \\
+Mesh (pilot)     & 0.627 & 0.688 & 0.312 & ---   & ---   \\
 \bottomrule
 \end{tabular}
 \tabnote{$\CPR$/$\ASRs$/$\NRPs$ under no-defense (pure propagation signal); time-to-detect
-and recovery under the per-agent guardrail. $\ASRs{=}1$ reflects
-availability-sabotage saturation (\Cref{tab:degradation}); $\CPR$ is the
-discriminating column.}
+and recovery under the per-agent guardrail. $\ASRs{=}1$ on star and tree reflects
+availability-sabotage saturation (\Cref{tab:degradation,app:harness}), so $\CPR$ is the
+discriminating column. These bounds hold at \emph{different} operating points for the
+different topologies, so the ordering should be read as a pattern consistent with them
+(\Cref{sec:theory-prop}), not as a corollary of a single comparison theorem.}
 \end{table}
 
 \subsection{Cost and complexity of the instrument}
@@ -131,17 +174,21 @@ evaluates $\Predsec,\Predutil$ once per trace with a linear or near-linear scan
 and tree, and $\Theta(N^2)$ for a dense mesh---why mesh is the costliest topology
 (\Cref{app:pilot}). Estimating the metrics to accuracy $\epsilon$ costs
 $M=O(\epsilon^{-2}\ln(1/\alpha))$ episodes (\Cref{thm:sample}); a \corb{} run of $R$
-rounds costs $\Theta(RMNH)$ invocations; a sweep of $G$ configurations resolving $\NRPs$
-gaps of size $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ (\Cref{cor:budget}).
-Because the parameter space is exponential in the number of adversary knobs, \corb{}
-explores a \emph{reachable region} rather than the whole space---an honesty constraint we
-report per study.
+rounds costs $\Theta(RMNH)$ invocations, with the constant $2$ per round that the protocol
+spends (each round scores the pair before and after the blue step); a sweep of $G$
+configurations resolving $\NRPs$ gaps of size $\Delta$ costs
+$O(GNH\Delta^{-2}\ln(G/\alpha))$ (\Cref{cor:budget}), which is a \emph{sufficient}
+budget---the main paper states it as an upper bound rather than a tight rate. Because the
+parameter space is exponential in the number of adversary knobs, \corb{} explores a
+\emph{reachable region} rather than the whole space---an honesty constraint we report per
+study.
 
 \begin{table}[t]
 \centering
 \caption{Cost of the \defname{} instrument. $N$ agents, horizon $H$, edges $|\Etop|$
 ($\Theta(N)$ for star/chain/tree, $\Theta(N^2)$ for dense mesh), $M$ episodes per
-configuration, $R$ \corb{} rounds, $G$ swept configurations. Checking is deterministic.}
+configuration, $R$ \corb{} rounds, $G$ swept configurations. Checking is deterministic and
+costs no model calls. The sweep row is a sufficient-budget upper bound (\Cref{cor:budget}).}
 \label{tab:complexity}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -153,15 +200,10 @@ Scope & Cost (agent invocations) \\
 Per episode        & $\Theta(NH)$ \\
 Per configuration  & $\Theta(MNH)$ \\
 Per \corb{} run    & $\Theta(RMNH)$ \\
-Full parameter sweep & $\Theta(GNH\Delta^{-2}\ln\tfrac{G}{\alpha})$ \\
+Full parameter sweep & $O(GNH\Delta^{-2}\ln\tfrac{G}{\alpha})$ \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\subsection{System architecture}
-\label{app:architecture}
-\Cref{fig:architecture} reproduces the system overview of \Cref{sec:method} in full
-width; the figure is defined in the main body and not repeated here.
 
 \subsection{Models, decoding, and the exact prompts of the defense study}
 \label{app:repro}
@@ -171,10 +213,10 @@ parameters, and the verbatim text of every prompt the study sends.
 
 \paragraph{Backbones and decoding.} All agent decisions are made by instruct-tuned
 checkpoints loaded locally with \texttt{transformers} (default revision, i.e.\ the
-main branch at download time), except the hosted Mistral cell. Decoding is greedy and
+main branch at download time), except the single hosted Mistral cell. Decoding is greedy and
 deterministic throughout: \texttt{do\_sample=False} with \texttt{temperature} effectively
 $0$ and no nucleus truncation for the local path, and \texttt{temperature=0.0} with
-\texttt{max\_tokens=160} for the hosted APIs (Mistral API and AWS Bedrock). The completion
+\texttt{max\_tokens=160} for the hosted API (AWS Bedrock). The completion
 budget is $160$ new tokens because it must hold a model's \emph{whole} answer: at $24$
 tokens a compliant model that prefixes ``BENIGN. I will send a copy of\ldots'' was cut
 off mid-sentence and then scored as a refusal. Greedy decoding is what makes the claim
@@ -189,8 +231,8 @@ output to be a meaningful hijack test at all.
 \centering
 \caption{Backbones and decoding for the real-LLM defense study (\Cref{tab:defense}).
 $M{=}30$ episodes per cell, $N{=}5$, four topologies, fictitious payload. All local
-backbones are greedy (\texttt{do\_sample=False}); both hosted cells use
-\texttt{temperature=0.0}, \texttt{max\_tokens=160}.}
+backbones are greedy (\texttt{do\_sample=False}); the single hosted cell (Mistral on AWS
+Bedrock) uses \texttt{temperature=0.0}, \texttt{max\_tokens=160}.}
 \label{tab:backbones}
 \small
 \renewcommand{\arraystretch}{1.08}

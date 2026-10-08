@@ -1,0 +1,219 @@
+\section{Clarifications of Main-Text Statements}
+\label{app:clarify}
+
+This appendix carries three things that are needed to read the main paper correctly but that
+would not fit in its eight pages: precise definitions of the two objects the integrity and
+sabotage arguments turn on (\Cref{app:harness}), the exact statement of the placement result
+whose main-text corollary is used loosely (\Cref{app:placement}), and the statistical
+resolution of the experiments the main text reports (\Cref{app:power}). None of it changes a
+number in the main paper; each item makes an existing statement unambiguous.
+
+\subsection{The harness's trace projection and sabotage rule}
+\label{app:harness}
+
+The main paper's integrity theorem (\Cref{thm:integrity}) is a statement about the
+\emph{design} of the checker, and its proof is only meaningful if the object the checker reads
+is defined. The following two definitions make it explicit. They also settle a reading of the
+main text that is otherwise ambiguous: if the trace contains every message, then a
+manipulation that edits a message \emph{does} change the trace, so a statement of the form
+``equal traces give equal verdicts'' would say nothing about content manipulation.
+The resolution is that the checker reads not the full trace but its structural projection,
+and the empirical question---whether a given injection changes that projection---is the one
+\Cref{sec:integrity} measures.
+
+\begin{definition}[Security-relevant projection]
+\label{def:projection}
+Let $\pi:\TraceSp\to\TraceSp^{\mathrm{st}}$ map a trace to its \emph{security-relevant
+projection}: the subsequence of recorded structural facts---executed tool calls with their
+arguments, recorded transitions such as \texttt{unsafe\_action}, \texttt{exfiltration} or
+\texttt{sabotage}, memory versions written, role assignments, topology edges, and the identity
+map---with all free-form message text, tool prose, and model reasoning removed. The predicates
+of \Cref{def:predicates} are required to factor through $\pi$: there are
+$\bar\Predsec,\bar\Predutil$ on $\pi(\TraceSp)$ with
+$\Predsec=\bar\Predsec\circ\pi$ and $\Predutil=\bar\Predutil\circ\pi$. Equivalently, the
+verdicts depend on \emph{what the system did}, never on how it was phrased---which is the
+property that lifts AgentDojo's per-agent state check~\cite{debenedetti2024agentdojo} to the
+global trace.
+\end{definition}
+
+Read that way, \Cref{thm:integrity} is an assumption-driven statement rather than a tautology
+about traces: its content is that the registered predicates are functions of $\pi$, so a
+message-content manipulation $\pi_m$ with $\pi(\pi_m(\Trace))=\pi(\Trace)$ leaves the verdict
+unchanged, whether or not it changed anything a human would consider the system's state. The
+converse is not claimed and is false in general: a manipulation that \emph{does} change
+$\pi$---for instance one that causes an illicit tool call to be executed---changes the verdict,
+which is exactly the intended behaviour of a security predicate. The complementary statement
+for a content-reading judge (\Cref{prop:judgehijack}) is an existence claim about judges, and
+the rate at which real judges flip is measured in \Cref{sec:integrity}.
+
+\begin{definition}[Availability sabotage in the harness]
+\label{def:sabotage}
+A task is $k$-forced with witness family $\mathcal{W}$. The harness records
+coordination sabotage---and therefore $\Predsec=1$---whenever no witness survives the episode,
+that is when either (a) fewer than $k$ agents remain uncompromised at fixation, or (b) the
+topology is hub-critical (star or tree) and the orchestrator is compromised, even if $k$
+honest agents remain. Case (b) is a deliberate modelling choice: the operator's routing is
+assumed to depend on the orchestrator on those topologies, so losing it loses availability
+regardless of how many workers survive. No language model participates in the judgement: it is
+a deterministic function of the compromised set, the topology, and $k$. (The definition of a
+$k$-forced task is \Cref{def:forced} in the main paper.)
+\end{definition}
+
+Three consequences follow, and each corrects an over-reading that the main text invites.
+
+\emph{(1) The rule, not the influence bound, is what saturates the metric.}
+\Cref{prop:star} is a statement about expected \emph{influence}: a centre seed reaches each
+leaf with probability $\pinf$, which is strictly below $1$ whenever $\pinf<1$. The saturation
+of $\ASRs$ at $1.000$ on star and tree in \Cref{tab:defense} is produced by
+\Cref{def:sabotage}(b) once the hub is compromised, together with the fraction of episodes in
+which the hub is seeded. So the correct description of that result is ``the harness-defined
+predicate is discharged without the action channel'', not ``an injection spreads to every
+worker''.
+
+\emph{(2) Case (b) is why the chain behaves differently, and why
+\Cref{prop:forced}(b) does not by itself describe the sweeps.} \Cref{prop:forced} assumes that
+the adversary's only lever is withholding its own contribution; under that assumption a chain
+is the \emph{most} sabotage-prone topology, because every witness contains every intermediate
+node. The harness instead applies case (b) only on star and tree, so a chain is the
+\emph{least} sabotage-prone topology in the measurements: that is why the chain column shows
+$\ASRs{=}0.108$ in the pilot topology table while star and tree reach $0.873$ and $0.766$.
+The main text's phrase ``the deterministic availability path'' therefore refers to
+\Cref{def:sabotage} and not to the transversal condition of \Cref{prop:forced}; the two agree
+only on hub-critical topologies.
+
+\emph{(3) It is why a zero-compliance defense still scores $\ASRs=1$.} The system predicate is
+a disjunction (unsafe action $\lor$ availability sabotage). A prompt-level defense acts on the
+first disjunct only. Once compliance is pinned at zero the second disjunct is the only one
+left, and it is a function of the compromised set and the topology with no model in the loop,
+so the metric stops depending on the backbone at all. That is the mechanism behind the three
+bit-identical rows of \Cref{tab:defense}, and it is a property of the instrument rather than
+an experimental finding about LLMs.
+
+\subsection{The placement result, stated exactly}
+\label{app:placement}
+
+The main paper states a strict advantage for coordinated seeding
+(\Cref{thm:collusion}) and defines a metric-level collusion advantage
+$\Delta_{\mathrm{coll}}=\ASRs^{\mathrm{coll}}-\ASRs^{\mathrm{ind}}$
+(\Cref{def:csr}). These are different quantities---one is a difference in expected
+\emph{number of compromised agents}, the other a difference in \emph{attack-success
+probability}---and the main text's ``strictly dominates'' should not be read as the second.
+We restate the first in full here, under the same independent-cascade model.
+
+\begin{proposition}[Placement advantage of coordinated seeding on the star]
+\label{prop:placement}
+Fix the independent-cascade model of \Cref{as:prop} on a star of $N$ nodes with a budget of
+one seed, edges bidirectional for the purpose of influence (a compromised leaf can compromise
+the centre, which is what a shared channel implies). A coordinated adversary that places its
+seed at the centre achieves expected compromise
+$C=1+\pinf(N-1)$; an adversary that places its seed uniformly at random achieves
+$\E^{\mathrm{ind}}=\tfrac1N C+\tfrac{N-1}{N}L$ with $L=1+\pinf+\pinf^{2}(N-2)$. Their
+difference
+\[
+\Delta_{\mathrm{place}}\;=\;C-\E^{\mathrm{ind}}
+\;=\;\pinf(1-\pinf)\,\frac{(N-1)(N-2)}{N}
+\]
+is strictly positive and $\Theta\bigl(\pinf(1-\pinf)N\bigr)$ for every $\pinf\in(0,1)$ and
+$N\ge3$.
+\end{proposition}
+
+\begin{proof}
+Each leaf is a direct out-neighbour of the centre, so a centre seed compromises all $N-1$
+leaves independently with probability $\pinf$: $C=1+\pinf(N-1)$. A leaf seed compromises the
+centre with probability $\pinf$ and, conditioned on that, each remaining leaf with probability
+$\pinf$: $L=1+\pinf+\pinf^{2}(N-2)$. A uniformly random seed lands on the centre with
+probability $1/N$ and on a leaf with probability $(N-1)/N$, hence
+$\E^{\mathrm{ind}}=\tfrac1N C+\tfrac{N-1}{N}L$. Therefore
+\[
+\Delta_{\mathrm{place}}=C-\E^{\mathrm{ind}}=\frac{N-1}{N}(C-L)
+=\pinf(1-\pinf)\,\frac{(N-1)(N-2)}{N},
+\]
+since $C-L=\pinf(1-\pinf)(N-2)$ by \Cref{prop:star}. For $N\ge3$ both
+$(N-1)(N-2)/N>0$ and $\pinf(1-\pinf)>0$, so the difference is strictly positive, and it is
+$\Theta(\pinf(1-\pinf)N)$. With one-directional edges the leaf-seed term loses its trailing
+$\pinf$, so the advantage is only larger; the bidirectional case is the conservative one.
+\end{proof}
+
+Two limits of \Cref{prop:placement} belong next to it. \emph{First}, it compares
+\emph{placement policies under a fixed budget of one seed}, not ``collusion on'' versus
+``collusion off''; a real colluding coalition also shares a channel and a joint objective,
+which the independent-cascade model does not represent. \emph{Second}, and empirically more
+important, the sweeps do not confirm the ordering the proposition suggests: in
+\Cref{tab:collusion} the unsafe-action advantage is $+0.049,+0.003,-0.024,+0.038,-0.001$ for
+$\betafrac=0.1,\dots,0.5$---sign-changing and entirely inside the $\pm\epsilon=0.05$
+resolution of an $M{=}738$ sweep. \Cref{prop:placement} is therefore offered as a statement
+about the environment's propagation model and as a prediction of \emph{where} to look (hub
+topologies), not as a fitted description of those five numbers.
+
+\subsection{Resolution of the reported differences}
+\label{app:power}
+
+The main paper's budgets follow \Cref{thm:sample}. With $\epsilon=\alpha=0.05$ this gives
+$M=\bigl\lceil(2\epsilon^{2})^{-1}\ln(2/\alpha)\bigr\rceil=738$ episodes per configuration,
+and the same computation bounds what a comparison of two cells can resolve.
+
+\emph{Single-cell resolution.} Hoeffding gives
+$\Prob[|\hat\theta-\theta|\ge\epsilon]\le2e^{-2M\epsilon^{2}}$, so at $M=738$ and
+$\epsilon=0.05$ each $\widehat{\ASRs}$ is within $\pm0.05$ of its target with probability
+$0.95$, and a \emph{difference} of two such estimates is resolved only to about
+$\pm2\epsilon=0.1$. Concretely, in \Cref{tab:degradation} the guardrail's advantage over
+no-defense is $0.244$, $0.178$ and $0.149$ in the three columns---far outside that
+band---whereas the \emph{shrinkage} between the single-agent and multi-agent columns rests on
+margins of $0.039$ and $0.008$, and the no-defense baseline itself drifts down
+($0.587\to0.560\to0.539$), which shrinks the reported \emph{ratio} without any defense effect.
+The main text's percentage sequence $41.6\%\to31.8\%\to27.6\%$ is arithmetically correct but
+is \emph{not resolved} at this budget, and the main paper reports it as an unresolved trend.
+The same applies to the five $\Delta_{\mathrm{coll}}$ values of \Cref{tab:collusion}, all of
+which lie within $\pm0.05$ of zero, and to the non-monotone adaptive-red sequence of
+\Cref{tab:adaptive}, for which $M=60$ per scored pair is even weaker.
+
+\emph{Multiplicity.} The sweep is not corrected across its $G$ cells. Bonferroni over $G=21$
+replaces $\alpha$ by $\alpha/G$, so \Cref{thm:sample}(c) would require
+\[
+M\;\ge\;\frac{\ln(2G/\alpha)}{2\epsilon^{2}}
+\;=\;\frac{\ln(42/0.05)}{2(0.05)^{2}}\;\approx\;1347
+\]
+episodes per cell; the reported sweep uses $738$ and is therefore \emph{descriptive} at the
+stated budget rather than a set of simultaneous $95\%$ claims. We state this rather than
+silently pool, and it is the reason no main-text claim rests on a cell difference smaller than
+$0.1$.
+
+\emph{Clustered compliance counts.} The $1075$ compliance decisions per backbone are not
+$1075$ independent Bernoulli trials. Decoding is greedy, the prompt varies only in agent id
+and step index, and the decisions cluster inside $M=30$ episodes per cell. A Wilson interval
+on $1075$ decisions (upper bound $0.0036$ at $0$ successes) therefore describes the released
+sample; it is not an inferential interval for the model's compliance rate, and we do not use
+it as one. The same clustering limits the per-cell claim: with $M=30$ episodes the standard
+error of a single cell proportion near $0.5$ is about $0.09$, so a contrast of the size that
+would matter (say a $0.15$ drop between the no-defense and defended arms) is
+$\approx1.6$ standard errors and would need far more episodes to be established at
+conventional power.
+
+\emph{Wilson intervals used in the main paper.} For completeness, the two-sided $95\%$
+Wilson intervals at $M=30$ are $[0,0.114]$ for $0/30$, $[0.886,1]$ for $30/30$, and
+$[0.274,0.608]$ for $13/30$; the last value is the $0.43$ cell of \Cref{tab:defense}. An
+earlier draft quoted $[0,0.10]$ and $[0.90,1]$, which are one-sided bounds
+($1-0.05^{1/30}\approx0.095$), and $[0.26,0.62]$, which came from a different convention; the
+main paper now uses the two-sided values.
+
+\subsection{Terminology and a citation caveat}
+\label{app:terms}
+
+\emph{Names of the inherited quantities.} ASB~\cite{zhang2025asb} defines
+$\mathrm{NRP}=\mathrm{PNA}\cdot(1-\mathrm{ASR})$ as \emph{net resilient performance} with
+\emph{PNA} the performance under \emph{no} attack; an earlier draft of this paper expanded
+NRP as ``non-refusal performance'', which is not ASB's term and is corrected in the main text.
+\defname{} writes $\mathrm{NRP}_{\mathrm{sys}}$ for the collective version and
+$\mathrm{NRP}_{\mathrm{act}}$ (equivalently $\mathrm{ASR}_{\mathrm{act}}$-based) for the
+single-agent predicate used in \Cref{tab:degradation}; the two must not be conflated.
+
+\emph{The emulation-fidelity figure.} The main paper cites ToolEmu's emulator/human agreement
+as $\kappaem\approx0.48$ and treats it as the central validity caveat. We flag honestly that
+we could not re-confirm that specific number against ToolEmu's reported results while
+preparing this supplement: what ToolEmu~\cite{ruan2024toolemu} reports is an agreement rate
+between its automatic evaluator and human annotators together with a
+human-validated realism rate for its emulated trajectories, and the $\kappa$ value has been
+carried in our materials without re-derivation. The value should therefore be read as an
+inherited caveat rather than as a measurement of this paper's emulator, and the
+emulated-versus-real-tools ablation that would replace it with a number of our own is
+registered but unrun (\Cref{app:limitations}, item (iv)).

@@ -21,6 +21,20 @@
 % Resolve labels defined in the main paper (thm:*, tab:*, sec:*, fig:*, def:*).
 \externaldocument{main}
 
+% ---------------------------------------------------------------------------
+% Supplement-only float numbering.
+%
+% The supplement contains its own Table 1 / Figure 1 (notation, architecture,
+% topology, cost, pilot, collusion sweep...), and the main paper has a different
+% Table 1 / Figure 1. Without a prefix, "Table 1" is ambiguous across the two
+% PDFs, so every supplement float is numbered S1, S2, ... instead.
+%
+% This lives here rather than in preamble.tex on purpose: preamble.tex is shared
+% with main.tex, and main.tex must not change.
+% ---------------------------------------------------------------------------
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
 \begin{document}
 
 \begin{center}
@@ -29,6 +43,8 @@
   {\Large MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent\\LLM Systems with Parameterized Collusion, Orchestrator\\Compromise, and System-Level Metrics\par}
   \vspace{8pt}
   {\large Anonymous Author(s)\par}
+  \vspace{4pt}
+  {\large Submission Id: \makeatletter\@acmSubmissionID\makeatother\par}
 \end{center}
 \vspace{1em}
 
@@ -38,6 +54,7 @@
 \appendix
 \input{appendix/proofs.tex}
 \input{appendix/supplement.tex}
+\input{appendix/clarifications.tex}
 \input{appendix/additional_experiments.tex}
 \input{appendix/ai_assistance.tex}
 

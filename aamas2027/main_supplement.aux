@@ -14,101 +14,128 @@
 \newlabel{prop:chain@cref}{{[proposition][1][]A.1}{[1][1][]1}{}{}{}}
 \newlabel{prop:star}{{A.2}{1}{Star: the orchestrator is the critical node}{proposition.A.2}{}}
 \newlabel{prop:star@cref}{{[proposition][2][]A.2}{[1][1][]1}{}{}{}}
-\newlabel{prop:tree}{{A.3}{1}{Tree: a branching phase transition}{proposition.A.3}{}}
+\newlabel{prop:tree}{{A.3}{1}{Tree: a branching critical point}{proposition.A.3}{}}
 \newlabel{prop:tree@cref}{{[proposition][3][]A.3}{[1][1][]1}{}{}{}}
-\newlabel{prop:mesh}{{A.4}{1}{Mesh: one-round lower bound}{proposition.A.4}{}}
+\newlabel{prop:mesh}{{A.4}{1}{Mesh: one-round expected compromise}{proposition.A.4}{}}
 \newlabel{prop:mesh@cref}{{[proposition][4][]A.4}{[1][1][]1}{}{}{}}
 \newlabel{cor:threshold}{{A.5}{1}{Threshold confinement}{corollary.A.5}{}}
 \newlabel{cor:threshold@cref}{{[corollary][5][]A.5}{[1][1][]1}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Derivations}{1}{subsection.A.2}\protected@file@percent }
 \citation{kempe2003maximizing,watts2002simple}
-\citation{ruan2024toolemu}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Why the star is the environment's critical topology}{2}{subsection.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Why the hub topologies are the environment's critical ones}{2}{subsection.A.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {B}Supplementary Material: Notation, Desiderata, and Cost}{2}{appendix.B}\protected@file@percent }
 \newlabel{app:supp}{{B}{2}{Supplementary Material: Notation, Desiderata, and Cost}{appendix.B}{}}
 \newlabel{app:supp@cref}{{[section][2][]B}{[1][2][]2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Threats to validity in full}{2}{subsection.B.1}\protected@file@percent }
-\newlabel{app:limitations}{{B.1}{2}{Threats to validity in full}{subsection.B.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Threats to validity}{2}{subsection.B.1}\protected@file@percent }
+\newlabel{app:limitations}{{B.1}{2}{Threats to validity}{subsection.B.1}{}}
 \newlabel{app:limitations@cref}{{[subsection][1][2]B.1}{[1][2][]2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Ethics and safety in full}{2}{subsection.B.2}\protected@file@percent }
-\newlabel{app:ethics}{{B.2}{2}{Ethics and safety in full}{subsection.B.2}{}}
-\newlabel{app:ethics@cref}{{[subsection][2][2]B.2}{[1][2][]2}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}MASGym architecture}{2}{subsection.B.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Notation}{2}{subsection.B.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Desiderata for the aggregator (D1--D5)}{2}{subsection.B.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {MASGym}\xspace  {} architecture. The \emph  {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $c_{\mathrm  {adv}}$ (\Cref  {eq:adv-config}); the \emph  {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph  {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Phi ,\Psi $ over the global trace $\tau $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref  {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability.}}{3}{figure.caption.1}\protected@file@percent }
+\citation{ruan2024toolemu}
+\@writefile{lof}{\contentsline {figure}{\numberline {S1}{\ignorespaces \textsc  {MASGym}\xspace  {} architecture. The \emph  {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $c_{\mathrm  {adv}}$ (\Cref  {eq:adv-config}); the \emph  {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph  {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Phi ,\Psi $ over the global trace $\tau $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref  {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability.}}{3}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:architecture}{{1}{3}{\defname {} architecture. The \emph {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $\config _{\mathrm {adv}}$ (\Cref {eq:adv-config}); the \emph {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Predsec ,\Predutil $ over the global trace $\Trace $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability}{figure.caption.1}{}}
-\newlabel{fig:architecture@cref}{{[figure][1][]1}{[1][2][]3}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Notation used throughout. Reproduced here from the main text to keep the main paper within its page limit; the main text references this table in prose.}}{3}{table.caption.2}\protected@file@percent }
-\newlabel{tab:notation}{{1}{3}{Notation used throughout. Reproduced here from the main text to keep the main paper within its page limit; the main text references this table in prose}{table.caption.2}{}}
-\newlabel{tab:notation@cref}{{[table][1][]1}{[1][2][]3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Topology study}{3}{subsection.B.6}\protected@file@percent }
-\newlabel{app:topology-table}{{B.6}{3}{Topology study}{subsection.B.6}{}}
-\newlabel{app:topology-table@cref}{{[subsection][6][2]B.6}{[1][2][]3}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.7}Cost and complexity of the instrument}{3}{subsection.B.7}\protected@file@percent }
-\newlabel{app:complexity}{{B.7}{3}{Cost and complexity of the instrument}{subsection.B.7}{}}
-\newlabel{app:complexity@cref}{{[subsection][7][2]B.7}{[1][2][]3}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Topology study (RQ3), \textbf  {synthetic-model} results: $\mathrm  {CPR}$ orders as predicted---chain $<$ tree $<$ star (\Cref  {prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured in the real-backbone pilot (\Cref  {fig:results}(b)).}}{4}{table.caption.3}\protected@file@percent }
-\newlabel{tab:topology}{{2}{4}{Topology study (RQ3), \textbf {synthetic-model} results: $\CPR $ orders as predicted---chain $<$ tree $<$ star (\Cref {prop:chain,prop:star,prop:tree})---and the orchestrator (star hub) is confirmed as the critical node. Mesh is deferred and measured in the real-backbone pilot (\Cref {fig:results}(b))}{table.caption.3}{}}
-\newlabel{tab:topology@cref}{{[table][2][]2}{[1][2][]4}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Cost of the \textsc  {MASGym}\xspace  {} instrument. $N$ agents, horizon $H$, edges $|\mathcal  {E}|$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \textsc  {CoRB}\xspace  {} rounds, $G$ swept configurations. Checking is deterministic.}}{4}{table.caption.4}\protected@file@percent }
-\newlabel{tab:complexity}{{3}{4}{Cost of the \defname {} instrument. $N$ agents, horizon $H$, edges $|\Etop |$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \corb {} rounds, $G$ swept configurations. Checking is deterministic}{table.caption.4}{}}
-\newlabel{tab:complexity@cref}{{[table][3][]3}{[1][3][]4}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Backbones and decoding for the real-LLM defense study (\Cref  {tab:defense}). $M{=}30$ episodes per cell, $N{=}5$, four topologies, fictitious payload. All local backbones are greedy (\texttt  {do\_sample=False}); both hosted cells use \texttt  {temperature=0.0}, \texttt  {max\_tokens=160}.}}{4}{table.caption.6}\protected@file@percent }
-\newlabel{tab:backbones}{{4}{4}{Backbones and decoding for the real-LLM defense study (\Cref {tab:defense}). $M{=}30$ episodes per cell, $N{=}5$, four topologies, fictitious payload. All local backbones are greedy (\texttt {do\_sample=False}); both hosted cells use \texttt {temperature=0.0}, \texttt {max\_tokens=160}}{table.caption.6}{}}
-\newlabel{tab:backbones@cref}{{[table][4][]4}{[1][4][]4}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.8}System architecture}{4}{subsection.B.8}\protected@file@percent }
-\newlabel{app:architecture}{{B.8}{4}{System architecture}{subsection.B.8}{}}
-\newlabel{app:architecture@cref}{{[subsection][8][2]B.8}{[1][3][]4}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.9}Models, decoding, and the exact prompts of the defense study}{4}{subsection.B.9}\protected@file@percent }
-\newlabel{app:repro}{{B.9}{4}{Models, decoding, and the exact prompts of the defense study}{subsection.B.9}{}}
-\newlabel{app:repro@cref}{{[subsection][9][2]B.9}{[1][4][]4}{}{}{}}
-\@writefile{toc}{\contentsline {paragraph}{Backbones and decoding.}{4}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{The prompts, verbatim.}{4}{section*.7}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Headline degradation study (RQ1), \textbf  {synthetic-model} results ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\mathrm  {ASR}_{\mathrm  {sys}}^{\dagger }\downarrow $ / $\mathrm  {NRP}_{\mathrm  {sys}}^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\beta {=}0.3$). The guardrail's relative $\mathrm  {ASR}_{\mathrm  {sys}}^{\dagger }$ reduction over no-defense shrinks left to right (41.6\% $\to $ 31.8\% $\to $ 27.6\%), supporting RQ1.}}{5}{table.caption.9}\protected@file@percent }
-\newlabel{tab:degradation}{{5}{5}{Headline degradation study (RQ1), \textbf {synthetic-model} results ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\ASRs ^{\dagger }\downarrow $ / $\NRPs ^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\betafrac {=}0.3$). The guardrail's relative $\ASRs ^{\dagger }$ reduction over no-defense shrinks left to right (41.6\% $\to $ 31.8\% $\to $ 27.6\%), supporting RQ1}{table.caption.9}{}}
-\newlabel{tab:degradation@cref}{{[table][5][]5}{[1][5][]5}{}{}{}}
-\@writefile{toc}{\contentsline {paragraph}{Provenance and what we cannot claim.}{5}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Extended Protocol and Additional Synthetic-Model Studies}{5}{appendix.C}\protected@file@percent }
-\newlabel{app:experiments}{{C}{5}{Extended Protocol and Additional Synthetic-Model Studies}{appendix.C}{}}
-\newlabel{app:experiments@cref}{{[section][3][]C}{[1][5][]5}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Headline degradation study (RQ1), full grid}{5}{subsection.C.1}\protected@file@percent }
-\newlabel{app:degradation}{{C.1}{5}{Headline degradation study (RQ1), full grid}{subsection.C.1}{}}
-\newlabel{app:degradation@cref}{{[subsection][1][3]C.1}{[1][5][]5}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Precise metric definitions}{5}{subsection.C.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Sybil study (RQ5), \textbf  {synthetic-model} results (star, $N{=}5$, $\beta {=}0.1$, no defense, $M{=}738$). The expected trend---$\mathrm  {ASR}_{\mathrm  {sys}}$ increases with the Sybil count until the system is fully seeded---is observed: $\mathrm  {ASR}_{\mathrm  {sys}}$ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\mathrm  {NRP}_{\mathrm  {sys}}$ falls to zero at full seeding.}}{6}{table.caption.10}\protected@file@percent }
-\newlabel{tab:sybil}{{6}{6}{Sybil study (RQ5), \textbf {synthetic-model} results (star, $N{=}5$, $\betafrac {=}0.1$, no defense, $M{=}738$). The expected trend---$\ASRs $ increases with the Sybil count until the system is fully seeded---is observed: $\ASRs $ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\NRPs $ falls to zero at full seeding}{table.caption.10}{}}
-\newlabel{tab:sybil@cref}{{[table][6][]6}{[1][6][]6}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Adaptivity study, \textbf  {synthetic-model} results (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \textsc  {CoRB}\xspace  {} rounds). An adaptive red (Algorithm\nonbreakingspace 2 best-responder) erodes the co-adapting blue's $\mathrm  {NRP}_{\mathrm  {sys}}$ from $0.649$ to $0.236$; a random (``static'') red leaves the system in the availability-sabotage regime ($\mathrm  {ASR}_{\mathrm  {sys}}{=}1$, $\mathrm  {NRP}_{\mathrm  {sys}}{=}0$) throughout.}}{6}{table.caption.11}\protected@file@percent }
-\newlabel{tab:adaptive}{{7}{6}{Adaptivity study, \textbf {synthetic-model} results (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \corb {} rounds). An adaptive red (Algorithm~2 best-responder) erodes the co-adapting blue's $\NRPs $ from $0.649$ to $0.236$; a random (``static'') red leaves the system in the availability-sabotage regime ($\ASRs {=}1$, $\NRPs {=}0$) throughout}{table.caption.11}{}}
-\newlabel{tab:adaptive@cref}{{[table][7][]7}{[1][6][]6}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Sybil and adaptivity studies}{6}{subsection.C.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}Cost model and reachable region}{6}{subsection.C.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Collusion sweep (RQ5), synthetic-model results (star, $N=5$, no defense, $M=738$ episodes per cell).}}{7}{table.caption.12}\protected@file@percent }
-\newlabel{tab:collusion}{{8}{7}{Collusion sweep (RQ5), synthetic-model results (star, $N=5$, no defense, $M=738$ episodes per cell)}{table.caption.12}{}}
-\newlabel{tab:collusion@cref}{{[table][8][]8}{[1][6][]7}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Scalability and cost (RQ6), \textbf  {synthetic-model} results (star, no defense, $\beta {=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx 8.8{\times }N$ per episode); latency is the synthetic per-call proxy and stays near-flat. $\mathrm  {ASR}_{\mathrm  {sys}}$ saturates via availability sabotage (\Cref  {tab:degradation}).}}{7}{table.caption.13}\protected@file@percent }
-\newlabel{tab:cost}{{9}{7}{Scalability and cost (RQ6), \textbf {synthetic-model} results (star, no defense, $\betafrac {=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx 8.8{\times }N$ per episode); latency is the synthetic per-call proxy and stays near-flat. $\ASRs $ saturates via availability sabotage (\Cref {tab:degradation})}{table.caption.13}{}}
-\newlabel{tab:cost@cref}{{[table][9][]9}{[1][6][]7}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.5}LLM backbone pilot (open models)}{7}{subsection.C.5}\protected@file@percent }
-\newlabel{app:pilot}{{C.5}{7}{LLM backbone pilot (open models)}{subsection.C.5}{}}
-\newlabel{app:pilot@cref}{{[subsection][5][3]C.5}{[1][6][]7}{}{}{}}
-\newlabel{app:scoring}{{C.5}{7}{How a real decision is scored}{section*.14}{}}
-\newlabel{app:scoring@cref}{{[subsection][5][3]C.5}{[1][7][]7}{}{}{}}
-\@writefile{toc}{\contentsline {paragraph}{How a real decision is scored.}{7}{section*.14}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.6}LLM backbone pilot: topology study}{7}{subsection.C.6}\protected@file@percent }
-\newlabel{app:pilot-topology}{{C.6}{7}{LLM backbone pilot: topology study}{subsection.C.6}{}}
-\newlabel{app:pilot-topology@cref}{{[subsection][6][3]C.6}{[1][7][]7}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.7}A worked forced-coordination task}{7}{subsection.C.7}\protected@file@percent }
-\newlabel{app:worked}{{C.7}{7}{A worked forced-coordination task}{subsection.C.7}{}}
-\newlabel{app:worked@cref}{{[subsection][7][3]C.7}{[1][7][]7}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces LLM backbone pilot, \textbf  {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious payload data). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (almost all parse failures 0), yet $\mathrm  {ASR}_{\mathrm  {sys}}$ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph  {complies}, yielding $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ across all attack scenarios, as does Mistral-7B (\Cref  {sec:experiments}). The registered security outcome is a real model property, not a framework artefact.}}{8}{table.caption.15}\protected@file@percent }
-\newlabel{tab:llm_pilot}{{10}{8}{LLM backbone pilot, \textbf {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious payload data). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (almost all parse failures 0), yet $\ASRs $ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\ASRs {=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph {complies}, yielding $\ASRs {=}1.000$ across all attack scenarios, as does Mistral-7B (\Cref {sec:experiments}). The registered security outcome is a real model property, not a framework artefact}{table.caption.15}{}}
-\newlabel{tab:llm_pilot@cref}{{[table][10][]10}{[1][7][]8}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces LLM backbone pilot, topology study (RQ4), \textbf  {PILOT-labelled}: six open instruct backbones, $12$ configs, $M{=}100$ per (config, scenario), no defense. $\mathrm  {CPR}$ is a deterministic structural functional of the topology and is \emph  {identical across all six backbones}, so one column reports it; it orders as \Cref  {prop:chain,prop:star,prop:tree,prop:mesh} predict (chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\mathrm  {ASR}_{\mathrm  {sys}}$ is topology-dependent for the five refusing backbones; the complying backbone saturates at $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ everywhere.}}{8}{table.caption.16}\protected@file@percent }
-\newlabel{tab:llm_pilot_topology}{{11}{8}{LLM backbone pilot, topology study (RQ4), \textbf {PILOT-labelled}: six open instruct backbones, $12$ configs, $M{=}100$ per (config, scenario), no defense. $\CPR $ is a deterministic structural functional of the topology and is \emph {identical across all six backbones}, so one column reports it; it orders as \Cref {prop:chain,prop:star,prop:tree,prop:mesh} predict (chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\ASRs $ is topology-dependent for the five refusing backbones; the complying backbone saturates at $\ASRs {=}1.000$ everywhere}{table.caption.16}{}}
-\newlabel{tab:llm_pilot_topology@cref}{{[table][11][]11}{[1][7][]8}{}{}{}}
+\newlabel{fig:architecture}{{S1}{3}{\defname {} architecture. The \emph {orchestration layer} (left, trusted) sets the topology, roles, observability masks, and the adversary configuration $\config _{\mathrm {adv}}$ (\Cref {eq:adv-config}); the \emph {agent collective} (centre) runs heterogeneous roles, with adversarial elements in red (a trust-switchable orchestrator, colluders and Sybils, a malicious tool, and poisoned shared memory); the \emph {emulation and checking layer} (right, trusted) supplies emulated tools and scores system-level predicates $\Predsec ,\Predutil $ over the global trace $\Trace $ with a deterministic checker rather than an LLM judge, so a successful injection cannot hijack the score (\Cref {thm:integrity}). Colour and shape jointly encode role and adversarial status for grayscale readability}{figure.caption.1}{}}
+\newlabel{fig:architecture@cref}{{[figure][1][]S1}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Ethics and safety}{3}{subsection.B.2}\protected@file@percent }
+\newlabel{app:ethics}{{B.2}{3}{Ethics and safety}{subsection.B.2}{}}
+\newlabel{app:ethics@cref}{{[subsection][2][2]B.2}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}MASGym architecture and notation}{3}{subsection.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Desiderata for the aggregator (D1--D5)}{3}{subsection.B.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Notation used throughout. Rows marked $\dagger $ are the ones a reader needs in order to follow the system-level metric; the rest is orientation.}}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:notation}{{S1}{4}{Notation used throughout. Rows marked $\dagger $ are the ones a reader needs in order to follow the system-level metric; the rest is orientation}{table.caption.2}{}}
+\newlabel{tab:notation@cref}{{[table][1][]S1}{[1][3][]4}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces Topology study (RQ3), \textbf  {synthetic effect model}: $\mathrm  {CPR}$ orders as the per-topology bounds motivate (chain $<$ tree $<$ star; \Cref  {prop:chain,prop:star,prop:tree,prop:mesh}) and the orchestrator (star hub) is the critical node. The mesh row is the real-backbone pilot measurement of \Cref  {tab:llm_pilot_topology}, whose $\mathrm  {CPR}$ column is a deterministic functional of the topology; detection and recovery are not instrumented for it, so those cells are left empty rather than filled with a placeholder.}}{4}{table.caption.3}\protected@file@percent }
+\newlabel{tab:topology}{{S2}{4}{Topology study (RQ3), \textbf {synthetic effect model}: $\CPR $ orders as the per-topology bounds motivate (chain $<$ tree $<$ star; \Cref {prop:chain,prop:star,prop:tree,prop:mesh}) and the orchestrator (star hub) is the critical node. The mesh row is the real-backbone pilot measurement of \Cref {tab:llm_pilot_topology}, whose $\CPR $ column is a deterministic functional of the topology; detection and recovery are not instrumented for it, so those cells are left empty rather than filled with a placeholder}{table.caption.3}{}}
+\newlabel{tab:topology@cref}{{[table][2][]S2}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Topology study}{4}{subsection.B.5}\protected@file@percent }
+\newlabel{app:topology-table}{{B.5}{4}{Topology study}{subsection.B.5}{}}
+\newlabel{app:topology-table@cref}{{[subsection][5][2]B.5}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Cost and complexity of the instrument}{4}{subsection.B.6}\protected@file@percent }
+\newlabel{app:complexity}{{B.6}{4}{Cost and complexity of the instrument}{subsection.B.6}{}}
+\newlabel{app:complexity@cref}{{[subsection][6][2]B.6}{[1][4][]4}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Cost of the \textsc  {MASGym}\xspace  {} instrument. $N$ agents, horizon $H$, edges $|\mathcal  {E}|$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \textsc  {CoRB}\xspace  {} rounds, $G$ swept configurations. Checking is deterministic and costs no model calls. The sweep row is a sufficient-budget upper bound (\Cref  {cor:budget}).}}{5}{table.caption.4}\protected@file@percent }
+\newlabel{tab:complexity}{{S3}{5}{Cost of the \defname {} instrument. $N$ agents, horizon $H$, edges $|\Etop |$ ($\Theta (N)$ for star/chain/tree, $\Theta (N^2)$ for dense mesh), $M$ episodes per configuration, $R$ \corb {} rounds, $G$ swept configurations. Checking is deterministic and costs no model calls. The sweep row is a sufficient-budget upper bound (\Cref {cor:budget})}{table.caption.4}{}}
+\newlabel{tab:complexity@cref}{{[table][3][]S3}{[1][4][]5}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Backbones and decoding for the real-LLM defense study (\Cref  {tab:defense}). $M{=}30$ episodes per cell, $N{=}5$, four topologies, fictitious payload. All local backbones are greedy (\texttt  {do\_sample=False}); the single hosted cell (Mistral on AWS Bedrock) uses \texttt  {temperature=0.0}, \texttt  {max\_tokens=160}.}}{5}{table.caption.6}\protected@file@percent }
+\newlabel{tab:backbones}{{S4}{5}{Backbones and decoding for the real-LLM defense study (\Cref {tab:defense}). $M{=}30$ episodes per cell, $N{=}5$, four topologies, fictitious payload. All local backbones are greedy (\texttt {do\_sample=False}); the single hosted cell (Mistral on AWS Bedrock) uses \texttt {temperature=0.0}, \texttt {max\_tokens=160}}{table.caption.6}{}}
+\newlabel{tab:backbones@cref}{{[table][4][]S4}{[1][5][]5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.7}Models, decoding, and the exact prompts of the defense study}{5}{subsection.B.7}\protected@file@percent }
+\newlabel{app:repro}{{B.7}{5}{Models, decoding, and the exact prompts of the defense study}{subsection.B.7}{}}
+\newlabel{app:repro@cref}{{[subsection][7][2]B.7}{[1][4][]5}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Backbones and decoding.}{5}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{The prompts, verbatim.}{5}{section*.7}\protected@file@percent }
+\citation{debenedetti2024agentdojo}
+\@writefile{toc}{\contentsline {paragraph}{Provenance and what we cannot claim.}{6}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Clarifications of Main-Text Statements}{6}{appendix.C}\protected@file@percent }
+\newlabel{app:clarify}{{C}{6}{Clarifications of Main-Text Statements}{appendix.C}{}}
+\newlabel{app:clarify@cref}{{[section][3][]C}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}The harness's trace projection and sabotage rule}{6}{subsection.C.1}\protected@file@percent }
+\newlabel{app:harness}{{C.1}{6}{The harness's trace projection and sabotage rule}{subsection.C.1}{}}
+\newlabel{app:harness@cref}{{[subsection][1][3]C.1}{[1][6][]6}{}{}{}}
+\newlabel{def:projection}{{C.1}{6}{Security-relevant projection}{definition.C.1}{}}
+\newlabel{def:projection@cref}{{[definition][1][]C.1}{[1][6][]6}{}{}{}}
+\newlabel{def:sabotage}{{C.2}{6}{Availability sabotage in the harness}{definition.C.2}{}}
+\newlabel{def:sabotage@cref}{{[definition][2][]C.2}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}The placement result, stated exactly}{7}{subsection.C.2}\protected@file@percent }
+\newlabel{app:placement}{{C.2}{7}{The placement result, stated exactly}{subsection.C.2}{}}
+\newlabel{app:placement@cref}{{[subsection][2][3]C.2}{[1][7][]7}{}{}{}}
+\newlabel{prop:placement}{{C.3}{7}{Placement advantage of coordinated seeding on the star}{proposition.C.3}{}}
+\newlabel{prop:placement@cref}{{[proposition][3][]C.3}{[1][7][]7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Resolution of the reported differences}{7}{subsection.C.3}\protected@file@percent }
+\newlabel{app:power}{{C.3}{7}{Resolution of the reported differences}{subsection.C.3}{}}
+\newlabel{app:power@cref}{{[subsection][3][3]C.3}{[1][7][]7}{}{}{}}
+\citation{zhang2025asb}
+\citation{ruan2024toolemu}
+\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Headline degradation study (RQ1), \textbf  {synthetic effect model} ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\mathrm  {ASR}_{\mathrm  {act}}^{\dagger }\downarrow $ / $\mathrm  {NRP}_{\mathrm  {sys}}^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\beta {=}0.3$). The guardrail's relative $\mathrm  {ASR}_{\mathrm  {act}}^{\dagger }$ reduction over no-defense is $41.6\%\to 31.8\%\to 27.6\%$ left to right; the $\dagger $ marks the \emph  {single-agent} predicate, so these columns are not the system metric, and the shrinkage between them is not statistically resolved at this budget (\Cref  {app:power}).}}{8}{table.caption.10}\protected@file@percent }
+\newlabel{tab:degradation}{{S5}{8}{Headline degradation study (RQ1), \textbf {synthetic effect model} ($M{=}738$, $\epsilon {=}\alpha {=}0.05$, seed-locked). $\ASRa ^{\dagger }\downarrow $ / $\NRPs ^{\dagger }\uparrow $ are better. Each defense is measured single-agent ($N{=}1$; the ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator configurations (star, $N{=}5$, $\betafrac {=}0.3$). The guardrail's relative $\ASRa ^{\dagger }$ reduction over no-defense is $41.6\%\to 31.8\%\to 27.6\%$ left to right; the $\dagger $ marks the \emph {single-agent} predicate, so these columns are not the system metric, and the shrinkage between them is not statistically resolved at this budget (\Cref {app:power})}{table.caption.10}{}}
+\newlabel{tab:degradation@cref}{{[table][5][]S5}{[1][8][]8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}Terminology and a citation caveat}{8}{subsection.C.4}\protected@file@percent }
+\newlabel{app:terms}{{C.4}{8}{Terminology and a citation caveat}{subsection.C.4}{}}
+\newlabel{app:terms@cref}{{[subsection][4][3]C.4}{[1][8][]8}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Extended Protocol and Additional Synthetic-Model Studies}{8}{appendix.D}\protected@file@percent }
+\newlabel{app:experiments}{{D}{8}{Extended Protocol and Additional Synthetic-Model Studies}{appendix.D}{}}
+\newlabel{app:experiments@cref}{{[section][4][]D}{[1][8][]8}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{How the configuration counts relate.}{8}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1}Headline degradation study (RQ1), full grid}{8}{subsection.D.1}\protected@file@percent }
+\newlabel{app:degradation}{{D.1}{8}{Headline degradation study (RQ1), full grid}{subsection.D.1}{}}
+\newlabel{app:degradation@cref}{{[subsection][1][4]D.1}{[1][8][]8}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S6}{\ignorespaces Sybil study (RQ5), \textbf  {synthetic effect model} (star, $N{=}5$, $\beta {=}0.1$, \emph  {independent} (non-colluding) adversary, no defense, $M{=}738$). The expected trend---$\mathrm  {ASR}_{\mathrm  {sys}}$ increases with the Sybil count until the system is fully seeded---is observed: $\mathrm  {ASR}_{\mathrm  {sys}}$ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\mathrm  {NRP}_{\mathrm  {sys}}$ falls to zero at full seeding. The count-$0$ row is the \emph  {independent}-seeding cell of the collusion sweep of \Cref  {tab:collusion} at the same operating point, which is why its $\mathrm  {ASR}_{\mathrm  {sys}}$ is $0.775$ there and $1.000$ for colluding seeding in that table: the two tables differ in the coordination mode, not in the setting.}}{9}{table.caption.11}\protected@file@percent }
+\newlabel{tab:sybil}{{S6}{9}{Sybil study (RQ5), \textbf {synthetic effect model} (star, $N{=}5$, $\betafrac {=}0.1$, \emph {independent} (non-colluding) adversary, no defense, $M{=}738$). The expected trend---$\ASRs $ increases with the Sybil count until the system is fully seeded---is observed: $\ASRs $ rises monotonically as Sybil identities inflate the adversary's initial footprint, and $\NRPs $ falls to zero at full seeding. The count-$0$ row is the \emph {independent}-seeding cell of the collusion sweep of \Cref {tab:collusion} at the same operating point, which is why its $\ASRs $ is $0.775$ there and $1.000$ for colluding seeding in that table: the two tables differ in the coordination mode, not in the setting}{table.caption.11}{}}
+\newlabel{tab:sybil@cref}{{[table][6][]S6}{[1][9][]9}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S7}{\ignorespaces Adaptivity study (RQ6), \textbf  {synthetic effect model} (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \textsc  {CoRB}\xspace  {} rounds). An adaptive red policy (the harness's best-response proposer) erodes the co-adapting blue's $\mathrm  {NRP}_{\mathrm  {sys}}$ from $0.649$ to $0.236$ in the \emph  {unsafe-action} channel; a random (``static'') red leaves the system in the availability-sabotage regime ($\mathrm  {ASR}_{\mathrm  {sys}}{=}1$, $\mathrm  {NRP}_{\mathrm  {sys}}{=}0$) from the first round. Under the \emph  {system} predicate, therefore, static red is the stronger attacker and adaptivity is visible only in the action channel---the opposite of the natural reading, and a direct consequence of the saturation described in \Cref  {app:harness}. The adaptive sequence is also non-monotone ($r{=}10$: $0.783$, $r{=}20$: $0.733$), which $M{=}60$ episodes per pair does not resolve; we report it as measured, not as convergence.}}{9}{table.caption.12}\protected@file@percent }
+\newlabel{tab:adaptive}{{S7}{9}{Adaptivity study (RQ6), \textbf {synthetic effect model} (star, $N{=}5$, $M{=}60$ per scored pair, $R{=}20$ \corb {} rounds). An adaptive red policy (the harness's best-response proposer) erodes the co-adapting blue's $\NRPs $ from $0.649$ to $0.236$ in the \emph {unsafe-action} channel; a random (``static'') red leaves the system in the availability-sabotage regime ($\ASRs {=}1$, $\NRPs {=}0$) from the first round. Under the \emph {system} predicate, therefore, static red is the stronger attacker and adaptivity is visible only in the action channel---the opposite of the natural reading, and a direct consequence of the saturation described in \Cref {app:harness}. The adaptive sequence is also non-monotone ($r{=}10$: $0.783$, $r{=}20$: $0.733$), which $M{=}60$ episodes per pair does not resolve; we report it as measured, not as convergence}{table.caption.12}{}}
+\newlabel{tab:adaptive@cref}{{[table][7][]S7}{[1][9][]9}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.2}Precise metric definitions}{9}{subsection.D.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3}Sybil and adaptivity studies}{9}{subsection.D.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {S8}{\ignorespaces Collusion sweep (RQ5), \textbf  {synthetic effect model} (star, $N{=}5$, no defense, $M{=}738$ episodes per cell). $\Delta _{\mathrm  {coll}}$ is defined on the \emph  {unsafe-action} channel (\Cref  {def:csr}); the system-level column pair is reported beside it because the two columns disagree once the system predicate saturates.}}{10}{table.caption.13}\protected@file@percent }
+\newlabel{tab:collusion}{{S8}{10}{Collusion sweep (RQ5), \textbf {synthetic effect model} (star, $N{=}5$, no defense, $M{=}738$ episodes per cell). $\Delta _{\mathrm {coll}}$ is defined on the \emph {unsafe-action} channel (\Cref {def:csr}); the system-level column pair is reported beside it because the two columns disagree once the system predicate saturates}{table.caption.13}{}}
+\newlabel{tab:collusion@cref}{{[table][8][]S8}{[1][10][]10}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S9}{\ignorespaces Scalability and cost (RQ6), \textbf  {synthetic effect model} (star, no defense, $\beta {=}0.3$, $M{=}738$). Token cost grows linearly in $N$ ($\approx 8.8{\times }N$ tokens per episode) because the cost model is \emph  {defined} as linear in the agent count, so this column is a model output, not a measured runtime. Latency is the synthetic per-call proxy, in arbitrary units (a.u.), and stays near-flat. $\mathrm  {ASR}_{\mathrm  {sys}}$ saturates via availability sabotage (\Cref  {tab:degradation}).}}{10}{table.caption.14}\protected@file@percent }
+\newlabel{tab:cost}{{S9}{10}{Scalability and cost (RQ6), \textbf {synthetic effect model} (star, no defense, $\betafrac {=}0.3$, $M{=}738$). Token cost grows linearly in $N$ ($\approx 8.8{\times }N$ tokens per episode) because the cost model is \emph {defined} as linear in the agent count, so this column is a model output, not a measured runtime. Latency is the synthetic per-call proxy, in arbitrary units (a.u.), and stays near-flat. $\ASRs $ saturates via availability sabotage (\Cref {tab:degradation})}{table.caption.14}{}}
+\newlabel{tab:cost@cref}{{[table][9][]S9}{[1][10][]10}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.4}Cost model and reachable region}{10}{subsection.D.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.5}LLM backbone pilot (open models)}{10}{subsection.D.5}\protected@file@percent }
+\newlabel{app:pilot}{{D.5}{10}{LLM backbone pilot (open models)}{subsection.D.5}{}}
+\newlabel{app:pilot@cref}{{[subsection][5][4]D.5}{[1][10][]10}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S10}{\ignorespaces LLM backbone pilot, \textbf  {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious payload data). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (parse failures are logged per decision and are zero in these cells), yet $\mathrm  {ASR}_{\mathrm  {sys}}$ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph  {complies}, yielding $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ across all attack scenarios, as does Mistral-7B (\Cref  {sec:experiments}). The refusal columns are the control evidence behind \Cref  {app:limitations}: most backbones tested \emph  {with} a defense refuse the same request \emph  {without} one. The registered security outcome is otherwise a real model property, not a framework artefact.}}{11}{table.caption.16}\protected@file@percent }
+\newlabel{tab:llm_pilot}{{S10}{11}{LLM backbone pilot, \textbf {PILOT-labelled} (Qwen2.5 \{$0.5$B,$1.5$B,$3$B,$7$B\} and Llama-3.2 \{$1$B,$3$B\}, $12$ configs $\{$star, chain, tree, mesh$\}$ $\times $ $N\in \{3,5,10\}$, $M{=}100$ per (config, scenario), no defense, fictitious payload data). Backbones differ in their security decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration instruction (parse failures are logged per decision and are zero in these cells), yet $\ASRs $ is still positive in the hub-critical topologies via structural availability sabotage---star and tree collapse to $\ASRs {=}1.000$ under collusion and orchestrator compromise, while chain stays $\leq \!0.25$; Llama-$1$B \emph {complies}, yielding $\ASRs {=}1.000$ across all attack scenarios, as does Mistral-7B (\Cref {sec:experiments}). The refusal columns are the control evidence behind \Cref {app:limitations}: most backbones tested \emph {with} a defense refuse the same request \emph {without} one. The registered security outcome is otherwise a real model property, not a framework artefact}{table.caption.16}{}}
+\newlabel{tab:llm_pilot@cref}{{[table][10][]S10}{[1][11][]11}{}{}{}}
+\newlabel{app:scoring}{{D.5}{11}{How a real decision is scored}{section*.15}{}}
+\newlabel{app:scoring@cref}{{[subsection][5][4]D.5}{[1][10][]11}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{How a real decision is scored.}{11}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.6}LLM backbone pilot: topology study}{11}{subsection.D.6}\protected@file@percent }
+\newlabel{app:pilot-topology}{{D.6}{11}{LLM backbone pilot: topology study}{subsection.D.6}{}}
+\newlabel{app:pilot-topology@cref}{{[subsection][6][4]D.6}{[1][11][]11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.7}A worked forced-coordination task}{11}{subsection.D.7}\protected@file@percent }
+\newlabel{app:worked}{{D.7}{11}{A worked forced-coordination task}{subsection.D.7}{}}
+\newlabel{app:worked@cref}{{[subsection][7][4]D.7}{[1][11][]11}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S11}{\ignorespaces LLM backbone pilot, topology study (RQ4), \textbf  {PILOT-labelled}: six open instruct backbones, $12$ configs, $M{=}100$ per (config, scenario), no defense. $\mathrm  {CPR}$ is a deterministic structural functional of the topology and is \emph  {identical across all six backbones}, so one column reports it; it orders as \Cref  {prop:chain,prop:star,prop:tree,prop:mesh} predict (chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\mathrm  {ASR}_{\mathrm  {sys}}$ is topology-dependent for the five refusing backbones; the complying backbone saturates at $\mathrm  {ASR}_{\mathrm  {sys}}{=}1.000$ everywhere.}}{12}{table.caption.17}\protected@file@percent }
+\newlabel{tab:llm_pilot_topology}{{S11}{12}{LLM backbone pilot, topology study (RQ4), \textbf {PILOT-labelled}: six open instruct backbones, $12$ configs, $M{=}100$ per (config, scenario), no defense. $\CPR $ is a deterministic structural functional of the topology and is \emph {identical across all six backbones}, so one column reports it; it orders as \Cref {prop:chain,prop:star,prop:tree,prop:mesh} predict (chain $0.130<$ tree $0.198<$ star $0.286<$ mesh $0.627$). $\ASRs $ is topology-dependent for the five refusing backbones; the complying backbone saturates at $\ASRs {=}1.000$ everywhere}{table.caption.17}{}}
+\newlabel{tab:llm_pilot_topology@cref}{{[table][11][]S11}{[1][11][]12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.8}Sensitivity and validity checks}{12}{subsection.D.8}\protected@file@percent }
+\newlabel{app:sensitivity}{{D.8}{12}{Sensitivity and validity checks}{subsection.D.8}{}}
+\newlabel{app:sensitivity@cref}{{[subsection][8][4]D.8}{[1][12][]12}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.9}Why three rows of \Cref  {tab:defense} are identical}{12}{subsection.D.9}\protected@file@percent }
+\newlabel{app:defense-degeneracy}{{D.9}{12}{Why three rows of \Cref {tab:defense} are identical}{subsection.D.9}{}}
+\newlabel{app:defense-degeneracy@cref}{{[subsection][9][4]D.9}{[1][12][]12}{}{}{}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{references_verified}
 \bibcite{chalupa1979bootstrap}{{1}{1979}{{Chalupa et~al\mbox  {.}}}{{}}}
@@ -118,18 +145,14 @@
 \bibcite{watts2002simple}{{5}{2002}{{Watts}}{{}}}
 \newlabel{tocindent-1}{{0}{p}{t}{}{main.pdf}}
 \newlabel{tocindent0}{{0}{p}{t}{}{main.pdf}}
-\newlabel{tocindent1}{6.25499pt}
+\newlabel{tocindent1}{6.30899pt}
 \newlabel{tocindent2}{12.41998pt}
 \newlabel{tocindent3}{{0}{p}{t}{}{main.pdf}}
 \newlabel{tocindent4}{{0}{p}{t}{}{main.pdf}}
 \newlabel{tocindent5}{{0}{p}{t}{}{main.pdf}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.8}Sensitivity and validity checks}{9}{subsection.C.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.9}Why three rows of \Cref  {tab:defense} are identical}{9}{subsection.C.9}\protected@file@percent }
-\newlabel{app:defense-degeneracy}{{C.9}{9}{Why three rows of \Cref {tab:defense} are identical}{subsection.C.9}{}}
-\newlabel{app:defense-degeneracy@cref}{{[subsection][9][3]C.9}{[1][9][]9}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D}AI-Assisted Preparation}{9}{appendix.D}\protected@file@percent }
-\newlabel{app:ai}{{D}{9}{AI-Assisted Preparation}{appendix.D}{}}
-\newlabel{app:ai@cref}{{[section][4][]D}{[1][9][]9}{}{}{}}
-\@writefile{toc}{\contentsline {section}{References}{9}{section*.18}\protected@file@percent }
-\newlabel{TotPages}{{9}{9}{}{page.9}{}}
-\gdef \@abspage@last{9}
+\@writefile{toc}{\contentsline {section}{\numberline {E}AI-Assisted Preparation}{13}{appendix.E}\protected@file@percent }
+\newlabel{app:ai}{{E}{13}{AI-Assisted Preparation}{appendix.E}{}}
+\newlabel{app:ai@cref}{{[section][5][]E}{[1][13][]13}{}{}{}}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.19}\protected@file@percent }
+\newlabel{TotPages}{{13}{13}{}{page.13}{}}
+\gdef \@abspage@last{13}

@@ -2,10 +2,20 @@
 \label{app:experiments}
 
 This appendix expands the evaluation protocol of \Cref{sec:experiments}: it records the
-precise metric definitions, the Sybil and adaptivity studies, the cost model, and a
-sensitivity plan. The filled cells below report measurements from the transparent
-synthetic model ($M{=}738$, $\epsilon{=}\alpha{=}0.05$, provenance-stamped in the released
-logs); cells marked ``---'' are deferred to the real-backbone release phase.
+precise metric definitions, the Sybil and adaptivity studies (RQ5, RQ6), the cost model, and
+a sensitivity plan. The filled cells below report measurements from the transparent
+synthetic effect model ($M{=}738$, $\epsilon{=}\alpha{=}0.05$, provenance-stamped in the
+released logs); cells marked ``---'' are deferred to the real-backbone release phase.
+
+\paragraph{How the configuration counts relate.} Four numbers appear in this paper and the
+main text; they are different slices of the same grids, not competing counts. The
+\emph{full matrix} released with this paper contains $138$ configurations, spanning the three
+topologies, $N\in\{3,5,10\}$, the six attack scenarios, and the defenses released in the grid.
+Of those, $81$ are \emph{attacked} configurations (the benign scenario on its own, and the
+no-defense configurations, removed) and they form the population re-ranked in
+\Cref{app:sensitivity}. The \emph{degradation grid} of \Cref{tab:degradation} is a separate
+$21$-cell study ($3$ defenses $\times$ $7$ operating points). The \emph{real-backbone pilot} of
+\Cref{app:pilot} is $12$ configurations ($4$ topologies $\times$ $N\in\{3,5,10\}$).
 
 \subsection{Headline degradation study (RQ1), full grid}
 \label{app:degradation}
@@ -16,13 +26,15 @@ compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$). Table generated in 
 seed-locked run ($M{=}738$, $\epsilon{=}\alpha{=}0.05$).
 \begin{table}[t]
 \centering
-\caption{Headline degradation study (RQ1), \textbf{synthetic-model} results ($M{=}738$,
-$\epsilon{=}\alpha{=}0.05$, seed-locked). $\ASRs^{\dagger}\downarrow$ /
+\caption{Headline degradation study (RQ1), \textbf{synthetic effect model} ($M{=}738$,
+$\epsilon{=}\alpha{=}0.05$, seed-locked). $\ASRa^{\dagger}\downarrow$ /
 $\NRPs^{\dagger}\uparrow$ are better. Each defense is measured single-agent ($N{=}1$; the
 ASB/AgentDojo baseline) and then under multi-agent collusion and compromised-orchestrator
 configurations (star, $N{=}5$, $\betafrac{=}0.3$). The guardrail's relative
-$\ASRs^{\dagger}$ reduction over no-defense shrinks left to right
-(41.6\% $\to$ 31.8\% $\to$ 27.6\%), supporting RQ1.}
+$\ASRa^{\dagger}$ reduction over no-defense is $41.6\%\to31.8\%\to27.6\%$ left to right; the
+$\dagger$ marks the \emph{single-agent} predicate, so these columns are not the system
+metric, and the shrinkage between them is not statistically resolved at this budget
+(\Cref{app:power}).}
 \label{tab:degradation}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -31,20 +43,25 @@ $\ASRs^{\dagger}$ reduction over no-defense shrinks left to right
 \toprule
 & \multicolumn{2}{c}{Single (ASB)} & \multicolumn{2}{c}{MA + collusion} & \multicolumn{2}{c}{MA + comp.\ orch.} \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-Defense & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRs^{\dagger}$ & $\NRPs^{\dagger}$ \\
+Defense & $\ASRa^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRa^{\dagger}$ & $\NRPs^{\dagger}$ & $\ASRa^{\dagger}$ & $\NRPs^{\dagger}$ \\
 \midrule
 No defense           & 0.587 & 0.374 & 0.560 & 0.396 & 0.539 & 0.424 \\
-Guardrail            & 0.343 & 0.590 & 0.382 & 0.553 & 0.390 & 0.552 \\
+Per-agent guardrail  & 0.343 & 0.590 & 0.382 & 0.553 & 0.390 & 0.552 \\
 System-level policy  & 0.450 & 0.505 & 0.461 & 0.482 & 0.447 & 0.506 \\
-\midrule
-\emph{Oracle (upper bound)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
+\emph{Oracle (reference)} & 0.000 & 0.904 & 0.000 & 0.898 & 0.000 & 0.920 \\
 \bottomrule
 \end{tabular}
 \tabnote{$\dagger$ single-agent predicate (unsafe action / exfiltration), under which
 \Cref{prop:reduction} reduces to ASB at $N{=}1$. Under the \emph{full} system predicate
-(adding coordination sabotage) $\ASRs$ saturates at $1.0$ in both MA columns: collusion
-and orchestrator compromise target the critical star hub and collapse availability
-(\Cref{sec:theory-prop}).}
+(adding coordination sabotage) $\ASRs$ saturates at $1.0$ in both MA columns for \emph{every}
+defense, because collusion and orchestrator compromise seed the star hub and collapse
+availability (\Cref{sec:theory-prop,app:harness}); the oracle row is a hypothetical
+$\Predsec\equiv0$ reference, not an implemented policy, and it too would read $1.0$ in those
+columns under the full predicate. The \emph{system-level policy} is the harness's
+fixed-threshold flag/defer rule, a weaker synthetic effect model than the lifted per-agent
+guardrail, which is why it sits between no-defense and the guardrail rather than above it.
+Guardrail advantage over no-defense is $0.244$, $0.178$, $0.149$ per column; the
+\emph{shrinkage} across columns rests on margins of $0.039$ and $0.008$.}
 \end{table}
 \subsection{Precise metric definitions}
 Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
@@ -69,16 +86,20 @@ triggered, when hooks are enabled.
 adversary controlling one underlying policy gains disproportionate influence over selection,
 voting, and memory writes. The shipped harness does not yet instrument per-selection /
 per-vote influence shares, so this study quantifies influence through the system metric
-suite instead. \Cref{tab:adaptive} gives the adaptivity study: static versus adaptive red
-policies across \corb{} rounds, reporting how quickly the blue policy is out-evolved.
+suite instead. \Cref{tab:adaptive} gives the adaptivity study (RQ6): static versus adaptive
+red policies across \corb{} rounds, reporting how quickly the blue policy is out-evolved.
+Both are supplementary: no claim in the main paper rests on them.
 
 \begin{table}[t]
 \centering
-\caption{Sybil study (RQ5), \textbf{synthetic-model} results (star, $N{=}5$,
-$\betafrac{=}0.1$, no defense, $M{=}738$). The expected trend---$\ASRs$ increases with the
-Sybil count until the system is fully seeded---is observed: $\ASRs$ rises monotonically as
-Sybil identities inflate the adversary's initial footprint, and $\NRPs$ falls to zero at
-full seeding.}
+\caption{Sybil study (RQ5), \textbf{synthetic effect model} (star, $N{=}5$,
+$\betafrac{=}0.1$, \emph{independent} (non-colluding) adversary, no defense, $M{=}738$). The
+expected trend---$\ASRs$ increases with the Sybil count until the system is fully
+seeded---is observed: $\ASRs$ rises monotonically as Sybil identities inflate the
+adversary's initial footprint, and $\NRPs$ falls to zero at full seeding. The count-$0$ row
+is the \emph{independent}-seeding cell of the collusion sweep of \Cref{tab:collusion} at the
+same operating point, which is why its $\ASRs$ is $0.775$ there and $1.000$ for colluding
+seeding in that table: the two tables differ in the coordination mode, not in the setting.}
 \label{tab:sybil}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -100,10 +121,16 @@ convention (\Cref{sec:metric-suite}) because the whole star is seeded at $t{=}0$
 
 \begin{table}[t]
 \centering
-\caption{Adaptivity study, \textbf{synthetic-model} results (star, $N{=}5$, $M{=}60$ per
-scored pair, $R{=}20$ \corb{} rounds). An adaptive red (Algorithm~2 best-responder) erodes
-the co-adapting blue's $\NRPs$ from $0.649$ to $0.236$; a random (``static'') red leaves the
-system in the availability-sabotage regime ($\ASRs{=}1$, $\NRPs{=}0$) throughout.}
+\caption{Adaptivity study (RQ6), \textbf{synthetic effect model} (star, $N{=}5$, $M{=}60$ per
+scored pair, $R{=}20$ \corb{} rounds). An adaptive red policy (the harness's best-response
+proposer) erodes the co-adapting blue's $\NRPs$ from $0.649$ to $0.236$ in the
+\emph{unsafe-action} channel; a random (``static'') red leaves the system in the
+availability-sabotage regime ($\ASRs{=}1$, $\NRPs{=}0$) from the first round. Under the
+\emph{system} predicate, therefore, static red is the stronger attacker and adaptivity is
+visible only in the action channel---the opposite of the natural reading, and a direct
+consequence of the saturation described in \Cref{app:harness}. The adaptive sequence is also
+non-monotone ($r{=}10$: $0.783$, $r{=}20$: $0.733$), which $M{=}60$ episodes per pair does
+not resolve; we report it as measured, not as convergence.}
 \label{tab:adaptive}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -127,76 +154,55 @@ adaptive-red ASR$_{\mathrm{act}}$ $\{0.10,0.18,0.17,0.17\}$.}
 
 \Cref{tab:collusion} gives the collusion sweep (RQ5): the full $\betafrac$ axis of
 \Cref{fig:results}(c), tabulating colluding versus independent behaviour in both the
-unsafe-action channel and under the full system predicate. In the unsafe-action channel the
-collusion advantage $\Delta_{\mathrm{coll}}$ (\Cref{def:csr}) is biggest at small adversary
-fraction ($+0.049$ at $\betafrac{=}0.1$) and shrinks---even changing sign---as $\betafrac$
-grows ($-0.024$ at $0.3$, $-0.001$ at $0.5$); under the full system predicate, colluding
-saturates at $\ASRs{=}1.000$ for every $\betafrac\ge0.1$ while independent stays below
-$1$, so the system-level advantage is strictly positive and the unsafe-action signal is what
-\Cref{fig:results}(c) shows.
-$\CPR$ rises with $\betafrac$ for both behaviours and is consistently higher for colluding
-until the independent cascade catches up at the top of the sweep.
-
-% \begin{table}[t]
-% \centering
-% \caption{Collusion sweep (RQ5), \textbf{synthetic-model} results (star, $N{=}5$, no
-% defense, $M{=}738$ episodes per (behaviour, $\betafrac$) cell, seed-locked rows of
-% \texttt{collusion\_sweep.csv}). $\ASRs$ is the full system predicate (\Cref{def:csr}); ASR$_{\mathrm{act}}$
-% is the single-agent unsafe-action predicate. The collusion advantage
-% $\Delta_{\mathrm{coll}}=\mathrm{ASR}_{\mathrm{act}}^{\mathrm{coll}}-\mathrm{ASR}_{\mathrm{act}}^{\mathrm{ind}}$
-% is largest at small $\betafrac$ and shrinks or changes sign as $\betafrac$ grows, while under
-% the system predicate colluding saturates at $1.000$ for all $\betafrac\ge0.1$.}
-% \label{tab:collusion}
-% \small
-% \setlength{\tabcolsep}{4pt}
-% \begin{tabular}{@{}lrrrrrrr@{}}
-% \toprule
-%  & \multicolumn{2}{c}{ASR$_{\mathrm{act}}$} & $\Delta_{\mathrm{coll}}$ & \multicolumn{2}{c}{$\ASRs$} & \multicolumn{2}{c}{$\CPR$} \\
-% \cmidrule(lr){2-3}\cmidrule(lr){4-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
-% $\betafrac$ & colluding & independent & (ASR$_{\mathrm{act}}$) & colluding & independent & colluding & independent \\
-% \midrule
-% 0.1 & 0.603 & 0.554 & $+$0.049 & 1.000 & 0.783 & 0.304 & 0.190 \\
-% 0.2 & 0.577 & 0.575 & $+$0.003 & 1.000 & 0.780 & 0.298 & 0.170 \\
-% 0.3 & 0.558 & 0.583 & $-$0.024 & 1.000 & 0.883 & 0.293 & 0.290 \\
-% 0.4 & 0.561 & 0.523 & $+$0.038 & 1.000 & 0.846 & 0.306 & 0.273 \\
-% 0.5 & 0.564 & 0.565 & $-$0.001 & 1.000 & 0.946 & 0.308 & 0.341 \\
-% \bottomrule
-% \multicolumn{8}{@{}p{\dimexpr\columnwidth-2\tabcolsep\relax}@{}}{\footnotesize Every value is a measured cell of
-% \texttt{collusion\_sweep.csv} (star topology, $N{=}5$, no defense, $M{=}738$). $\ASRs$ is the
-% full system predicate including availability sabotage, which saturates at $1.000$ when the
-% star hub is seeded; the unsafe-action channel is what \Cref{fig:results}(c) plots. $\betafrac$
-% is the adversary fraction (\Cref{eq:adv-config}); $\CPR$ at $\betafrac{=}0.0$ is $0$ for both
-% behaviours and is omitted.}
-% \end{tabular}
-% \end{table}
+unsafe-action channel and under the full system predicate. Three readings, in order of how
+much the data supports them. \emph{First}, the system predicate saturates: colluding reaches
+$\ASRs{=}1.000$ at every $\betafrac\ge0.1$ while independent seeding stays strictly below it
+($0.783$ to $0.946$), so in that column the system-level advantage is positive by
+\emph{saturation}---a consequence of the hub-availability rule---rather than by the placement
+effect of \Cref{thm:collusion}. \emph{Second}, in the unsafe-action channel, where the two
+coordination modes are actually distinguishable, the advantage $\Delta_{\mathrm{coll}}$
+(\Cref{def:csr}) is \emph{not} monotone in $\betafrac$: it is largest at the smallest fraction
+($+0.049$ at $\betafrac{=}0.1$) but returns at $\betafrac{=}0.4$ ($+0.038$) and changes sign
+twice. Each of the five values lies inside the $\pm\epsilon=0.05$ resolution of an $M{=}738$
+sweep, so the honest summary is that the collusion advantage is \emph{not resolved} at this
+budget, and that the ``advantage shrinks as $\betafrac$ grows'' reading is not supported by
+the sequence. \emph{Third}, $\CPR$ rises with $\betafrac$ for both behaviours and is
+consistently higher for colluding until the independent cascade catches up at the top of the
+sweep. \Cref{thm:collusion} is a statement about expected \emph{placement} under a stated
+independent-cascade model, not a prediction of these sign-changing differences.
 
 \begin{table}[t]
 \centering
-\caption{Collusion sweep (RQ5), synthetic-model results
-(star, $N=5$, no defense, $M=738$ episodes per cell).}
+\caption{Collusion sweep (RQ5), \textbf{synthetic effect model}
+(star, $N{=}5$, no defense, $M{=}738$ episodes per cell). $\Delta_{\mathrm{coll}}$ is defined
+on the \emph{unsafe-action} channel (\Cref{def:csr}); the system-level column pair is
+reported beside it because the two columns disagree once the system predicate saturates.}
 \label{tab:collusion}
 \small
 \renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}ccccccc@{}}
+\begin{tabular}{@{}lrrrrrrr@{}}
 \toprule
-& \multicolumn{2}{c}{$\ASRa$} & $\Delta_{\mathrm{coll}}$ & $\ASRs$
-& \multicolumn{2}{c}{$\CPR$} \\
-\cmidrule(lr){2-3}\cmidrule(lr){6-7}
-$\betafrac$ & Coll. & Ind. & & & Coll. & Ind. \\
+& \multicolumn{2}{c}{$\ASRa$} & \multicolumn{2}{c}{$\ASRs$}
+& \multicolumn{2}{c}{$\CPR$} & $\Delta_{\mathrm{coll}}$ \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-8}
+$\betafrac$ & Coll. & Ind. & Coll. & Ind. & Coll. & Ind. & ($\ASRa$) \\
 \midrule
-0.1 & 0.603 & 0.554 & $+0.049$ & 1.000 & 0.304 & 0.190 \\
-0.2 & 0.577 & 0.575 & $+0.003$ & 1.000 & 0.298 & 0.170 \\
-0.3 & 0.558 & 0.583 & $-0.024$ & 1.000 & 0.293 & 0.290 \\
-0.4 & 0.561 & 0.523 & $+0.038$ & 1.000 & 0.306 & 0.273 \\
-0.5 & 0.564 & 0.565 & $-0.001$ & 1.000 & 0.308 & 0.341 \\
+0.1 & 0.603 & 0.554 & 1.000 & 0.783 & 0.304 & 0.190 & $+0.049$ \\
+0.2 & 0.577 & 0.575 & 1.000 & 0.780 & 0.298 & 0.170 & $+0.003$ \\
+0.3 & 0.558 & 0.583 & 1.000 & 0.883 & 0.293 & 0.290 & $-0.024$ \\
+0.4 & 0.561 & 0.523 & 1.000 & 0.846 & 0.306 & 0.273 & $+0.038$ \\
+0.5 & 0.564 & 0.565 & 1.000 & 0.946 & 0.308 & 0.341 & $-0.001$ \\
 \bottomrule
 \end{tabular}
-\tabnote{\emph{Coll.} = colluding; \emph{Ind.} = independent.
-$\Delta_{\mathrm{coll}} = \ASRa^{\mathrm{coll}} - \ASRa^{\mathrm{ind}}$.
-The $\ASRs$ column is the full system predicate, including availability sabotage,
-and equals $1.000$ for all colluding conditions. $\CPR=0$ at $\betafrac=0$ and is
-omitted.}
+\tabnote{\emph{Coll.} = colluding; \emph{Ind.} = independent. Every cell is a measured row
+of the released \texttt{collusion\_sweep.csv}. $\ASRs$ is the full system predicate including
+availability sabotage, which saturates at $1.000$ for every \emph{colluding} condition once
+the hub is seeded; the independent column is given so that the saturation can be read against
+a comparison rather than asserted, and it is the column whose absence made the earlier
+version of this table ambiguous. All five $\Delta_{\mathrm{coll}}$ values are within
+$\pm\epsilon$ of zero ($\epsilon=0.05$), so none is resolved at this budget. $\CPR=0$ at
+$\betafrac=0$ and is omitted.}
 \end{table}
 
 \subsection{Cost model and reachable region}
@@ -211,26 +217,28 @@ run---rather than implying exhaustive coverage.
 
 \begin{table}[t]
 \centering
-\caption{Scalability and cost (RQ6), \textbf{synthetic-model} results (star, no defense,
-$\betafrac{=}0.3$, $M{=}738$). Token cost grows almost exactly linearly in $N$ ($\approx
-8.8{\times}N$ per episode); latency is the synthetic per-call proxy and stays near-flat.
-$\ASRs$ saturates via availability sabotage (\Cref{tab:degradation}).}
+\caption{Scalability and cost (RQ6), \textbf{synthetic effect model} (star, no defense,
+$\betafrac{=}0.3$, $M{=}738$). Token cost grows linearly in $N$ ($\approx 8.8{\times}N$ tokens
+per episode) because the cost model is \emph{defined} as linear in the agent count, so this
+column is a model output, not a measured runtime. Latency is the synthetic per-call proxy, in
+arbitrary units (a.u.), and stays near-flat. $\ASRs$ saturates via availability sabotage
+(\Cref{tab:degradation}).}
 \label{tab:cost}
 \small
 \renewcommand{\arraystretch}{1.08}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-$N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode & Reachable? \\
+$N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode (a.u.) & Reachable? \\
 \midrule
-3  & 1.000 & 0.279 & 26.4 & 18.7 & Yes (138 configs) \\
-5  & 1.000 & 0.289 & 44.0 & 20.8 & Yes (138 configs) \\
-10 & 0.999 & 0.294 & 88.0 & 22.4 & Yes (138 configs) \\
+3  & 1.000 & 0.279 & 26.4 & 18.7 & Yes ($138$-config matrix) \\
+5  & 1.000 & 0.289 & 44.0 & 20.8 & Yes ($138$-config matrix) \\
+10 & 0.999 & 0.294 & 88.0 & 22.4 & Yes ($138$-config matrix) \\
 \bottomrule
 \end{tabular}
 \tabnote{$N\in\{20,50\}$ and mesh are deferred to the release phase; the reachable region is
-the $(N,\text{topology},\betafrac,\text{knob})$ combinations actually run (grid in the
-released provenance logs).}
+the $(N,\text{topology},\betafrac,\text{knob})$ combinations actually run, i.e.\ the
+$138$-configuration matrix described at the head of this appendix.}
 \end{table}
 
 \subsection{LLM backbone pilot (open models)}
@@ -248,10 +256,14 @@ compromised agent's reaction to the injected instruction is a real model output.
 \Cref{tab:llm_pilot} summarizes; every model response, with its prompt, is in the released
 \texttt{decisions.jsonl}. These are \textbf{PILOT-labelled real-model measurements}, reported
 as such and not folded into the synthetic tables. Mistral-7B-Instruct has since been run at
-full scale ($12$ configs, $M{=}100$ per (config, scenario)) and, unlike the six backbones
-here, \emph{complies} on every attack scenario. That is what makes the defense study of
-\Cref{sec:experiments} possible at all: with no baseline refusal there is room for a
-prompt-level defense to move the compliance rate. The official \verb+meta-llama+ repos gate
+full scale ($12$ configs, $M{=}100$ per (config, scenario)) and, unlike \emph{five of the six}
+backbones here---the four Qwen sizes and Llama-3.2-3B all refuse outright---it \emph{complies}
+on every attack scenario; the sixth, Llama-3.2-1B, complies as well. That is what makes the
+defense study of \Cref{sec:experiments} possible at all: with no baseline refusal there is
+room for a prompt-level defense to move the compliance rate. This asymmetry is also the reason
+the main paper's defense claim is bounded: the refusal columns below are the control evidence
+showing that most of the backbones tested \emph{with} a defense decline the same request
+\emph{without} one (\Cref{app:limitations}). The official \verb+meta-llama+ repos gate
 downloads on per-account approval, so the Llama-3.2 checkpoints here are loaded from an
 ungated mirror of the official weights.
 
@@ -281,12 +293,14 @@ model that never complies. The completion budget and the exact prompts are in
 $\{$star, chain, tree, mesh$\}$ $\times$ $N\in\{3,5,10\}$, $M{=}100$ per
 (config, scenario), no defense, fictitious payload data). Backbones differ in their security
 decision: the Qwen family (all four sizes) and Llama-$3$B refuse every direct exfiltration
-instruction (almost all parse failures 0), yet $\ASRs$ is still positive in the hub-critical
-topologies via structural availability sabotage---star and tree collapse to
-$\ASRs{=}1.000$ under collusion and orchestrator compromise, while chain stays
-$\leq\!0.25$; Llama-$1$B \emph{complies}, yielding $\ASRs{=}1.000$ across all
-attack scenarios, as does Mistral-7B (\Cref{sec:experiments}). The registered security
-outcome is a real model property, not a framework artefact.}
+instruction (parse failures are logged per decision and are zero in these cells), yet $\ASRs$
+is still positive in the hub-critical topologies via structural availability sabotage---star
+and tree collapse to $\ASRs{=}1.000$ under collusion and orchestrator compromise, while chain
+stays $\leq\!0.25$; Llama-$1$B \emph{complies}, yielding $\ASRs{=}1.000$ across all
+attack scenarios, as does Mistral-7B (\Cref{sec:experiments}). The refusal columns are the
+control evidence behind \Cref{app:limitations}: most backbones tested \emph{with} a defense
+refuse the same request \emph{without} one. The registered security
+outcome is otherwise a real model property, not a framework artefact.}
 \label{tab:llm_pilot}
 \small
 \renewcommand{\arraystretch}{1.08}
@@ -304,22 +318,27 @@ Llama-3.2-$3$B    & 0.000 & 0.427 & 0.696 & 0.703 \\
 \bottomrule
 \end{tabular}
 \tabnote{Cells are $\ASRs$, averaged over the $12$ configurations, with
-$\NRPs=\PNAs(1-\ASRs)$ and $\PNAs=1.000$. Compliance is $0$ wholesale refusal for the
-single, colluding, and orchest.\@-compromise scenarios, except Qwen2.5-$3$B ($10/3878$)
-and Llama-3.2-$1$B ($3812/3878$, $4077/4077$, $4002/4118$). Star and tree saturate via
-availability sabotage on the hub; chain does not, so refusal-only $\ASRs$ is
-topology-dependent. Defenses here are synthetic effect-models, deliberately not applied.
-Token/episode $\approx 320$--$2400$ (largest: mesh, $N{=}10$); latency $\approx
-0.2$--$1.9$\,s (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in full precision
-and is loaded 4-bit; Llama weights are ungated mirrors of the official bf16 checkpoints.}
+$\NRPs=\PNAs(1-\ASRs)$ and $\PNAs=1.000$. Compliance is wholesale refusal for the
+single, colluding, and orchestrat.\@-compromise scenarios for every backbone except
+Qwen2.5-$3$B ($10/3878$ compliant decisions) and Llama-3.2-$1$B ($3812/3878$, $4077/4077$,
+$4002/4118$). The Qwen rows share their $\ASRs$ values to three decimals, including the $3$B
+row whose $10$ compliant decisions differ from the others' $0$: those $10$ decisions fall in
+episodes whose system predicate was already discharged by availability sabotage
+(\Cref{app:harness}), so they cannot move the cell mean, and the identity is a rounding
+consequence of a small denominator rather than a claim that the backbones behaved
+identically. Star and tree saturate via availability sabotage on the hub; chain does not, so
+refusal-only $\ASRs$ is topology-dependent. Defenses here are synthetic effect models,
+deliberately not applied. Token/episode $\approx 320$--$2400$ (largest: mesh, $N{=}10$);
+latency $\approx 0.2$--$1.9$\,s (RTX~4060). $^{*}$Qwen2.5-$7$B exceeds the $8$\,GB GPU in
+full precision and is loaded 4-bit; Llama weights are ungated mirrors of the official bf16
+checkpoints.}
 \end{table}
 
 \subsection{LLM backbone pilot: topology study}
 \label{app:pilot-topology}
-The table below is the per-backbone topology study (RQ4); the main paper's
-\Cref{sec:experiments} refers to it as a supplementary table, since the 8-page
-main-track limit does not admit it in the body. The companion per-scenario table
-\Cref{tab:llm_pilot} gives the backbone $\times$ scenario breakdown.
+The table below is the per-backbone topology study, the pilot half of RQ3 (the synthetic half
+is \Cref{tab:topology}). The companion per-scenario table \Cref{tab:llm_pilot} gives the
+backbone $\times$ scenario breakdown.
 \input{tables/pilot_topology.tex}
 
 \subsection{A worked forced-coordination task}
@@ -352,36 +371,43 @@ component of the metric records as coordination failure. This example is illustr
 task suite generalizes it across roles, tools, and topologies.
 
 \subsection{Sensitivity and validity checks}
+\label{app:sensitivity}
 The released harness registers four checks beyond the headline studies, and we state
 plainly which of them this submission reports and which it does not.
 \emph{Reported in \Cref{sec:experiments}:} \textbf{evaluator integrity} (RQ2), which counts
 how often a crafted injection flips the off-critical-path judge while leaving
-$\Checker(\Trace)$ unchanged ($80/80$ judge, $0/80$ checker, over $80$ compromised
-episodes). The axiom check additionally records that only the product satisfies
-(D1)--(D4) and reduces to ASB.
+$\Checker(\pi(\Trace))$ unchanged ($80/80$ judge, $0/80$ checker, over $80$ compromised
+episodes). Note that the $80/80$ figure is true by construction---the stand-in judge is
+defined to read the message that the injection edits---so it bounds nothing on its own and is
+reported only for contrast with the measured rates in \Cref{sec:integrity}. The axiom check
+additionally records that only the product satisfies (D1)--(D4) and reduces to ASB.
 \textbf{Backbone robustness} is reported in \Cref{sec:experiments} for the defense study
 across four backbones in three model families, which is where the model dependence
 mattered most.
 \emph{Reported here, in full:} \textbf{aggregator sensitivity} (RQ1). Since
-\Cref{thm:metric} fixes $\NRPs$ under (D1)--(D4), we test whether the reported ranking
+\Cref{thm:metric} fixes $\NRPs$ under D2/D4 (the operative axioms; D1, D3 and D5 are
+consequences, see \Cref{app:supp}), we test whether the reported ranking
 survives \Cref{rem:metric}'s alternatives. Re-ranking the $81$ attacked configurations
 gives Spearman $\rho$ against the product of $1.000$ for $u^{0.5}\sigma^{0.5}$ (a monotone
 transform of $u\sigma$, so exact agreement doubles as an implementation check), $0.956$ and
 $0.879$ for $w{=}0.25,0.75$, but only $0.586$ for $\min(u,\sigma)$, which keeps $2$ of $5$
-top configurations. The ranking is robust across the log-linear family and \emph{not}
-across the worst-coordinate choice, and the axiom check agrees: only the product satisfies
-(D1)--(D4) and reduces to ASB, $\min$ violates both homogeneity axioms, and
-$u^{w}\sigma^{1-w}$ also violates consistency. Every cell is recomputed offline by
+top configurations. Because $\NRPs$ saturates at $0$ for most of those $81$ configurations,
+the ranking carries many ties; the coefficient is computed on tied ranks (mid-rank Spearman)
+and should be read as a rank-agreement summary of a largely tied sample rather than as a
+correlation between two continuous scores. The ranking is robust across the log-linear family
+and \emph{not} across the worst-coordinate choice, and the axiom check agrees: only the product
+satisfies D2/D4 and reduces to ASB, $\min$ violates D4, and $u^{w}\sigma^{1-w}$ violates D4
+and (for $w<1$) D2 as well. Every cell is recomputed offline by
 \texttt{experiments/run\_aggregator\_sensitivity.py} from
 \texttt{outputs/full\_matrix/matrix\_metrics.csv}; the headline table is therefore ranked by
 one specified aggregator, and a reader who prefers a different one can rerun the check
 without touching the harness.
 \emph{Registered but not run for this submission:} an \textbf{emulation-fidelity} check
 comparing emulated and real tools where a real implementation is available, relating the
-change in $\ASRs$ and $\NRPs$ to $\kappaem$. Each remaining gap is a configuration in the
-released harness and can be run without modifying it, so validity---not only headline
-numbers---is independently reproducible; we prefer naming these gaps to implying coverage
-we do not have.
+change in $\ASRs$ and $\NRPs$ to $\kappaem$ (\Cref{app:terms} on what that quantity is and is
+not). Each remaining gap is a configuration in the released harness and can be run without
+modifying it, so validity---not only headline numbers---is independently reproducible; we
+prefer naming these gaps to implying coverage we do not have.
 
 \subsection{Why three rows of \Cref{tab:defense} are identical}
 \label{app:defense-degeneracy}
@@ -390,19 +416,23 @@ defense study. This is a structural consequence, not independent corroboration, 
 state it explicitly because a reader could otherwise reasonably over-weight it.
 
 The system predicate is a disjunction: it is discharged either by an unsafe action
-(requiring a compliant compromised agent) or by the deterministic availability path of
-\Cref{prop:forced}. The defense drives compliance to $0/1075$ on all three backbones, so
-the first disjunct is unavailable in every cell and only the second remains. That path is
-computed from topology, scenario, and propagation, with no model in the loop, so once
-compliance is pinned at zero the metric is no longer a function of the backbone at all. The
-three rows are one structural result observed three times.
+(requiring a compliant compromised agent) or by the deterministic availability rule of
+\Cref{def:sabotage}. The defense drives compliance to $0/1075$ on all three backbones, so
+the first disjunct is unavailable in every cell and only the second remains. That rule is
+computed from the compromised set, the topology, and the forced degree, with no model in the
+loop, so once compliance is pinned at zero the metric is no longer a function of the backbone
+at all. The three rows are one structural result observed three times. Because the rule is
+part of the instrument, this is also why the main text says the residual failures are a
+property of the harness-defined predicate rather than a finding about LLM systems.
 
 Two consequences for reading the study. First, the cross-backbone evidence is
-\emph{evidential about the pattern}, namely the hub-critical ordering chain $<$ mesh $<$
-tree $=$ star and the size of the action-to-system gap, not about the values, which are a
-property of the harness. Second, the model-dependence of the instrument is real but shows
-up in the \emph{other} regime: with compliance at $1$ versus $0$ the measured collusion
-advantage moves from $0.00$ to $0.33$, an effect no topology constant can produce, and the
-Llama-3.2-1B row is entirely a different instrument reading. A metric that silently
+\emph{evidential about the pattern}, namely the hub-critical ordering in the pilot table
+(chain $<$ tree $<$ star $<$ mesh in $\CPR$, the last from
+\Cref{tab:llm_pilot_topology}) and the size of the action-to-system gap, not about the values,
+which are a property of the harness. Second, the model-dependence of the instrument is real
+but shows up in the \emph{other} regime: with compliance at $1$ versus $0$ the compliance
+split changes the collusion advantage of \Cref{def:csr} from $0.00$ to $0.33$ by the
+harness's own arithmetic, an effect no topology constant can produce, and the Llama-3.2-1B row
+is a different instrument reading altogether. A metric that silently
 collapses to a topology lookup when a defense succeeds is also a metric that cannot detect
 a defense failing, which is why we report the decision-level compliance count alongside it.
