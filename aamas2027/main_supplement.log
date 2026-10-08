@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.8)  8 OCT 2026 16:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.8)  8 OCT 2026 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2816,7 +2816,7 @@ Package rerunfilecheck Info: File `main_supplement.out' has not changed.
 Here is how much of TeX's memory you used:
  48066 strings out of 467392
  1066865 string characters out of 5415751
- 1637917 words of memory out of 5000000
+ 1637922 words of memory out of 5000000
  75547 multiletter control sequences out of 15000+600000
  902961 words of font info for 656 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
@@ -2839,7 +2839,7 @@ fonts/type1/public/newtx/txexs.pfb><C:/Users/ASUS/AppData/Roaming/MiKTeX/fonts/
 type1/public/newtx/txmiaX.pfb><C:/Users/ASUS/AppData/Roaming/MiKTeX/fonts/type1
 /public/newtx/txsym.pfb><C:/Users/ASUS/AppData/Roaming/MiKTeX/fonts/type1/publi
 c/newtx/txsys.pfb>
-Output written on main_supplement.pdf (9 pages, 609577 bytes).
+Output written on main_supplement.pdf (9 pages, 610458 bytes).
 PDF statistics:
  433 PDF objects out of 1000 (max. 8388607)
  63 named destinations out of 1000 (max. 500000)
