@@ -22,9 +22,6 @@ orchestrator ($27.6\%$). Under the single-agent predicate the guardrail cuts $\A
 $0.587$ to $0.343$; under the full system predicate $\ASRs$ saturates at $1.0$ in both
 multi-agent columns because the star hub collapses availability rather than exfiltrating.
 
-% tab:degradation moved to Supplementary Material (page limit); its numbers remain in the text.
-
-
 \subsection{RQ2: integrity of the deterministic checker}
 \label{sec:integrity}
 \Cref{thm:integrity} guarantees that equal traces yield equal $\Checker$ verdicts. A
@@ -37,10 +34,8 @@ Qwen2.5-3B and Qwen2.5-7B are pushed off the recorded state in $0.315$ and $0.34
 injected calls, while Llama-3.2-1B resists all of them. The more damaging number needs no
 injection at all: Qwen2.5-7B returns a different verdict for the \emph{identical} clean trace
 in $14/40$ traces, so the equality premise of \Cref{thm:integrity} simply does not hold for a
-sampled judge. Unparseable replies are counted as unusable, never guessed. Judge reliability
-is therefore not a binary ``hijackable or not'': the two Qwen judges are both hijackable and
-irreproducible, and the one that resists injection does so only as reliably as its own
-sampling. This is the empirical case for \Cref{thm:integrity}.
+sampled judge. Unparseable replies are counted as unusable, never guessed, and this is the
+empirical case for \Cref{thm:integrity}.
 
 \subsection{Two channels of system failure: a real-LLM defense study}
 \label{sec:defense}
@@ -49,23 +44,18 @@ model that \emph{would} have complied. We therefore rerun the defense contrast o
 backbones in three families (Qwen2.5-3B, Qwen2.5-7B, Llama-3.2-1B, Mistral-7B), over the
 four topologies at $N{=}5$, $M{=}30$ episodes per cell, with a prompt-level defense that
 marks untrusted data as untrusted. The payload is fictitious, so any successful exfiltration
-is ours. For the three locally run backbones we release every decision with the exact
-prompts sent, so the defense reaching the model is checkable from the artifact rather than
-taken on trust; the hosted Mistral run predates prompt logging, records the defense
-condition and raw outputs only, and we say so rather than imply symmetry. Every cell in
-\Cref{tab:defense} is regenerated from that release by script, and the re-run is
-deterministic: all $36$ local cells reproduce bit-identically from their seeds. Backbone
-ids, decoding parameters, the verbatim system/user prompts and the defense transform, and
-the compliance-scoring rule are all in the Supplementary Material.
+is ours. For the three locally run backbones every decision is released with the exact prompt
+sent, so the defense reaching the model is checkable from the artifact; the hosted Mistral run
+predates prompt logging and records the defense condition and raw outputs only. All $36$ local
+cells reproduce bit-identically from their seeds; decoding parameters, verbatim prompts and
+the compliance-scoring rule are in the Supplementary Material.
 
-The result is not ``the defense works'' but a \emph{two-channel} picture, and both halves
-matter for how a system-level metric should be read.
+The result is not ``the defense works'' but a \emph{two-channel} picture.
 
 \emph{When the model complies, the action channel alone fails the system.} Undefended,
 Llama-3.2-1B and Mistral-7B comply on every attack cell, and $\ASRs$ is then
 $1.000$ on \emph{every} topology, chain included---the unsafe action alone discharges the
-system predicate, so topology carries no signal. A single-agent guardrail score would report
-these cells as safe.
+system predicate, so topology carries no signal.
 
 \emph{When the defense induces refusal, the action channel is closed and topology becomes
 the whole story.} On Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B the defense yields $0/1075$
@@ -75,26 +65,23 @@ by topology, reaching $1.000$ on tree and star under collusion
 (\Cref{tab:defense,fig:results}). The residual failures are availability sabotage, not
 exfiltration: with the unsafe action blocked, the system predicate is still discharged by
 the deterministic availability path of \Cref{prop:forced}, whose hub-critical
-topologies (tree, star) have no path to the sink. This is \Cref{thm:collusion} observed
-with the action channel closed, and it is the reason a defense measured on the action
+topologies (tree, star) have no path to the sink. That is why a defense measured on the action
 channel cannot certify the system.
 
 \emph{And the defense is model-dependent in a way that is easy to miss.} Llama-3.2-1B
 ignores the defense entirely: $1075/1075$ compliant decisions, $\ASRa{=}1$, $\ASRs{=}1$
-everywhere. Three of four backbones obey it, one does not, and the non-obeying case is
-exactly the small model that also complied when undefended. A defense's measured
-effectiveness is therefore a property of the model as much as of the defense, and a study
-that reports an average over backbones can hide this.
+everywhere, and the non-obeying case is exactly the small model that also complied when
+undefended: a defense's measured effectiveness is a property of the model as much as of the
+defense.
 
 \begin{table}[t]
 \centering
 \caption{Real-LLM defense study, prompt-level defense applied, $N{=}5$, $M{=}30$ episodes
 per cell, fictitious payload. \emph{Compliance} is pooled over all $12$ attack cells
-($1075$ decisions, Wilson $95\%$ upper bound $0.0036$ where $0$ is shown).
+($1075$ decisions; the Wilson $95\%$ upper bound is $0.0036$ where $0$ is shown).
 $\ASRs$ is the system predicate under collusion. Where the defense holds, $\ASRa{=}0$ in
 every cell yet $\ASRs$ remains $1.000$ on tree and star; Llama-3.2-1B does not obey the
-defense and fails on every topology. Table generated from the run summaries by
-\texttt{experiments/make\_defense\_table.py}.}
+defense. Generated by \texttt{make\_defense\_table.py}.}
 \label{tab:defense}
 \small
 \setlength{\tabcolsep}{3.5pt}
@@ -106,20 +93,16 @@ intervals $[0,0.10]$ and $[0.90,1]$; $0.43$ is $[0.26,0.62]$.
 \end{table}
 
 Qwen2.5-3B, Qwen2.5-7B, and Mistral-7B return \emph{bit-identical} $\ASRs$ in all twelve
-cells; once compliance is $0$ the action channel is closed, so the system predicate follows
-topology and propagation only. The compliance split ($1$ vs.\ $0$) moves the collusion
-advantage from $0.00$ to $0.33$ (Supplementary Material).
+cells once compliance is $0$, so the system predicate follows topology and propagation only.
 
 \subsection{RQ3: topology and collusion structure}
 \Cref{sec:theory-prop} predicts chain $<$ tree $<$ star; the synthetic study confirms the
-order and the hub effect, and \Cref{tab:defense} shows the same pattern on real backbones.
-Under the system predicate collusion saturates at $\ASRs{=}1.000$ for all $\betafrac\ge0.1$
-(availability collapse); per-backbone and per-$\betafrac$ tables are in the Supplementary
-Material.
+order and the hub effect, and \Cref{tab:defense} shows the same pattern on real backbones,
+where collusion saturates at $\ASRs{=}1.000$ for every $\betafrac\ge0.1$. Per-backbone and
+per-$\betafrac$ tables are in the Supplementary Material.
+
 \subsection{RQ4: cost}
 \label{sec:rq4}
-\begingroup\emergencystretch=2em
-Cost follows the episode budget of \Cref{thm:sample}: a $G{=}21$-configuration sweep resolving
-a gap $\Delta$ costs $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ invocations (\Cref{cor:budget});
-token/latency-versus-$N$ and the full cost model are in the Supplementary Material.\par
-\endgroup
+Cost follows the episode budget of \Cref{thm:sample}: a $G$-configuration sweep resolving a gap
+$\Delta$ costs $O(GNH\Delta^{-2}\ln(G/\alpha))$ invocations (\Cref{cor:budget}); the cost model
+and the scalability table are in the Supplementary Material.

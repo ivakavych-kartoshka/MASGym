@@ -1,0 +1,40 @@
+\section{Related Work in Full}
+\label{app:related-full}
+
+This appendix expands \Cref{sec:related}: it records the multi-agent defenses and the
+classical distributed-systems line that motivates our knobs, and it credits the environment
+vocabulary this instrument adopts. The positioning against ASB and AgentDojo is in
+\Cref{sec:related} and is not repeated.
+
+\subsection{Multi-agent defenses and Byzantine antecedents}
+Beyond the per-agent guardrails lifted in the main paper, multi-agent defenses include
+AutoDefense~\cite{zeng2024autodefense} and the topology-guided
+G-Safeguard~\cite{yu2025gsafeguard}. Classical Byzantine fault
+tolerance~\cite{lamport1982byzantine,pease1980reaching} and Byzantine-robust
+aggregation~\cite{blanchard2017krum} tolerate faulty fractions under a trusted coordinator
+over \emph{numeric} messages; they motivate our adversary-fraction and orchestrator-trust
+knobs, but they do not cover collectives that exchange natural language, where the same
+fraction of compromised agents can be far more or far less damaging depending on which roles
+and which edges they hold. That gap is one of the things the sweeps of
+\Cref{sec:experiments} make measurable. Mixing and debating
+designs~\cite{du2023debate} are a further collective pattern that \defname{} could host as a
+topology variant rather than as a separate environment.
+
+\subsection{Environment vocabulary adopted}
+Three design choices are inherited rather than invented, and are credited here so that the
+main paper's compression does not read as novelty. From standardized environment
+work~\cite{brockman2016openaigym,terry2021pettingzoo,leibo2021meltingpot} \defname{} takes the
+step/observation/action interface, the notion of a partially observable multi-agent
+environment, and the idea that the \emph{collective} is the unit at which social outcomes are
+scored. From automated red teaming~\cite{perez2022redteaming} and the MAST
+taxonomy~\cite{cemri2025mast} it takes the vocabulary for group-level failure and the practice
+of logging an attack trajectory. From AgentDojo~\cite{debenedetti2024agentdojo} it takes
+deterministic, state-based scoring: rather than asking a model whether a system was
+compromised, the environment registers a program that reads recorded state. That property is
+lifted here from one agent's state to the global trace (\Cref{def:projection},
+\Cref{thm:integrity}), which is what makes it usable at the level of a collective.
+
+The parts that are ours, and that no prior instrument provides, are the system-level
+aggregation and its axiomatic characterization (\Cref{thm:metric}), the trace projection and
+its integrity consequence, the parameterized adversary vector with collusion and
+orchestrator-trust knobs, and the co-evolving red/blue protocol of \Cref{sec:algorithm}.

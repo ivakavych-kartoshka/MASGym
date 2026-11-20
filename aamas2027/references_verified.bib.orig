@@ -1,0 +1,747 @@
+%% =====================================================================
+%% references_verified.bib  --  MASGym
+%% A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems.
+%%
+%% VERIFICATION. Every entry was verified against a primary source: an arXiv
+%% abstract page, a DOI/Crossref record, or an official proceedings / publisher
+%% page. The four seed references (ToolEmu, ASB, AgentDojo, MASEC) and 17
+%% MASGym-specific anchors were re-verified for this manuscript against the
+%% fetched primary page; see citation_claim_map.csv for the per-entry
+%% verification URL, verification level, the exact claim each supports, and the
+%% source location, and citation_search_log.md for methodology. Entries carried
+%% over from the vetted sibling-project pool (same rigorous process, Secure-MAS
+%% repository) are flagged "existing-project reference" in the claim map and were
+%% re-checked where they support a substantive claim.
+%%
+%% Internal organisation (comment headers):
+%%   [1] Core seed references (from idea.pdf)
+%%   [2] Closest competing methods (agent-security benchmarks + MAS attacks/defenses)
+%%   [3] Foundational theory (concentration, cascades, Byzantine, agreement stats)
+%%   [4] System / model background (MAS frameworks, LLM agents, environments)
+%%   [5] Security background and prompt-injection primitives
+%%   [6] Experimental baselines, datasets, models, and evaluation
+%% =====================================================================
+
+
+%% ==================== [1] CORE SEED REFERENCES (idea.pdf) ====================
+
+@inproceedings{ruan2024toolemu,
+  title     = {Identifying the Risks of {LM} Agents with an {LM}-Emulated Sandbox},
+  author    = {Ruan, Yangjun and Dong, Honghua and Wang, Andrew and Pitis, Silviu and Zhou, Yongchao and Ba, Jimmy and Dubois, Yann and Maddison, Chris J. and Hashimoto, Tatsunori},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {ToolEmu; arXiv:2309.15817}
+}
+
+@inproceedings{zhang2025asb,
+  title     = {Agent Security Bench ({ASB}): Formalizing and Benchmarking Attacks and Defenses in {LLM}-based Agents},
+  author    = {Zhang, Hanrong and Huang, Jingyuan and Mei, Kai and Yao, Yifei and Wang, Zhenting and Zhan, Chenlu and Wang, Hongwei and Zhang, Yongfeng},
+  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  note      = {ASB; introduces NRP = PNA (1 - ASR); arXiv:2410.02644}
+}
+
+@inproceedings{debenedetti2024agentdojo,
+  title     = {{AgentDojo}: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for {LLM} Agents},
+  author    = {Debenedetti, Edoardo and Zhang, Jie and Balunovi{\'c}, Mislav and Beurer-Kellner, Luca and Fischer, Marc and Tram{\`e}r, Florian},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024), Datasets and Benchmarks Track},
+  year      = {2024},
+  doi       = {10.52202/079017-2636},
+  note      = {deterministic state-based security() checks; arXiv:2406.13352}
+}
+
+@article{schroederdewitt2025masec,
+  author  = {Schroeder de Witt, Christian and Krawiecka, Klaudia and Krawczuk, Igor and Hagag, Ben and Anderson, William L. and Belcak, Peter and others},
+  title   = {Open Challenges in Multi-Agent Security: Towards Secure Systems of Interacting {AI} Agents},
+  journal = {arXiv preprint arXiv:2505.02077},
+  year    = {2025},
+  doi     = {10.48550/arXiv.2505.02077},
+  note    = {MASEC; Sec. 4.7 states no multi-agent security benchmark exists}
+}
+
+
+%% ============ [2] CLOSEST COMPETING METHODS (benchmarks + MAS attacks/defenses) ============
+
+@techreport{hammond2025multiagent,
+  author      = {Hammond, Lewis and Chan, Alan and Clifton, Jesse and Hoelscher-Obermaier, Jason and Khan, Akbir and McLean, Euan and Smith, Chandler and Barfuss, Wolfram and Foerster, Jakob and others},
+  title       = {Multi-Agent Risks from Advanced {AI}},
+  institution = {Cooperative AI Foundation},
+  number      = {Technical Report \#1},
+  year        = {2025},
+  note        = {arXiv:2502.14143},
+  doi         = {10.48550/arXiv.2502.14143}
+}
+
+@article{cemri2025mast,
+  title   = {Why Do Multi-Agent {LLM} Systems Fail?},
+  author  = {Cemri, Mert and Pan, Melissa Z. and Yang, Shuyi and Agrawal, Lakshya A. and Chopra, Bhavya and Tiwari, Rishabh and Keutzer, Kurt and Parameswaran, Aditya and Klein, Dan and Ramchandran, Kannan and Zaharia, Matei and Gonzalez, Joseph E. and Stoica, Ion},
+  journal = {arXiv preprint arXiv:2503.13657},
+  year    = {2025},
+  note    = {MAST failure taxonomy for multi-agent LLM systems}
+}
+
+@inproceedings{zhan2024injecagent,
+  title     = {{InjecAgent}: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents},
+  author    = {Zhan, Qiusi and Liang, Zhixiang and Ying, Zifan and Kang, Daniel},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},
+  year      = {2024},
+  note      = {arXiv:2403.02691}
+}
+
+@inproceedings{andriushchenko2025agentharm,
+  title     = {{AgentHarm}: A Benchmark for Measuring Harmfulness of {LLM} Agents},
+  author    = {Andriushchenko, Maksym and Souly, Alexandra and Dziemian, Mateusz and Duenas, Derek and Lin, Maxwell and Wang, Justin and Hendrycks, Dan and Zou, Andy and Kolter, Zico and Fredrikson, Matt and Winsor, Eric and Wynne, Jerome and Gal, Yarin and Davies, Xander},
+  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  note      = {arXiv:2410.09024}
+}
+
+@inproceedings{chen2024agentpoison,
+  title     = {{AgentPoison}: Red-teaming {LLM} Agents via Poisoning Memory or Knowledge Bases},
+  author    = {Chen, Zhaorun and Xiang, Zhen and Xiao, Chaowei and Song, Dawn and Li, Bo},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS 2024)},
+  pages     = {130185--130213},
+  year      = {2024},
+  note      = {arXiv:2407.12784}
+}
+
+@article{lee2024promptinfection,
+  title   = {Prompt Infection: {LLM}-to-{LLM} Prompt Injection within Multi-Agent Systems},
+  author  = {Lee, Donghyun and Tiwari, Mo},
+  journal = {arXiv preprint arXiv:2410.07283},
+  year    = {2024}
+}
+
+@inproceedings{he2025redteaming,
+  title     = {Red-Teaming {LLM} Multi-Agent Systems via Communication Attacks},
+  author    = {He, Pengfei and Lin, Yuping and Dong, Shen and Xu, Han and Xing, Yue and Liu, Hui},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2025},
+  year      = {2025},
+  note      = {Agent-in-the-Middle (AiTM); arXiv:2502.14847}
+}
+
+@article{zhou2025corba,
+  title   = {{CORBA}: Contagious Recursive Blocking Attacks on Multi-Agent Systems Based on Large Language Models},
+  author  = {Zhou, Zhenhong and Li, Zherui and Zhang, Jie and Zhang, Yuanhe and Wang, Kun and Liu, Yang and Guo, Qing},
+  journal = {arXiv preprint arXiv:2502.14529},
+  year    = {2025}
+}
+
+@inproceedings{gu2024agentsmith,
+  title     = {Agent Smith: A Single Image Can Jailbreak One Million Multimodal {LLM} Agents Exponentially Fast},
+  author    = {Gu, Xiangming and Zheng, Xiaosen and Pang, Tianyu and Du, Chao and Liu, Qian and Wang, Ye and Jiang, Jing and Lin, Min},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning (ICML)},
+  year      = {2024},
+  note      = {arXiv:2402.08567}
+}
+
+@inproceedings{zhang2024psysafe,
+  title     = {{PsySafe}: A Comprehensive Framework for Psychological-based Attack, Defense, and Evaluation of Multi-agent System Safety},
+  author    = {Zhang, Zaibin and Zhang, Yongting and Li, Lijun and Gao, Hongzhi and Wang, Lijun and Lu, Huchuan and Zhao, Feng and Qiao, Yu and Shao, Jing},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2024},
+  note      = {arXiv:2401.11880}
+}
+
+@article{tian2023evilgeniuses,
+  title   = {Evil Geniuses: Delving into the Safety of {LLM}-based Agents},
+  author  = {Tian, Yu and Yang, Xiao and Zhang, Jingyuan and Dong, Yinpeng and Su, Hang},
+  journal = {arXiv preprint arXiv:2311.11855},
+  year    = {2023}
+}
+
+@article{yu2024netsafe,
+  title   = {{NetSafe}: Exploring the Topological Safety of Multi-agent Networks},
+  author  = {Yu, Miao and Wang, Shilong and Zhang, Guibin and Mao, Junyuan and Yin, Chenlong and Liu, Qijiong and Wen, Qingsong and Wang, Kun and Wang, Yang},
+  journal = {arXiv preprint arXiv:2410.15686},
+  year    = {2024}
+}
+
+@article{cohen2024aiworm,
+  title   = {Here Comes The {AI} Worm: Unleashing Zero-click Worms that Target {GenAI}-Powered Applications},
+  author  = {Cohen, Stav and Bitton, Ron and Nassi, Ben},
+  journal = {arXiv preprint arXiv:2403.02817},
+  year    = {2024}
+}
+
+@inproceedings{yang2024watchout,
+  title     = {Watch Out for Your Agents! Investigating Backdoor Threats to {LLM}-Based Agents},
+  author    = {Yang, Wenkai and Bi, Xiaohan and Lin, Yankai and Chen, Sishuo and Zhou, Jie and Sun, Xu},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2024},
+  note      = {arXiv:2402.11208}
+}
+
+@article{yu2025gsafeguard,
+  title   = {{G-Safeguard}: A Topology-Guided Security Lens and Treatment on {LLM}-based Multi-agent Systems},
+  author  = {Wang, Shilong and Zhang, Guibin and Yu, Miao and Wan, Guancheng and Meng, Fanci and Guo, Chongye and Wang, Kun and Wang, Yang},
+  journal = {arXiv preprint arXiv:2502.11127},
+  year    = {2025}
+}
+
+@article{zeng2024autodefense,
+  title   = {{AutoDefense}: Multi-Agent {LLM} Defense against Jailbreak Attacks},
+  author  = {Zeng, Yifan and Wu, Yiran and Zhang, Xiao and Wang, Huazheng and Wu, Qingyun},
+  journal = {arXiv preprint arXiv:2403.04783},
+  year    = {2024}
+}
+
+@inproceedings{mazeika2024harmbench,
+  title     = {{HarmBench}: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal},
+  author    = {Mazeika, Mantas and Phan, Long and Yin, Xuwang and Zou, Andy and Wang, Zifan and Mu, Norman and Sakhaee, Elham and Li, Nathaniel and Basart, Steven and Li, Bo and Forsyth, David and Hendrycks, Dan},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning (ICML)},
+  series    = {PMLR},
+  volume    = {235},
+  pages     = {35181--35224},
+  year      = {2024},
+  note      = {arXiv:2402.04249}
+}
+
+@inproceedings{wang2023decodingtrust,
+  title     = {{DecodingTrust}: A Comprehensive Assessment of Trustworthiness in {GPT} Models},
+  author    = {Wang, Boxin and Chen, Weixin and Pei, Hengzhi and Xie, Chulin and Kang, Mintong and Zhang, Chenhui and Xu, Chejian and Xiong, Zidi and Dutta, Ritik and Schaeffer, Rylan and Truong, Sang T. and Arora, Simran and Mazeika, Mantas and Hendrycks, Dan and Lin, Zinan and Cheng, Yu and Koyejo, Sanmi and Song, Dawn and Li, Bo},
+  booktitle = {Advances in Neural Information Processing Systems 36 (NeurIPS 2023), Datasets and Benchmarks Track},
+  year      = {2023},
+  note      = {arXiv:2306.11698}
+}
+
+
+%% ==================== [3] FOUNDATIONAL THEORY ====================
+
+@article{hoeffding1963probability,
+  author    = {Hoeffding, Wassily},
+  title     = {Probability Inequalities for Sums of Bounded Random Variables},
+  journal   = {Journal of the American Statistical Association},
+  volume    = {58},
+  number    = {301},
+  pages     = {13--30},
+  year      = {1963},
+  publisher = {Taylor \& Francis},
+  doi       = {10.1080/01621459.1963.10500830}
+}
+
+@incollection{mcdiarmid1989bounded,
+  author    = {McDiarmid, Colin},
+  title     = {On the Method of Bounded Differences},
+  booktitle = {Surveys in Combinatorics, 1989},
+  series    = {London Mathematical Society Lecture Note Series},
+  volume    = {141},
+  pages     = {148--188},
+  year      = {1989},
+  publisher = {Cambridge University Press},
+  doi       = {10.1017/CBO9781107359949.008}
+}
+
+@book{boucheron2013concentration,
+  author    = {Boucheron, St\'ephane and Lugosi, G\'abor and Massart, Pascal},
+  title     = {Concentration Inequalities: A Nonasymptotic Theory of Independence},
+  year      = {2013},
+  publisher = {Oxford University Press},
+  isbn      = {9780199535255},
+  doi       = {10.1093/acprof:oso/9780199535255.001.0001}
+}
+
+@article{neyman1933problem,
+  author    = {Neyman, Jerzy and Pearson, Egon S.},
+  title     = {On the Problem of the Most Efficient Tests of Statistical Hypotheses},
+  journal   = {Philosophical Transactions of the Royal Society of London. Series A},
+  volume    = {231},
+  number    = {694--706},
+  pages     = {289--337},
+  year      = {1933},
+  publisher = {The Royal Society},
+  doi       = {10.1098/rsta.1933.0009}
+}
+
+@book{lehmann2005testing,
+  author    = {Lehmann, Erich L. and Romano, Joseph P.},
+  title     = {Testing Statistical Hypotheses},
+  edition   = {3rd},
+  series    = {Springer Texts in Statistics},
+  year      = {2005},
+  publisher = {Springer},
+  isbn      = {9780387988641},
+  doi       = {10.1007/0-387-27605-X}
+}
+
+@article{rubin1974estimating,
+  author    = {Rubin, Donald B.},
+  title     = {Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies},
+  journal   = {Journal of Educational Psychology},
+  volume    = {66},
+  pages     = {688--701},
+  year      = {1974},
+  publisher = {American Psychological Association},
+  doi       = {10.1037/h0037350}
+}
+
+@article{granovetter1978threshold,
+  author    = {Granovetter, Mark},
+  title     = {Threshold Models of Collective Behavior},
+  journal   = {American Journal of Sociology},
+  volume    = {83},
+  number    = {6},
+  pages     = {1420--1443},
+  year      = {1978},
+  publisher = {University of Chicago Press},
+  doi       = {10.1086/226707}
+}
+
+@inproceedings{kempe2003maximizing,
+  author    = {Kempe, David and Kleinberg, Jon and Tardos, \'Eva},
+  title     = {Maximizing the Spread of Influence through a Social Network},
+  booktitle = {Proceedings of the Ninth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '03)},
+  pages     = {137--146},
+  year      = {2003},
+  publisher = {ACM},
+  doi       = {10.1145/956750.956769}
+}
+
+@article{watts2002simple,
+  author    = {Watts, Duncan J.},
+  title     = {A Simple Model of Global Cascades on Random Networks},
+  journal   = {Proceedings of the National Academy of Sciences},
+  volume    = {99},
+  number    = {9},
+  pages     = {5766--5771},
+  year      = {2002},
+  publisher = {National Academy of Sciences},
+  doi       = {10.1073/pnas.082090499}
+}
+
+@article{chalupa1979bootstrap,
+  author    = {Chalupa, J. and Leath, P. L. and Reich, G. R.},
+  title     = {Bootstrap Percolation on a Bethe Lattice},
+  journal   = {Journal of Physics C: Solid State Physics},
+  volume    = {12},
+  number    = {1},
+  pages     = {L31--L35},
+  year      = {1979},
+  publisher = {IOP Publishing},
+  doi       = {10.1088/0022-3719/12/1/008}
+}
+
+@article{lamport1982byzantine,
+  author    = {Lamport, Leslie and Shostak, Robert and Pease, Marshall},
+  title     = {The Byzantine Generals Problem},
+  journal   = {ACM Transactions on Programming Languages and Systems},
+  volume    = {4},
+  number    = {3},
+  pages     = {382--401},
+  year      = {1982},
+  publisher = {Association for Computing Machinery},
+  doi       = {10.1145/357172.357176}
+}
+
+@article{pease1980reaching,
+  author    = {Pease, Marshall and Shostak, Robert and Lamport, Leslie},
+  title     = {Reaching Agreement in the Presence of Faults},
+  journal   = {Journal of the ACM},
+  volume    = {27},
+  number    = {2},
+  pages     = {228--234},
+  year      = {1980},
+  publisher = {Association for Computing Machinery},
+  doi       = {10.1145/322186.322188}
+}
+
+@inproceedings{blanchard2017krum,
+  title     = {Machine Learning with Adversaries: {B}yzantine Tolerant Gradient Descent},
+  author    = {Blanchard, Peva and El Mhamdi, El Mahdi and Guerraoui, Rachid and Stainer, Julien},
+  booktitle = {Advances in Neural Information Processing Systems 30 (NIPS)},
+  year      = {2017}
+}
+
+@article{douceur2002sybil,
+  title     = {The {Sybil} Attack},
+  author    = {Douceur, John R.},
+  booktitle = {Peer-to-Peer Systems: First International Workshop (IPTPS 2002)},
+  journal   = {Peer-to-Peer Systems (IPTPS 2002), Lecture Notes in Computer Science},
+  volume    = {2429},
+  pages     = {251--260},
+  year      = {2002},
+  publisher = {Springer},
+  doi       = {10.1007/3-540-45748-8_24}
+}
+
+@article{benjamini1995controlling,
+  author    = {Benjamini, Yoav and Hochberg, Yosef},
+  title     = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal   = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume    = {57},
+  number    = {1},
+  pages     = {289--300},
+  year      = {1995},
+  publisher = {Wiley},
+  doi       = {10.1111/j.2517-6161.1995.tb02031.x}
+}
+
+@article{cohen1960coefficient,
+  author    = {Cohen, Jacob},
+  title     = {A Coefficient of Agreement for Nominal Scales},
+  journal   = {Educational and Psychological Measurement},
+  volume    = {20},
+  number    = {1},
+  pages     = {37--46},
+  year      = {1960},
+  publisher = {SAGE Publications},
+  doi       = {10.1177/001316446002000104}
+}
+
+@article{fleiss1971measuring,
+  author    = {Fleiss, Joseph L.},
+  title     = {Measuring Nominal Scale Agreement Among Many Raters},
+  journal   = {Psychological Bulletin},
+  volume    = {76},
+  number    = {5},
+  pages     = {378--382},
+  year      = {1971},
+  publisher = {American Psychological Association},
+  doi       = {10.1037/h0031619}
+}
+
+
+%% ============ [4] SYSTEM / MODEL BACKGROUND (MAS FRAMEWORKS, LLM AGENTS, ENVIRONMENTS) ============
+
+@article{wu2023autogen,
+  title   = {{AutoGen}: Enabling Next-Gen {LLM} Applications via Multi-Agent Conversation},
+  author  = {Wu, Qingyun and Bansal, Gagan and Zhang, Jieyu and Wu, Yiran and Li, Beibin and Zhu, Erkang and Jiang, Li and Zhang, Xiaoyun and Zhang, Shaokun and Liu, Jiale and Awadallah, Ahmed Hassan and White, Ryen W. and Burger, Doug and Wang, Chi},
+  journal = {arXiv preprint arXiv:2308.08155},
+  year    = {2023}
+}
+
+@inproceedings{li2023camel,
+  title     = {{CAMEL}: Communicative Agents for ``Mind'' Exploration of Large Language Model Society},
+  author    = {Li, Guohao and Hammoud, Hasan Abed Al Kader and Itani, Hani and Khizbullin, Dmitrii and Ghanem, Bernard},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  note      = {arXiv:2303.17760}
+}
+
+@article{hong2023metagpt,
+  title   = {{MetaGPT}: Meta Programming for a Multi-Agent Collaborative Framework},
+  author  = {Hong, Sirui and Zhuge, Mingchen and Chen, Jiaqi and Zheng, Xiawu and Cheng, Yuheng and Zhang, Ceyao and Wang, Jinlin and Wang, Zili and Yau, Steven Ka Shing and Lin, Zijuan and Zhou, Liyang and Ran, Chenyu and Xiao, Lingfeng and Wu, Chenglin and Schmidhuber, J{\"u}rgen},
+  journal = {arXiv preprint arXiv:2308.00352},
+  year    = {2023}
+}
+
+@inproceedings{qian2024chatdev,
+  title     = {{ChatDev}: Communicative Agents for Software Development},
+  author    = {Qian, Chen and Liu, Wei and Liu, Hongzhang and Chen, Nuo and Dang, Yufan and Li, Jiahao and Yang, Cheng and Chen, Weize and Su, Yusheng and Cong, Xin and Xu, Juyuan and Li, Dahai and Liu, Zhiyuan and Sun, Maosong},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year      = {2024},
+  note      = {arXiv:2307.07924}
+}
+
+@inproceedings{chen2024agentverse,
+  title     = {{AgentVerse}: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors},
+  author    = {Chen, Weize and Su, Yusheng and Zuo, Jingwei and Yang, Cheng and Yuan, Chenfei and Chan, Chi-Min and Yu, Heyang and Lu, Yaxi and Hung, Yi-Hsin and Qian, Chen and Qin, Yujia and Cong, Xin and Xie, Ruobing and Liu, Zhiyuan and Sun, Maosong and Zhou, Jie},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2308.10848}
+}
+
+@article{du2023debate,
+  title   = {Improving Factuality and Reasoning in Language Models through Multiagent Debate},
+  author  = {Du, Yilun and Li, Shuang and Torralba, Antonio and Tenenbaum, Joshua B. and Mordatch, Igor},
+  journal = {arXiv preprint arXiv:2305.14325},
+  year    = {2023}
+}
+
+@article{chan2023chateval,
+  title   = {{ChatEval}: Towards Better {LLM}-based Evaluators through Multi-Agent Debate},
+  author  = {Chan, Chi-Min and Chen, Weize and Su, Yusheng and Yu, Jianxuan and Xue, Wei and Zhang, Shanghang and Fu, Jie and Liu, Zhiyuan},
+  journal = {arXiv preprint arXiv:2308.07201},
+  year    = {2023}
+}
+
+@article{wang2024mixture,
+  title   = {Mixture-of-Agents Enhances Large Language Model Capabilities},
+  author  = {Wang, Junlin and Wang, Jue and Athiwaratkun, Ben and Zhang, Ce and Zou, James},
+  journal = {arXiv preprint arXiv:2406.04692},
+  year    = {2024}
+}
+
+@inproceedings{liu2024dylan,
+  title     = {A Dynamic {LLM}-Powered Agent Network for Task-Oriented Agent Collaboration},
+  author    = {Liu, Zijun and Zhang, Yanzhe and Li, Peng and Liu, Yang and Yang, Diyi},
+  booktitle = {Conference on Language Modeling (COLM)},
+  year      = {2024},
+  note      = {arXiv:2310.02170}
+}
+
+@inproceedings{wang2025openhands,
+  title     = {{OpenHands}: An Open Platform for {AI} Software Developers as Generalist Agents},
+  author    = {Wang, Xingyao and Li, Boxuan and Song, Yufan and Xu, Frank F. and Tang, Xiangru and Zhuge, Mingchen and others},
+  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},
+  year      = {2025},
+  note      = {arXiv:2407.16741}
+}
+
+@article{fourney2024magenticone,
+  title   = {Magentic-One: A Generalist Multi-Agent System for Solving Complex Tasks},
+  author  = {Fourney, Adam and Bansal, Gagan and Mozannar, Hussein and Tan, Cheng and Salinas, Eduardo and Zhu, Erkang and others},
+  journal = {arXiv preprint arXiv:2411.04468},
+  year    = {2024}
+}
+
+@inproceedings{yao2023react,
+  title     = {{ReAct}: Synergizing Reasoning and Acting in Language Models},
+  author    = {Yao, Shunyu and Zhao, Jeffrey and Yu, Dian and Du, Nan and Shafran, Izhak and Narasimhan, Karthik and Cao, Yuan},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2023},
+  note      = {arXiv:2210.03629}
+}
+
+@article{shinn2023reflexion,
+  title   = {Reflexion: Language Agents with Verbal Reinforcement Learning},
+  author  = {Shinn, Noah and Cassano, Federico and Berman, Edward and Gopinath, Ashwin and Narasimhan, Karthik and Yao, Shunyu},
+  journal = {arXiv preprint arXiv:2303.11366},
+  year    = {2023}
+}
+
+@article{park2023generative,
+  title   = {Generative Agents: Interactive Simulacra of Human Behavior},
+  author  = {Park, Joon Sung and O'Brien, Joseph C. and Cai, Carrie J. and Morris, Meredith Ringel and Liang, Percy and Bernstein, Michael S.},
+  journal = {arXiv preprint arXiv:2304.03442},
+  year    = {2023}
+}
+
+@article{schick2023toolformer,
+  title   = {Toolformer: Language Models Can Teach Themselves to Use Tools},
+  author  = {Schick, Timo and Dwivedi-Yu, Jane and Dess{\`\i}, Roberto and Raileanu, Roberta and Lomeli, Maria and Zettlemoyer, Luke and Cancedda, Nicola and Scialom, Thomas},
+  journal = {arXiv preprint arXiv:2302.04761},
+  year    = {2023}
+}
+
+@article{guo2024survey,
+  title   = {Large Language Model based Multi-Agents: A Survey of Progress and Challenges},
+  author  = {Guo, Taicheng and Chen, Xiuying and Wang, Yaqi and Chang, Ruidi and Pei, Shichao and Chawla, Nitesh V. and Wiest, Olaf and Zhang, Xiangliang},
+  journal = {arXiv preprint arXiv:2402.01680},
+  year    = {2024}
+}
+
+@article{brockman2016openaigym,
+  title   = {OpenAI Gym},
+  author  = {Brockman, Greg and Cheung, Vicki and Pettersson, Ludwig and Schneider, Jonas and Schulman, John and Tang, Jie and Zaremba, Wojciech},
+  journal = {arXiv preprint arXiv:1606.01540},
+  year    = {2016}
+}
+
+@inproceedings{terry2021pettingzoo,
+  title     = {{PettingZoo}: Gym for Multi-Agent Reinforcement Learning},
+  author    = {Terry, J. K. and Black, Benjamin and Grammel, Nathaniel and Jayakumar, Mario and Hari, Ananth and Sullivan, Ryan and Santos, Luis and Dieffendahl, Clemens and Horsch, Caroline and Perez-Vicente, Rodrigo and Williams, Niall and Lokesh, Yashas and Ravi, Praveen},
+  booktitle = {Advances in Neural Information Processing Systems 34 (NeurIPS)},
+  year      = {2021},
+  note      = {arXiv:2009.14471}
+}
+
+@inproceedings{leibo2021meltingpot,
+  title     = {Scalable Evaluation of Multi-Agent Reinforcement Learning with {M}elting {P}ot},
+  author    = {Leibo, Joel Z. and Du{\'e}{\~n}ez-Guzm{\'a}n, Edgar and Vezhnevets, Alexander Sasha and Agapiou, John P. and Sunehag, Peter and Koster, Raphael and Matyas, Jayd and Beattie, Charles and Mordatch, Igor and Graepel, Thore},
+  booktitle = {Proceedings of the 38th International Conference on Machine Learning (ICML)},
+  series    = {PMLR},
+  volume    = {139},
+  pages     = {6187--6199},
+  year      = {2021},
+  note      = {arXiv:2107.06857}
+}
+
+
+%% ==================== [5] SECURITY BACKGROUND AND PROMPT-INJECTION PRIMITIVES ====================
+
+@article{greshake2023indirect,
+  title   = {Not What You've Signed Up For: Compromising Real-World {LLM}-Integrated Applications with Indirect Prompt Injection},
+  author  = {Greshake, Kai and Abdelnabi, Sahar and Mishra, Shailesh and Endres, Christoph and Holz, Thorsten and Fritz, Mario},
+  journal = {arXiv preprint arXiv:2302.12173},
+  year    = {2023}
+}
+
+@article{liu2023houyi,
+  title   = {Prompt Injection Attack against {LLM}-integrated Applications},
+  author  = {Liu, Yi and Deng, Gelei and Li, Yuekang and Wang, Kailong and Wang, Zihao and Wang, Xiaofeng and Zhang, Tianwei and Liu, Yepang and Wang, Haoyu and Zheng, Yan and Zhang, Leo Yu and Liu, Yang},
+  journal = {arXiv preprint arXiv:2306.05499},
+  year    = {2023}
+}
+
+@inproceedings{perez2022ignore,
+  title     = {Ignore Previous Prompt: Attack Techniques for Language Models},
+  author    = {Perez, F{\'a}bio and Ribeiro, Ian},
+  booktitle = {NeurIPS 2022 Workshop on ML Safety},
+  year      = {2022},
+  note      = {arXiv:2211.09527}
+}
+
+@inproceedings{liu2024formalizing,
+  title     = {Formalizing and Benchmarking Prompt Injection Attacks and Defenses},
+  author    = {Liu, Yupei and Jia, Yuqi and Geng, Runpeng and Jia, Jinyuan and Gong, Neil Zhenqiang},
+  booktitle = {33rd USENIX Security Symposium (USENIX Security)},
+  year      = {2024},
+  note      = {arXiv:2310.12815}
+}
+
+@article{zou2023universal,
+  title   = {Universal and Transferable Adversarial Attacks on Aligned Language Models},
+  author  = {Zou, Andy and Wang, Zifan and Carlini, Nicholas and Nasr, Milad and Kolter, J. Zico and Fredrikson, Matt},
+  journal = {arXiv preprint arXiv:2307.15043},
+  year    = {2023}
+}
+
+@inproceedings{liu2024autodan,
+  title     = {{AutoDAN}: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models},
+  author    = {Liu, Xiaogeng and Xu, Nan and Chen, Muhao and Xiao, Chaowei},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2310.04451}
+}
+
+@inproceedings{wei2023jailbroken,
+  title     = {Jailbroken: How Does {LLM} Safety Training Fail?},
+  author    = {Wei, Alexander and Haghtalab, Nika and Steinhardt, Jacob},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2023},
+  note      = {arXiv:2307.02483}
+}
+
+@inproceedings{hua2024trustagent,
+  title     = {{TrustAgent}: Towards Safe and Trustworthy {LLM}-based Agents},
+  author    = {Hua, Wenyue and Yang, Xianjun and Jin, Mingyu and Li, Zelong and Cheng, Wei and Tang, Ruixiang and Zhang, Yongfeng},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2024},
+  year      = {2024},
+  note      = {arXiv:2402.01586}
+}
+
+@article{li2024personalllmagents,
+  title   = {Personal {LLM} Agents: Insights and Survey about the Capability, Efficiency and Security},
+  author  = {Li, Yuanchun and Wen, Hao and Wang, Weijun and Li, Xiangyu and Yuan, Yizhen and Liu, Guohong and Liu, Jiacheng and Xu, Wenxing and Wang, Xiang and Sun, Yi and Kong, Rui and Wang, Yile and Geng, Hanfei and Luan, Jian and Jin, Xuefeng and Ye, Zilong and Xiong, Guanjing and Zhang, Fan and Li, Xiang and Xu, Mengwei and Li, Zhijun and Li, Peng and Liu, Yang and Zhang, Ya-Qin and Liu, Yunxin},
+  journal = {arXiv preprint arXiv:2401.05459},
+  year    = {2024}
+}
+
+@article{he2025emerged,
+  title     = {The Emerged Security and Privacy of {LLM} Agent: A Survey with Case Studies},
+  author    = {He, Feng and Zhu, Tianqing and Ye, Dayong and Liu, Bo and Zhou, Wanlei and Yu, Philip S.},
+  journal   = {ACM Computing Surveys},
+  year      = {2025},
+  doi       = {10.1145/3773080},
+  note      = {arXiv:2407.19354}
+}
+
+@inproceedings{perez2022redteaming,
+  title     = {Red Teaming Language Models with Language Models},
+  author    = {Perez, Ethan and Huang, Saffron and Song, Francis and Cai, Trevor and Ring, Roman and Aslanides, John and Glaese, Amelia and McAleese, Nat and Irving, Geoffrey},
+  booktitle = {Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {3419--3448},
+  year      = {2022},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2022.emnlp-main.225},
+  note      = {arXiv:2202.03286}
+}
+
+@article{inan2023llamaguard,
+  title   = {Llama Guard: {LLM}-based Input-Output Safeguard for Human-{AI} Conversations},
+  author  = {Inan, Hakan and Upasani, Kartikeya and Chi, Jianfeng and Rungta, Rashi and Iyer, Krithika and Mao, Yuning and Tontchev, Michael and Hu, Qing and Fuller, Brian and Testuggine, Davide and Khabsa, Madian},
+  journal = {arXiv preprint arXiv:2312.06674},
+  year    = {2023}
+}
+
+@inproceedings{rebedea2023nemo,
+  title     = {{NeMo} Guardrails: A Toolkit for Controllable and Safe {LLM} Applications with Programmable Rails},
+  author    = {Rebedea, Traian and Dinu, Razvan and Sreedhar, Makesh and Parisien, Christopher and Cohen, Jonathan},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing: System Demonstrations (EMNLP)},
+  year      = {2023},
+  note      = {arXiv:2310.10501}
+}
+
+
+%% ==================== [6] EXPERIMENTAL BASELINES, DATASETS, MODELS, EVALUATION ====================
+
+@inproceedings{liu2024agentbench,
+  title     = {{AgentBench}: Evaluating {LLMs} as Agents},
+  author    = {Liu, Xiao and Yu, Hao and Zhang, Hanchen and Xu, Yifan and Lei, Xuanyu and Lai, Hanyu and others},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2308.03688}
+}
+
+@inproceedings{jimenez2024swebench,
+  title     = {{SWE}-bench: Can Language Models Resolve Real-World {GitHub} Issues?},
+  author    = {Jimenez, Carlos E. and Yang, John and Wettig, Alexander and Yao, Shunyu and Pei, Kexin and Press, Ofir and Narasimhan, Karthik},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2310.06770}
+}
+
+@inproceedings{mialon2024gaia,
+  title     = {{GAIA}: A Benchmark for General {AI} Assistants},
+  author    = {Mialon, Gr{\'e}goire and Fourrier, Cl{\'e}mentine and Swift, Craig and Wolf, Thomas and LeCun, Yann and Scialom, Thomas},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2311.12983}
+}
+
+@inproceedings{zhou2024webarena,
+  title     = {{WebArena}: A Realistic Web Environment for Building Autonomous Agents},
+  author    = {Zhou, Shuyan and Xu, Frank F. and Zhu, Hao and Zhou, Xuhui and Lo, Robert and Sridhar, Abishek and Cheng, Xianyi and Ou, Tianyue and Bisk, Yonatan and Fried, Daniel and Alon, Uri and Neubig, Graham},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2307.13854}
+}
+
+@inproceedings{zheng2023judging,
+  title     = {Judging {LLM}-as-a-Judge with {MT}-Bench and Chatbot Arena},
+  author    = {Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric P. and Zhang, Hao and Gonzalez, Joseph E. and Stoica, Ion},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track},
+  year      = {2023},
+  note      = {arXiv:2306.05685}
+}
+
+@article{wang2023fair,
+  title   = {Large Language Models Are Not Fair Evaluators},
+  author  = {Wang, Peiyi and Li, Lei and Chen, Liang and Cai, Zefan and Zhu, Dawei and Lin, Binghuai and Cao, Yunbo and Liu, Qi and Liu, Tianyu and Sui, Zhifang},
+  journal = {arXiv preprint arXiv:2305.17926},
+  year    = {2023}
+}
+
+@inproceedings{hendrycks2021measuring,
+  title     = {Measuring Massive Multitask Language Understanding},
+  author    = {Hendrycks, Dan and Burns, Collin and Basart, Steven and Zou, Andy and Mazeika, Mantas and Song, Dawn and Steinhardt, Jacob},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2021},
+  note      = {arXiv:2009.03300}
+}
+
+@article{cobbe2021gsm8k,
+  title   = {Training Verifiers to Solve Math Word Problems},
+  author  = {Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and Hesse, Christopher and Schulman, John},
+  journal = {arXiv preprint arXiv:2110.14168},
+  year    = {2021}
+}
+
+@article{dubey2024llama3,
+  title   = {The {Llama} 3 Herd of Models},
+  author  = {Grattafiori, Aaron and Dubey, Abhimanyu and Jauhri, Abhinav and others},
+  journal = {arXiv preprint arXiv:2407.21783},
+  year    = {2024}
+}
+
+@article{qwen2025qwen25,
+  title   = {{Qwen2.5} Technical Report},
+  author  = {{Qwen Team}},
+  journal = {arXiv preprint arXiv:2412.15115},
+  year    = {2024}
+}
+
+@article{jiang2023mistral7b,
+  title   = {{Mistral 7B}},
+  author  = {Jiang, Albert Q. and Sablayrolles, Alexandre and Mensch, Arthur and Bamford, Chris and Chaplot, Devendra Singh and de las Casas, Diego and Bressand, Florian and Lengyel, Gianna and Lample, Guillaume and Saulnier, Lucile and Lavaud, L{\'e}lio Renard and Lachaux, Marie-Anne and Stock, Pierre and Le Scao, Teven and Lavril, Thibaut and Wang, Thomas and Lacroix, Timoth{\'e}e and El Sayed, William},
+  journal = {arXiv preprint arXiv:2310.06825},
+  year    = {2023}
+}
+
+@article{openai2024gpt4o,
+  title   = {{GPT-4o} System Card},
+  author  = {{OpenAI}},
+  journal = {arXiv preprint arXiv:2410.21276},
+  year    = {2024}
+}

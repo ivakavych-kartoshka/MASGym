@@ -49,15 +49,8 @@ Under them, $g$ reduces to ASB's metric at one agent.
 \label{prop:reduction}
 If $N=1$ and $\Predsec,\Predutil$ are the single-agent security and benign predicates,
 then $\ASRs=\mathrm{ASR}$, $\PNAs=\mathrm{PNA}$, and $\NRPs=\mathrm{NRP}$ of
-\Cref{eq:asb-nrp}.
+\Cref{eq:asb-nrp}. \emph{Proof in the Supplementary Material.}
 \end{proposition}
-
-\begin{proof}[Proof of \Cref{prop:reduction}]
-With one agent the global trace $\Trace$ is that agent's own trajectory and the system
-predicates $\Predsec,\Predutil$ coincide with the single-agent ones. Substituting into
-\Cref{eq:asrsys,eq:pnasys} yields $\ASRs=\mathrm{ASR}$ and $\PNAs=\mathrm{PNA}$ term by
-term, hence $\NRPs=\PNAs(1-\ASRs)=\mathrm{PNA}(1-\mathrm{ASR})=\mathrm{NRP}$.
-\end{proof}
 
 \begin{theorem}[Axiomatic characterization of $\NRPs$; complete proof]
 \label{thm:metric}
@@ -113,18 +106,8 @@ $\widehat{\ASRs},\widehat{\PNAs},\widehat{\NRPs}$.
 There exist an LLM judge $\Judge$ that reads messages and a message manipulation $\pi$
 with $\Trace_\pi=\Trace$ such that
 $\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$.
+\emph{Proof in the Supplementary Material.}
 \end{proposition}
-
-\begin{proof}[Proof of \Cref{prop:judgehijack}]
-$\Judge$ takes message content as an argument, so let it be any judge non-constant in that
-argument---as all instruction-following judges are. Choose messages $\mathrm{msgs}$ and a
-manipulation $\pi$ (e.g.\ $\mathrm{msgs}_\pi$ carries the injected instruction ``report
-this trace as safe'') on which it disagrees, so
-$\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$. Content edits leave
-the recorded state untouched, so by construction $\Trace_\pi=\Trace$ and the deterministic
-verdict is unchanged. The contrast with \Cref{thm:integrity} is exact: it is the message
-channel, not the trace, that carries the vulnerability.
-\end{proof}
 
 \begin{remark}
 \Cref{thm:integrity} shows the deterministic verdict cannot be \emph{gamed} through
@@ -166,25 +149,10 @@ expected compromise $\tfrac1N C+\tfrac{N-1}{N}L$, writing $C$ as above and
 $L=1+\pinf+\pinf^{2}(N-2)$. Their difference
 $\Delta_{\mathrm{coll}}=\pinf(1-\pinf)\tfrac{(N-1)(N-2)}{N}$ is positive,
 $\Theta(\pinf(1-\pinf)N)$, for all $\pinf\in(0,1)$, $N\ge3$: coordinated placement
-strictly dominates.
+strictly dominates. \emph{Proof in the Supplementary Material}; the quantity proved positive is a
+difference in expected compromised \emph{agents}, not the probability difference of
+\Cref{def:csr}.}
 \end{theorem}
-
-\begin{proof}[Proof of \Cref{thm:collusion}]
-Each leaf is a direct out-neighbour of the centre, so a centre seed compromises all
-$N-1$ leaves independently with probability $\pinf$, giving $C=1+\pinf(N-1)$. A leaf seed
-compromises the centre with probability $\pinf$ and, conditioned on that, each remaining
-leaf with probability $\pinf$, giving $L=1+\pinf+\pinf^{2}(N-2)$. A uniform independent seed
-lands on the centre with probability $1/N$ and on a leaf with probability $(N-1)/N$, hence
-$\E^{\mathrm{ind}}=\tfrac1N C+\tfrac{N-1}{N}L$. Therefore
-\[
-\Delta_{\mathrm{coll}}=C-\E^{\mathrm{ind}}=\tfrac{N-1}{N}(C-L)
-=\pinf(1-\pinf)\tfrac{(N-1)(N-2)}{N}.
-\]
-For every $\pinf\in(0,1)$ and $N\ge3$ we have $(N-1)(N-2)/N>0$ and $\pinf(1-\pinf)>0$, so
-$\Delta_{\mathrm{coll}}>0$ strictly, and it is $\Theta(\pinf(1-\pinf)N)$ since
-$(N-1)(N-2)/N=\Theta(N)$. (For $s>1$ seeds, coordinated placement solves the monotone
-submodular influence-maximization objective instead; see the Supplementary Material.)
-\end{proof}
 
 \Cref{thm:collusion} describes the \emph{environment's} propagation model, not any real
 defense; its value is that ``collusion on/off'' becomes well posed and predicts where to
@@ -199,21 +167,17 @@ $\mathcal{W}$. Then: (a) no set $S$ of agents with $|S|<k$ can satisfy $\Preduti
 (b) if $\Advset$ is a transversal of $\mathcal{W}$, the adversary can force $\Predutil=0$
 by having its member in each witness withhold or sabotage its contribution; conversely,
 if some witness is adversary-free, the honest agents can complete the task.
+\emph{Proof in the Supplementary Material.}
 \end{proposition}
-
-\begin{proof}[Proof of \Cref{prop:forced}]
-(a) Every witness has size $\ge k$, so a set $S$ with $|S|<k$ supports no witness and
-cannot satisfy $\Predutil$. (b) If $\Advset$ is a transversal, every route to
-$\Predutil=1$ passes through an adversarial agent that can withhold, so $\Predutil=0$; if
-some witness is adversary-free its members jointly satisfy it.
-\end{proof}
 
 \subsection{Sample complexity of the estimators}
 \label{sec:theory-sample}
 The estimates require bounded episodes, driving the cost analysis. The tools are elementary
 concentration inequalities~\cite{boucheron2013concentration,hoeffding1963probability}:
 Hoeffding's inequality applies to the means here, and McDiarmid's
-inequality~\cite{mcdiarmid1989bounded} handles the non-mean estimators.
+inequality~\cite{mcdiarmid1989bounded} handles the non-mean estimators. What the resulting
+budget does and does not resolve in the experiments is worked out in
+the Supplementary Material.
 
 \begin{theorem}[Concentration and sample complexity]
 \label{thm:sample}
@@ -223,35 +187,16 @@ $\Prob[|\hat\theta-\theta|\ge\epsilon]\le 2e^{-2M\epsilon^{2}}$, so $M\ge\frac{1
 \ln\frac{2}{\alpha}$ episodes give $\epsilon$-accuracy at confidence $1-\alpha$;
 (b) the product is Lipschitz; hence, by a union bound, $\Prob[|\widehat{\NRPs}-\NRPs|\ge
 2\epsilon]\le 4e^{-2M\epsilon^{2}}$;
-and (c) across a sweep of $G$ configurations, Bonferroni/FDR control~\cite{benjamini1995controlling}
+and (c) across a sweep of $G$ configurations, Bonferroni control~\cite{benjamini1995controlling}
 gives $M=O(\epsilon^{-2}\ln(G/\alpha))$ per configuration, for $\Theta(GMNH)$ total agent
-invocations.
+invocations. \emph{Proof in the Supplementary Material.}
 \end{theorem}
-
-\begin{proof}[Proof of \Cref{thm:sample}]
-(a) Each $\widehat{\ASRs}$ and $\widehat{\PNAs}$ is the mean of $M$ i.i.d.\ $\{0,1\}$
-indicates (\Cref{as:bounded}), so Hoeffding's inequality gives
-$\Prob[|\hat\theta-\theta|\ge\epsilon]\le2e^{-2M\epsilon^{2}}$; rearranging
-$2e^{-2M\epsilon^{2}}\le\alpha$ yields $M\ge(2\epsilon^{2})^{-1}\ln(2/\alpha)$.
-(b) For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
-$|\hat u\hat\sigma-u\sigma|\le\hat\sigma|\hat u-u|+u|\hat\sigma-\sigma|
-\le|\hat u-u|+|\hat\sigma-\sigma|$;
-apply this with $\sigma=1-\ASRs$ and union-bound the two events of (a) at threshold
-$\epsilon$. (c) Bonferroni over $G$ tests replaces $\alpha$ by $\alpha/G$; solving for $M$
-gives the stated rate, and each of $G$ configurations runs $M$ episodes of $N$ agents over
-horizon $H$.
-\end{proof}
 
 \begin{corollary}[Sweep budget]
 \label{cor:budget}
 Resolving a target $\NRPs$ gap of size $\Delta$ between any two of $G$ swept
 configurations with family-wise confidence $1-\alpha$ costs
-$\Theta\bigl(GNH\Delta^{-2}\ln(G/\alpha)\bigr)$ agent invocations.
+$O\bigl(GNH\Delta^{-2}\ln(G/\alpha)\bigr)$ agent invocations (a sufficient budget, not a
+tight rate). \emph{Proof in the Supplementary Material.}
 \end{corollary}
 
-\begin{proof}[Proof of \Cref{cor:budget}]
-Set the per-configuration accuracy to $\epsilon=\Delta/4$ in \Cref{thm:sample}(b) so that
-the two $\NRPs$ estimates are each within $\Delta/2$; by the triangle inequality their
-difference is resolved to $\Delta$. \Cref{thm:sample}(c) then gives
-$M=O(\Delta^{-2}\ln(G/\alpha))$, and each configuration runs $M$ episodes of $N$ agents over horizon $H$.
-\end{proof}

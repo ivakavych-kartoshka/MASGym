@@ -29,12 +29,11 @@ methodology, and group-level emergence metrics.\par
 \endgroup
 
 \paragraph{Contributions.}
-To the best of our knowledge \defname{} is the first environment purpose-built for the
-security of multi-agent LLM systems. It is not a new attack or defense; it is an
-environment and evaluation methodology whose scientific object is the controlled variation
-of coordination, collusion, and orchestrator variables and the system-level metrics that
-quantify their effect (architecture in the Supplementary Material; three-layer design in
-\Cref{sec:method}). Concretely,
+To the best of our knowledge \defname{} is among the first environments purpose-built for the
+security of multi-agent LLM systems; it is not a new attack or defense, but an environment and
+evaluation methodology whose object is the controlled variation of coordination, collusion,
+and orchestrator variables and the system-level metrics that quantify their effect
+(architecture in \Cref{fig:architecture}). Concretely,
 \begin{itemize}[leftmargin=1.4em]
 \item \textbf{An environment and task suite} (\Cref{sec:system,sec:method}): heterogeneous
 roles, partial observability, \emph{forced-coordination} tasks (no agent can complete one
@@ -47,28 +46,27 @@ generalization $\NRPs=\PNAs(1-\ASRs)$, scored by a \emph{deterministic checker} 
 global trace so an injection cannot hijack the evaluator (\Cref{thm:integrity}), plus
 collusion-success and compromise-propagation rates, coordination quality, cost, and
 recovery.
-\item \textbf{The \corb{} co-evolving red/blue protocol} (\Cref{sec:algorithm}), logging
+\item \textbf{The \corb{} protocol} (\Cref{sec:algorithm}), logging
 $(\text{attack},\text{defense},\NRPs)$ trajectories and a (security, cost) Pareto frontier.
 \item \textbf{An answer to ``does the defense work?''} (\Cref{sec:defense}): on four real
-backbones in three model families a prompt-level defense drives action-channel compliance
-to $0/1075$ decisions---$\ASRa{=}0$---yet $\ASRs$ stays $1.000$ on tree and star, because
-the residual failure is deterministic availability sabotage that topology alone determines,
-and one backbone ignores the defense entirely (\Cref{tab:defense}). A defense scored on the
-action channel cannot certify system-level security. The controlled synthetic sweep
-separately measures the guardrail's shrinking margin, $41.6\%\to31.8\%\to27.6\%$
-(degradation grid, Supplementary Material).
+backbones a prompt-level defense drives action-channel compliance to $0/1075$
+decisions---$\ASRa{=}0$---yet $\ASRs$ stays $1.000$ on tree and star, because the residual
+failure is deterministic availability sabotage that topology alone determines, and one
+backbone ignores the defense entirely (\Cref{tab:defense}). A defense scored on the action
+channel cannot certify system-level security.
 \end{itemize}
 
 Because reviewers rightly discount benchmarks whose central metric is asserted rather than
 justified, we treat theory as part of the instrument (\Cref{sec:theory}): under explicit
-assumptions and honest proof-status labels, \emph{every result we claim is proved in the
-paper}. We prove the product aggregator is the unique combiner satisfying our axioms and
-reduces to ASB at $N{=}1$; that the deterministic checker cannot be hijacked through
-message content, unlike a message-reading LLM judge, which we measure pushed off the
-recorded state in roughly a third of injected traces; and finite-sample concentration
-bounds. None asserts that any real defense is secure or provably degrades.
+assumptions, \emph{every result we claim is proved}. We prove the product aggregator is the
+unique combiner satisfying our axioms and reduces to ASB at $N{=}1$; that the deterministic
+checker cannot be hijacked through message content, unlike a message-reading LLM judge, which
+we measure pushed off the recorded state in roughly a third of injected traces; and
+finite-sample concentration bounds. None asserts that any real defense is secure.
 
 \paragraph{Scope and stance.}
 \defname{} is an instrument, not a verdict: a lower $\ASRs$ is a measurement under a stated
 configuration, not a certificate. Scoring uses a deterministic critical path
-(\Cref{thm:integrity}); emulation fidelity is the main validity gap (\Cref{sec:limitations}). The TCB is the harness and checker; model-weight attacks are out of scope.
+(\Cref{thm:integrity}); emulation fidelity is the main validity gap and the other
+design limits of this instantiation are in \Cref{sec:discussion}. The TCB is the harness and
+checker; model-weight attacks are out of scope.

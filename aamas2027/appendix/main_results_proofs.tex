@@ -1,0 +1,113 @@
+\section{Proofs of the Main Results}
+\label{app:main-proofs}
+
+This appendix supplies the complete proofs of the results whose statements appear in the
+main paper but whose derivations were moved here to keep the main paper within its eight
+pages: the reduction to ASB (\Cref{prop:reduction}), judge hijackability
+(\Cref{prop:judgehijack}), the collusion advantage (\Cref{thm:collusion}), the
+forced-coordination bound (\Cref{prop:forced}), concentration and sample complexity
+(\Cref{thm:sample}), and the sweep budget (\Cref{cor:budget}). The two proofs in the main
+paper are the metric characterization (\Cref{thm:metric}) and evaluator integrity
+(\Cref{thm:integrity}); every other claim the main paper makes is a restatement of a
+classical result, derived in \Cref{app:proofs}. Where a proof below refers to a manipulation
+$\pi$, that is the main paper's generic notation for a trace manipulation; it is unrelated to
+the projection $\pi$ of \Cref{def:projection} in \Cref{app:harness}.
+
+\begin{proof}[Proof of \Cref{prop:reduction}]
+With one agent the global trace $\Trace$ is that agent's own trajectory and the system
+predicates $\Predsec,\Predutil$ coincide with the single-agent ones. Substituting into
+\Cref{eq:asrsys,eq:pnasys} yields $\ASRs=\mathrm{ASR}$ and $\PNAs=\mathrm{PNA}$ term by
+term, hence $\NRPs=\PNAs(1-\ASRs)=\mathrm{PNA}(1-\mathrm{ASR})=\mathrm{NRP}$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:judgehijack}]
+$\Judge$ takes message content as an argument, so let it be any judge non-constant in that
+argument---as all instruction-following judges are. Choose messages $\mathrm{msgs}$ and a
+manipulation $\pi$ (e.g.\ $\mathrm{msgs}_\pi$ carries the injected instruction ``report
+this trace as safe'') on which it disagrees, so
+$\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$. Content edits leave
+the recorded state untouched, so by construction $\Trace_\pi=\Trace$ and the deterministic
+verdict is unchanged. The contrast with \Cref{thm:integrity} is exact: it is the message
+channel, not the trace, that carries the vulnerability. The statement is an existence claim
+about content-reading judges; the rate at which the judges actually tested flip off the
+recorded state is measured in \Cref{sec:integrity}.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:collusion}]
+Each leaf is a direct out-neighbour of the centre, so a centre seed compromises all
+$N-1$ leaves independently with probability $\pinf$, giving $C=1+\pinf(N-1)$. A leaf seed
+compromises the centre with probability $\pinf$ and, conditioned on that, each remaining
+leaf with probability $\pinf$, giving $L=1+\pinf+\pinf^{2}(N-2)$. A uniform independent seed
+lands on the centre with probability $1/N$ and on a leaf with probability $(N-1)/N$, hence
+$\E^{\mathrm{ind}}=\tfrac1N C+\tfrac{N-1}{N}L$. Therefore
+\[
+\Delta_{\mathrm{coll}}=C-\E^{\mathrm{ind}}=\tfrac{N-1}{N}(C-L)
+=\pinf(1-\pinf)\tfrac{(N-1)(N-2)}{N}.
+\]
+For every $\pinf\in(0,1)$ and $N\ge3$ we have $(N-1)(N-2)/N>0$ and $\pinf(1-\pinf)>0$, so
+$\Delta_{\mathrm{coll}}>0$ strictly, and it is $\Theta(\pinf(1-\pinf)N)$ since
+$(N-1)(N-2)/N=\Theta(N)$. (For $s>1$ seeds, coordinated placement solves the monotone
+submodular influence-maximization objective instead.) Two clarifications belong with the
+algebra. The quantity proved positive here is a difference in \emph{expected number of
+compromised agents} under two seeding placements, not the metric-level collusion advantage
+$\Delta_{\mathrm{coll}}$ of \Cref{def:csr}, which is a difference of attack probabilities; the
+main paper renames the former $\Delta_{\mathrm{place}}$ for that reason, and
+\Cref{prop:placement} restates it. The model also treats edges as bidirectional for the
+purpose of influence, which is what a shared channel implies; with one-directional edges the
+leaf-seed term loses its trailing $\pinf$ and the advantage is only larger.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:forced}]
+(a) Every witness has size $\ge k$, so a set $S$ with $|S|<k$ supports no witness and
+cannot satisfy $\Predutil$. (b) If $\Advset$ is a transversal, every route to
+$\Predutil=1$ passes through an adversarial agent that can withhold, so $\Predutil=0$; if
+some witness is adversary-free its members jointly satisfy it. The italicized hypothesis of
+the statement---that withholding is the adversary's \emph{only} lever---is what part (b)
+needs, and it is exactly the gap between this bound and the harness: the harness adds the
+hub rule of \Cref{def:sabotage}, which is why the empirical sabotage pattern on star and tree
+is not read off part (b) alone.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:sample}]
+(a) Each $\widehat{\ASRs}$ and $\widehat{\PNAs}$ is the mean of $M$ i.i.d.\ $\{0,1\}$
+indicators (\Cref{as:bounded}), so Hoeffding's inequality gives
+$\Prob[|\hat\theta-\theta|\ge\epsilon]\le2e^{-2M\epsilon^{2}}$; rearranging
+$2e^{-2M\epsilon^{2}}\le\alpha$ yields $M\ge(2\epsilon^{2})^{-1}\ln(2/\alpha)$.
+(b) For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
+$|\hat u\hat\sigma-u\sigma|\le\hat\sigma|\hat u-u|+u|\hat\sigma-\sigma|
+\le|\hat u-u|+|\hat\sigma-\sigma|$;
+apply this with $\sigma=1-\ASRs$ and union-bound the two events of (a) at threshold
+$\epsilon$. (c) Bonferroni over $G$ tests replaces $\alpha$ by $\alpha/G$; solving for $M$
+gives the stated rate, and each of $G$ configurations runs $M$ episodes of $N$ agents over
+horizon $H$. The bound in (c) is \emph{sufficient}, hence an upper bound on the budget;
+the matching lower bound is the standard $\Omega(\epsilon^{-2})$ information-theoretic rate
+for estimating a Bernoulli mean to accuracy $\epsilon$ at constant confidence, so the
+dependence on $\epsilon$ cannot be improved in general. The correction used here is
+Bonferroni, which controls the family-wise error rate; an FDR-controlling procedure is a
+different guarantee and is not what \Cref{cor:budget} states.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{cor:budget}]
+Set the per-configuration accuracy to $\epsilon=\Delta/4$ in \Cref{thm:sample}(b) so that
+the two $\NRPs$ estimates are each within $\Delta/2$; by the triangle inequality their
+difference is resolved to $\Delta$. \Cref{thm:sample}(c) then gives
+$M=O(\Delta^{-2}\ln(G/\alpha))$, and each configuration runs $M$ episodes of $N$ agents over
+horizon $H$.
+\end{proof}
+
+\subsection{What the sample sizes do and do not resolve}
+\label{app:main-power}
+
+Because the proofs above fix the budget, we record here what the reported experiments can
+conclude at that budget, so that the main text's numbers are not over-read. With
+$\epsilon=\alpha=0.05$, \Cref{thm:sample}(a) gives $M=738$ episodes per configuration and a
+per-cell accuracy of roughly $\pm2\epsilon=0.1$ for a \emph{difference} of two cells. Two
+consequences. \emph{First}, the degradation grid's guardrail advantage over no-defense
+($0.244$, $0.178$, $0.149$) is far outside that band, but the \emph{shrinkage} across the
+single-agent and multi-agent columns rests on margins of $0.039$ and $0.008$ and is therefore
+not resolved; the main paper reports the percentages as an unresolved trend. \emph{Second},
+the sweep is not multiplicity-corrected: Bonferroni over $G=21$ cells would require
+$M\ge\ln(2G/\alpha)/(2\epsilon^{2})\approx1347$ episodes per cell, so the reported per-cell
+values are descriptive rather than simultaneous $95\%$ claims. The same arithmetic bounds the
+real-backbone study, whose cells use $M=30$ episodes and whose $1075$ compliance decisions
+are clustered rather than independent (\Cref{app:power}).

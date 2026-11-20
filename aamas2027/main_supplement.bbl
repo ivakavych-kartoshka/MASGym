@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{5}
+\begin{thebibliography}{18}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -40,6 +40,46 @@
 \@ifundefined{NAT@parse@date}{}{\def\NAT@parse@date#1#2#3#4#5#6@@{\NAT@parse@date@orig#1#2#3#4#5#6@@\def\NAT@tempyear{0000}\def\NAT@tempexlab{{?}}\ifx\NAT@year\NAT@tempyear\ifx\NAT@exlab\NAT@tempexlab\def\NAT@date{[n.\,d.]}\else\edef\NAT@date{[n.\,d.]\NAT@exlab}\fi\fi}}
 \makeatother
 
+\bibitem[Blanchard et~al\mbox{.}(2017)]%
+        {blanchard2017krum}
+\bibfield{author}{\bibinfo{person}{Peva Blanchard}, \bibinfo{person}{El~Mahdi
+  El~Mhamdi}, \bibinfo{person}{Rachid Guerraoui}, {and} \bibinfo{person}{Julien
+  Stainer}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Machine Learning with Adversaries: {B}yzantine
+  Tolerant Gradient Descent}. In \bibinfo{booktitle}{\emph{Advances in Neural
+  Information Processing Systems 30 (NIPS)}}.
+\newblock
+
+
+\bibitem[Brockman et~al\mbox{.}(2016)]%
+        {brockman2016openaigym}
+\bibfield{author}{\bibinfo{person}{Greg Brockman}, \bibinfo{person}{Vicki
+  Cheung}, \bibinfo{person}{Ludwig Pettersson}, \bibinfo{person}{Jonas
+  Schneider}, \bibinfo{person}{John Schulman}, \bibinfo{person}{Jie Tang},
+  {and} \bibinfo{person}{Wojciech Zaremba}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{OpenAI Gym}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1606.01540}}
+  (\bibinfo{year}{2016}).
+\newblock
+
+
+\bibitem[Cemri et~al\mbox{.}(2025)]%
+        {cemri2025mast}
+\bibfield{author}{\bibinfo{person}{Mert Cemri}, \bibinfo{person}{Melissa~Z.
+  Pan}, \bibinfo{person}{Shuyi Yang}, \bibinfo{person}{Lakshya~A. Agrawal},
+  \bibinfo{person}{Bhavya Chopra}, \bibinfo{person}{Rishabh Tiwari},
+  \bibinfo{person}{Kurt Keutzer}, \bibinfo{person}{Aditya Parameswaran},
+  \bibinfo{person}{Dan Klein}, \bibinfo{person}{Kannan Ramchandran},
+  \bibinfo{person}{Matei Zaharia}, \bibinfo{person}{Joseph~E. Gonzalez}, {and}
+  \bibinfo{person}{Ion Stoica}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{Why Do Multi-Agent {LLM} Systems Fail?}
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2503.13657}}
+  (\bibinfo{year}{2025}).
+\newblock
+\newblock
+\shownote{MAST failure taxonomy for multi-agent LLM systems}.
+
+
 \bibitem[Chalupa et~al\mbox{.}(1979)]%
         {chalupa1979bootstrap}
 \bibfield{author}{\bibinfo{person}{J. Chalupa}, \bibinfo{person}{P.~L. Leath},
@@ -50,6 +90,34 @@
   \bibinfo{pages}{L31--L35}.
 \newblock
 \href{https://doi.org/10.1088/0022-3719/12/1/008}{doi:\nolinkurl{10.1088/0022-3719/12/1/008}}
+
+
+\bibitem[Debenedetti et~al\mbox{.}(2024)]%
+        {debenedetti2024agentdojo}
+\bibfield{author}{\bibinfo{person}{Edoardo Debenedetti}, \bibinfo{person}{Jie
+  Zhang}, \bibinfo{person}{Mislav Balunovi{\'c}}, \bibinfo{person}{Luca
+  Beurer-Kellner}, \bibinfo{person}{Marc Fischer}, {and}
+  \bibinfo{person}{Florian Tram{\`e}r}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{AgentDojo}: A Dynamic Environment to Evaluate
+  Prompt Injection Attacks and Defenses for {LLM} Agents}. In
+  \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems
+  37 (NeurIPS 2024), Datasets and Benchmarks Track}}.
+\newblock
+\href{https://doi.org/10.52202/079017-2636}{doi:\nolinkurl{10.52202/079017-2636}}
+\newblock
+\shownote{deterministic state-based security() checks; arXiv:2406.13352}.
+
+
+\bibitem[Du et~al\mbox{.}(2023)]%
+        {du2023debate}
+\bibfield{author}{\bibinfo{person}{Yilun Du}, \bibinfo{person}{Shuang Li},
+  \bibinfo{person}{Antonio Torralba}, \bibinfo{person}{Joshua~B. Tenenbaum},
+  {and} \bibinfo{person}{Igor Mordatch}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Improving Factuality and Reasoning in Language
+  Models through Multiagent Debate}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2305.14325}}
+  (\bibinfo{year}{2023}).
+\newblock
 
 
 \bibitem[Granovetter(1978)]%
@@ -76,6 +144,67 @@
 \href{https://doi.org/10.1145/956750.956769}{doi:\nolinkurl{10.1145/956750.956769}}
 
 
+\bibitem[Lamport et~al\mbox{.}(1982)]%
+        {lamport1982byzantine}
+\bibfield{author}{\bibinfo{person}{Leslie Lamport}, \bibinfo{person}{Robert
+  Shostak}, {and} \bibinfo{person}{Marshall Pease}.}
+  \bibinfo{year}{1982}\natexlab{}.
+\newblock \showarticletitle{The Byzantine Generals Problem}.
+\newblock \bibinfo{journal}{\emph{ACM Transactions on Programming Languages and
+  Systems}} \bibinfo{volume}{4}, \bibinfo{number}{3} (\bibinfo{year}{1982}),
+  \bibinfo{pages}{382--401}.
+\newblock
+\href{https://doi.org/10.1145/357172.357176}{doi:\nolinkurl{10.1145/357172.357176}}
+
+
+\bibitem[Leibo et~al\mbox{.}(2021)]%
+        {leibo2021meltingpot}
+\bibfield{author}{\bibinfo{person}{Joel~Z. Leibo}, \bibinfo{person}{Edgar
+  Du{\'e}{\~n}ez-Guzm{\'a}n}, \bibinfo{person}{Alexander~Sasha Vezhnevets},
+  \bibinfo{person}{John~P. Agapiou}, \bibinfo{person}{Peter Sunehag},
+  \bibinfo{person}{Raphael Koster}, \bibinfo{person}{Jayd Matyas},
+  \bibinfo{person}{Charles Beattie}, \bibinfo{person}{Igor Mordatch}, {and}
+  \bibinfo{person}{Thore Graepel}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Scalable Evaluation of Multi-Agent Reinforcement
+  Learning with {M}elting {P}ot}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the 38th International Conference on Machine Learning (ICML)}}
+  \emph{(\bibinfo{series}{PMLR}, Vol.~\bibinfo{volume}{139})}.
+  \bibinfo{pages}{6187--6199}.
+\newblock
+\newblock
+\shownote{arXiv:2107.06857}.
+
+
+\bibitem[Pease et~al\mbox{.}(1980)]%
+        {pease1980reaching}
+\bibfield{author}{\bibinfo{person}{Marshall Pease}, \bibinfo{person}{Robert
+  Shostak}, {and} \bibinfo{person}{Leslie Lamport}.}
+  \bibinfo{year}{1980}\natexlab{}.
+\newblock \showarticletitle{Reaching Agreement in the Presence of Faults}.
+\newblock \bibinfo{journal}{\emph{J. ACM}} \bibinfo{volume}{27},
+  \bibinfo{number}{2} (\bibinfo{year}{1980}), \bibinfo{pages}{228--234}.
+\newblock
+\href{https://doi.org/10.1145/322186.322188}{doi:\nolinkurl{10.1145/322186.322188}}
+
+
+\bibitem[Perez et~al\mbox{.}(2022)]%
+        {perez2022redteaming}
+\bibfield{author}{\bibinfo{person}{Ethan Perez}, \bibinfo{person}{Saffron
+  Huang}, \bibinfo{person}{Francis Song}, \bibinfo{person}{Trevor Cai},
+  \bibinfo{person}{Roman Ring}, \bibinfo{person}{John Aslanides},
+  \bibinfo{person}{Amelia Glaese}, \bibinfo{person}{Nat McAleese}, {and}
+  \bibinfo{person}{Geoffrey Irving}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Red Teaming Language Models with Language Models}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the 2022 Conference on Empirical
+  Methods in Natural Language Processing (EMNLP)}}.
+  \bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{pages}{3419--3448}.
+\newblock
+\href{https://doi.org/10.18653/v1/2022.emnlp-main.225}{doi:\nolinkurl{10.18653/v1/2022.emnlp-main.225}}
+\newblock
+\shownote{arXiv:2202.03286}.
+
+
 \bibitem[Ruan et~al\mbox{.}(2024)]%
         {ruan2024toolemu}
 \bibfield{author}{\bibinfo{person}{Yangjun Ruan}, \bibinfo{person}{Honghua
@@ -91,6 +220,37 @@
 \shownote{ToolEmu; arXiv:2309.15817}.
 
 
+\bibitem[Terry et~al\mbox{.}(2021)]%
+        {terry2021pettingzoo}
+\bibfield{author}{\bibinfo{person}{J.~K. Terry}, \bibinfo{person}{Benjamin
+  Black}, \bibinfo{person}{Nathaniel Grammel}, \bibinfo{person}{Mario
+  Jayakumar}, \bibinfo{person}{Ananth Hari}, \bibinfo{person}{Ryan Sullivan},
+  \bibinfo{person}{Luis Santos}, \bibinfo{person}{Clemens Dieffendahl},
+  \bibinfo{person}{Caroline Horsch}, \bibinfo{person}{Rodrigo Perez-Vicente},
+  \bibinfo{person}{Niall Williams}, \bibinfo{person}{Yashas Lokesh}, {and}
+  \bibinfo{person}{Praveen Ravi}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{{PettingZoo}: Gym for Multi-Agent Reinforcement
+  Learning}. In \bibinfo{booktitle}{\emph{Advances in Neural Information
+  Processing Systems 34 (NeurIPS)}}.
+\newblock
+\newblock
+\shownote{arXiv:2009.14471}.
+
+
+\bibitem[Wang et~al\mbox{.}(2025)]%
+        {yu2025gsafeguard}
+\bibfield{author}{\bibinfo{person}{Shilong Wang}, \bibinfo{person}{Guibin
+  Zhang}, \bibinfo{person}{Miao Yu}, \bibinfo{person}{Guancheng Wan},
+  \bibinfo{person}{Fanci Meng}, \bibinfo{person}{Chongye Guo},
+  \bibinfo{person}{Kun Wang}, {and} \bibinfo{person}{Yang Wang}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{G-Safeguard}: A Topology-Guided Security Lens and
+  Treatment on {LLM}-based Multi-agent Systems}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2502.11127}}
+  (\bibinfo{year}{2025}).
+\newblock
+
+
 \bibitem[Watts(2002)]%
         {watts2002simple}
 \bibfield{author}{\bibinfo{person}{Duncan~J. Watts}.}
@@ -102,6 +262,34 @@
   \bibinfo{pages}{5766--5771}.
 \newblock
 \href{https://doi.org/10.1073/pnas.082090499}{doi:\nolinkurl{10.1073/pnas.082090499}}
+
+
+\bibitem[Zeng et~al\mbox{.}(2024)]%
+        {zeng2024autodefense}
+\bibfield{author}{\bibinfo{person}{Yifan Zeng}, \bibinfo{person}{Yiran Wu},
+  \bibinfo{person}{Xiao Zhang}, \bibinfo{person}{Huazheng Wang}, {and}
+  \bibinfo{person}{Qingyun Wu}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{AutoDefense}: Multi-Agent {LLM} Defense against
+  Jailbreak Attacks}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2403.04783}}
+  (\bibinfo{year}{2024}).
+\newblock
+
+
+\bibitem[Zhang et~al\mbox{.}(2025)]%
+        {zhang2025asb}
+\bibfield{author}{\bibinfo{person}{Hanrong Zhang}, \bibinfo{person}{Jingyuan
+  Huang}, \bibinfo{person}{Kai Mei}, \bibinfo{person}{Yifei Yao},
+  \bibinfo{person}{Zhenting Wang}, \bibinfo{person}{Chenlu Zhan},
+  \bibinfo{person}{Hongwei Wang}, {and} \bibinfo{person}{Yongfeng Zhang}.}
+  \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{Agent Security Bench ({ASB}): Formalizing and
+  Benchmarking Attacks and Defenses in {LLM}-based Agents}. In
+  \bibinfo{booktitle}{\emph{The Thirteenth International Conference on Learning
+  Representations (ICLR)}}.
+\newblock
+\newblock
+\shownote{ASB; introduces NRP = PNA (1 - ASR); arXiv:2410.02644}.
 
 
 \end{thebibliography}

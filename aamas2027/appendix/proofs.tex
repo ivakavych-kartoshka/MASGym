@@ -111,7 +111,7 @@ $b\pinf=1$. (This is the mean of a Galton--Watson branching process with offspri
 $b\pinf$.)
 \end{proof}
 
-\begin{proof}[Derivation of \Cref{prop:mesh} (mesh, one round)]
+\begin{proof}[Derivation of \Cref{prop:mesh} (mesh)]
 On $K_n$ with seed set $\Advset_0$, $|\Advset_0|=s$, each honest node has all $s$ seeds as
 in-neighbours. It survives the round uncompromised iff every one of the $s$ independent
 edges fails, with probability $(1-\pinf)^{s}$; hence it is compromised with probability
@@ -125,9 +125,9 @@ the percolation threshold a giant compromised component forms, driving $\CPR\to1
 (cf.~\cite{kempe2003maximizing,watts2002simple}).
 \end{proof}
 
-\begin{proof}[Derivation of \Cref{cor:threshold} (threshold confinement)]
-In the threshold model an agent is compromised only once at least $\thresh$ of its
-in-neighbours are compromised. An agent with fewer than $\thresh$ in-neighbours can never
+\begin{proof}[Derivation of \Cref{cor:threshold} (threshold)]
+In the threshold model, an agent is compromised only once at least $\thresh$ of its
+in-neighbours are compromised. An agent with fewer than $\thresh$ such neighbours can never
 meet that condition, so it remains honest for the entire (absorbing) process. On a chain
 every non-seed agent has in-degree $1<\thresh$, so no propagation occurs.
 \end{proof}

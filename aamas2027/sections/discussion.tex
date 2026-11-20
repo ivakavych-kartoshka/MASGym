@@ -6,3 +6,14 @@ predicates (\Cref{rem:metric}). \textbf{Validity:} the main gap is emulation fid
 ($\kappaem\approx0.48$); the emulated-versus-real-tools ablation is unmeasured.
 \textbf{Ethics:} only sandboxed fictitious payloads with bounded adversaries
 (\Cref{sec:threat}).
+
+\paragraph{Limitations.}
+Five limits bound what this paper supports, each recorded in full in the Supplementary
+Material. (i) The defense's efficacy is \emph{not identified}: there is no no-defense arm in
+the same protocol, and the undefended pilot already shows most backbones refusing, so
+$0/1075$ is a floor effect for them. (ii) The system predicate can be \emph{discharged with no
+model in the loop}, so $\ASRs$ saturates on hub topologies and the sweep cannot resolve
+residual differences (Bonferroni at $G{=}21$ needs $M\ge1347$ against the $738$ used). (iii)
+Scale is $N\le10$ on one task family with one attack template and one defense; mesh,
+$N\in\{20,50\}$ and the tool and memory knobs are unrun. (iv) The emulation-fidelity figure is
+inherited, not re-measured. (v) $\NRPs$ is a coordinate, not a certificate.

@@ -24,7 +24,7 @@ shrinkage reported in the main text: each per-agent defense, single-agent (the
 ASB/AgentDojo reducer, \Cref{prop:reduction}) and then under multi-agent collusion and a
 compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$). Table generated in the same
 seed-locked run ($M{=}738$, $\epsilon{=}\alpha{=}0.05$).
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{Headline degradation study (RQ1), \textbf{synthetic effect model} ($M{=}738$,
 $\epsilon{=}\alpha{=}0.05$, seed-locked). $\ASRa^{\dagger}\downarrow$ /
@@ -62,7 +62,7 @@ fixed-threshold flag/defer rule, a weaker synthetic effect model than the lifted
 guardrail, which is why it sits between no-defense and the guardrail rather than above it.
 Guardrail advantage over no-defense is $0.244$, $0.178$, $0.149$ per column; the
 \emph{shrinkage} across columns rests on margins of $0.039$ and $0.008$.}
-\end{table}
+\end{table*}
 \subsection{Precise metric definitions}
 Given the \corb{} logs, each metric is a deterministic functional of the recorded traces:
 \begin{itemize}[leftmargin=1.4em]
@@ -215,7 +215,7 @@ of the scalability study (RQ6). We report the \emph{reachable region} of the par
 explicitly---which $(N,\text{topology},\betafrac,\text{knobs})$ combinations were actually
 run---rather than implying exhaustive coverage.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{Scalability and cost (RQ6), \textbf{synthetic effect model} (star, no defense,
 $\betafrac{=}0.3$, $M{=}738$). Token cost grows linearly in $N$ ($\approx 8.8{\times}N$ tokens
@@ -239,7 +239,7 @@ $N$ & $\ASRs$ & $\CPR$ & Tokens/episode & Latency/episode (a.u.) & Reachable? \\
 \tabnote{$N\in\{20,50\}$ and mesh are deferred to the release phase; the reachable region is
 the $(N,\text{topology},\betafrac,\text{knob})$ combinations actually run, i.e.\ the
 $138$-configuration matrix described at the head of this appendix.}
-\end{table}
+\end{table*}
 
 \subsection{LLM backbone pilot (open models)}
 \label{app:pilot}

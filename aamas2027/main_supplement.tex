@@ -35,24 +35,32 @@
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
+% ---------------------------------------------------------------------------
+% First page in the official AAMAS template style. \maketitle prints the shared
+% \title (preamble.tex) with the anonymous author line and submission id, and
+% \subtitle marks this artefact as the supplement. The class then supplies the
+% header, copyright block and page style, so no manual title block or
+% \thispagestyle is needed.
+% ---------------------------------------------------------------------------
+\subtitle{Supplementary Material}
+
 \begin{document}
 
-\begin{center}
-  {\LARGE\bfseries Supplementary Material\par}
-  \vspace{4pt}
-  {\Large MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent\\LLM Systems with Parameterized Collusion, Orchestrator\\Compromise, and System-Level Metrics\par}
-  \vspace{8pt}
-  {\large Anonymous Author(s)\par}
-  \vspace{4pt}
-  {\large Submission Id: \makeatletter\@acmSubmissionID\makeatother\par}
-\end{center}
-\vspace{1em}
+% Supplement-only line-breaking slack. The appendix sources (proofs.tex,
+% additional_experiments.tex) leave a handful of tiny inline-math / \texttt
+% overfull lines; this absorbs them without touching the shared preamble or
+% main.tex.
+\emergencystretch=1.5em
+
+\maketitle
 
 % ---------------------------------------------------------------------------
 % Appendices
 % ---------------------------------------------------------------------------
 \appendix
 \input{appendix/proofs.tex}
+\input{appendix/main_results_proofs.tex}
+\input{appendix/related_work_supp.tex}
 \input{appendix/supplement.tex}
 \input{appendix/clarifications.tex}
 \input{appendix/additional_experiments.tex}
