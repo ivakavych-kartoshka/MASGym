@@ -1,0 +1,36 @@
+# OS & editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Secrets / credentials (never commit)
+.env
+*.env
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+texput.log
+
+# Local Vietnamese rebuttal notes (kept local only)
+aamas2027/rebuttal_VI.md

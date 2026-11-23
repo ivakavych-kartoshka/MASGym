@@ -268,7 +268,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.backend == "bedrock" and args.model == DEFAULT_MODEL:
         args.model = BEDROCK_DEFAULT_MODEL
 
-    short = RECOMMENDED.get(args.model, args.model.split("/")[-1])
+    short = RECOMMENDED.get(args.model, args.model.split("/")[-1].replace(":", "_"))
     base = args.out or (_ROOT / "outputs" / "llm_pilot_scale")
     out_dir = base / short
     if args.defense != "none":

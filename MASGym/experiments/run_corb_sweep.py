@@ -34,12 +34,12 @@ def run_corb_sweep(out_dir: str | pathlib.Path, rounds: int, n_episodes: int, se
         {"topology": "star", "n_agents": 5, "forced_degree": 2, "p_infect": 0.3,
          "base_unsafe_action_prob": 0.1}
     )
-    blue = EscalatingBluePolicy()
     datasets: dict[str, object] = {}
     for red_name, red in (
         ("static", RandomRedPolicy(SeededRNG(seed))),
         ("adaptive", AdaptiveRedPolicy()),
     ):
+        blue = EscalatingBluePolicy()
         res = run_corb(env, red, blue, rounds=rounds, n_episodes=n_episodes, seed=seed)
         write_csv(out / f"corb_trajectory_{red_name}.csv", res.rows)
         # report the blue (post-defense) row of each selected round

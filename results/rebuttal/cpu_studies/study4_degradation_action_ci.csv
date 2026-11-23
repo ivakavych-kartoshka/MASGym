@@ -1,0 +1,4 @@
+context,asr_act_none,asr_act_guard,abs_reduction,abs_ci_95,rel_reduction_pct,rel_ci_95_pct
+single_agent_ASB,0.5691,0.3306,0.2385,"[0.188, 0.287]",41.9,"[34.6%, 48.6%]"
+ma_colluding,0.5528,0.3713,0.1816,"[0.130, 0.230]",32.8,"[24.6%, 40.1%]"
+ma_comp_orch,0.5515,0.3496,0.2019,"[0.152, 0.252]",36.6,"[28.8%, 43.9%]"
