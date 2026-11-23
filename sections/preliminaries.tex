@@ -1,0 +1,94 @@
+\section{Preliminaries and Notation}
+\label{sec:prelim}
+
+This section fixes notation (\Cref{tab:notation}) and recalls the three primitives
+\defname{} builds on: ASB's utility--security metric, AgentDojo's deterministic
+state-based checking, and ToolEmu's LM tool emulation.
+
+\begin{table}[t]
+\centering
+\caption{Notation used throughout. Dimensions and domains are stated where relevant;
+symbols are checked for conflicts in \texttt{notation\_consistency\_check.md}.}
+\label{tab:notation}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\Agents=\{a_1,\dots,a_N\}$ & set of $N$ agents, $N\in\{3,\dots,50\}$ \\
+$\Roles$ & role set $\{$orchestrator, worker, tool-executor, memory$\}$ \\
+$\Gtop=(\Vtop,\Etop)$ & communication topology (star, chain, tree, mesh) \\
+$\Nin(a)$ & inbound neighbourhood of agent $a$ in $\Gtop$ \\
+$\Statesp,\ s_t\in\Statesp$ & global state space; global state at step $t$ \\
+$\Trace\in\TraceSp$ & global state trace $\Trace=(s_0,\dots,s_H)$ of an episode \\
+$H$ & episode horizon (number of environment steps) \\
+$\Predsec:\TraceSp\to\{0,1\}$ & system-level security predicate ($1=$ compromised) \\
+$\Predutil:\TraceSp\to\{0,1\}$ & benign-success predicate ($1=$ task solved) \\
+$\Checker$ & deterministic checker computing $(\Predutil(\Trace),\Predsec(\Trace))$ \\
+$\Emu$ & LM tool emulator (ToolEmu-style); adversarial mode $\Emu^{\!\dagger}$ \\
+$\Judge$ & LLM judge (contrast baseline for the evaluator) \\
+$\config\in\Configs$ & environment configuration (topology, roles, adversary knobs) \\
+$\Advset\subseteq\Agents$ & set of adversarial agents; $\betafrac=|\Advset|/N$ \\
+$\ASRs,\PNAs,\NRPs$ & system-level attack success, benign performance, net metric \\
+$\CPR,\ \CSR$ & compromise-propagation rate, collusion success rate \\
+$\pinf\in[0,1]$ & per-edge compromise-propagation probability \\
+$\thresh\in\{1,2,\dots\}$ & compromise threshold (bootstrap-percolation model) \\
+$\red,\ \blue$ & red (attack) policy and blue (defense) policy in \corb \\
+$M$ & number of evaluation episodes per configuration \\
+$\kappaem$ & emulator/evaluator human-agreement coefficient ($\approx 0.48$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{ASB's utility--security metric}
+ASB~\cite{zhang2025asb} scores an agent by a \emph{Non-Refusal Performance} that
+multiplies benign task performance by the complement of attack success,
+\begin{equation}
+\label{eq:asb-nrp}
+\mathrm{NRP} \;=\; \mathrm{PNA}\cdot(1-\mathrm{ASR}),
+\end{equation}
+where $\mathrm{PNA}\in[0,1]$ is performance on benign tasks (the agent neither refuses
+nor fails a legitimate request) and $\mathrm{ASR}\in[0,1]$ is the attack success rate.
+The product form rewards a system only when it is both useful and not successfully
+attacked; refusing everything drives $\mathrm{PNA}$ (hence $\mathrm{NRP}$) to zero, and
+being fully compromised drives $\mathrm{ASR}\to1$ (hence $\mathrm{NRP}\to0$).
+\Cref{eq:asb-nrp} is defined for a single agent; generalizing it to a collective is the
+subject of \Cref{sec:problem,sec:theory}.
+
+\subsection{AgentDojo's deterministic state-based checking}
+AgentDojo~\cite{debenedetti2024agentdojo} evaluates security by \emph{deterministic}
+functions of environment state rather than by an LLM judge. Concretely, a task fixes a
+predicate that reads the pre- and post-execution state (e.g., ``was money transferred
+to an account not named in the user's instruction?'') and returns a Boolean. Because the
+predicate is a fixed program over recorded state, a prompt injection that manipulates
+the agent's natural-language reasoning cannot manipulate the score unless it actually
+changes the security-relevant state. \defname{} preserves this property and lifts it to
+the system level: our checker $\Checker$ evaluates predicates $\Predsec,\Predutil$ over
+the \emph{global} trace $\Trace$, never an LLM judge on the critical path
+(\Cref{sec:problem}), and we prove the resulting integrity property in
+\Cref{thm:integrity} and quantify its value against an LLM-judge ablation in
+\Cref{sec:experiments}.
+
+\subsection{ToolEmu's LM tool emulation}
+ToolEmu~\cite{ruan2024toolemu} replaces hand-built tool implementations with a language
+model that emulates tool execution from a specification, enabling breadth of tools and
+scenarios at low cost, and pairs the emulator with an automatic safety evaluator. Its
+authors validate both against humans and report only moderate agreement---human
+agreement of the automatic evaluation is $\kappaem\approx0.48$ (Cohen's $\kappa$~\cite{cohen1960coefficient},
+an agreement coefficient extended to many raters by Fleiss~\cite{fleiss1971measuring}), and a
+majority (but not all) of emulator-identified failures are judged real. \defname{} adopts LM emulation for
+tool breadth, including an adversarial-emulator mode $\Emu^{\!\dagger}$ for malicious
+tools, but treats $\kappaem$ as a first-class threat to validity: scoring is routed
+through the deterministic checker (not the emulator's own verdict), and an
+emulated-versus-real-tools ablation is part of the protocol (\Cref{sec:experiments}).
+
+\subsection{Episodes, traces, and configurations}
+An \emph{episode} runs a task to completion under a fixed configuration $\config$ and
+produces a global state trace $\Trace$. The configuration $\config$ specifies the
+topology $\Gtop$, the role assignment, the observability mask, and the adversary knobs
+of \Cref{sec:threat}. We write $\Trace\sim\mathcal{D}(\config)$ for the distribution
+over traces induced by running the (stochastic) agents and environment under $\config$,
+and reserve $\mathbb{1}[\cdot]$ for the indicator function. All security and utility
+quantities are functionals of $\Trace$ and are therefore, by construction, computable
+by a program that reads only the recorded trace---the fact that makes deterministic,
+hijack-resistant scoring possible.

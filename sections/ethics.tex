@@ -1,0 +1,31 @@
+\section{Ethical and Safety Considerations}
+\label{sec:ethics}
+
+\defname{} is a measurement instrument for the security of multi-agent LLM systems, and its
+release is intended to help defenders. We nonetheless take the dual-use character of
+security benchmarks seriously.
+
+\paragraph{Dual use and containment.} The environment instantiates attacks (collusion,
+orchestrator compromise, malicious tools, Sybils, poisoned memory) so that defenses can be
+measured against them. To limit misuse, the harness uses \emph{emulated} tools with
+\emph{no real side effects} (\Cref{sec:tcb}): an ``exfiltration'' or ``unsafe action'' is a
+recorded state transition inside the sandbox, never a real-world effect. The red-team
+primitives \defname{} composes are already public in the single-agent
+literature~\cite{greshake2023indirect,perez2022ignore,zou2023universal,chen2024agentpoison};
+\defname{} contributes their measurement, not their invention.
+
+\paragraph{Responsible release.} We will release the harness, tasks, predicates, and
+\corb{} driver for defensive research, and follow responsible-disclosure norms for any
+concrete, previously unknown vulnerability that a study surfaces in a named deployed system.
+Model backbones are used through their standard interfaces and are subject to their
+providers' usage policies; the automated red-teaming methodology follows the tradition of
+using models to find failures so they can be fixed~\cite{perez2022redteaming,mazeika2024harmbench}.
+
+\paragraph{Not a certificate.} We reiterate the paper's stance for the record: a low
+$\ASRs$ or a high $\NRPs$ under \defname{} is a measurement under a stated configuration, not
+a safety guarantee. Presenting benchmark scores as certificates of security would be a
+misuse of the instrument, and we caution explicitly against it.
+
+\paragraph{Human oversight.} \defname{} includes optional human-approval hooks and reports
+the human-intervention rate required to hold risk at a target, reflecting the view that
+autonomous agent collectives should retain meaningful human oversight for high-risk actions.

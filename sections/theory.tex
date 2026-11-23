@@ -1,0 +1,329 @@
+\section{Theory: What the Instrument Measures}
+\label{sec:theory}
+
+A benchmark earns trust when its central metric is justified, its evaluator cannot be
+gamed, and its sample sizes are principled. We therefore treat theory as part of the
+instrument. All results below are stated under the explicit assumptions of
+\Cref{sec:assumptions} and carry honest proof-status labels; none claims that any real
+defense is secure or provably degrades. Long derivations are deferred to
+\Cref{app:proofs}. \Cref{fig:theory} shows the dependency structure.
+
+\subsection{Assumptions}
+\label{sec:assumptions}
+\begin{assumption}[Trusted checking]
+\label{as:tcb}
+The harness records a faithful global trace $\Trace$, and the checker $\Checker$
+evaluates the fixed predicates $\Predsec,\Predutil$ as functions of $\Trace$ \emph{only}
+(\Cref{sec:tcb}).
+\end{assumption}
+\begin{assumption}[i.i.d.\ episodes]
+\label{as:iid}
+For a fixed configuration $\config$, the $M$ episode traces are independent draws from
+$\mathcal{D}(\config)$.
+\end{assumption}
+\begin{assumption}[Bounded indicators]
+\label{as:bounded}
+$\Predutil,\Predsec\in\{0,1\}$, so per-episode utility and security indicators lie in
+$\{0,1\}$ and their means in $[0,1]$.
+\end{assumption}
+\begin{assumption}[Monotone propagation model]
+\label{as:prop}
+Compromise spreads over $\Gtop$ by a monotone (absorbing) rule $\mathcal{P}$. In the
+\emph{independent-cascade} instance, a compromised agent independently compromises each
+susceptible out-neighbour with probability $\pinf$ when its message is processed; in the
+\emph{threshold} instance, a susceptible agent is compromised once at least $\thresh$ of
+its in-neighbours are compromised.
+\end{assumption}
+\begin{assumption}[Continuity of the aggregator]
+\label{as:cont}
+The utility--security aggregator $g:[0,1]^2\to[0,1]$ is continuous.
+\end{assumption}
+
+\noindent\Cref{as:prop} defines the environment's compromise dynamics; it is a modelling
+choice \defname{} implements so that propagation is measurable, not an empirical law about
+LLM agents. Its realism is itself something \defname{} measures (via $\CPR$), and the
+emulated-versus-real-tools ablation.
+
+\subsection{Characterization of the system-level metric}
+\label{sec:theory-metric}
+We first show that the product form of $\NRPs$ is forced by the desiderata of
+\Cref{sec:problem}, and that it reduces to ASB's metric at one agent.
+
+\begin{proposition}[Reduction to ASB]
+\label{prop:reduction}
+If $N=1$ and $\Predsec,\Predutil$ are the single-agent security and benign predicates,
+then $\ASRs=\mathrm{ASR}$, $\PNAs=\mathrm{PNA}$, and $\NRPs=\mathrm{NRP}$ of
+\Cref{eq:asb-nrp}.
+\end{proposition}
+\begin{proof}
+With one agent the global trace is that agent's trajectory and the system predicates equal
+the single-agent predicates, so \Cref{eq:asrsys,eq:pnasys} equal ASB's ASR and PNA, and
+\Cref{eq:nrpsys} equals \Cref{eq:asb-nrp}.
+\end{proof}
+
+\begin{theorem}[Axiomatic characterization of $\NRPs$; complete proof]
+\label{thm:metric}
+Write $\NRPs=g(u,\sigma)$ with utility $u=\PNAs\in[0,1]$ and security level
+$\sigma=1-\ASRs\in[0,1]$. Under \Cref{as:cont}, suppose $g$ satisfies:
+\emph{(D2) consistency}, $g(u,1)=u$ and $g(0,\sigma)=0$;
+\emph{(D4a) utility-homogeneity}, $g(\lambda u,\sigma)=\lambda\,g(u,\sigma)$ for
+$\lambda\in[0,1]$; and
+\emph{(D4b) security-homogeneity}, $g(u,\lambda\sigma)=\lambda\,g(u,\sigma)$ for
+$\lambda\in[0,1]$.
+Then $g(u,\sigma)=u\,\sigma$ is the unique such aggregator, and it also satisfies
+boundedness (D1) and monotonicity (D3).
+\end{theorem}
+\begin{proof}
+By D4a with base $u=1$, $g(u,\sigma)=g(u\cdot 1,\sigma)=u\,g(1,\sigma)$. By D4b with base
+$\sigma=1$, $g(1,\sigma)=g(1,\sigma\cdot 1)=\sigma\,g(1,1)$. By D2, $g(1,1)=1$. Hence
+$g(u,\sigma)=u\sigma\,g(1,1)=u\sigma$. The boundary $g(0,\sigma)=0$ holds since
+$0\cdot\sigma=0$. Finally $u\sigma$ is bounded in $[0,1]$ and non-decreasing in each
+argument on $[0,1]^2$.
+\end{proof}
+
+\begin{remark}[Construct validity, honestly]
+\label{rem:metric}
+\Cref{thm:metric} says the product is the unique aggregator \emph{relative to D2/D4};
+it is not a claim that the product is ``optimal'' in any absolute sense. Replacing D4 by a
+worst-coordinate priority axiom yields $\min(u,\sigma)$; replacing it by weighted
+log-linearity yields a weighted geometric mean $u^{w}\sigma^{1-w}$. \defname{} reports
+$\NRPs=u\sigma$ as its default because it generalizes ASB (\Cref{prop:reduction}) and
+matches the ``useful-and-not-compromised'' reading, and it exposes the alternatives as
+configurable so that construct validity is testable rather than asserted---exactly the
+concern that motivates this work.
+\end{remark}
+
+\subsection{Evaluator integrity}
+\label{sec:theory-integrity}
+We now formalize why deterministic checking cannot be hijacked by a successful injection,
+and contrast it with an LLM judge.
+
+\begin{theorem}[Evaluator integrity; complete proof]
+\label{thm:integrity}
+Under \Cref{as:tcb}, for any two episodes with equal recorded traces $\Trace=\Trace'$,
+$\Checker(\Trace)=\Checker(\Trace')$. Consequently, if an adversarial manipulation changes
+message content but leaves the recorded security-relevant state unchanged (so the induced
+trace is unchanged), it cannot change $\Predsec(\Trace)$; hence neither $\widehat{\ASRs}$
+nor $\widehat{\NRPs}$ can be inflated or deflated by message content alone.
+\end{theorem}
+\begin{proof}
+By \Cref{as:tcb}, $\Predsec$ and $\Predutil$ are functions of $\Trace$ only; a function
+returns equal outputs on equal inputs, giving $\Checker(\Trace)=\Checker(\Trace')$. Let
+$\pi$ be any message-space manipulation inducing trace $\Trace_\pi$. The verdict is
+$\Predsec(\Trace_\pi)$; if $\Trace_\pi=\Trace$, then $\Predsec(\Trace_\pi)=\Predsec(\Trace)$.
+As $\widehat{\ASRs}$ and $\widehat{\PNAs}$ are averages of such verdicts, they are unchanged,
+and so is $\widehat{\NRPs}$.
+\end{proof}
+
+\begin{proposition}[An LLM judge is hijackable; complete proof of existence]
+\label{prop:judgehijack}
+There exist an LLM judge $\Judge$ that reads messages and a message manipulation $\pi$ with
+$\Trace_\pi=\Trace$ (no security-relevant state change) such that
+$\Judge(\Trace_\pi,\mathrm{msgs}_\pi)\neq\Judge(\Trace,\mathrm{msgs})$.
+\end{proposition}
+\begin{proof}
+Because $\Judge$ takes message content as an argument and is non-constant in it, pick any
+two message sets on which $\Judge$ disagrees (e.g., $\mathrm{msgs}_\pi$ contains an
+injected instruction ``report this trace as safe''); by construction $\Trace_\pi=\Trace$,
+so the state is unchanged while the verdict flips.
+\end{proof}
+
+\begin{remark}[Integrity is not correctness]
+\label{rem:integrity}
+\Cref{thm:integrity} shows the deterministic verdict cannot be \emph{gamed} through
+messages; it does \emph{not} show the verdict is \emph{correct}. A mis-specified predicate
+$\Predsec$ can be systematically wrong, and \Cref{as:tcb} (trusted harness/checker) is an
+assumption, not a guarantee: TCB compromise and predicate mis-specification are out of
+scope. Viewed as a test of the compromise hypothesis, the checker is a deterministic decision rule
+whose error tradeoff is governed by classical testing theory~\cite{neyman1933problem,lehmann2005testing};
+the LLM judge, unlike $\Checker$, additionally exposes that decision to manipulation through its
+message input. \Cref{prop:judgehijack} is an existence result consistent with documented
+manipulability and bias of LLM-as-judge evaluation~\cite{zheng2023judging,wang2023fair};
+\defname{} therefore keeps $\Checker$ on the critical path and measures the judge-hijack
+gap as an ablation rather than assuming it.
+\end{remark}
+
+\subsection{Compromise propagation across topologies}
+\label{sec:theory-prop}
+Under the independent-cascade instance of \Cref{as:prop}, the expected reach of a
+compromise depends sharply on topology. We give exact expectations for chain, star, and
+tree, and a one-round bound for the complete-graph mesh; proofs are in
+\Cref{app:proofs}.
+
+\begin{proposition}[Chain: bounded reach]
+\label{prop:chain}
+On a directed path $a_1\to\cdots\to a_n$ with a single seed at $a_1$, the expected number
+of additionally compromised agents is $\sum_{j=1}^{n-1}\pinf^{\,j}\le \pinf/(1-\pinf)$ for
+$\pinf<1$, independent of $n$.
+\end{proposition}
+
+\begin{proposition}[Star: the orchestrator is the critical node]
+\label{prop:star}
+On a star with centre $c$ and $n-1$ leaves, a seed at the centre compromises each leaf
+independently with probability $\pinf$, giving expected reach $\pinf(n-1)$ and
+$\CPR=\pinf$; a seed at a leaf gives expected reach $\pinf+\pinf^{2}(n-2)$. The centre-seed
+reach exceeds the leaf-seed reach by $\Theta(\pinf(1-\pinf)n)$.
+\end{proposition}
+
+\begin{proposition}[Tree: a branching phase transition]
+\label{prop:tree}
+On a rooted tree with branching factor $b$ and depth $d$, seeded at the root, the expected
+number compromised at level $\ell$ is $(b\pinf)^{\ell}$, and the total expected reach is
+$\sum_{\ell=1}^{d}(b\pinf)^{\ell}$. Thus the process is subcritical for $b\pinf<1$
+(reach $\le b\pinf/(1-b\pinf)$, bounded in $d$) and supercritical for $b\pinf>1$
+(reach $\Theta((b\pinf)^{d})$, exponential in depth), with the transition at $b\pinf=1$.
+\end{proposition}
+
+\begin{proposition}[Mesh: one-round lower bound]
+\label{prop:mesh}
+On the complete graph $K_n$ with $s$ seeds, the expected number compromised after one
+round is at least $s+(n-s)\bigl(1-(1-\pinf)^{s}\bigr)$. Consequently, for any fixed
+$\pinf>0$ the honest-compromise fraction after one round tends to $1$ as $s$ grows, and
+iterating drives $\CPR\to1$ above the percolation threshold.
+\end{proposition}
+
+\begin{corollary}[Threshold confinement; complete proof]
+\label{cor:threshold}
+Under the threshold instance of \Cref{as:prop} with threshold $\thresh$, any agent whose
+in-degree in $\Gtop$ is strictly less than $\thresh$ can never be compromised by propagation.
+In particular, on a chain (in-degree $1$) with $\thresh\ge2$ the compromised set never grows
+beyond the seeds, so $\CPR=0$.
+\end{corollary}
+\begin{proof}
+In the threshold model an agent is compromised only once at least $\thresh$ of its
+in-neighbours are compromised. An agent with fewer than $\thresh$ in-neighbours can never meet
+that condition, so it remains honest for the entire (absorbing) process. On a chain every
+non-seed agent has in-degree $1<\thresh$, so no propagation occurs.
+\end{proof}
+
+\begin{remark}
+\Cref{cor:threshold} shows that the environment's threshold knob induces a qualitatively
+different, and controllable, propagation regime from the cascade knob: raising $\thresh$
+confines compromise to well-connected agents and can eliminate chain propagation entirely.
+This is why \defname{} exposes both $\pinf$ and $\thresh$ as configurable, rather than fixing a
+single dynamics.
+\end{remark}
+
+These four results reproduce, inside \defname{}, the classical intuition that spread is
+slow on sparse chains, dominated by the hub on stars, phase-transitioned on trees, and
+explosive on dense meshes~\cite{granovetter1978threshold,watts2002simple,kempe2003maximizing,chalupa1979bootstrap}.
+They justify treating topology as a first-class variable and identify the compromised
+orchestrator (the star hub) as the most dangerous single compromise.
+
+\begin{theorem}[Collusion advantage on the star; complete proof]
+\label{thm:collusion}
+Fix the independent-cascade model on a star of $N$ nodes with a budget of one seed. A
+colluding adversary that places its seed at the centre achieves expected compromise
+$1+\pinf(N-1)$. An independent adversary that places its seed uniformly at random achieves
+expected compromise $\tfrac{1}{N}\bigl[1+\pinf(N-1)\bigr]+\tfrac{N-1}{N}\bigl[1+\pinf+\pinf^{2}(N-2)\bigr]$.
+Their difference is $\Delta_{\mathrm{coll}}=\pinf(1-\pinf)\tfrac{(N-1)(N-2)}{N}=\Theta\bigl(\pinf(1-\pinf)N\bigr)$;
+the coordinated adversary strictly dominates for all $\pinf\in(0,1)$ and $N\ge3$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Substitute the centre- and leaf-seed reaches of \Cref{prop:star} into the mixture for the
+random placement, and subtract from the centre-seed reach; the $O(\pinf N)$ terms do not
+cancel because random placement hits the centre with probability only $1/N$. The full
+computation is in \Cref{app:proofs}. For $s>1$ seeds, coordinated placement solves the
+monotone submodular influence-maximization objective, for which greedy seeding attains a
+$(1-1/e)$ approximation to the optimum~\cite{kempe2003maximizing}, whereas independent
+placement does not optimize; the strict star gap already establishes a separation, which is
+all we claim.
+\end{proof}
+
+\begin{remark}[What \Cref{thm:collusion} does and does not say]
+\label{rem:collusion}
+The theorem is a statement about the environment's propagation \emph{model}: colluding
+adversaries can coordinate seed placement to compromise strictly more of the collective
+than uncoordinated adversaries of equal budget. It is \emph{not} a claim that any real LLM
+defense degrades under collusion; that is the empirical hypothesis of
+\Cref{sec:experiments}. The value of the theorem is that it shows \defname{} can express
+and quantify a collusion advantage---the ``collusion on/off'' variable is well posed---and
+it predicts \emph{where} to look (hub-centric topologies) for degradation.
+\end{remark}
+
+\subsection{Forced coordination}
+\label{sec:theory-forced}
+\begin{proposition}[Forced-coordination lower bound and a hitting-set condition; complete proof]
+\label{prop:forced}
+Let a task be $k$-forced-coordination (\Cref{def:forced}) with witness family
+$\mathcal{W}$. Then: (a) no set $S$ of agents with $|S|<k$ can satisfy $\Predutil$; and
+(b) if the adversary set $\Advset$ is a transversal of $\mathcal{W}$ (it intersects every
+witness), the adversary can force $\Predutil=0$ by having its member in each witness
+withhold or sabotage its contribution; conversely, if some witness $W\subseteq\Agents\setminus\Advset$
+is adversary-free, the honest agents can complete the task.
+\end{proposition}
+\begin{proof}
+(a) Every witness has size $\ge k$ by \Cref{def:forced}; a set of size $<k$ contains no
+witness, so no assignment supported on it satisfies $\Predutil$. (b) If $\Advset$ meets
+every witness, then every route to $\Predutil=1$ passes through an adversarial agent, which
+can withhold its contribution, so no witness completes and $\Predutil=0$; if some witness is
+adversary-free, its members jointly satisfy $\Predutil$.
+\end{proof}
+
+\begin{remark}
+\Cref{prop:forced} recasts coordination sabotage as a covering problem: the adversary
+blocks a $k$-forced task exactly when it forms a transversal (hitting set) of the witness
+hypergraph. This is intrinsically group-level---undefined for $k=1$ single-agent
+tasks---and it is why $\ASRs$ under a sabotage predicate, not a per-agent score, is the
+right measurement.
+\end{remark}
+
+\subsection{Sample complexity of the estimators}
+\label{sec:theory-sample}
+Finally, we fix how many episodes the metric estimates require, which drives the cost
+analysis. The tools are elementary concentration inequalities~\cite{boucheron2013concentration};
+for estimators that are not simple means but have bounded differences, McDiarmid's
+inequality~\cite{mcdiarmid1989bounded} gives an analogous guarantee.
+
+\begin{theorem}[Concentration and sample complexity; complete proof]
+\label{thm:sample}
+Under \Cref{as:iid,as:bounded}, for any $\epsilon,\alpha\in(0,1)$:
+\begin{enumerate}[leftmargin=1.5em,label=(\alph*)]
+\item $\Prob\bigl[|\widehat{\ASRs}-\ASRs|\ge\epsilon\bigr]\le 2e^{-2M\epsilon^{2}}$, so
+$M\ge \tfrac{1}{2\epsilon^{2}}\ln\tfrac{2}{\alpha}$ episodes give $\epsilon$-accuracy with
+confidence $1-\alpha$; the same holds for $\widehat{\PNAs}$.
+\item $\bigl|\widehat{\NRPs}-\NRPs\bigr|\le\bigl|\widehat{\PNAs}-\PNAs\bigr|+\bigl|\widehat{\ASRs}-\ASRs\bigr|$,
+hence $\Prob\bigl[|\widehat{\NRPs}-\NRPs|\ge 2\epsilon\bigr]\le 4e^{-2M\epsilon^{2}}$ and
+$M\ge\tfrac{1}{2\epsilon^{2}}\ln\tfrac{4}{\alpha}$ suffices for $2\epsilon$-accuracy.
+\item To control error across a sweep of $G$ configurations, taking $\alpha\!\to\!\alpha/G$
+(or applying Benjamini--Hochberg FDR control~\cite{benjamini1995controlling}) gives
+$M=O\!\bigl(\epsilon^{-2}\ln(G/\alpha)\bigr)$ per configuration, for a total of
+$\Theta(GMNH)$ agent invocations.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) is Hoeffding's inequality~\cite{hoeffding1963probability} for the mean of $M$ i.i.d.\
+$\{0,1\}$ indicators; invert the bound for $M$. (b) For $u,\hat u,\sigma,\hat\sigma\in[0,1]$,
+$|\hat u\hat\sigma-u\sigma|\le\hat\sigma|\hat u-u|+u|\hat\sigma-\sigma|\le|\hat u-u|+|\hat\sigma-\sigma|$;
+apply with $\sigma=1-\ASRs$, then union-bound the two events of (a). (c) Bonferroni over
+$G$ tests replaces $\alpha$ by $\alpha/G$; solving for $M$ gives the stated rate, and each
+of $G$ configurations runs $M$ episodes of $N$ agents over horizon $H$.
+\end{proof}
+
+\begin{corollary}[Sweep budget; complete proof]
+\label{cor:budget}
+To resolve a target $\NRPs$ gap of size $\Delta$ between any two of $G$ swept configurations
+with family-wise confidence $1-\alpha$, it suffices to run
+$M=O\!\bigl(\Delta^{-2}\ln(G/\alpha)\bigr)$ episodes per configuration, for a total of
+$\Theta(GMNH)=\Theta\!\bigl(G\,N\,H\,\Delta^{-2}\ln(G/\alpha)\bigr)$ agent invocations across
+the sweep.
+\end{corollary}
+\begin{proof}
+Set the per-configuration accuracy to $\epsilon=\Delta/4$ in \Cref{thm:sample}(b) so that the
+two $\NRPs$ estimates are each within $\Delta/2$; by the triangle inequality their difference is
+resolved to $\Delta$. \Cref{thm:sample}(c) then gives $M=O(\epsilon^{-2}\ln(G/\alpha))
+=O(\Delta^{-2}\ln(G/\alpha))$, and each of the $G$ configurations runs $M$ episodes of $N$
+agents over horizon $H$.
+\end{proof}
+
+\begin{remark}[Reading the theory as a whole]
+\label{rem:theory}
+\Cref{thm:metric,thm:integrity,thm:collusion,prop:forced,thm:sample} characterize,
+respectively, \emph{what} \defname{} aggregates, \emph{why} its evaluator cannot be gamed
+through messages, \emph{how} collusion and topology shape measured compromise, \emph{what}
+makes forced coordination a group-level object, and \emph{how many} episodes the estimates
+need. Together they turn the benchmark's design choices into stated, checkable claims. What
+they deliberately do \emph{not} do is assert that any deployed defense is secure or that any
+defense provably degrades---those remain empirical questions, marked as hypotheses and
+tested by the protocol of \Cref{sec:experiments}.
+\end{remark}

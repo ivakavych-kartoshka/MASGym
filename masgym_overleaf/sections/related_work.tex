@@ -1,0 +1,61 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Single-agent security instruments}
+The closest instruments evaluate a lone tool-using agent. ASB~\cite{zhang2025asb}
+formalizes attacks and defenses for agents and introduces the utility--security metric
+$\mathrm{NRP}=\mathrm{PNA}\cdot(1-\mathrm{ASR})$ that we generalize; its threat model is
+single-agent with retrieved memory. AgentDojo~\cite{debenedetti2024agentdojo} contributes
+a stateful environment whose \emph{deterministic} security/utility functions are computed
+from pre- and post-execution state, so a prompt injection cannot also hijack the evaluator;
+it names multi-agent planner/worker defense as future work.
+InjecAgent~\cite{zhan2024injecagent}, ToolEmu~\cite{ruan2024toolemu},
+AgentHarm~\cite{andriushchenko2025agentharm}, HarmBench~\cite{mazeika2024harmbench}, and
+formalizations of prompt injection~\cite{liu2024formalizing} and
+trustworthiness~\cite{wang2023decodingtrust} complete the single-agent picture. None
+parameterizes collusion, orchestrator trust, Sybils, or compromise propagation.
+
+\subsection{Multi-agent LLM frameworks and attacks}
+A large literature builds collectives---AutoGen~\cite{wu2023autogen},
+MetaGPT~\cite{hong2023metagpt}, CAMEL~\cite{li2023camel},
+ChatDev~\cite{qian2024chatdev}, Magentic-One~\cite{fourney2024magenticone}, and
+mixing/debating designs~\cite{du2023debate}---concerned with capability, not security;
+\defname{} adopts their role structures as substrate. A fast-growing attack literature is
+intrinsically multi-agent: prompt infection~\cite{lee2024promptinfection},
+contagious blocking~\cite{zhou2025corba}, population jailbreaking~\cite{gu2024agentsmith},
+topological safety~\cite{yu2024netsafe}, adversarial roles~\cite{tian2023evilgeniuses},
+GenAI worms~\cite{cohen2024aiworm}, memory poisoning~\cite{chen2024agentpoison}, and
+backdoors~\cite{yang2024watchout}. These are attacks in bespoke setups; \defname{} is the
+controlled, deterministically scored environment in which such attacks and defenses can be
+swept and compared.
+
+\subsection{Defenses, surveys, and systematizations}
+Multi-agent defenses include AutoDefense~\cite{zeng2024autodefense} and the
+topology-guided G-Safeguard~\cite{yu2025gsafeguard}; per-agent guardrails
+(TrustAgent~\cite{hua2024trustagent}, Llama Guard~\cite{inan2023llamaguard}, NeMo
+Guardrails~\cite{rebedea2023nemo}) are the baselines we lift into the collective setting.
+Classical Byzantine fault tolerance~\cite{lamport1982byzantine,pease1980reaching} and
+Byzantine-robust aggregation~\cite{blanchard2017krum} tolerate faulty fractions under a
+trusted coordinator over numeric messages; they motivate our collusion and
+orchestrator-trust knobs without covering natural-language collectives. Surveys of
+agent security~\cite{he2025emerged,li2024personalllmagents} and the
+non-compositionality argument~\cite{schroederdewitt2025masec,hammond2025multiagent} are the
+gap \defname{} addresses.
+
+\subsection{Environments, red teaming, and evaluation validity}
+Methodologically \defname{} follows standardized environments---Gym~\cite{brockman2016openaigym},
+PettingZoo~\cite{terry2021pettingzoo}, and Melting Pot~\cite{leibo2021meltingpot}, which
+evaluates social outcomes at the level of the collective---and automated red
+teaming~\cite{perez2022redteaming}, with the MAST taxonomy~\cite{cemri2025mast}
+supplying a vocabulary for group-level failures. On scoring validity, LLM-as-judge
+evaluation is documented as manipulable and biased~\cite{zheng2023judging,wang2023fair};
+\defname{} therefore keeps a deterministic trace-based checker on the critical path and
+treats the deterministic-versus-judge comparison as a measurable ablation.
+
+\subsection{Positioning}
+\defname{} is \emph{not} ASB applied to many agents (ASB's only cross-agent vector is
+shared memory), \emph{not} AgentDojo at scale (its deterministic checker is per-agent over
+environment state; a collective requires system-level predicates over a global trace,
+\Cref{sec:problem}), and \emph{not} a model-swap or prompt-filter study: its object is the
+controlled variation of coordination, collusion, and orchestrator variables, and the
+system-level metrics that quantify their effect.

@@ -1,0 +1,70 @@
+% ============================================================================
+% figures/tikz_threat_privacy_robustness.tex  --  Threat model (Fig. 2)
+% Adversary knobs (left) -> attack surfaces (middle, icons) -> recorded trace
+% (right, TCB) -> system-level compromise predicate + measured defense.
+% ============================================================================
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+
+% ---------- top banner: global modifiers ----------
+\node[amberblock, text width=150mm, minimum height=6mm] (banner) at (7.6,6.7)
+  {Global knobs: adversary fraction $\betafrac=|\Advset|/N$ \; $\cdot$ \; independent vs.\ colluding \; $\cdot$ \; static vs.\ adaptive \; $\cdot$ \; attacker knowledge};
+
+% ---------- left: adversary knobs (red) ----------
+\node[advblock, text width=24mm] (k1) at (1.9,5.6) {orchestrator compromise};
+\node[advblock, text width=24mm] (k2) at (1.9,4.5) {collusion};
+\node[advblock, text width=24mm] (k3) at (1.9,3.4) {malicious tool};
+\node[advblock, text width=24mm] (k4) at (1.9,2.3) {poisoned memory};
+\node[advblock, text width=24mm] (k5) at (1.9,1.2) {Sybil identities};
+
+% ---------- middle: attack surfaces (blue, icons to the left) ----------
+\node[honestblock, text width=24mm] (s1) at (7.0,5.6) {orchestrator};
+\node[honestblock, text width=24mm] (s2) at (7.0,4.5) {worker set};
+\node[honestblock, text width=24mm] (s3) at (7.0,3.4) {tool-executor};
+\node[honestblock, text width=24mm] (s4) at (7.0,2.3) {shared memory};
+\node[honestblock, text width=24mm] (s5) at (7.0,1.2) {identities / selection};
+\pic at ([xshift=-10mm]s1.west) {orchbadicon};
+\pic at ([xshift=-10mm]s2.west) {attackericon};
+\pic at ([xshift=-10mm]s3.west) {toolbadicon};
+\pic at ([xshift=-10mm]s4.west) {membadicon};
+\pic at ([xshift=-10mm]s5.west) {sybilicon};
+
+% knob -> surface (red dashed, horizontal)
+\foreach \a/\b in {k1/s1,k2/s2,k3/s3,k4/s4,k5/s5}{
+  \draw[advflow] (\a.east) -- (\b.west);}
+
+% ---------- right: recorded trace lane (green, TCB) ----------
+\node[defblock, text width=10mm, minimum height=52mm] (trace) at (10.7,3.4)
+  {\rotatebox{90}{Global trace $\Trace$ (TCB)}};
+\foreach \s in {s1,s2,s3,s4,s5}{
+  \draw[ctrlflow] (\s.east) -- (\s.east-|trace.west);}
+
+% ---------- compromise objective + defense ----------
+\node[theoryblock, text width=30mm] (phi) at (13.6,4.6)
+  {Compromise $\Predsec(\Trace)=1$\\[-1pt]\scriptsize unsafe $\cdot$ exfiltration $\cdot$ sabotage};
+\node[defblock, text width=30mm] (def) at (13.6,1.9)
+  {Blue policy $\blue$ (measured)\\[-1pt]\scriptsize detection $\cdot$ recovery $\cdot$ approval hooks};
+\draw[defflow] (trace.east|-phi) -- (phi.west);
+\draw[defflow] (trace.east|-def) -- (def.west);
+\draw[theoryflow] (phi.south) -- node[arlbl]{$\ASRs=\Prob[\Predsec{=}1]$} (def.north);
+
+% ---------- legend ----------
+\begin{scope}[shift={(0.2,0.1)}]
+  \draw[advflow] (0,0) -- (0.6,0); \node[right, font=\scriptsize] at (0.65,0) {adversary knob $\to$ surface};
+  \draw[ctrlflow] (4.6,0) -- (5.2,0); \node[right, font=\scriptsize] at (5.25,0) {recorded into trace};
+  \draw[defflow] (8.6,0) -- (9.2,0); \node[right, font=\scriptsize] at (9.25,0) {trusted (TCB) / defense};
+  \draw[theoryflow] (12.6,0) -- (13.2,0); \node[right, font=\scriptsize] at (13.25,0) {measured metric};
+\end{scope}
+
+\end{tikzpicture}}
+\caption{Parameterized threat model. Global knobs (top) set the adversary fraction, collusion,
+adaptivity, and knowledge; per-vector knobs (left, red) each enter a specific attack surface
+(a trust-switchable orchestrator, a colluding worker set, a malicious tool, poisoned shared
+memory, and Sybil identities). Every action is recorded by the trusted harness into the global
+trace $\Trace$, over which the deterministic checker evaluates the compromise predicate
+$\Predsec$; the blue policy's detection and recovery are \emph{measured}, never assumed. A low
+$\ASRs$ is a measurement under a stated configuration, not a certificate of security.}
+\label{fig:threat}
+\end{figure*}

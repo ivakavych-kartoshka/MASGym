@@ -1,0 +1,48 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{An instrument reframes the question.}
+Single-agent benchmarks ask whether \emph{an} agent resists \emph{an} attack. \defname{}
+asks whether \emph{a collective} resists a \emph{configuration}---a point in a space whose
+axes (collusion, orchestrator trust, Sybil pressure, topology) do not exist for a lone
+agent. The reframing is what lets the field pose, and eventually answer, the question that
+motivated this work: whether single-agent defenses survive multi-agent deployment. The
+theory of \Cref{sec:theory} makes the reframing precise---forced coordination is a covering
+problem (\Cref{prop:forced}), collusion is a seeding advantage (\Cref{thm:collusion}), and
+the orchestrator is the critical node on hub topologies (\Cref{prop:star})---and the
+protocol of \Cref{sec:algorithm} makes it measurable.
+
+\paragraph{Why deterministic scoring is more than an engineering choice.}
+\Cref{thm:integrity} shows that a deterministic checker is immune to a class of failures
+that an LLM judge is not: an attack that hijacks the agents cannot, in addition, hijack the
+score. In a multi-agent setting this matters more than in a single-agent one, because there
+are more messages, more roles, and more opportunities for an injection to reach an
+evaluator. Keeping the checker on the critical path---and measuring the judge-hijack gap as
+an ablation rather than assuming it away---is therefore a validity decision, not a
+convenience.
+
+\paragraph{The metric is a coordinate, not a verdict.}
+\Cref{thm:metric} justifies the product aggregator relative to stated axioms, and
+\Cref{rem:metric} exposes the alternatives. But no aggregator turns a measurement into a
+certificate. Throughout, ``higher $\NRPs$'' means ``measured to be more useful-and-less-
+compromised under this configuration.'' A defense that lowers $\ASRs$ on the configurations
+\defname{} happens to sweep may still fail on configurations it does not; the honest output
+of \defname{} is a Pareto frontier over a logged region of the parameter space, with its
+coverage stated.
+
+\paragraph{Relationship to attacks and defenses.}
+\defname{} is deliberately neither. The attacks it instantiates
+(e.g.,~\cite{lee2024promptinfection,zhou2025corba,gu2024agentsmith,he2025redteaming,chen2024agentpoison})
+and the defenses it lifts (e.g.,~\cite{inan2023llamaguard,rebedea2023nemo,hua2024trustagent,zeng2024autodefense,yu2025gsafeguard})
+are inputs to the instrument. This is what makes it reusable: as new attacks and defenses
+appear, they can be registered and scored under the same deterministic, system-level metric,
+and compared to everything measured before through the \corb{} logs.
+
+\paragraph{Emulation fidelity, squarely.}
+The environment's realism is bounded by LM emulation, whose human agreement is only
+$\kappaem\approx0.48$~\cite{ruan2024toolemu}. We neither hide this nor let it corrupt
+scoring: the emulator supplies tool \emph{content} (which affects realism) while the
+deterministic checker supplies the \emph{verdict} (which does not depend on the emulator's
+own judgement), and the emulated-versus-real-tools ablation bounds the realism cost
+empirically. This is the discipline that lets a benchmark built on emulation still produce
+credible relative comparisons.

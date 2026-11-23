@@ -1,0 +1,60 @@
+% ============================================================================
+% figures/tikz_method_pipeline.tex  --  CoRB co-evolving pipeline (Fig. 3)
+% Numbered stages left-to-right; co-evolution feedback along the bottom.
+% ============================================================================
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+
+% ---------- stage icons ----------
+\pic (i1) at (1.9,4.4) {attackericon};
+\pic (i2) at (5.2,4.4) {agenticon};
+\pic (i3) at (8.5,4.4) {checkericon};
+\pic (i4) at (11.7,4.4) {shieldicon};
+\pic (i5) at (14.4,4.4) {theoremicon};
+
+% ---------- stage boxes ----------
+\node[advblock, text width=26mm, minimum height=13mm] (S1) at (1.9,3.0)
+  {\textbf{\small \textcircled{\scriptsize 1} Red}\\[-1pt]\scriptsize propose attack config $\config_{\mathrm{adv}}$ from the parameter space};
+\node[honestblock, text width=26mm, minimum height=13mm] (S2) at (5.2,3.0)
+  {\textbf{\small \textcircled{\scriptsize 2} Rollout}\\[-1pt]\scriptsize agents act; tools via $\Emu/\Emu^{\!\dagger}$; harness records $\Trace$};
+\node[defblock, text width=26mm, minimum height=13mm] (S3) at (8.5,3.0)
+  {\textbf{\small \textcircled{\scriptsize 3} Score}\\[-1pt]\scriptsize checker $\Checker$ on $\Trace$: $\ASRs,\PNAs,\NRPs$};
+\node[defblock, text width=26mm, minimum height=13mm] (S4) at (11.7,3.0)
+  {\textbf{\small \textcircled{\scriptsize 4} Blue}\\[-1pt]\scriptsize propose/upgrade defense $\blue$};
+\node[theoryblock, text width=26mm, minimum height=13mm] (S5) at (14.4,3.0)
+  {\textbf{\small \textcircled{\scriptsize 5} Log}\\[-1pt]\scriptsize re-score; append $(\config_{\mathrm{adv}},\blue,\NRPs)$; Pareto frontier};
+
+% ---------- forward flow ----------
+\draw[dataflow] (S1) -- (S2);
+\draw[dataflow] (S2) -- (S3);
+\draw[dataflow] (S3) -- (S4);
+\draw[dataflow] (S4) -- (S5);
+
+% ---------- integrity annotation ----------
+\node[font=\scriptsize\itshape, text=defense!60!black, align=center] (note)
+  at (8.5,1.55) {LLM never on the scoring critical path (\Cref{thm:integrity})};
+\draw[defflow, densely dotted] (note) -- (S3);
+
+% ---------- co-evolution feedback (bottom, red dashed) ----------
+\coordinate (b5) at (14.4,0.7);
+\coordinate (b1) at (1.9,0.7);
+\draw[advflow] (S5.south) |- (b5) -- node[arlbl]{co-evolution: adaptive red best-responds to $\blue$ (\Cref{alg:corb})} (b1) -| (S1.south);
+
+% ---------- legend ----------
+\begin{scope}[shift={(0.2,-0.2)}]
+  \draw[dataflow] (0,0) -- (0.6,0); \node[right, font=\scriptsize] at (0.65,0) {forward step};
+  \draw[advflow] (4.2,0) -- (4.8,0); \node[right, font=\scriptsize] at (4.85,0) {co-evolution feedback};
+  \draw[defflow, densely dotted] (8.9,0) -- (9.5,0); \node[right, font=\scriptsize] at (9.55,0) {integrity constraint};
+\end{scope}
+
+\end{tikzpicture}
+\caption{The \corb{} co-evolving red/blue protocol (\Cref{alg:corb}). A red policy proposes an
+attack configuration; the harness rolls out episodes and records the global trace $\Trace$; the
+deterministic checker scores system-level metrics; a blue policy proposes or upgrades a defense;
+and the pair is re-scored and appended to the trajectory, from which a (security, cost) Pareto
+frontier is read. The adaptive setting closes the loop (red best-responds to the current blue).
+Because scoring is deterministic and off the LLM critical path, no proposal can inflate its own
+evaluation.}
+\label{fig:pipeline}
+\end{figure*}

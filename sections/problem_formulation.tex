@@ -1,0 +1,98 @@
+\section{Problem Formulation}
+\label{sec:problem}
+
+We now define the objects a system-level security benchmark must measure: the security
+and benign-success predicates, the system-level metric that aggregates them, and the
+group-level quantities (forced coordination, compromise propagation, collusion) that
+have no single-agent analogue. These definitions are the contract the theory of
+\Cref{sec:theory} must satisfy and the environment of \Cref{sec:method} must realize.
+
+\subsection{System-level predicates}
+\begin{definition}[System-level security and benign-success predicates]
+\label{def:predicates}
+A task fixes two Boolean functionals of the global trace $\Trace\in\TraceSp$:
+a \emph{security predicate} $\Predsec:\TraceSp\to\{0,1\}$ with $\Predsec(\Trace)=1$ iff
+the trace contains a system-level compromise (an unsafe action executed, protected data
+exfiltrated, or a forced-coordination task sabotaged), and a \emph{benign-success
+predicate} $\Predutil:\TraceSp\to\{0,1\}$ with $\Predutil(\Trace)=1$ iff the collective
+completed the legitimate task. Both are fixed programs registered before evaluation and
+are evaluated by the deterministic checker $\Checker$ over the harness-recorded trace.
+\end{definition}
+
+The requirement that $\Predsec,\Predutil$ depend on $\Trace$ \emph{only}---and never on
+un-recorded natural-language content---is what later yields evaluator integrity
+(\Cref{thm:integrity}). It also mirrors AgentDojo's single-agent design~\cite{debenedetti2024agentdojo},
+lifted from one agent's environment state to the global trace of the collective.
+
+\subsection{System-level metrics}
+\begin{definition}[System-level ASR, PNA, and NRP]
+\label{def:metrics}
+Fix a configuration $\config$ and let $\Trace\sim\mathcal{D}(\config)$. Define
+\begin{align}
+\ASRs(\config) &\;=\; \Prob_{\Trace\sim\mathcal{D}(\config)}\!\bigl[\Predsec(\Trace)=1\bigr],
+\label{eq:asrsys}\\
+\PNAs(\config) &\;=\; \Prob_{\Trace\sim\mathcal{D}(\config^{\circ})}\!\bigl[\Predutil(\Trace)=1\bigr],
+\label{eq:pnasys}\\
+\NRPs(\config) &\;=\; \PNAs(\config)\cdot\bigl(1-\ASRs(\config)\bigr),
+\label{eq:nrpsys}
+\end{align}
+where $\config^{\circ}$ denotes the benign counterpart of $\config$ (no adversary),
+so that $\PNAs$ measures coordinated-task performance uncontaminated by refusals induced
+by the attack, exactly as ASB separates PNA from ASR.
+\end{definition}
+
+Two properties are required and proved in \Cref{sec:theory}: \Cref{eq:nrpsys} must
+\emph{reduce} to ASB's \Cref{eq:asb-nrp} when $N=1$ and $\Predsec$ is the single-agent
+predicate (\Cref{prop:reduction}), and the product form must be \emph{justified} rather
+than assumed---we give an axiomatic characterization that singles it out
+(\Cref{thm:metric}). We stress the benchmark stance: $\NRPs$ is a coordinate for
+comparing configurations, not a certificate; ``higher $\NRPs$'' means ``measured to be
+more useful-and-less-compromised under this configuration,'' nothing more.
+
+\subsection{Forced coordination}
+\begin{definition}[$k$-forced-coordination task]
+\label{def:forced}
+For an agent set $\Agents$, let a \emph{witness} be a set $W\subseteq\Agents$ of agents
+whose joint contributions can satisfy $\Predutil$. A task is \emph{$k$-forced-coordination}
+if every witness has size $|W|\ge k$; equivalently, for every set $S$ with $|S|<k$, no
+assignment in which only the agents of $S$ act non-trivially satisfies $\Predutil$.
+\end{definition}
+
+$k$-forced tasks with $k\ge2$ cannot be represented in a single-agent harness and make the
+collective the unit of analysis. \Cref{sec:theory} relates task disruption to whether the
+adversary set $\Advset$ intersects every minimal witness (a hitting-set condition).
+
+\subsection{Compromise propagation and collusion}
+\begin{definition}[Compromise relation and propagation rate]
+\label{def:propagation}
+Let $\Advset_0=\Advset$ be the initially adversarial (seed) agents. Compromise spreads
+over $\Gtop$ according to a monotone rule $\mathcal{P}$ (\Cref{sec:theory} instantiates
+$\mathcal{P}$ as an independent-cascade model with per-edge probability $\pinf$ and,
+alternatively, a threshold model with threshold $\thresh$). Write $\Advset_\infty\supseteq\Advset_0$
+for the set compromised at fixation. The \emph{compromise-propagation rate} is
+\begin{equation}
+\label{eq:cpr}
+\CPR(\config) \;=\; \E\!\left[\frac{|\Advset_\infty|-|\Advset_0|}{\,N-|\Advset_0|\,}\right],
+\end{equation}
+the expected fraction of \emph{initially honest} agents that become compromised.
+\end{definition}
+
+\begin{definition}[Collusion success rate]
+\label{def:csr}
+For a fixed fraction $\betafrac$, let $\ASRs^{\mathrm{coll}}$ and $\ASRs^{\mathrm{ind}}$ be
+the system attack success rates under colluding and independent adversaries respectively.
+The \emph{collusion success rate} reports $\ASRs^{\mathrm{coll}}$, and the
+\emph{collusion advantage} is $\Delta_{\mathrm{coll}}=\ASRs^{\mathrm{coll}}-\ASRs^{\mathrm{ind}}$.
+\end{definition}
+
+\subsection{Desiderata for the aggregator}
+Finally, we record the properties a system-level utility--security aggregator
+$g:[0,1]\times[0,1]\to[0,1]$, written $\NRPs=g(\PNAs,\,1-\ASRs)$, should satisfy. These
+are the axioms discharged in \Cref{thm:metric}: (D1) \emph{boundedness}, $g$ maps into
+$[0,1]$; (D2) \emph{security consistency}, $g(u,1)=u$ (no attack means net performance
+equals utility) and $g(0,\sigma)=0$ (no utility means no net performance); (D3)
+\emph{monotonicity}, $g$ is non-decreasing in each argument; (D4) \emph{utility- and
+security-proportionality}, the two scaling axioms of \Cref{thm:metric}; and (D5)
+\emph{reduction}, $g$ recovers \Cref{eq:asb-nrp} at $N=1$. The point of stating D1--D5 is
+that the central metric of the benchmark is then a theorem, not a stipulation---directly
+answering the construct-validity concern that motivates this work.

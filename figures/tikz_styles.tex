@@ -1,0 +1,237 @@
+% ============================================================================
+% figures/tikz_styles.tex
+% Shared visual grammar for all MASGym figures.
+% Colour code (also encoded by shape/pattern for grayscale readability):
+%   blue   = honest / normal system component (agents, orchestrator, memory)
+%   orange/red = adversarial (colluders, compromised orchestrator, malicious tool, Sybil)
+%   green  = defense / blue-team / deterministic checker (trusted evaluation)
+%   purple = theory / mathematics
+%   gray   = infrastructure / environment harness / background
+% Arrow lanes: dataflow (blue), ctrlflow (gray dashed), advflow (red dashed),
+%   defflow (green), theoryflow (purple).
+% ============================================================================
+
+% ---- palette ----
+\definecolor{honest}{RGB}{31,97,164}      % blue
+\definecolor{honestbg}{RGB}{219,232,246}
+\definecolor{advers}{RGB}{200,63,42}      % red-orange
+\definecolor{adversbg}{RGB}{250,224,216}
+\definecolor{defense}{RGB}{34,139,80}     % green
+\definecolor{defensebg}{RGB}{219,241,226}
+\definecolor{theorycol}{RGB}{120,66,161}  % purple
+\definecolor{theorybg}{RGB}{233,223,244}
+\definecolor{infra}{RGB}{90,90,95}        % gray
+\definecolor{infrabg}{RGB}{233,233,236}
+\definecolor{amber}{RGB}{214,158,46}
+\definecolor{amberbg}{RGB}{250,240,214}
+
+% ---- generic node styles ----
+\tikzset{
+  >={Latex[length=2.4mm,width=1.8mm]},
+  font=\small,
+  block/.style={
+    rounded corners=2pt, draw=infra!80, fill=infrabg, line width=0.7pt,
+    align=center, inner sep=4pt, minimum height=8mm, text width=24mm},
+  honestblock/.style={block, draw=honest!85, fill=honestbg, text=black},
+  advblock/.style={block, draw=advers!85, fill=adversbg, text=black,
+    dash pattern=on 3pt off 1.5pt},
+  defblock/.style={block, draw=defense!80, fill=defensebg, text=black},
+  theoryblock/.style={block, draw=theorycol!80, fill=theorybg, text=black},
+  infrablock/.style={block, draw=infra!80, fill=infrabg},
+  amberblock/.style={block, draw=amber!85, fill=amberbg, text=black},
+  smalllabel/.style={font=\footnotesize, inner sep=1pt},
+  arlbl/.style={midway, fill=white, inner sep=1.5pt, font=\scriptsize},
+  % arrow "lanes"
+  dataflow/.style={-{Latex[length=2.2mm]}, honest!85, line width=0.9pt},
+  ctrlflow/.style={-{Latex[length=2.2mm]}, infra!85, line width=0.8pt,
+    densely dashed},
+  advflow/.style={-{Latex[length=2.2mm]}, advers!85, line width=1.0pt,
+    dash pattern=on 3pt off 1.6pt},
+  defflow/.style={-{Latex[length=2.2mm]}, defense!80, line width=1.0pt},
+  theoryflow/.style={-{Latex[length=2.2mm]}, theorycol!80, line width=0.9pt},
+  grp/.style={rounded corners=4pt, draw=#1!55, line width=0.8pt,
+    fill=#1!5, inner sep=6pt},
+  grp/.default=infra,
+}
+
+% ============================================================================
+% Pure-TikZ icons (no external images, no fontawesome dependency).
+% Each is a "pic" scaled to ~6mm; call with:  \pic at (x,y) {agenticon};
+% ============================================================================
+
+% -- worker agent (rounded robot head) --
+\tikzset{
+  agenticon/.pic={
+    \draw[honest!85, fill=honestbg, line width=0.7pt, rounded corners=1pt]
+      (-2.6mm,-2.2mm) rectangle (2.6mm,2.4mm);
+    \draw[honest!85, fill=white, line width=0.5pt] (-1.2mm,0.3mm) circle (0.7mm);
+    \draw[honest!85, fill=white, line width=0.5pt] (1.2mm,0.3mm) circle (0.7mm);
+    \draw[honest!85, line width=0.6pt] (-1mm,-1.3mm) -- (1mm,-1.3mm);
+    \draw[honest!85, line width=0.6pt] (0,2.4mm) -- (0,3.4mm);
+    \fill[honest!85] (0,3.5mm) circle (0.5mm);
+  }
+}
+
+% -- orchestrator (hub with crown) --
+\tikzset{
+  orchicon/.pic={
+    \draw[honest!90, fill=honestbg, line width=0.8pt] (0,0) circle (2.7mm);
+    \draw[honest!90, fill=honest!25, line width=0.6pt]
+      (-2mm,0.6mm)--(-1mm,2.2mm)--(0,0.9mm)--(1mm,2.2mm)--(2mm,0.6mm)--(2mm,-0.4mm)--(-2mm,-0.4mm)--cycle;
+    \fill[honest!90] (-2mm,0.6mm) circle (0.35mm);
+    \fill[honest!90] (0,0.9mm) circle (0.35mm);
+    \fill[honest!90] (2mm,0.6mm) circle (0.35mm);
+  }
+}
+
+% -- compromised orchestrator (hub with crown + cross) --
+\tikzset{
+  orchbadicon/.pic={
+    \draw[advers!90, fill=adversbg, line width=0.8pt] (0,0) circle (2.7mm);
+    \draw[advers!90, fill=advers!20, line width=0.6pt]
+      (-2mm,0.6mm)--(-1mm,2.2mm)--(0,0.9mm)--(1mm,2.2mm)--(2mm,0.6mm)--(2mm,-0.4mm)--(-2mm,-0.4mm)--cycle;
+    \draw[advers!95, line width=0.9pt] (-1.2mm,-1.0mm)--(1.2mm,-2.4mm);
+    \draw[advers!95, line width=0.9pt] (-1.2mm,-2.4mm)--(1.2mm,-1.0mm);
+  }
+}
+
+% -- Byzantine / attacker node (warning cross) --
+\tikzset{
+  attackericon/.pic={
+    \draw[advers!90, fill=adversbg, line width=0.8pt] (0,0) circle (2.7mm);
+    \draw[advers!90, line width=0.9pt] (-1.3mm,-1.3mm)--(1.3mm,1.3mm);
+    \draw[advers!90, line width=0.9pt] (-1.3mm,1.3mm)--(1.3mm,-1.3mm);
+  }
+}
+
+% -- Sybil (two overlapping identity disks) --
+\tikzset{
+  sybilicon/.pic={
+    \draw[advers!85, fill=adversbg, line width=0.7pt] (-1.1mm,0) circle (2.0mm);
+    \draw[advers!85, fill=adversbg, line width=0.7pt] (1.1mm,0) circle (2.0mm);
+    \draw[advers!85, line width=0.6pt] (-1.1mm,-0.4mm) circle (0.6mm);
+    \draw[advers!85, line width=0.6pt] (1.1mm,-0.4mm) circle (0.6mm);
+  }
+}
+
+% -- shield (defense / blue team) --
+\tikzset{
+  shieldicon/.pic={
+    \draw[defense!85, fill=defensebg, line width=0.8pt]
+      (0,3mm) -- (2.4mm,1.6mm) -- (2.4mm,-1mm) -- (0,-3mm)
+      -- (-2.4mm,-1mm) -- (-2.4mm,1.6mm) -- cycle;
+    \draw[defense!85, line width=0.9pt] (-1.1mm,0.2mm)--(-0.2mm,-1.2mm)--(1.4mm,1.2mm);
+  }
+}
+
+% -- deterministic checker (clipboard + tick) --
+\tikzset{
+  checkericon/.pic={
+    \draw[defense!85, fill=defensebg, line width=0.7pt, rounded corners=0.6pt]
+      (-2mm,-2.7mm) rectangle (2mm,2.7mm);
+    \draw[defense!85, fill=white, line width=0.5pt] (-0.9mm,2.3mm) rectangle (0.9mm,3.1mm);
+    \draw[defense!85, line width=0.9pt] (-1.2mm,0.2mm)--(-0.3mm,-1.0mm)--(1.4mm,1.4mm);
+  }
+}
+
+% -- LM tool emulator (cloud with function symbol) --
+\tikzset{
+  emuicon/.pic={
+    \draw[infra!85, fill=infrabg, line width=0.7pt]
+      (-2.4mm,-0.6mm) .. controls (-2.8mm,1.4mm) and (-0.9mm,1.9mm) .. (-0.6mm,1.2mm)
+      .. controls (0.0mm,2.3mm) and (1.6mm,2.0mm) .. (1.5mm,0.9mm)
+      .. controls (2.6mm,0.9mm) and (2.5mm,-0.8mm) .. (1.4mm,-0.9mm)
+      -- (-2.0mm,-0.9mm) .. controls (-2.6mm,-0.9mm) and (-2.6mm,-0.6mm) .. (-2.4mm,-0.6mm) -- cycle;
+    \node[infra!90, font=\scriptsize\itshape] at (0,0.1mm) {f};
+  }
+}
+
+% -- tool (gear) --
+\tikzset{
+  toolicon/.pic={
+    \draw[infra!85, fill=infrabg, line width=0.7pt] (0,0) circle (1.9mm);
+    \foreach \a in {0,45,...,315}{
+      \draw[infra!85, line width=0.8pt] (\a:1.9mm)--(\a:2.8mm);}
+    \draw[infra!85, fill=white, line width=0.5pt] (0,0) circle (0.7mm);
+  }
+}
+
+% -- malicious tool (gear, red, with cross) --
+\tikzset{
+  toolbadicon/.pic={
+    \draw[advers!85, fill=adversbg, line width=0.7pt] (0,0) circle (1.9mm);
+    \foreach \a in {0,45,...,315}{
+      \draw[advers!85, line width=0.8pt] (\a:1.9mm)--(\a:2.8mm);}
+    \draw[advers!90, line width=0.8pt] (-0.9mm,-0.9mm)--(0.9mm,0.9mm);
+    \draw[advers!90, line width=0.8pt] (-0.9mm,0.9mm)--(0.9mm,-0.9mm);
+  }
+}
+
+% -- shared memory store (cylinder/stack) --
+\tikzset{
+  memicon/.pic={
+    \draw[honest!85, fill=honestbg, line width=0.7pt]
+      (-2mm,-2.4mm) -- (-2mm,2mm) arc (180:0:2mm and 0.7mm) -- (2mm,-2.4mm)
+      arc (0:-180:2mm and 0.7mm);
+    \draw[honest!85, line width=0.6pt] (-2mm,2mm) arc (180:360:2mm and 0.7mm);
+    \draw[honest!85, line width=0.5pt] (-2mm,0.4mm) arc (180:360:2mm and 0.7mm);
+    \draw[honest!85, line width=0.5pt] (-2mm,-1.2mm) arc (180:360:2mm and 0.7mm);
+  }
+}
+
+% -- poisoned memory (cylinder, red, droplet) --
+\tikzset{
+  membadicon/.pic={
+    \draw[advers!85, fill=adversbg, line width=0.7pt]
+      (-2mm,-2.4mm) -- (-2mm,2mm) arc (180:0:2mm and 0.7mm) -- (2mm,-2.4mm)
+      arc (0:-180:2mm and 0.7mm);
+    \draw[advers!85, line width=0.6pt] (-2mm,2mm) arc (180:360:2mm and 0.7mm);
+    \fill[advers!80] (0,-0.2mm) circle (0.55mm);
+  }
+}
+
+% -- neural net / model --
+\tikzset{
+  modelicon/.pic={
+    \foreach \y in {-1.8mm,0mm,1.8mm}{\fill[honest!80] (-2.2mm,\y) circle (0.5mm);}
+    \foreach \y in {-1mm,1mm}{\fill[honest!80] (0,\y) circle (0.5mm);}
+    \fill[honest!80] (2.2mm,0) circle (0.5mm);
+    \foreach \y in {-1.8mm,0mm,1.8mm}{\foreach \z in {-1mm,1mm}{
+      \draw[honest!45, line width=0.3pt] (-2.2mm,\y)--(0,\z);}}
+    \foreach \z in {-1mm,1mm}{\draw[honest!45, line width=0.3pt] (0,\z)--(2.2mm,0);}
+  }
+}
+
+% -- database / dataset --
+\tikzset{
+  dbicon/.pic={
+    \draw[infra!85, fill=infrabg, line width=0.7pt] (-2mm,-2.4mm) rectangle (2mm,2.4mm);
+    \draw[infra!85, line width=0.6pt] (-2mm,1.2mm)--(2mm,1.2mm);
+    \draw[infra!85, line width=0.6pt] (-2mm,0mm)--(2mm,0mm);
+    \draw[infra!85, line width=0.6pt] (-2mm,-1.2mm)--(2mm,-1.2mm);
+  }
+}
+
+% -- theorem scroll --
+\tikzset{
+  theoremicon/.pic={
+    \draw[theorycol!80, fill=theorybg, line width=0.7pt, rounded corners=1pt]
+      (-2mm,-2.6mm) rectangle (2mm,2.6mm);
+    \draw[theorycol!80, line width=0.6pt] (-1.2mm,1.4mm)--(1.2mm,1.4mm);
+    \draw[theorycol!80, line width=0.6pt] (-1.2mm,0.4mm)--(1.2mm,0.4mm);
+    \draw[theorycol!80, line width=0.6pt] (-1.2mm,-0.6mm)--(0.6mm,-0.6mm);
+  }
+}
+
+% -- human oversight (person) --
+\tikzset{
+  humanicon/.pic={
+    \draw[infra!90, fill=infrabg, line width=0.7pt] (0,1.6mm) circle (1.0mm);
+    \draw[infra!90, fill=infrabg, line width=0.7pt]
+      (-1.6mm,-2.6mm) .. controls (-1.6mm,0.2mm) and (1.6mm,0.2mm) .. (1.6mm,-2.6mm) -- cycle;
+  }
+}
+
+% ---- legend helper ----
+\newcommand{\legendline}[2]{% #1 style, #2 text
+  \draw[#1] (0,0) -- (5mm,0); \node[right, font=\scriptsize] at (5.5mm,0) {#2};}

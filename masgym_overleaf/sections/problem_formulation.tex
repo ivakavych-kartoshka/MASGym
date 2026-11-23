@@ -1,0 +1,79 @@
+\section{Problem Formulation}
+\label{sec:problem}
+
+We define what a system-level security benchmark must measure: security and benign-success
+predicates, the system-level metric aggregating them, and the group-level quantities
+(forced coordination, compromise propagation, collusion) with no single-agent analogue.
+
+\subsection{System-level predicates}
+\begin{definition}[System-level security and benign-success predicates]
+\label{def:predicates}
+A task fixes two Boolean functionals of the global trace $\Trace\in\TraceSp$: a
+\emph{security predicate} $\Predsec:\TraceSp\to\{0,1\}$, $1$ iff the trace contains a
+system-level compromise (an unsafe action executed, protected data exfiltrated, or a
+forced-coordination task sabotaged), and a \emph{benign-success predicate}
+$\Predutil:\TraceSp\to\{0,1\}$, $1$ iff the collective completed the legitimate task.
+Both are registered programs evaluated by the deterministic checker over the
+harness-recorded trace; dependencies on \emph{un}-recorded natural-language content are
+disallowed, yielding evaluator integrity (\Cref{thm:integrity}) and lifting
+AgentDojo~\cite{debenedetti2024agentdojo} from one agent's state to the global trace.
+\end{definition}
+
+\subsection{System-level metrics}
+\begin{definition}[System-level ASR, PNA, and NRP]
+\label{def:metrics}
+Fix a configuration $\config$ and let $\Trace\sim\mathcal{D}(\config)$. Define
+\begin{align}
+\ASRs(\config) &\;=\; \Prob_{\Trace\sim\mathcal{D}(\config)}\!\bigl[\Predsec(\Trace)=1\bigr],
+\label{eq:asrsys}\\
+\PNAs(\config) &\;=\; \Prob_{\Trace\sim\mathcal{D}(\config^{\circ})}\!\bigl[\Predutil(\Trace)=1\bigr],
+\label{eq:pnasys}\\
+\NRPs(\config) &\;=\; \PNAs(\config)\cdot\bigl(1-\ASRs(\config)\bigr),
+\label{eq:nrpsys}
+\end{align}
+where $\config^{\circ}$ is $\config$'s benign counterpart (no adversary), so $\PNAs$ measures
+coordinated-task performance uncontaminated by attack-induced refusals, exactly as ASB
+separates PNA from ASR.
+\end{definition}
+
+Two properties are required and proved in \Cref{sec:theory}: \Cref{eq:nrpsys} \emph{reduces}
+to ASB's \Cref{eq:asb-nrp} at $N{=}1$ (\Cref{prop:reduction}), and the product form is
+\emph{justified} rather than assumed, via an axiomatic characterization over D1--D5
+(\Cref{sec:theory}; \Cref{thm:metric}). The benchmark stance: $\NRPs$ is a coordinate for
+comparing configurations, not a certificate.
+
+\subsection{Forced coordination}
+\begin{definition}[$k$-forced-coordination task]
+\label{def:forced}
+For an agent set $\Agents$, let a \emph{witness} be a set $W\subseteq\Agents$ whose joint
+contributions can satisfy $\Predutil$. A task is \emph{$k$-forced-coordination} if every
+witness has size $|W|\ge k$; equivalently, for every $S$ with $|S|<k$, no assignment in
+which only the agents of $S$ act non-trivially satisfies $\Predutil$.
+\end{definition}
+
+$k$-forced tasks with $k\ge2$ cannot be represented in a single-agent harness.
+\Cref{sec:theory} relates task disruption to whether $\Advset$ intersects every minimal
+witness (a hitting-set condition, \Cref{prop:forced}).
+
+\subsection{Compromise propagation and collusion}
+\begin{definition}[Compromise relation and propagation rate]
+\label{def:propagation}
+Let $\Advset_0=\Advset$ be the initially adversarial (seed) agents. Compromise spreads
+over $\Gtop$ according to a monotone rule $\mathcal{P}$ (\Cref{sec:theory}: an
+independent-cascade model with per-edge probability $\pinf$, or a threshold model with
+threshold $\thresh$). Write $\Advset_\infty\supseteq\Advset_0$ for the compromised set at
+fixation. The \emph{compromise-propagation rate} is
+\begin{equation}
+\label{eq:cpr}
+\CPR(\config) \;=\; \E\!\left[\frac{|\Advset_\infty|-|\Advset_0|}{\,N-|\Advset_0|\,}\right],
+\end{equation}
+the expected fraction of \emph{initially honest} agents that become compromised.
+\end{definition}
+
+\begin{definition}[Collusion success rate]
+\label{def:csr}
+For a fixed fraction $\betafrac$, let $\ASRs^{\mathrm{coll}}$ and $\ASRs^{\mathrm{ind}}$ be
+the system attack success rates under colluding and independent adversaries respectively.
+The \emph{collusion success rate} reports $\ASRs^{\mathrm{coll}}$, and the
+\emph{collusion advantage} is $\Delta_{\mathrm{coll}}=\ASRs^{\mathrm{coll}}-\ASRs^{\mathrm{ind}}$.
+\end{definition}

@@ -1,0 +1,28 @@
+\section{Discussion, Limitations, and Ethics}
+\label{sec:discussion}
+
+Two commitments deserve emphasis. \emph{Deterministic integrity over semantic flexibility}:
+a deterministic checker on the critical path (\Cref{thm:integrity}) rules out a class of
+score manipulation at the price that a mis-specified predicate can be systematically wrong;
+\Cref{rem:metric} exposes the aggregator alternatives. \emph{Sweeps, not
+claims}: \corb{} logs the full $\mathcal{L}$ trajectory and a (security, cost) Pareto
+frontier rather than a single winner; headline numbers are measurements of a fixed
+configuration grid, not properties of any defense. Our theory results are deliberately
+scoped: \Cref{thm:collusion}, \Cref{prop:forced}, and the topology forecasts of
+\Cref{sec:theory-prop} describe the \emph{environment}'s propagation and coordination
+structure, not any real defense.
+
+\textbf{Limitations and validity.}\label{sec:limitations} The largest unmeasured gap is
+emulation fidelity: $\kappaem\approx0.48$ is inherited from ToolEmu, not re-measured here,
+and although the harness registers an emulated-versus-real-tools ablation we did not run
+it, because no real tool backend is wired into our environment. Every synthetic number is
+therefore conditional on the emulator; the deterministic-versus-judge contrast of
+\Cref{sec:integrity} is the one ablation we ran on real backbones. We enumerate the
+remaining threats to validity---episode counts, backbone sample size, the structural
+degeneracy, and the unmeasured ablation---in the Supplementary Material.
+
+\textbf{Ethics and safety.} \defname{} is a measurement instrument: its red-team primitives
+are from the published literature, exercised only inside the sandbox against registered
+predicates, never against live third-party services; tasks are benign; the adversary is
+bounded (\Cref{sec:threat}); results should route defenses, not certify systems. The full
+statement is in the Supplementary Material.

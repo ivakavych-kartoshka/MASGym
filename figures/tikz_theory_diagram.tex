@@ -1,0 +1,70 @@
+% ============================================================================
+% figures/tikz_theory_diagram.tex  --  Theory dependency (Fig. 4)
+% Assumptions (gray) -> Results (purple) -> Design insights (green).
+% ============================================================================
+\begin{figure*}[t]
+\centering
+\resizebox{0.98\textwidth}{!}{%
+\begin{tikzpicture}
+
+\begin{scope}[on background layer]
+  \node[grp=infra,     fit={(-0.2,-0.2) (3.3,8.0)}, label={[font=\footnotesize\bfseries,infra]above:Assumptions}] {};
+  \node[grp=theorycol, fit={(3.9,-0.2) (10.3,8.0)}, label={[font=\footnotesize\bfseries,theorycol]above:Results (this paper)}] {};
+  \node[grp=defense,   fit={(10.9,-0.2) (14.8,8.0)}, label={[font=\footnotesize\bfseries,defense]above:Design insight}] {};
+\end{scope}
+
+% ---------- assumptions ----------
+\node[infrablock, text width=24mm] (A1) at (1.55,6.9) {\scriptsize A\ref{as:tcb}: trusted harness / checker};
+\node[infrablock, text width=24mm] (A2) at (1.55,5.4) {\scriptsize A\ref{as:iid}--A\ref{as:bounded}: i.i.d., bounded};
+\node[infrablock, text width=24mm] (A4) at (1.55,3.3) {\scriptsize A\ref{as:prop}: monotone cascade};
+\node[infrablock, text width=24mm] (A5) at (1.55,1.4) {\scriptsize A\ref{as:cont}: continuous aggregator};
+
+% ---------- results (2 lines each, generous spacing) ----------
+\node[theoryblock, text width=36mm, minimum height=10mm] (Rmetric) at (7.1,7.0)
+  {\scriptsize \textbf{Thm~\ref{thm:metric}}: unique product metric; \textbf{Prop~\ref{prop:reduction}}$\,\to\,$ASB};
+\node[theoryblock, text width=36mm, minimum height=10mm] (Rint) at (7.1,5.5)
+  {\scriptsize \textbf{Thm~\ref{thm:integrity}}: evaluator integrity; \textbf{Prop~\ref{prop:judgehijack}}: judge hijackable};
+\node[theoryblock, text width=36mm, minimum height=8mm] (Rprop) at (7.1,4.1)
+  {\scriptsize \textbf{Prop~\ref{prop:chain}--\ref{prop:mesh}}: topology propagation bounds};
+\node[theoryblock, text width=36mm, minimum height=8mm] (Rcoll) at (7.1,2.8)
+  {\scriptsize \textbf{Thm~\ref{thm:collusion}}: strict collusion advantage (star)};
+\node[theoryblock, text width=36mm, minimum height=8mm] (Rforced) at (7.1,1.5)
+  {\scriptsize \textbf{Prop~\ref{prop:forced}}: forced coordination / hitting set};
+\node[theoryblock, text width=36mm, minimum height=8mm] (Rsample) at (7.1,0.3)
+  {\scriptsize \textbf{Thm~\ref{thm:sample}}: estimator concentration};
+
+% ---------- insights (aligned to results) ----------
+\node[defblock, text width=30mm] (Imetric) at (12.75,7.0) {\scriptsize construct validity: metric is a theorem};
+\node[defblock, text width=30mm] (Iint)    at (12.75,5.5) {\scriptsize deterministic vs.\ judge ablation (RQ2)};
+\node[defblock, text width=30mm] (Iprop)   at (12.75,4.1) {\scriptsize topology sweep; orchestrator is critical};
+\node[defblock, text width=30mm] (Icoll)   at (12.75,2.8) {\scriptsize collusion on/off; where to look (RQ5)};
+\node[defblock, text width=30mm] (Iforced) at (12.75,1.5) {\scriptsize group-level unit of analysis};
+\node[defblock, text width=30mm] (Isample) at (12.75,0.3) {\scriptsize episode budget $\Rightarrow$ cost (RQ6)};
+
+% ---------- assumption -> result (purple) ----------
+\draw[theoryflow] (A1.east) to[out=0,in=180] (Rint.west);
+\draw[theoryflow] (A2.east) to[out=0,in=180] (Rsample.west);
+\draw[theoryflow] (A4.east) to[out=0,in=180] (Rprop.west);
+\draw[theoryflow] (A4.east) to[out=-25,in=180] (Rcoll.west);
+\draw[theoryflow] (A5.east) to[out=30,in=180] (Rmetric.west);
+
+% within-results dependency: propagation -> collusion
+\draw[theoryflow] (Rprop.east) to[out=0,in=60] (Rcoll.east);
+
+% ---------- result -> insight (green) ----------
+\foreach \r/\i in {Rmetric/Imetric, Rint/Iint, Rprop/Iprop, Rcoll/Icoll, Rforced/Iforced, Rsample/Isample}{
+  \draw[defflow] (\r.east) -- (\i.west);}
+
+% ---------- legend ----------
+\begin{scope}[shift={(0.0,-0.9)}]
+  \draw[theoryflow] (0,0) -- (0.6,0); \node[right, font=\scriptsize] at (0.65,0) {assumption $\Rightarrow$ result};
+  \draw[defflow] (5.2,0) -- (5.8,0); \node[right, font=\scriptsize] at (5.85,0) {result $\Rightarrow$ design insight};
+\end{scope}
+
+\end{tikzpicture}}
+\caption{Dependency structure of the theory (\Cref{sec:theory}). Explicit assumptions (left)
+yield stated results (centre), each of which motivates a concrete design choice or research
+question (right). Every result carries an honest proof-status label in the text; none asserts
+that a real defense is secure or provably degrades.}
+\label{fig:theory}
+\end{figure*}

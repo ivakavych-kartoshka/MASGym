@@ -1,0 +1,107 @@
+{
+  "paper_id": "Idea_08_MASGym",
+  "locked_title": "MASGym: A Co-Evolving Red/Blue Security Gym for Multi-Agent LLM Systems",
+  "source_of_truth": "idea.pdf",
+  "contribution_type": "benchmark + evaluation methodology (NOT an attack, NOT a defense)",
+  "required_core_terms": [
+    "multi-agent LLM security",
+    "benchmark", "environment", "gym",
+    "co-evolving red/blue", "CoRB",
+    "forced coordination", "heterogeneous roles", "partial observability",
+    "colluding agents", "collusion",
+    "compromised orchestrator",
+    "malicious tools", "Sybil identities", "poisoned shared memory",
+    "system-level metrics", "system-level NRP",
+    "LM-emulated tools", "ToolEmu-style emulation",
+    "deterministic state-based security checks", "AgentDojo-style checker",
+    "communication topology", "star", "chain", "tree", "mesh",
+    "compromise propagation", "group-level emergence",
+    "adversary fraction", "static vs adaptive attacker"
+  ],
+  "required_equations": [
+    "NRP = PNA * (1 - ASR)  (ASB baseline metric)",
+    "NRP_sys = PNA_sys * (1 - ASR_sys)  (proposed system-level generalization)",
+    "ASR_sys measured against system-level security predicates over the global state trace",
+    "PNA_sys = benign coordinated-task performance",
+    "compromise-propagation fraction as a function of topology and adversary fraction",
+    "concentration bound / sample complexity for the system-ASR and NRP_sys estimators"
+  ],
+  "required_algorithm_names": [
+    "Co-evolving Red/Blue protocol (CoRB): alternate red policy (proposes attack configs) and blue policy (proposes defenses), logging (attack, defense, system-NRP) trajectories",
+    "Deterministic system-level state checker (security predicates over the global trace)",
+    "LM tool-emulation loop (ToolEmu-style, with adversarial-emulator mode)"
+  ],
+  "required_theorem_directions": [
+    "Axiomatic characterization / uniqueness of the NRP_sys aggregator; reduction to ASB NRP at N=1 (construct validity) [complete proof]",
+    "Evaluator integrity: deterministic checker verdict is invariant to adversarial message content except via TCB-recorded state; LLM-judge is not (hijack separation) [complete proof under stated assumptions]",
+    "Compromise-propagation bounds across star/chain/tree/mesh in the environment's monotone cascade model; collusion-vs-independent separation [complete proofs for the model; empirical realism is (hypothesis)]",
+    "Forced-coordination lower bound: k-forced tasks unsolvable by any coalition of < k agents [complete proof under the task predicate definition]",
+    "Concentration / sample complexity of system-ASR and NRP_sys estimators (Hoeffding/McDiarmid) [complete proof]"
+  ],
+  "required_experiment_variables": [
+    "agent count 3-50",
+    "topology in {star, chain, tree, mesh}",
+    "adversary fraction",
+    "independent vs colluding adversaries",
+    "static vs adaptive attacker",
+    "orchestrator trusted vs compromised",
+    "malicious tools on/off",
+    "Sybil identities on/off",
+    "poisoned shared memory on/off",
+    "agent models: Llama-3, Qwen2.5, Mistral, GPT-4o, Claude-3.5",
+    "emulated vs real tools (ablation)",
+    "deterministic vs LLM-judge evaluation (ablation)"
+  ],
+  "required_metrics": [
+    "system-level ASR (ASR_sys)",
+    "collusion success rate",
+    "compromise-propagation rate",
+    "coordination quality",
+    "system-level NRP (NRP_sys)",
+    "time-to-detection",
+    "recovery rate",
+    "token/API cost", "latency cost",
+    "scalability with agent count",
+    "human-intervention rate"
+  ],
+  "required_baselines": [
+    "ASB re-run in single-agent mode",
+    "AgentDojo (single-agent)",
+    "no-defense",
+    "per-agent defenses lifted into the multi-agent setting",
+    "oracle / upper-bound reference where applicable"
+  ],
+  "headline_finding": {
+    "statement": "Defenses effective in single-agent ASB/AgentDojo degrade under collusion and compromised-orchestrator conditions",
+    "status": "(hypothesis) — to be measured; if it does not replicate, reframe as a negative result"
+  },
+  "trusted_computing_base": [
+    "deterministic state checker",
+    "environment harness",
+    "emulated tools have no real side effects"
+  ],
+  "out_of_scope": [
+    "real-world tool side effects",
+    "physical actuation",
+    "model-weight attacks"
+  ],
+  "forbidden_topic_drifts": [
+    "over-the-air / analog superposition / AirComp aggregation",
+    "federated learning as the central topic",
+    "differential privacy mechanism design / privacy accounting as the central topic",
+    "mechanism design / VCG / auctions / incentive compatibility / DSIC",
+    "zero-knowledge proofs / SMPC / TEE as a central cryptographic construction",
+    "multi-agent reinforcement-learning reward shaping as the central topic",
+    "presenting a single named novel attack as THE contribution",
+    "presenting a single named novel defense as THE contribution",
+    "single-agent-only framing",
+    "claiming defenses are proven to degrade (this is an empirical hypothesis, not a theorem)",
+    "equating low system-ASR or high system-NRP with 'secure'"
+  ],
+  "verified_seed_references": {
+    "toolemu": "arXiv:2309.15817 (ICLR 2024) — verified arxiv.org/abs/2309.15817",
+    "asb": "arXiv:2410.02644 (ICLR 2025) — verified arxiv.org/abs/2410.02644",
+    "agentdojo": "arXiv:2406.13352 (NeurIPS 2024 Datasets & Benchmarks) — verified",
+    "masec": "arXiv:2505.02077 (Open Challenges in Multi-Agent Security) — verified"
+  }
+}

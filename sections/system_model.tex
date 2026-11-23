@@ -1,0 +1,70 @@
+\section{System Model}
+\label{sec:system}
+
+\defname{} instantiates an orchestrated collective of LLM agents. Because it is an
+environment, the model below is \emph{configurable}: the quantities that a security
+study wants to vary---topology, roles, observability, trust---are parameters of the
+harness, not fixed choices.
+
+\subsection{Agents and roles}
+The system comprises $N\in\{3,\dots,50\}$ agents $\Agents=\{a_1,\dots,a_N\}$, each an
+LLM policy that reads a local context and emits messages and tool calls. Agents are
+\emph{heterogeneous} in role, drawn from $\Roles$:
+\begin{itemize}[leftmargin=1.4em]
+\item an \textbf{orchestrator} (planner) that decomposes the task, assigns subtasks,
+and routes messages;
+\item \textbf{workers} that solve subtasks and exchange intermediate results;
+\item \textbf{tool-executors} that mediate calls to external tools; and
+\item a \textbf{shared-memory store} that agents read from and write to.
+\end{itemize}
+Each agent $a$ has capabilities: a model backbone (\Cref{sec:experiments}), a set of
+permitted tools, and read/write permissions on shared memory. The role assignment and
+capability grants are part of the configuration $\config$.
+
+\subsection{Topology and communication}
+Agents communicate over a directed graph $\Gtop=(\Vtop,\Etop)$ with $\Vtop=\Agents$;
+an edge $(a,a')\in\Etop$ means $a'$ may read messages from $a$. \defname{} ships four
+canonical topologies (\Cref{fig:architecture}): a \textbf{star} with the orchestrator at
+the hub; a \textbf{chain} in which each agent forwards to its successor; a \textbf{tree}
+in which the orchestrator branches to sub-orchestrators and workers; and a \textbf{mesh}
+in which many worker pairs communicate directly. Topology is a first-class variable
+because, as \Cref{sec:theory} shows, it controls how a compromise propagates and how
+severe an orchestrator compromise is.
+
+\subsection{Partial observability}
+Agents are \emph{partially observing}: agent $a$ sees only its local context---its own
+role prompt, the messages on its inbound edges $\Nin(a)$, and the memory entries it is
+permitted to read. No agent observes the global state $s_t$; in particular, no honest
+agent can unilaterally detect that a peer has been compromised or that the orchestrator
+is malicious. Partial observability is what makes group-level detection nontrivial and
+is a stated requirement of the multi-agent security agenda~\cite{schroederdewitt2025masec}.
+
+\subsection{Forced coordination}
+A task is \emph{forced-coordination} when its benign-success predicate $\Predutil$ can be
+satisfied only by the joint action of several agents---no single agent, and no coalition
+below a task-specific size, can complete it alone (\Cref{def:forced} makes this precise).
+Forced coordination is the property that makes the collective the unit of analysis: it
+cannot be represented in a single-agent harness, and it lets \defname{} measure
+coordination quality and coordination sabotage as system-level quantities.
+
+\subsection{Orchestration, trust boundaries, and the harness}
+An \textbf{orchestration layer}---part of the trusted harness---instantiates $\Gtop$,
+assigns roles, enforces the observability masks, applies the adversary knobs, and drives
+episodes step by step. Per-agent \textbf{trust boundaries} record which agents and tools
+a given agent is configured to trust; the orchestrator itself carries a trust bit that
+can be set to \emph{trusted} or \emph{compromised} (\Cref{sec:threat}). Optional
+\textbf{human-approval hooks} can gate designated high-risk actions, letting a study
+measure the human-intervention rate required to hold risk at a target level.
+
+\subsection{Trusted computing base}
+\label{sec:tcb}
+Following the source design, the \textbf{deterministic state checker} $\Checker$ and the
+\textbf{environment harness} (orchestration layer, logging, observability enforcement)
+are the trusted computing base (TCB) and are assumed uncompromised; the emulated tools
+have \emph{no real side effects}. Everything else---agents (including the orchestrator),
+tools, memory contents, and messages---may be adversarial under a given configuration.
+Out of scope are real-world tool side effects, physical actuation, and model-weight
+attacks. This TCB is what makes hijack-resistant scoring possible: because $\Checker$
+reads only the harness-recorded trace $\Trace$, no adversarial agent or tool can alter a
+verdict except by actually changing the security-relevant state that the harness records
+(\Cref{thm:integrity}).

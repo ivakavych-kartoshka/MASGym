@@ -1,0 +1,698 @@
+\begin{thebibliography}{83}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Andriushchenko et~al.(2025)Andriushchenko, Souly, Dziemian, Duenas,
+  Lin, Wang, Hendrycks, Zou, Kolter, Fredrikson, Winsor, Wynne, Gal, and
+  Davies]{andriushchenko2025agentharm}
+Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas, Maxwell
+  Lin, Justin Wang, Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson, Eric
+  Winsor, Jerome Wynne, Yarin Gal, and Xander Davies.
+\newblock {AgentHarm}: A benchmark for measuring harmfulness of {LLM} agents.
+\newblock In \emph{The Thirteenth International Conference on Learning
+  Representations (ICLR)}, 2025.
+\newblock arXiv:2410.09024.
+
+\bibitem[Benjamini and Hochberg(1995)]{benjamini1995controlling}
+Yoav Benjamini and Yosef Hochberg.
+\newblock Controlling the false discovery rate: A practical and powerful
+  approach to multiple testing.
+\newblock \emph{Journal of the Royal Statistical Society: Series B
+  (Methodological)}, 57\penalty0 (1):\penalty0 289--300, 1995.
+\newblock \doi{10.1111/j.2517-6161.1995.tb02031.x}.
+
+\bibitem[Blanchard et~al.(2017)Blanchard, El~Mhamdi, Guerraoui, and
+  Stainer]{blanchard2017krum}
+Peva Blanchard, El~Mahdi El~Mhamdi, Rachid Guerraoui, and Julien Stainer.
+\newblock Machine learning with adversaries: {B}yzantine tolerant gradient
+  descent.
+\newblock In \emph{Advances in Neural Information Processing Systems 30
+  (NIPS)}, 2017.
+
+\bibitem[Boucheron et~al.(2013)Boucheron, Lugosi, and
+  Massart]{boucheron2013concentration}
+St\'ephane Boucheron, G\'abor Lugosi, and Pascal Massart.
+\newblock \emph{Concentration Inequalities: A Nonasymptotic Theory of
+  Independence}.
+\newblock Oxford University Press, 2013.
+\newblock ISBN 9780199535255.
+\newblock \doi{10.1093/acprof:oso/9780199535255.001.0001}.
+
+\bibitem[Brockman et~al.(2016)Brockman, Cheung, Pettersson, Schneider,
+  Schulman, Tang, and Zaremba]{brockman2016openaigym}
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman,
+  Jie Tang, and Wojciech Zaremba.
+\newblock Openai gym.
+\newblock \emph{arXiv preprint arXiv:1606.01540}, 2016.
+
+\bibitem[Cemri et~al.(2025)Cemri, Pan, Yang, Agrawal, Chopra, Tiwari, Keutzer,
+  Parameswaran, Klein, Ramchandran, Zaharia, Gonzalez, and
+  Stoica]{cemri2025mast}
+Mert Cemri, Melissa~Z. Pan, Shuyi Yang, Lakshya~A. Agrawal, Bhavya Chopra,
+  Rishabh Tiwari, Kurt Keutzer, Aditya Parameswaran, Dan Klein, Kannan
+  Ramchandran, Matei Zaharia, Joseph~E. Gonzalez, and Ion Stoica.
+\newblock Why do multi-agent {LLM} systems fail?
+\newblock \emph{arXiv preprint arXiv:2503.13657}, 2025.
+\newblock MAST failure taxonomy for multi-agent LLM systems.
+
+\bibitem[Chalupa et~al.(1979)Chalupa, Leath, and Reich]{chalupa1979bootstrap}
+J.~Chalupa, P.~L. Leath, and G.~R. Reich.
+\newblock Bootstrap percolation on a bethe lattice.
+\newblock \emph{Journal of Physics C: Solid State Physics}, 12\penalty0
+  (1):\penalty0 L31--L35, 1979.
+\newblock \doi{10.1088/0022-3719/12/1/008}.
+
+\bibitem[Chan et~al.(2023)Chan, Chen, Su, Yu, Xue, Zhang, Fu, and
+  Liu]{chan2023chateval}
+Chi-Min Chan, Weize Chen, Yusheng Su, Jianxuan Yu, Wei Xue, Shanghang Zhang,
+  Jie Fu, and Zhiyuan Liu.
+\newblock {ChatEval}: Towards better {LLM}-based evaluators through multi-agent
+  debate.
+\newblock \emph{arXiv preprint arXiv:2308.07201}, 2023.
+
+\bibitem[Chen et~al.(2024{\natexlab{a}})Chen, Su, Zuo, Yang, Yuan, Chan, Yu,
+  Lu, Hung, Qian, Qin, Cong, Xie, Liu, Sun, and Zhou]{chen2024agentverse}
+Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang, Chenfei Yuan, Chi-Min Chan,
+  Heyang Yu, Yaxi Lu, Yi-Hsin Hung, Chen Qian, Yujia Qin, Xin Cong, Ruobing
+  Xie, Zhiyuan Liu, Maosong Sun, and Jie Zhou.
+\newblock {AgentVerse}: Facilitating multi-agent collaboration and exploring
+  emergent behaviors.
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations (ICLR)}, 2024{\natexlab{a}}.
+\newblock arXiv:2308.10848.
+
+\bibitem[Chen et~al.(2024{\natexlab{b}})Chen, Xiang, Xiao, Song, and
+  Li]{chen2024agentpoison}
+Zhaorun Chen, Zhen Xiang, Chaowei Xiao, Dawn Song, and Bo~Li.
+\newblock {AgentPoison}: Red-teaming {LLM} agents via poisoning memory or
+  knowledge bases.
+\newblock In \emph{Advances in Neural Information Processing Systems 37
+  (NeurIPS 2024)}, pages 130185--130213, 2024{\natexlab{b}}.
+\newblock arXiv:2407.12784.
+
+\bibitem[Cobbe et~al.(2021)Cobbe, Kosaraju, Bavarian, Chen, Jun, Kaiser,
+  Plappert, Tworek, Hilton, Nakano, Hesse, and Schulman]{cobbe2021gsm8k}
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz
+  Kaiser, Matthias Plappert, Jerry Tworek, Jacob Hilton, Reiichiro Nakano,
+  Christopher Hesse, and John Schulman.
+\newblock Training verifiers to solve math word problems.
+\newblock \emph{arXiv preprint arXiv:2110.14168}, 2021.
+
+\bibitem[Cohen(1960)]{cohen1960coefficient}
+Jacob Cohen.
+\newblock A coefficient of agreement for nominal scales.
+\newblock \emph{Educational and Psychological Measurement}, 20\penalty0
+  (1):\penalty0 37--46, 1960.
+\newblock \doi{10.1177/001316446002000104}.
+
+\bibitem[Cohen et~al.(2024)Cohen, Bitton, and Nassi]{cohen2024aiworm}
+Stav Cohen, Ron Bitton, and Ben Nassi.
+\newblock Here comes the {AI} worm: Unleashing zero-click worms that target
+  {GenAI}-powered applications.
+\newblock \emph{arXiv preprint arXiv:2403.02817}, 2024.
+
+\bibitem[Debenedetti et~al.(2024)Debenedetti, Zhang, Balunovi{\'c},
+  Beurer-Kellner, Fischer, and Tram{\`e}r]{debenedetti2024agentdojo}
+Edoardo Debenedetti, Jie Zhang, Mislav Balunovi{\'c}, Luca Beurer-Kellner, Marc
+  Fischer, and Florian Tram{\`e}r.
+\newblock {AgentDojo}: A dynamic environment to evaluate prompt injection
+  attacks and defenses for {LLM} agents.
+\newblock In \emph{Advances in Neural Information Processing Systems 37
+  (NeurIPS 2024), Datasets and Benchmarks Track}, 2024.
+\newblock \doi{10.52202/079017-2636}.
+\newblock deterministic state-based security() checks; arXiv:2406.13352.
+
+\bibitem[Douceur(2002)]{douceur2002sybil}
+John~R. Douceur.
+\newblock The {Sybil} attack.
+\newblock \emph{Peer-to-Peer Systems (IPTPS 2002), Lecture Notes in Computer
+  Science}, 2429:\penalty0 251--260, 2002.
+\newblock \doi{10.1007/3-540-45748-8_24}.
+
+\bibitem[Du et~al.(2023)Du, Li, Torralba, Tenenbaum, and
+  Mordatch]{du2023debate}
+Yilun Du, Shuang Li, Antonio Torralba, Joshua~B. Tenenbaum, and Igor Mordatch.
+\newblock Improving factuality and reasoning in language models through
+  multiagent debate.
+\newblock \emph{arXiv preprint arXiv:2305.14325}, 2023.
+
+\bibitem[Fleiss(1971)]{fleiss1971measuring}
+Joseph~L. Fleiss.
+\newblock Measuring nominal scale agreement among many raters.
+\newblock \emph{Psychological Bulletin}, 76\penalty0 (5):\penalty0 378--382,
+  1971.
+\newblock \doi{10.1037/h0031619}.
+
+\bibitem[Fourney et~al.(2024)Fourney, Bansal, Mozannar, Tan, Salinas, Zhu,
+  et~al.]{fourney2024magenticone}
+Adam Fourney, Gagan Bansal, Hussein Mozannar, Cheng Tan, Eduardo Salinas,
+  Erkang Zhu, et~al.
+\newblock Magentic-one: A generalist multi-agent system for solving complex
+  tasks.
+\newblock \emph{arXiv preprint arXiv:2411.04468}, 2024.
+
+\bibitem[Granovetter(1978)]{granovetter1978threshold}
+Mark Granovetter.
+\newblock Threshold models of collective behavior.
+\newblock \emph{American Journal of Sociology}, 83\penalty0 (6):\penalty0
+  1420--1443, 1978.
+\newblock \doi{10.1086/226707}.
+
+\bibitem[Grattafiori et~al.(2024)Grattafiori, Dubey, Jauhri,
+  et~al.]{dubey2024llama3}
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, et~al.
+\newblock The {Llama} 3 herd of models.
+\newblock \emph{arXiv preprint arXiv:2407.21783}, 2024.
+
+\bibitem[Greshake et~al.(2023)Greshake, Abdelnabi, Mishra, Endres, Holz, and
+  Fritz]{greshake2023indirect}
+Kai Greshake, Sahar Abdelnabi, Shailesh Mishra, Christoph Endres, Thorsten
+  Holz, and Mario Fritz.
+\newblock Not what you've signed up for: Compromising real-world
+  {LLM}-integrated applications with indirect prompt injection.
+\newblock \emph{arXiv preprint arXiv:2302.12173}, 2023.
+
+\bibitem[Gu et~al.(2024)Gu, Zheng, Pang, Du, Liu, Wang, Jiang, and
+  Lin]{gu2024agentsmith}
+Xiangming Gu, Xiaosen Zheng, Tianyu Pang, Chao Du, Qian Liu, Ye~Wang, Jing
+  Jiang, and Min Lin.
+\newblock Agent smith: A single image can jailbreak one million multimodal
+  {LLM} agents exponentially fast.
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning (ICML)}, 2024.
+\newblock arXiv:2402.08567.
+
+\bibitem[Guo et~al.(2024)Guo, Chen, Wang, Chang, Pei, Chawla, Wiest, and
+  Zhang]{guo2024survey}
+Taicheng Guo, Xiuying Chen, Yaqi Wang, Ruidi Chang, Shichao Pei, Nitesh~V.
+  Chawla, Olaf Wiest, and Xiangliang Zhang.
+\newblock Large language model based multi-agents: A survey of progress and
+  challenges.
+\newblock \emph{arXiv preprint arXiv:2402.01680}, 2024.
+
+\bibitem[Hammond et~al.(2025)Hammond, Chan, Clifton, Hoelscher-Obermaier, Khan,
+  McLean, Smith, Barfuss, Foerster, et~al.]{hammond2025multiagent}
+Lewis Hammond, Alan Chan, Jesse Clifton, Jason Hoelscher-Obermaier, Akbir Khan,
+  Euan McLean, Chandler Smith, Wolfram Barfuss, Jakob Foerster, et~al.
+\newblock Multi-agent risks from advanced {AI}.
+\newblock Technical Report Technical Report \#1, Cooperative AI Foundation,
+  2025.
+\newblock arXiv:2502.14143.
+
+\bibitem[He et~al.(2025{\natexlab{a}})He, Zhu, Ye, Liu, Zhou, and
+  Yu]{he2025emerged}
+Feng He, Tianqing Zhu, Dayong Ye, Bo~Liu, Wanlei Zhou, and Philip~S. Yu.
+\newblock The emerged security and privacy of {LLM} agent: A survey with case
+  studies.
+\newblock \emph{ACM Computing Surveys}, 2025{\natexlab{a}}.
+\newblock \doi{10.1145/3773080}.
+\newblock arXiv:2407.19354.
+
+\bibitem[He et~al.(2025{\natexlab{b}})He, Lin, Dong, Xu, Xing, and
+  Liu]{he2025redteaming}
+Pengfei He, Yuping Lin, Shen Dong, Han Xu, Yue Xing, and Hui Liu.
+\newblock Red-teaming {LLM} multi-agent systems via communication attacks.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL 2025}, 2025{\natexlab{b}}.
+\newblock Agent-in-the-Middle (AiTM); arXiv:2502.14847.
+
+\bibitem[Hendrycks et~al.(2021)Hendrycks, Burns, Basart, Zou, Mazeika, Song,
+  and Steinhardt]{hendrycks2021measuring}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn
+  Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2021.
+\newblock arXiv:2009.03300.
+
+\bibitem[Hoeffding(1963)]{hoeffding1963probability}
+Wassily Hoeffding.
+\newblock Probability inequalities for sums of bounded random variables.
+\newblock \emph{Journal of the American Statistical Association}, 58\penalty0
+  (301):\penalty0 13--30, 1963.
+\newblock \doi{10.1080/01621459.1963.10500830}.
+
+\bibitem[Hong et~al.(2023)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang,
+  Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber]{hong2023metagpt}
+Sirui Hong, Mingchen Zhuge, Jiaqi Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang,
+  Jinlin Wang, Zili Wang, Steven Ka~Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu
+  Ran, Lingfeng Xiao, Chenglin Wu, and J{\"u}rgen Schmidhuber.
+\newblock {MetaGPT}: Meta programming for a multi-agent collaborative
+  framework.
+\newblock \emph{arXiv preprint arXiv:2308.00352}, 2023.
+
+\bibitem[Hua et~al.(2024)Hua, Yang, Jin, Li, Cheng, Tang, and
+  Zhang]{hua2024trustagent}
+Wenyue Hua, Xianjun Yang, Mingyu Jin, Zelong Li, Wei Cheng, Ruixiang Tang, and
+  Yongfeng Zhang.
+\newblock {TrustAgent}: Towards safe and trustworthy {LLM}-based agents.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2024}, 2024.
+\newblock arXiv:2402.01586.
+
+\bibitem[Inan et~al.(2023)Inan, Upasani, Chi, Rungta, Iyer, Mao, Tontchev, Hu,
+  Fuller, Testuggine, and Khabsa]{inan2023llamaguard}
+Hakan Inan, Kartikeya Upasani, Jianfeng Chi, Rashi Rungta, Krithika Iyer,
+  Yuning Mao, Michael Tontchev, Qing Hu, Brian Fuller, Davide Testuggine, and
+  Madian Khabsa.
+\newblock Llama guard: {LLM}-based input-output safeguard for human-{AI}
+  conversations.
+\newblock \emph{arXiv preprint arXiv:2312.06674}, 2023.
+
+\bibitem[Jiang et~al.(2023)Jiang, Sablayrolles, Mensch, Bamford, Chaplot,
+  de~las Casas, Bressand, Lengyel, Lample, Saulnier, Lavaud, Lachaux, Stock,
+  Le~Scao, Lavril, Wang, Lacroix, and El~Sayed]{jiang2023mistral7b}
+Albert~Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford,
+  Devendra~Singh Chaplot, Diego de~las Casas, Florian Bressand, Gianna Lengyel,
+  Guillaume Lample, Lucile Saulnier, L{\'e}lio~Renard Lavaud, Marie-Anne
+  Lachaux, Pierre Stock, Teven Le~Scao, Thibaut Lavril, Thomas Wang,
+  Timoth{\'e}e Lacroix, and William El~Sayed.
+\newblock {Mistral 7B}.
+\newblock \emph{arXiv preprint arXiv:2310.06825}, 2023.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, and Karthik Narasimhan.
+\newblock {SWE}-bench: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+\newblock arXiv:2310.06770.
+
+\bibitem[Kempe et~al.(2003)Kempe, Kleinberg, and Tardos]{kempe2003maximizing}
+David Kempe, Jon Kleinberg, and \'Eva Tardos.
+\newblock Maximizing the spread of influence through a social network.
+\newblock In \emph{Proceedings of the Ninth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining (KDD '03)}, pages 137--146. ACM, 2003.
+\newblock \doi{10.1145/956750.956769}.
+
+\bibitem[Lamport et~al.(1982)Lamport, Shostak, and Pease]{lamport1982byzantine}
+Leslie Lamport, Robert Shostak, and Marshall Pease.
+\newblock The byzantine generals problem.
+\newblock \emph{ACM Transactions on Programming Languages and Systems},
+  4\penalty0 (3):\penalty0 382--401, 1982.
+\newblock \doi{10.1145/357172.357176}.
+
+\bibitem[Lee and Tiwari(2024)]{lee2024promptinfection}
+Donghyun Lee and Mo~Tiwari.
+\newblock Prompt infection: {LLM}-to-{LLM} prompt injection within multi-agent
+  systems.
+\newblock \emph{arXiv preprint arXiv:2410.07283}, 2024.
+
+\bibitem[Lehmann and Romano(2005)]{lehmann2005testing}
+Erich~L. Lehmann and Joseph~P. Romano.
+\newblock \emph{Testing Statistical Hypotheses}.
+\newblock Springer Texts in Statistics. Springer, 3rd edition, 2005.
+\newblock ISBN 9780387988641.
+\newblock \doi{10.1007/0-387-27605-X}.
+
+\bibitem[Leibo et~al.(2021)Leibo, Du{\'e}{\~n}ez-Guzm{\'a}n, Vezhnevets,
+  Agapiou, Sunehag, Koster, Matyas, Beattie, Mordatch, and
+  Graepel]{leibo2021meltingpot}
+Joel~Z. Leibo, Edgar Du{\'e}{\~n}ez-Guzm{\'a}n, Alexander~Sasha Vezhnevets,
+  John~P. Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charles Beattie,
+  Igor Mordatch, and Thore Graepel.
+\newblock Scalable evaluation of multi-agent reinforcement learning with
+  {M}elting {P}ot.
+\newblock In \emph{Proceedings of the 38th International Conference on Machine
+  Learning (ICML)}, volume 139 of \emph{PMLR}, pages 6187--6199, 2021.
+\newblock arXiv:2107.06857.
+
+\bibitem[Li et~al.(2023)Li, Hammoud, Itani, Khizbullin, and
+  Ghanem]{li2023camel}
+Guohao Li, Hasan Abed Al~Kader Hammoud, Hani Itani, Dmitrii Khizbullin, and
+  Bernard Ghanem.
+\newblock {CAMEL}: Communicative agents for ``mind'' exploration of large
+  language model society.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2023.
+\newblock arXiv:2303.17760.
+
+\bibitem[Li et~al.(2024)Li, Wen, Wang, Li, Yuan, Liu, Liu, Xu, Wang, Sun, Kong,
+  Wang, Geng, Luan, Jin, Ye, Xiong, Zhang, Li, Xu, Li, Li, Liu, Zhang, and
+  Liu]{li2024personalllmagents}
+Yuanchun Li, Hao Wen, Weijun Wang, Xiangyu Li, Yizhen Yuan, Guohong Liu,
+  Jiacheng Liu, Wenxing Xu, Xiang Wang, Yi~Sun, Rui Kong, Yile Wang, Hanfei
+  Geng, Jian Luan, Xuefeng Jin, Zilong Ye, Guanjing Xiong, Fan Zhang, Xiang Li,
+  Mengwei Xu, Zhijun Li, Peng Li, Yang Liu, Ya-Qin Zhang, and Yunxin Liu.
+\newblock Personal {LLM} agents: Insights and survey about the capability,
+  efficiency and security.
+\newblock \emph{arXiv preprint arXiv:2401.05459}, 2024.
+
+\bibitem[Liu et~al.(2024{\natexlab{a}})Liu, Yu, Zhang, Xu, Lei, Lai,
+  et~al.]{liu2024agentbench}
+Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu Lei, Hanyu Lai, et~al.
+\newblock {AgentBench}: Evaluating {LLMs} as agents.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024{\natexlab{a}}.
+\newblock arXiv:2308.03688.
+
+\bibitem[Liu et~al.(2024{\natexlab{b}})Liu, Xu, Chen, and Xiao]{liu2024autodan}
+Xiaogeng Liu, Nan Xu, Muhao Chen, and Chaowei Xiao.
+\newblock {AutoDAN}: Generating stealthy jailbreak prompts on aligned large
+  language models.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024{\natexlab{b}}.
+\newblock arXiv:2310.04451.
+
+\bibitem[Liu et~al.(2023)Liu, Deng, Li, Wang, Wang, Wang, Zhang, Liu, Wang,
+  Zheng, Zhang, and Liu]{liu2023houyi}
+Yi~Liu, Gelei Deng, Yuekang Li, Kailong Wang, Zihao Wang, Xiaofeng Wang,
+  Tianwei Zhang, Yepang Liu, Haoyu Wang, Yan Zheng, Leo~Yu Zhang, and Yang Liu.
+\newblock Prompt injection attack against {LLM}-integrated applications.
+\newblock \emph{arXiv preprint arXiv:2306.05499}, 2023.
+
+\bibitem[Liu et~al.(2024{\natexlab{c}})Liu, Jia, Geng, Jia, and
+  Gong]{liu2024formalizing}
+Yupei Liu, Yuqi Jia, Runpeng Geng, Jinyuan Jia, and Neil~Zhenqiang Gong.
+\newblock Formalizing and benchmarking prompt injection attacks and defenses.
+\newblock In \emph{33rd USENIX Security Symposium (USENIX Security)},
+  2024{\natexlab{c}}.
+\newblock arXiv:2310.12815.
+
+\bibitem[Liu et~al.(2024{\natexlab{d}})Liu, Zhang, Li, Liu, and
+  Yang]{liu2024dylan}
+Zijun Liu, Yanzhe Zhang, Peng Li, Yang Liu, and Diyi Yang.
+\newblock A dynamic {LLM}-powered agent network for task-oriented agent
+  collaboration.
+\newblock In \emph{Conference on Language Modeling (COLM)}, 2024{\natexlab{d}}.
+\newblock arXiv:2310.02170.
+
+\bibitem[Mazeika et~al.(2024)Mazeika, Phan, Yin, Zou, Wang, Mu, Sakhaee, Li,
+  Basart, Li, Forsyth, and Hendrycks]{mazeika2024harmbench}
+Mantas Mazeika, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Norman Mu, Elham
+  Sakhaee, Nathaniel Li, Steven Basart, Bo~Li, David Forsyth, and Dan
+  Hendrycks.
+\newblock {HarmBench}: A standardized evaluation framework for automated red
+  teaming and robust refusal.
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning (ICML)}, volume 235 of \emph{PMLR}, pages 35181--35224, 2024.
+\newblock arXiv:2402.04249.
+
+\bibitem[McDiarmid(1989)]{mcdiarmid1989bounded}
+Colin McDiarmid.
+\newblock On the method of bounded differences.
+\newblock In \emph{Surveys in Combinatorics, 1989}, volume 141 of \emph{London
+  Mathematical Society Lecture Note Series}, pages 148--188. Cambridge
+  University Press, 1989.
+\newblock \doi{10.1017/CBO9781107359949.008}.
+
+\bibitem[Mialon et~al.(2024)Mialon, Fourrier, Swift, Wolf, LeCun, and
+  Scialom]{mialon2024gaia}
+Gr{\'e}goire Mialon, Cl{\'e}mentine Fourrier, Craig Swift, Thomas Wolf, Yann
+  LeCun, and Thomas Scialom.
+\newblock {GAIA}: A benchmark for general {AI} assistants.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+\newblock arXiv:2311.12983.
+
+\bibitem[Neyman and Pearson(1933)]{neyman1933problem}
+Jerzy Neyman and Egon~S. Pearson.
+\newblock On the problem of the most efficient tests of statistical hypotheses.
+\newblock \emph{Philosophical Transactions of the Royal Society of London.
+  Series A}, 231\penalty0 (694--706):\penalty0 289--337, 1933.
+\newblock \doi{10.1098/rsta.1933.0009}.
+
+\bibitem[{OpenAI}(2024)]{openai2024gpt4o}
+{OpenAI}.
+\newblock {GPT-4o} system card.
+\newblock \emph{arXiv preprint arXiv:2410.21276}, 2024.
+
+\bibitem[Park et~al.(2023)Park, O'Brien, Cai, Morris, Liang, and
+  Bernstein]{park2023generative}
+Joon~Sung Park, Joseph~C. O'Brien, Carrie~J. Cai, Meredith~Ringel Morris, Percy
+  Liang, and Michael~S. Bernstein.
+\newblock Generative agents: Interactive simulacra of human behavior.
+\newblock \emph{arXiv preprint arXiv:2304.03442}, 2023.
+
+\bibitem[Pease et~al.(1980)Pease, Shostak, and Lamport]{pease1980reaching}
+Marshall Pease, Robert Shostak, and Leslie Lamport.
+\newblock Reaching agreement in the presence of faults.
+\newblock \emph{Journal of the ACM}, 27\penalty0 (2):\penalty0 228--234, 1980.
+\newblock \doi{10.1145/322186.322188}.
+
+\bibitem[Perez et~al.(2022)Perez, Huang, Song, Cai, Ring, Aslanides, Glaese,
+  McAleese, and Irving]{perez2022redteaming}
+Ethan Perez, Saffron Huang, Francis Song, Trevor Cai, Roman Ring, John
+  Aslanides, Amelia Glaese, Nat McAleese, and Geoffrey Irving.
+\newblock Red teaming language models with language models.
+\newblock In \emph{Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 3419--3448. Association for
+  Computational Linguistics, 2022.
+\newblock \doi{10.18653/v1/2022.emnlp-main.225}.
+\newblock arXiv:2202.03286.
+
+\bibitem[Perez and Ribeiro(2022)]{perez2022ignore}
+F{\'a}bio Perez and Ian Ribeiro.
+\newblock Ignore previous prompt: Attack techniques for language models.
+\newblock In \emph{NeurIPS 2022 Workshop on ML Safety}, 2022.
+\newblock arXiv:2211.09527.
+
+\bibitem[Qian et~al.(2024)Qian, Liu, Liu, Chen, Dang, Li, Yang, Chen, Su, Cong,
+  Xu, Li, Liu, and Sun]{qian2024chatdev}
+Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang,
+  Weize Chen, Yusheng Su, Xin Cong, Juyuan Xu, Dahai Li, Zhiyuan Liu, and
+  Maosong Sun.
+\newblock {ChatDev}: Communicative agents for software development.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, 2024.
+\newblock arXiv:2307.07924.
+
+\bibitem[{Qwen Team}(2024)]{qwen2025qwen25}
+{Qwen Team}.
+\newblock {Qwen2.5} technical report.
+\newblock \emph{arXiv preprint arXiv:2412.15115}, 2024.
+
+\bibitem[Rebedea et~al.(2023)Rebedea, Dinu, Sreedhar, Parisien, and
+  Cohen]{rebedea2023nemo}
+Traian Rebedea, Razvan Dinu, Makesh Sreedhar, Christopher Parisien, and
+  Jonathan Cohen.
+\newblock {NeMo} guardrails: A toolkit for controllable and safe {LLM}
+  applications with programmable rails.
+\newblock In \emph{Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing: System Demonstrations (EMNLP)}, 2023.
+\newblock arXiv:2310.10501.
+
+\bibitem[Ruan et~al.(2024)Ruan, Dong, Wang, Pitis, Zhou, Ba, Dubois, Maddison,
+  and Hashimoto]{ruan2024toolemu}
+Yangjun Ruan, Honghua Dong, Andrew Wang, Silviu Pitis, Yongchao Zhou, Jimmy Ba,
+  Yann Dubois, Chris~J. Maddison, and Tatsunori Hashimoto.
+\newblock Identifying the risks of {LM} agents with an {LM}-emulated sandbox.
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations (ICLR)}, 2024.
+\newblock ToolEmu; arXiv:2309.15817.
+
+\bibitem[Rubin(1974)]{rubin1974estimating}
+Donald~B. Rubin.
+\newblock Estimating causal effects of treatments in randomized and
+  nonrandomized studies.
+\newblock \emph{Journal of Educational Psychology}, 66:\penalty0 688--701,
+  1974.
+\newblock \doi{10.1037/h0037350}.
+
+\bibitem[Schick et~al.(2023)Schick, Dwivedi-Yu, Dess{\`\i}, Raileanu, Lomeli,
+  Zettlemoyer, Cancedda, and Scialom]{schick2023toolformer}
+Timo Schick, Jane Dwivedi-Yu, Roberto Dess{\`\i}, Roberta Raileanu, Maria
+  Lomeli, Luke Zettlemoyer, Nicola Cancedda, and Thomas Scialom.
+\newblock Toolformer: Language models can teach themselves to use tools.
+\newblock \emph{arXiv preprint arXiv:2302.04761}, 2023.
+
+\bibitem[Schroeder~de Witt et~al.(2025)Schroeder~de Witt, Krawiecka, Krawczuk,
+  Hagag, Anderson, Belcak, et~al.]{schroederdewitt2025masec}
+Christian Schroeder~de Witt, Klaudia Krawiecka, Igor Krawczuk, Ben Hagag,
+  William~L. Anderson, Peter Belcak, et~al.
+\newblock Open challenges in multi-agent security: Towards secure systems of
+  interacting {AI} agents.
+\newblock \emph{arXiv preprint arXiv:2505.02077}, 2025.
+\newblock \doi{10.48550/arXiv.2505.02077}.
+\newblock MASEC; Sec. 4.7 states no multi-agent security benchmark exists.
+
+\bibitem[Shinn et~al.(2023)Shinn, Cassano, Berman, Gopinath, Narasimhan, and
+  Yao]{shinn2023reflexion}
+Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik
+  Narasimhan, and Shunyu Yao.
+\newblock Reflexion: Language agents with verbal reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2303.11366}, 2023.
+
+\bibitem[Terry et~al.(2021)Terry, Black, Grammel, Jayakumar, Hari, Sullivan,
+  Santos, Dieffendahl, Horsch, Perez-Vicente, Williams, Lokesh, and
+  Ravi]{terry2021pettingzoo}
+J.~K. Terry, Benjamin Black, Nathaniel Grammel, Mario Jayakumar, Ananth Hari,
+  Ryan Sullivan, Luis Santos, Clemens Dieffendahl, Caroline Horsch, Rodrigo
+  Perez-Vicente, Niall Williams, Yashas Lokesh, and Praveen Ravi.
+\newblock {PettingZoo}: Gym for multi-agent reinforcement learning.
+\newblock In \emph{Advances in Neural Information Processing Systems 34
+  (NeurIPS)}, 2021.
+\newblock arXiv:2009.14471.
+
+\bibitem[Tian et~al.(2023)Tian, Yang, Zhang, Dong, and
+  Su]{tian2023evilgeniuses}
+Yu~Tian, Xiao Yang, Jingyuan Zhang, Yinpeng Dong, and Hang Su.
+\newblock Evil geniuses: Delving into the safety of {LLM}-based agents.
+\newblock \emph{arXiv preprint arXiv:2311.11855}, 2023.
+
+\bibitem[Wang et~al.(2023{\natexlab{a}})Wang, Chen, Pei, Xie, Kang, Zhang, Xu,
+  Xiong, Dutta, Schaeffer, Truong, Arora, Mazeika, Hendrycks, Lin, Cheng,
+  Koyejo, Song, and Li]{wang2023decodingtrust}
+Boxin Wang, Weixin Chen, Hengzhi Pei, Chulin Xie, Mintong Kang, Chenhui Zhang,
+  Chejian Xu, Zidi Xiong, Ritik Dutta, Rylan Schaeffer, Sang~T. Truong, Simran
+  Arora, Mantas Mazeika, Dan Hendrycks, Zinan Lin, Yu~Cheng, Sanmi Koyejo, Dawn
+  Song, and Bo~Li.
+\newblock {DecodingTrust}: A comprehensive assessment of trustworthiness in
+  {GPT} models.
+\newblock In \emph{Advances in Neural Information Processing Systems 36
+  (NeurIPS 2023), Datasets and Benchmarks Track}, 2023{\natexlab{a}}.
+\newblock arXiv:2306.11698.
+
+\bibitem[Wang et~al.(2024)Wang, Wang, Athiwaratkun, Zhang, and
+  Zou]{wang2024mixture}
+Junlin Wang, Jue Wang, Ben Athiwaratkun, Ce~Zhang, and James Zou.
+\newblock Mixture-of-agents enhances large language model capabilities.
+\newblock \emph{arXiv preprint arXiv:2406.04692}, 2024.
+
+\bibitem[Wang et~al.(2023{\natexlab{b}})Wang, Li, Chen, Cai, Zhu, Lin, Cao,
+  Liu, Liu, and Sui]{wang2023fair}
+Peiyi Wang, Lei Li, Liang Chen, Zefan Cai, Dawei Zhu, Binghuai Lin, Yunbo Cao,
+  Qi~Liu, Tianyu Liu, and Zhifang Sui.
+\newblock Large language models are not fair evaluators.
+\newblock \emph{arXiv preprint arXiv:2305.17926}, 2023{\natexlab{b}}.
+
+\bibitem[Wang et~al.(2025{\natexlab{a}})Wang, Zhang, Yu, Wan, Meng, Guo, Wang,
+  and Wang]{yu2025gsafeguard}
+Shilong Wang, Guibin Zhang, Miao Yu, Guancheng Wan, Fanci Meng, Chongye Guo,
+  Kun Wang, and Yang Wang.
+\newblock {G-Safeguard}: A topology-guided security lens and treatment on
+  {LLM}-based multi-agent systems.
+\newblock \emph{arXiv preprint arXiv:2502.11127}, 2025{\natexlab{a}}.
+
+\bibitem[Wang et~al.(2025{\natexlab{b}})Wang, Li, Song, Xu, Tang, Zhuge,
+  et~al.]{wang2025openhands}
+Xingyao Wang, Boxuan Li, Yufan Song, Frank~F. Xu, Xiangru Tang, Mingchen Zhuge,
+  et~al.
+\newblock {OpenHands}: An open platform for {AI} software developers as
+  generalist agents.
+\newblock In \emph{The Thirteenth International Conference on Learning
+  Representations (ICLR)}, 2025{\natexlab{b}}.
+\newblock arXiv:2407.16741.
+
+\bibitem[Watts(2002)]{watts2002simple}
+Duncan~J. Watts.
+\newblock A simple model of global cascades on random networks.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 99\penalty0
+  (9):\penalty0 5766--5771, 2002.
+\newblock \doi{10.1073/pnas.082090499}.
+
+\bibitem[Wei et~al.(2023)Wei, Haghtalab, and Steinhardt]{wei2023jailbroken}
+Alexander Wei, Nika Haghtalab, and Jacob Steinhardt.
+\newblock Jailbroken: How does {LLM} safety training fail?
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2023.
+\newblock arXiv:2307.02483.
+
+\bibitem[Wu et~al.(2023)Wu, Bansal, Zhang, Wu, Li, Zhu, Jiang, Zhang, Zhang,
+  Liu, Awadallah, White, Burger, and Wang]{wu2023autogen}
+Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu,
+  Li~Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed~Hassan Awadallah,
+  Ryen~W. White, Doug Burger, and Chi Wang.
+\newblock {AutoGen}: Enabling next-gen {LLM} applications via multi-agent
+  conversation.
+\newblock \emph{arXiv preprint arXiv:2308.08155}, 2023.
+
+\bibitem[Yang et~al.(2024)Yang, Bi, Lin, Chen, Zhou, and Sun]{yang2024watchout}
+Wenkai Yang, Xiaohan Bi, Yankai Lin, Sishuo Chen, Jie Zhou, and Xu~Sun.
+\newblock Watch out for your agents! investigating backdoor threats to
+  {LLM}-based agents.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2024.
+\newblock arXiv:2402.11208.
+
+\bibitem[Yao et~al.(2023)Yao, Zhao, Yu, Du, Shafran, Narasimhan, and
+  Cao]{yao2023react}
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan,
+  and Yuan Cao.
+\newblock {ReAct}: Synergizing reasoning and acting in language models.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2023.
+\newblock arXiv:2210.03629.
+
+\bibitem[Yu et~al.(2024)Yu, Wang, Zhang, Mao, Yin, Liu, Wen, Wang, and
+  Wang]{yu2024netsafe}
+Miao Yu, Shilong Wang, Guibin Zhang, Junyuan Mao, Chenlong Yin, Qijiong Liu,
+  Qingsong Wen, Kun Wang, and Yang Wang.
+\newblock {NetSafe}: Exploring the topological safety of multi-agent networks.
+\newblock \emph{arXiv preprint arXiv:2410.15686}, 2024.
+
+\bibitem[Zeng et~al.(2024)Zeng, Wu, Zhang, Wang, and Wu]{zeng2024autodefense}
+Yifan Zeng, Yiran Wu, Xiao Zhang, Huazheng Wang, and Qingyun Wu.
+\newblock {AutoDefense}: Multi-agent {LLM} defense against jailbreak attacks.
+\newblock \emph{arXiv preprint arXiv:2403.04783}, 2024.
+
+\bibitem[Zhan et~al.(2024)Zhan, Liang, Ying, and Kang]{zhan2024injecagent}
+Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang.
+\newblock {InjecAgent}: Benchmarking indirect prompt injections in
+  tool-integrated large language model agents.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL 2024}, 2024.
+\newblock arXiv:2403.02691.
+
+\bibitem[Zhang et~al.(2025)Zhang, Huang, Mei, Yao, Wang, Zhan, Wang, and
+  Zhang]{zhang2025asb}
+Hanrong Zhang, Jingyuan Huang, Kai Mei, Yifei Yao, Zhenting Wang, Chenlu Zhan,
+  Hongwei Wang, and Yongfeng Zhang.
+\newblock Agent security bench ({ASB}): Formalizing and benchmarking attacks
+  and defenses in {LLM}-based agents.
+\newblock In \emph{The Thirteenth International Conference on Learning
+  Representations (ICLR)}, 2025.
+\newblock ASB; introduces NRP = PNA (1 - ASR); arXiv:2410.02644.
+
+\bibitem[Zhang et~al.(2024)Zhang, Zhang, Li, Gao, Wang, Lu, Zhao, Qiao, and
+  Shao]{zhang2024psysafe}
+Zaibin Zhang, Yongting Zhang, Lijun Li, Hongzhi Gao, Lijun Wang, Huchuan Lu,
+  Feng Zhao, Yu~Qiao, and Jing Shao.
+\newblock {PsySafe}: A comprehensive framework for psychological-based attack,
+  defense, and evaluation of multi-agent system safety.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, 2024.
+\newblock arXiv:2401.11880.
+
+\bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li,
+  Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao
+  Zhuang, Zi~Lin, Zhuohan Li, Dacheng Li, Eric~P. Xing, Hao Zhang, Joseph~E.
+  Gonzalez, and Ion Stoica.
+\newblock Judging {LLM}-as-a-judge with {MT}-bench and chatbot arena.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS),
+  Datasets and Benchmarks Track}, 2023.
+\newblock arXiv:2306.05685.
+
+\bibitem[Zhou et~al.(2024)Zhou, Xu, Zhu, Zhou, Lo, Sridhar, Cheng, Ou, Bisk,
+  Fried, Alon, and Neubig]{zhou2024webarena}
+Shuyan Zhou, Frank~F. Xu, Hao Zhu, Xuhui Zhou, Robert Lo, Abishek Sridhar,
+  Xianyi Cheng, Tianyue Ou, Yonatan Bisk, Daniel Fried, Uri Alon, and Graham
+  Neubig.
+\newblock {WebArena}: A realistic web environment for building autonomous
+  agents.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+\newblock arXiv:2307.13854.
+
+\bibitem[Zhou et~al.(2025)Zhou, Li, Zhang, Zhang, Wang, Liu, and
+  Guo]{zhou2025corba}
+Zhenhong Zhou, Zherui Li, Jie Zhang, Yuanhe Zhang, Kun Wang, Yang Liu, and Qing
+  Guo.
+\newblock {CORBA}: Contagious recursive blocking attacks on multi-agent systems
+  based on large language models.
+\newblock \emph{arXiv preprint arXiv:2502.14529}, 2025.
+
+\bibitem[Zou et~al.(2023)Zou, Wang, Carlini, Nasr, Kolter, and
+  Fredrikson]{zou2023universal}
+Andy Zou, Zifan Wang, Nicholas Carlini, Milad Nasr, J.~Zico Kolter, and Matt
+  Fredrikson.
+\newblock Universal and transferable adversarial attacks on aligned language
+  models.
+\newblock \emph{arXiv preprint arXiv:2307.15043}, 2023.
+
+\end{thebibliography}

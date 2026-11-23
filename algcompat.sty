@@ -1,0 +1,74 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{algcompat}[2026/07/17 v0.2 Minimal algorithm/pseudocode shim
+  (no algorithmicx / algorithm2e required; self-contained for offline builds)]
+%% -------------------------------------------------------------------------
+%% NOTE. This package emulates a small, standard subset of the
+%% algorithm + algpseudocode API (float, line numbers, keyword macros) so the
+%% manuscript compiles in environments where those CTAN packages are not
+%% installed. To use the official packages, delete \usepackage{algcompat}
+%% and add \usepackage{algorithm}\usepackage{algpseudocode}; the algorithm
+%% bodies in sections/algorithm.tex use only the common macros below.
+%% -------------------------------------------------------------------------
+\RequirePackage{float}
+\RequirePackage{amsmath}
+\RequirePackage{xcolor}
+\RequirePackage{calc}
+
+%% ---- Algorithm float (numbered, ruled, captioned) ----
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algorithm}
+\newcommand{\listalgorithmname}{List of Algorithms}
+
+%% ---- Inline pseudocode formatting helpers ----
+\newcommand{\algkw}[1]{\textbf{\upshape #1}}       % keywords: for, if, return
+\newcommand{\algfn}[1]{\textsc{#1}}                % procedure / function names
+\newcommand{\algvar}[1]{\ensuremath{#1}}           % math variables
+\providecommand{\Comment}[1]{\unskip\nobreak\hfill{\footnotesize\itshape$\triangleright$~#1}}
+
+%% ---- Indentation machinery ----
+\newlength{\algindentunit}\setlength{\algindentunit}{1.5em}
+\newcounter{alg@indent}
+\newcounter{alg@line}
+\newcommand{\algpad}{\hspace*{\dimexpr\value{alg@indent}\algindentunit\relax}}
+\newcommand{\Indent}{\stepcounter{alg@indent}}
+\newcommand{\Unindent}{\addtocounter{alg@indent}{-1}}
+
+%% ---- Line-numbered body environment ----
+\newenvironment{algorithmic}[1][1]{%
+  \setcounter{alg@line}{0}%
+  \setcounter{alg@indent}{0}%
+  \begin{list}{{\footnotesize\ttfamily\stepcounter{alg@line}\arabic{alg@line}:}}{%
+    \setlength{\leftmargin}{2.6em}%
+    \setlength{\labelwidth}{2.0em}%
+    \setlength{\labelsep}{0.4em}%
+    \setlength{\itemsep}{1.6pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{3pt}%
+    \setlength{\listparindent}{0pt}%
+  }%
+}{%
+  \end{list}%
+}
+\newcommand{\State}{\item\algpad}
+\newcommand{\Statex}{\item[]\algpad}
+\newcommand{\Require}{\item[\textbf{Input:}]\hspace{0.2em}}
+\newcommand{\Ensure}{\item[\textbf{Output:}]\hspace{0.2em}}
+
+%% ---- Structured convenience macros (auto-indenting) ----
+\newcommand{\Return}{\State\algkw{return}\ }
+\newcommand{\Output}{\State\algkw{output}\ }
+\newcommand{\For}[1]{\State\algkw{for} #1 \algkw{do}\Indent}
+\newcommand{\EndFor}{\Unindent\State\algkw{end for}}
+\newcommand{\ForAll}[1]{\State\algkw{for all} #1 \algkw{do}\Indent}
+\newcommand{\While}[1]{\State\algkw{while} #1 \algkw{do}\Indent}
+\newcommand{\EndWhile}{\Unindent\State\algkw{end while}}
+\newcommand{\If}[1]{\State\algkw{if} #1 \algkw{then}\Indent}
+\newcommand{\ElsIf}[1]{\Unindent\State\algkw{else if} #1 \algkw{then}\Indent}
+\newcommand{\Else}{\Unindent\State\algkw{else}\Indent}
+\newcommand{\EndIf}{\Unindent\State\algkw{end if}}
+\newcommand{\Function}[2]{\State\algkw{function} \algfn{#1}(#2)\Indent}
+\newcommand{\EndFunction}{\Unindent\State\algkw{end function}}
+\newcommand{\Procedure}[2]{\State\algkw{procedure} \algfn{#1}(#2)\Indent}
+\newcommand{\EndProcedure}{\Unindent\State\algkw{end procedure}}
+\endinput

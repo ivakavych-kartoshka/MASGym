@@ -1,0 +1,45 @@
+\section{The \corb{} Co-Evolving Red/Blue Protocol}
+\label{sec:algorithm}
+
+\defname{}'s evaluation methodology is a co-evolving loop, \corb, that alternates a red
+policy proposing attack configurations and a blue policy proposing defenses, scoring each
+pair with the deterministic checker and logging a trajectory of
+$(\text{attack},\text{defense},\NRPs)$ triples. The per-configuration scoring procedure
+(\textsc{ScoreConfig}) is fully specified: instantiate $\Gtop$, roles, masks, and the
+adversary knobs $\config_{\mathrm{adv}}$\Cref{eq:adv-config} via the trusted harness; seed
+$\Advset_0$; run $M$ episodes of $H$ steps, recording each transition into the global
+trace and updating the compromised set under the propagation rule $\mathcal{P}$
+(\Cref{def:propagation}); evaluate $(\Predutil,\Predsec)$ with the deterministic checker on
+each trace; and aggregate $\widehat{\ASRs},\widehat{\PNAs},\widehat{\NRPs},\widehat{\CPR}$
+plus detection and recovery statistics. The protocol-level loop is \Cref{alg:corb}. Both
+levels keep the LLM off the scoring critical path, so no proposal can inflate its own
+score.
+
+\begin{algorithm}[t]
+\caption{\corb: co-evolving red/blue evaluation.}
+\label{alg:corb}
+\algreset
+\PL{\kw{Input:} red policy $\red$; blue policy $\blue$; rounds $R$; task, budget $M$.}
+\PL{\kw{Output:} trajectory $\mathcal{L}=\{(\config^r_{\mathrm{adv}},\blue^r,\NRPs^r,\ASRs^r)\}_{r=1}^R$
+and a Pareto frontier.}
+\PL{Initialize defense $\blue^0$ (no-defense or a lifted per-agent defense).}
+\PL{\kw{for} $r=1,\dots,R$ \kw{do}}\Ind
+\PL{\emph{Red step:} $\config^r_{\mathrm{adv}}\gets\red(\mathcal{L}_{<r},\blue^{r-1})$
+\comm{static: fixed; adaptive: best-response}}
+\PL{Score $(\config^r_{\mathrm{adv}},\blue^{r-1})$ with \textsc{ScoreConfig}.}
+\PL{\emph{Blue step:} $\blue^r\gets\blue(\mathcal{L}_{<r},\config^r_{\mathrm{adv}})$
+\comm{propose/upgrade defense}}
+\PL{Re-score $(\config^r_{\mathrm{adv}},\blue^r)$; append both scorings to $\mathcal{L}$.}\Ded
+\PL{\kw{return} $\mathcal{L}$ and its $(\ASRs,\text{cost})$ / $(\NRPs,\text{cost})$ frontier.}
+\end{algorithm}
+
+Three properties make \corb{} a measurement protocol rather than a training loop:
+(i) \emph{integrity}---every score comes from \textsc{ScoreConfig}, so neither policy can
+hijack its own evaluation (\Cref{thm:integrity}); (ii) \emph{reproducibility}---the
+trajectory $\mathcal{L}$ is the full audit trail of fully specified
+$(\config_{\mathrm{adv}},\blue)$ pairs; and (iii) \emph{honesty of the frontier}---\corb{}
+reports a Pareto frontier over (security, cost) rather than a single ``winner''. The red
+and blue policies may be grid/random search, an optimizer, or an LLM-driven proposer;
+\defname{} fixes the \emph{interface} and the \emph{scoring}, not the proposers. Cost is
+$\Theta(RMNH)$ for an $R$-round run and $\Theta(GNH\Delta^{-2}\ln(G/\alpha))$ across a
+$G$-configuration sweep (\Cref{cor:budget}).
