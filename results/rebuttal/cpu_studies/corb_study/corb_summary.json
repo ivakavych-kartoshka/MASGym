@@ -1,0 +1,74 @@
+{
+  "note": "synthetic; CoRB loop blue-phase rows; ASR_sys saturated near 1 via availability sabotage, so NRP_action is the discriminating column",
+  "table": {
+    "static": [
+      {
+        "round": 1,
+        "asr_sys": 1.0,
+        "nrp_sys": 0.0,
+        "asr_action": 0.5,
+        "defense": "escalating_blue(p_red=0.20)"
+      },
+      {
+        "round": 5,
+        "asr_sys": 1.0,
+        "nrp_sys": 0.0,
+        "asr_action": 0.53,
+        "defense": "escalating_blue(p_red=0.60)"
+      },
+      {
+        "round": 10,
+        "asr_sys": 1.0,
+        "nrp_sys": 0.0,
+        "asr_action": 0.28,
+        "defense": "escalating_blue(p_red=0.80)"
+      },
+      {
+        "round": 20,
+        "asr_sys": 1.0,
+        "nrp_sys": 0.0,
+        "asr_action": 0.54,
+        "defense": "escalating_blue(p_red=0.80)"
+      }
+    ],
+    "adaptive": [
+      {
+        "round": 1,
+        "asr_sys": 0.345,
+        "nrp_sys": 0.583,
+        "asr_action": 0.135,
+        "defense": "escalating_blue(p_red=0.80)"
+      },
+      {
+        "round": 5,
+        "asr_sys": 0.55,
+        "nrp_sys": 0.405,
+        "asr_action": 0.145,
+        "defense": "escalating_blue(p_red=0.80)"
+      },
+      {
+        "round": 10,
+        "asr_sys": 0.55,
+        "nrp_sys": 0.4162,
+        "asr_action": 0.145,
+        "defense": "escalating_blue(p_red=0.80)"
+      },
+      {
+        "round": 20,
+        "asr_sys": 0.675,
+        "nrp_sys": 0.2909,
+        "asr_action": 0.14,
+        "defense": "escalating_blue(p_red=0.80)"
+      }
+    ]
+  },
+  "provenance": {
+    "masgym_version": "0.1.0",
+    "seed": 0,
+    "config_hash": "d89829fd8638",
+    "python": "3.13.3",
+    "timestamp_utc": "2026-11-22T18:05:22Z",
+    "synthetic": true,
+    "provenance_note": "synthetic smoke-test output, not a paper result"
+  }
+}
