@@ -37,6 +37,13 @@ measured via $\CPR$.
 The utility--security aggregator $g:[0,1]^2\to[0,1]$ is continuous.
 \end{assumption}
 
+\paragraph{Which assumptions each result needs.}
+\Cref{thm:metric} uses \Cref{as:cont}; \Cref{thm:integrity} uses \Cref{as:tcb};
+\Cref{thm:collusion} and \Cref{sec:theory-prop} use \Cref{as:prop}; \Cref{thm:sample}
+uses \Cref{as:iid,as:bounded}. The remaining conditions (fixed seed set, monotone
+propagation, a registered predicate) are restated with each result; no theorem assumes
+more than its text lists.
+
 \subsection{Characterization of the system-level metric}
 \label{sec:theory-metric}
 The product form of $\NRPs$ is forced by the desiderata of \Cref{sec:problem}, phrased as
@@ -129,7 +136,7 @@ $b\pinf$-depth phase transition and complete graphs grow superlinearly in seed c
 Under threshold contagion an agent with in-degree below $\thresh$ is never compromised, so
 a chain with $\thresh\ge2$ has $\CPR=0$.
 
-\begin{theorem}[Collusion advantage on the star]
+\begin{theorem}[Seed-placement advantage on the star]
 \label{thm:collusion}
 Fix the independent-cascade model on a star of $N$ nodes with a budget of one seed. A
 colluding adversary that places its seed at the centre achieves expected compromise

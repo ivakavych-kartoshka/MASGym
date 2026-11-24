@@ -1,9 +1,31 @@
 \section{Preliminaries and Notation}
 \label{sec:prelim}
 
-This section recalls the three primitives \defname{} builds on (notation summarized in the
-Supplementary Material): ASB's utility--security metric, AgentDojo's
-deterministic state-based checking, and ToolEmu's LM tool emulation.
+This section fixes notation and recalls the three primitives \defname{} builds on: ASB's
+utility--security metric, AgentDojo's deterministic state-based checking, and ToolEmu's
+LM tool emulation. \Cref{tab:notation} is the single source of truth for symbols used
+before they are re-introduced in context.
+
+\begin{table}[t]
+\centering
+\caption{Core notation used throughout the paper.}
+\label{tab:notation}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\ \midrule
+$\mathrm{NRP}$ & utility--security product $\mathrm{PNA}\cdot(1-\mathrm{ASR})$ (ASB) \\
+$\mathrm{PNA}$ & benign-task performance \\
+$\mathrm{ASR}$ & attack success rate (single-agent) \\
+$\ASRs,\ASRa$ & system-level / action-channel attack success rate \\
+$\PNAs,\NRPs$ & system-level benign performance / utility--security product \\
+$\Predsec,\Predutil$ & security predicate / benign-success predicate over a trace \\
+$\Checker$ & deterministic checker; $\Judge$ LLM judge (contrast) \\
+TCB & trusted computing base (harness, checker, predicates) \\
+$\Agents,\Gtop,\Trace$ & agents, communication topology, global trace \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{ASB's utility--security metric}
 ASB~\cite{zhang2025asb} scores an agent by a \emph{Non-Refusal Performance},
@@ -40,5 +62,5 @@ $\config$ and produces a global trace $\Trace\sim\mathcal{D}(\config)$, from whi
 security and utility quantities are computable---the fact that makes deterministic,
 hijack-resistant scoring possible.
 
-% Notation table moved to the Supplementary Material to keep the main paper
-% within its page limit; main-text references it in prose.
+% Core notation is tabulated above (Table~\ref{tab:notation}); extended notation
+% remains in the Supplementary Material.

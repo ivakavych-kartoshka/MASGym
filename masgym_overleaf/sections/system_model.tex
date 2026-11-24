@@ -42,6 +42,14 @@ honest agents' private internals. Compromise then \emph{propagates} along $\Gtop
 (\Cref{def:propagation}) from these seeds, so the effective compromised set at episode end,
 $\Advset_\infty$, can exceed $\Advset$.
 
+\textbf{Orchestrator trust.} By default the orchestrator is part of the trusted computing
+base: it is assumed honest and its decisions are recorded, so $\Predsec$ can rely on its
+behaviour. The knob $\mathsf{orch}$ in \Cref{eq:adv-config} switches to the \emph{compromised}
+regime, in which the orchestrator is one of $\Advset$ and its outputs are adversarial;
+in star/tree topologies this removes every adversary-free witness by definition (the
+availability path of \Cref{prop:forced}). Studies must state which regime they use, and
+conclusions about a defense are valid only for the regime measured.
+
 \textbf{Inferential threats and scope.} The operator sets horizon, models, and metrics; the
 adversaries do not. An \emph{LLM judge}, when used (only in ablations, off the critical
 path), is a \emph{measurement} threat: human agreement is $\kappaem\approx0.48$ and judges

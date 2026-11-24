@@ -15,9 +15,13 @@ structure, not any real defense.
 \textbf{Limitations and validity.}\label{sec:limitations} The largest unmeasured gap is
 emulation fidelity: $\kappaem\approx0.48$ is inherited from ToolEmu, not re-measured here,
 and although the harness registers an emulated-versus-real-tools ablation we did not run
-it, because no real tool backend is wired into our environment. Every synthetic number is
+it, because no real tool backend is wired into our environment. \corb{} is demonstrated on
+one task family, one attack template, and one defense class. Every synthetic number is
 therefore conditional on the emulator; the deterministic-versus-judge contrast of
-\Cref{sec:integrity} is the one ablation we ran on real backbones. We enumerate the
+\Cref{sec:integrity} is the one ablation we ran on real backbones. Additional gaps:
+availability-sabotage results depend on the availability rule (ablated in the harness),
+collusion is studied at fixed attacker count and placement, and the threshold model is a
+stylistic contagion model rather than an empirical law. We enumerate the
 remaining threats to validity---episode counts, backbone sample size, the structural
 degeneracy, and the unmeasured ablation---in the Supplementary Material.
 

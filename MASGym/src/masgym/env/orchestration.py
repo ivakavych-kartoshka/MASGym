@@ -146,7 +146,14 @@ class Orchestrator:
         # 4) benign success via k-forced-coordination / transversal condition (Prop. 9.15)
         honest_final = env.n_agents - len(final_comp)
         orch_honest = env.orchestrator_id not in final_comp
-        coordination_critical = env.topology in (TopologyName.STAR, TopologyName.TREE)
+        # Availability rule (ablatable): in star/tree topologies a compromised
+        # orchestrator removes every adversary-free witness. Disable via
+        # ``env.availability_rule=False`` to separate "fail by definition" from
+        # "fail by model behaviour" (task T06).
+        coordination_critical = bool(getattr(env, "availability_rule", True)) and env.topology in (
+            TopologyName.STAR,
+            TopologyName.TREE,
+        )
         witness_available = honest_final >= env.forced_degree and (orch_honest or not coordination_critical)
         if witness_available:
             trace.witness_completed = bool(gen.random() < env.benign_success_base)

@@ -19,12 +19,14 @@ The headline stimulus is the defense $\times$ adversary-context study: each per-
 defense, single-agent (the ASB/AgentDojo reducer, \Cref{prop:reduction}) and under
 multi-agent collusion and a compromised orchestrator (star, $N{=}5$, $\betafrac{=}0.3$).
 The full grid is in the Supplementary Material. The system-level picture matches
-\Cref{thm:collusion}: the guardrail's relative $\ASRs$ reduction over no-defense shrinks
-from single-agent ($41.6\%$) to collusion ($31.8\%$) to compromised orchestrator
-($27.6\%$). Under the single-agent predicate the guardrail cuts $\ASRs$ from $0.587$ to
-$0.343$; under the full system predicate $\ASRs$ saturates at $1.0$ in both
-multi-agent columns, because collusion and orchestrator compromise target the critical
-star hub and collapse availability rather than exfiltrate.
+\Cref{thm:collusion}: the guardrail's relative reduction on the \emph{action} channel
+over no-defense shrinks from single-agent ($41.6\%$) to collusion ($31.8\%$) to
+compromised orchestrator ($27.6\%$). These are action-channel ($\ASRa$) reductions on
+the synthetic emulator, not system-level certifications: under the single-agent predicate
+the guardrail cuts $\ASRs$ from $0.587$ to $0.343$, while under the full system predicate
+$\ASRs$ saturates at $1.0$ in both multi-agent columns, because collusion and
+orchestrator compromise target the critical star hub and collapse availability rather
+than exfiltrate.
 
 % tab:degradation moved to Supplementary Material (page limit); its numbers remain in the text.
 

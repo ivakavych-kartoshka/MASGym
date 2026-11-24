@@ -133,6 +133,9 @@ class EnvConfig:
     p_infect: float = 0.3  # per-edge propagation probability p
     threshold: int = 1  # compromise threshold theta (threshold model)
     orchestrator_id: int = 0  # the star hub / tree root
+    # Whether the "orchestrator compromised in star/tree => no adversary-free witness"
+    # availability rule is applied (ablation toggle for RQ on availability sabotage).
+    availability_rule: bool = True
     # Synthetic-agent effect parameters (SYNTHETIC MODEL ONLY, not paper-measured):
     base_unsafe_action_prob: float = 0.5  # prob a compromised agent records an unsafe action/step
     benign_success_base: float = 0.9  # base benign-success prob when no adversary blocks a witness

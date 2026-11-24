@@ -52,6 +52,25 @@ evaluation is documented as manipulable and biased~\cite{zheng2023judging,wang20
 \defname{} therefore keeps a deterministic trace-based checker on the critical path and
 treats the deterministic-versus-judge comparison as a measurable ablation.
 
+\begin{table}[t]
+\centering
+\caption{Comparison of security evaluation instruments. ``MA'' = multi-agent; ``FC'' =
+forced coordination; ``Topo'' = communication topology; ``Adv.'' = parameterized adversary
+model; ``Global checker'' = deterministic system-level predicate.}
+\label{tab:related-compare}
+\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Instrument & MA & FC & Topo & Adv. & Global checker \\
+\midrule
+ASB / AgentDojo / InjecAgent & no & no & no & partial & per-agent \\
+ToolEmu & no & no & no & no & no \\
+AutoGen-style frameworks & yes & partial & yes & no & no \\
+\defname{} & yes & yes & yes & yes & yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Positioning}
 \defname{} is \emph{not} ASB applied to many agents (ASB's only cross-agent vector is
 shared memory), \emph{not} AgentDojo at scale (its deterministic checker is per-agent over

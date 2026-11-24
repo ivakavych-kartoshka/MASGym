@@ -4,7 +4,10 @@
 \defname{}'s evaluation methodology is a co-evolving loop, \corb, that alternates a red
 policy proposing attack configurations and a blue policy proposing defenses, scoring each
 pair with the deterministic checker and logging a trajectory of
-$(\text{attack},\text{defense},\NRPs)$ triples. The per-configuration scoring procedure
+$(\text{attack},\text{defense},\NRPs)$ triples. \corb{} is a \emph{proposed protocol}: in
+this paper it is illustrated on the synthetic emulator, with one task family, one attack
+template, and one defense class; it has not been exercised on a real red/blue deployment
+or a real tool backend. The per-configuration scoring procedure
 (\textsc{ScoreConfig}) is fully specified: instantiate $\Gtop$, roles, masks, and the
 adversary knobs $\config_{\mathrm{adv}}$\Cref{eq:adv-config} via the trusted harness; seed
 $\Advset_0$; run $M$ episodes of $H$ steps, recording each transition into the global

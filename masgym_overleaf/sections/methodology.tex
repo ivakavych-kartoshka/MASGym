@@ -1,7 +1,11 @@
 \section{The \defname{} Environment}
 \label{sec:method}
 
-\defname{} is organized as three layers (architecture figure in the Supplementary Material): an \emph{emulation
+\paragraph{How a study uses \defname{}.} A researcher (1) chooses a forced-coordination task
+and its $k$, (2) fixes a topology and agent count, (3) sets an adversary configuration
+$\config_{\mathrm{adv}}$, (4) runs $M$ seeded episodes, and (5) reads the deterministic
+report ($\ASRs,\PNAs,\NRPs,\CPR$, cost). The three layers below implement this pipeline:
+an \emph{emulation
 layer} that supplies tools, a \emph{deterministic checking layer} that scores
 system-level predicates, and an \emph{orchestration layer} that instantiates the system
 and threat models and drives the \corb{} loop.
